@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import data from './data/kafici';
+import _ from 'lodash';
 
 function App() {
   const [current, setCurrent] = useState(null);
@@ -15,15 +16,18 @@ function App() {
   }
 
   const filterBySearch = (arr = data) => {
-    return arr.filter(({ Title }) => {
+    let filtered = arr.filter(({ Title }) => {
       return Title.trim().toLowerCase().indexOf(search) > -1;
     });
+
+    return _.orderBy(filtered, 'BrojSlobodnihMesta', 'desc');
   }
 
   return (
     <div className="App">
       <div className="search">
         <input
+          className="searchInput"
           placeholder="Search..."
           value={search}
           onChange={(e) => {
@@ -32,7 +36,13 @@ function App() {
       </div>
       {
         !current && filterBySearch().map((Kafic) => {
-          return <div key={Kafic.ID} className="singleLine">
+          return <div 
+          key={Kafic.ID} 
+          className="singleLine"
+          style={{
+            backgroundColor: Kafic.BrojSlobodnihMesta > 0 ? '#00ff00' : '#ff0000',
+          }}
+          >
             <img className="listLogo" src={'./slike/' + Kafic.Logo} />
             <h1>{Kafic.Title}</h1>
             <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
