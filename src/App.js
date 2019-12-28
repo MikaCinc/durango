@@ -4,7 +4,9 @@ import './App.css';
 
 import logo from './slike/vinyl.png';
 
-const Kafic = {
+import data from './data/kafici';
+
+/* const Kafic = {
   ID: 1,
   Title: 'Square',
   Logo: require('./slike/vinyl.png'),
@@ -17,34 +19,59 @@ const Kafic = {
     Lokacija: '',
     Meni: ''
   },
-};
+}; */
 
 function App() {
-  const [k, setK] = useState(null);
+  const [current, setCurrent] = useState(null);
+  const [search, setSearch] = useState('');
+
+  const findByID = (ID) => {
+    data.forEach(k => {
+      if (k.ID === ID) return k;
+    })
+
+    return null;
+  }
+
+  const filterBySearch = (arr = data) => {
+    return arr.filter(({ Title }) => {
+      return Title.trim().toLowerCase().indexOf(search) > -1;
+    });
+  }
 
   return (
     <div className="App">
+      <div className="search">
+        <input
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value)
+          }} />
+      </div>
       {
-        !k && <div>
-          <h1>{Kafic.Title}</h1>
-          <img src={Kafic.Logo} />
-          <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
-          <button onClick={() => {
-            setK(Kafic.ID)
-          }}>Details</button>
-        </div>
+        !current && filterBySearch().map((Kafic) => {
+          return <div key={Kafic.ID} className="singleLine">
+            <img className="listLogo" src={'./slike/' + Kafic.Logo} />
+            <h1>{Kafic.Title}</h1>
+            <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
+            <button onClick={() => {
+              setCurrent(Kafic)
+            }}>Details</button>
+          </div>
+        })
       }
       <div className='details'>
         {
-          k && <div>
-            <h1>{Kafic.Title}</h1>
-            <img src={'./slike/vinyl.png'} />
-            <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
-            <p>O mestu: {Kafic.Details.Opis}</p>
+          current && <div>
+            <h1>{current.Title}</h1>
+            <img src={'./slike/' + current.Logo} />
+            <p>Slobodnih mesta: {current.BrojSlobodnihMesta} / {current.BrojMesta}</p>
+            <p>O mestu: {current.Details.Opis}</p>
             <button>Rezervisi</button>
             <button onClick={() => {
-              setK(null)
-            }}>Go back</button>
+              setCurrent(null)
+            }}>Nazad</button>
           </div>
         }
       </div>
