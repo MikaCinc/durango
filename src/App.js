@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-// import Kafic from './data.js';
-
-import logo from './slike/vinyl.png';
-
 import data from './data/kafici';
-
-/* const Kafic = {
-  ID: 1,
-  Title: 'Square',
-  Logo: require('./slike/vinyl.png'),
-  BrojMesta: 32,
-  BrojSlobodnihMesta: 22,
-  Details: {
-    Opis: 'Hhehehehehe',
-    Slike: ['', '', ''],
-    RadnoVreme: '07:00 - 23:30',
-    Lokacija: '',
-    Meni: ''
-  },
-}; */
 
 function App() {
   const [current, setCurrent] = useState(null);
