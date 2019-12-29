@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
+/* React */
+import React, { useState, useEffect } from 'react';
 import './App.css';
+/* Data */
 import data from './data/kafici';
+/* Libraries */
 import _ from 'lodash';
+import queryString from 'query-string';
+/* Pages */
+import Details from './Details';
 
-function App() {
-  const [current, setCurrent] = useState(null);
+function App(props) {
+  const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
 
-  const findByID = (ID) => {
-    data.forEach(k => {
-      if (k.ID === ID) return k;
-    })
+  useEffect(() => {
+    let query = queryString.parse(window.location.search);
 
-    return null;
-  }
+    if (query.view) {
+      setSelected(parseInt(query.view, 10));
+    };
+  }, [])
+
+  useEffect(() => {
+    if (window.location.search !== queryString.stringify({ 'view': selected })) {
+      if (selected) {
+        window.history.replaceState(
+          {},
+          '',
+          window.location.protocol +
+          '//' +
+          window.location.host +
+          '?' +
+          queryString.stringify({ 'view': selected })
+        )
+      } else {
+        window.history.replaceState(
+          {},
+          '',
+          window.location.protocol +
+          '//' +
+          window.location.host +
+          '?'
+        )
+      }
+    }
+  }, [selected])
 
   const filterBySearch = (arr = data) => {
     let filtered = arr.filter(({ Title }) => {
@@ -35,35 +66,26 @@ function App() {
           }} />
       </div>
       {
-        !current && filterBySearch().map((Kafic) => {
-          return <div 
-          key={Kafic.ID} 
-          className="singleLine"
-          style={{
-            backgroundColor: Kafic.BrojSlobodnihMesta > 0 ? '#00ff00' : '#ff0000',
-          }}
+        !selected && filterBySearch().map((Kafic) => {
+          return <div
+            key={Kafic.ID}
+            className="singleLine"
+            style={{
+              backgroundColor: Kafic.BrojSlobodnihMesta > 0 ? '#00ff00' : '#ff0000',
+            }}
           >
             <img className="listLogo" src={'./slike/' + Kafic.Logo} />
             <h1>{Kafic.Title}</h1>
             <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
             <button onClick={() => {
-              setCurrent(Kafic)
+              setSelected(Kafic.ID)
             }}>Details</button>
           </div>
         })
       }
       <div className='details'>
         {
-          current && <div>
-            <h1>{current.Title}</h1>
-            <img src={'./slike/' + current.Logo} />
-            <p>Slobodnih mesta: {current.BrojSlobodnihMesta} / {current.BrojMesta}</p>
-            <p>O mestu: {current.Details.Opis}</p>
-            <button>Rezervisi</button>
-            <button onClick={() => {
-              setCurrent(null)
-            }}>Nazad</button>
-          </div>
+          selected && <Details data={_.find(data, { 'ID': selected })} setSelected={setSelected} />
         }
       </div>
     </div>
