@@ -40,9 +40,17 @@ function Details(props) {
             <div className="detailsHeader">
                 <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
                 <h1 className="detailsTitle">{props.data.Title}</h1>
-                <button onClick={() => {
-                    props.setSelected(null)
-                }}>Nazad</button>
+                <div
+                    className="goBack"
+                    onClick={() => {
+                        props.setSelected(null)
+                    }}
+                >
+                    <i className="material-icons">
+                        arrow_back_ios
+                    </i>
+                    <span>Nazad</span>
+                </div>
             </div>
             <div className="detailsRow">
                 <h1 className="greyText">

@@ -6,6 +6,10 @@
   background: #bbff00 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 
+h1 {
+  font-size: 24px;
+}
+
 .list {}
 
 #searchIcon {
@@ -130,4 +134,10 @@
 
 .detailsAboutText {
   text-align: justify;
+}
+
+.goBack {
+  color: white;
+  display: flex;
+  cursor: pointer;
 }

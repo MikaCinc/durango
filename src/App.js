@@ -60,7 +60,7 @@ function App(props) {
       filterBySearch().map((Kafic) => {
         return <div
           key={Kafic.ID}
-          className="singleLine ripple"
+          className="singleLine button"
           onClick={() => {
             setSelected(Kafic.ID)
           }}
