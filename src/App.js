@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import Details from './Details';
 
 function App(props) {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(2);
   const [search, setSearch] = useState('');
 
   useEffect(() => {

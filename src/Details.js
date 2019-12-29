@@ -11,14 +11,16 @@ function Details(props) {
 
     return (
         <div>
-            <h1>{props.data.Title}</h1>
-            <img src={'./slike/' + props.data.Logo} />
+            <div className="detailsHeader">
+                <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
+                <h1 className="detailsTitle">{props.data.Title}</h1>
+                <button onClick={() => {
+                    props.setSelected(null)
+                }}>Nazad</button>
+            </div>
             <p>Slobodnih mesta: {props.data.BrojSlobodnihMesta} / {props.data.BrojMesta}</p>
             <p>O mestu: {props.data.Details.Opis}</p>
             <button>Rezervisi</button>
-            <button onClick={() => {
-                props.setSelected(null)
-            }}>Nazad</button>
         </div>
     );
 }
