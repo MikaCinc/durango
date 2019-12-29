@@ -141,3 +141,44 @@ h1 {
   display: flex;
   cursor: pointer;
 }
+
+.modalUpper {
+  display: flex;
+}
+
+.modalInputDiv {
+  flex: 1;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin: 10px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.modalLower {
+  display: flex;
+}
+
+.buttonReserve {
+  flex: 1;
+  background-color: #3261D5;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  text-transform: uppercase;
+  color: white;
+  font-size: 18px;
+  border: 0px solid white;
+  margin: 5px;
+}
+
+.buttonCancel {
+  flex: 1;
+  background-color: #C50505;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  text-transform: uppercase;
+  color: white;
+  font-size: 18px;
+  border: 0px solid white;
+  margin: 5px;
+}

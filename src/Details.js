@@ -1,18 +1,25 @@
 /* React */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-/* Data */
-// import data from './data/kafici';
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
-import queryString from 'query-string';
+
+import { Button, Modal } from 'react-bootstrap';
+
 
 function Details(props) {
 
     /* useEffect(() => {
         console.log('herrerre')
     }, []) */
+
+    const [seats, setSeats] = useState(3);
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     const getRadnoVreme = () => {
         let time = props.data.Details.RadnoVreme,
@@ -65,7 +72,12 @@ function Details(props) {
                     / {props.data.BrojMesta}
                 </h1>
             </div>
-            <div className="detailsRow clickableRow">
+            <div
+                className="detailsRow clickableRow"
+                onClick={() => {
+                    handleShow()
+                }}
+            >
                 <i className="material-icons detailIcon">
                     book
                 </i>
@@ -94,6 +106,48 @@ function Details(props) {
                 </div>
                 <p className="detailsAboutText">{props.data.Details.Opis}</p>
             </div>
+
+            <Modal
+                show={showModal}
+                onHide={handleClose}
+                centered
+            >
+                <Modal.Body>
+                    <div className="modalUpper">
+                        <div className="modalInputDiv greyText">
+                            <p>Broj mesta</p>
+                            <p><span onClick={() => {
+                                if (seats > 1) {
+                                    setSeats(seats - 1)
+                                }
+                            }}> - </span>{seats}<span onClick={() => {
+                                setSeats(seats + 1)
+                            }}> + </span></p>
+                        </div>
+                        <div className="modalInputDiv greyText">
+                            Vreme
+                        </div>
+                    </div>
+                    <div className="modalLower">
+                        <button
+                            className="buttonReserve"
+                            onClick={() => {
+                                handleClose()
+                            }}
+                        >
+                            Rezerviši
+                        </button>
+                        <button
+                            className="buttonCancel"
+                            onClick={() => {
+                                handleClose()
+                            }}
+                        >
+                            Odustani
+                        </button>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
