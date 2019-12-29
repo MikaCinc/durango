@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import Details from './Details';
 
 function App(props) {
-  const [selected, setSelected] = useState(2);
+  const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function App(props) {
       filterBySearch().map((Kafic) => {
         return <div
           key={Kafic.ID}
-          className="singleLine"
+          className="singleLine ripple"
           onClick={() => {
             setSelected(Kafic.ID)
           }}

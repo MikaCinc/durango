@@ -63,7 +63,9 @@ function Details(props) {
                 </i>
                 <h1 className="detailRowText">Napravi rezervaciju</h1>
             </div>
-            <div className="detailsRow clickableRow">
+            <div className="detailsRow clickableRow" onClick={() => {
+                window.open(props.data.Details.Lokacija, '_blank');
+            }}>
                 <i className="material-icons detailIcon">
                     map
                 </i>
