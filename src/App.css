@@ -94,6 +94,17 @@
   padding-right: 10px;
 }
 
+.detailAbout {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.detailsRowSimple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .clickableRow {
   background-color: #FCA731;
   color: white;
@@ -107,4 +118,8 @@
 
 .detailIcon {
   width: 5%;
+}
+
+.detailsAboutText {
+  text-align: justify;
 }

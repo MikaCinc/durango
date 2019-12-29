@@ -21,10 +21,18 @@ function Details(props) {
             currentTime = moment();
 
         if (currentTime.isBetween(moment(timeStart, 'HH:mm'), moment(timeEnd, 'HH:mm'))) {
-        return <h1 className="detailRowText"><span className="greyText">Otvoreno: </span> <span style={{color: '#009A1F'}}>{time}</span></h1>;
+            return <h1
+                className="detailRowText"
+            >
+                <span className="greyText">Otvoreno: </span>
+                <span style={{ color: '#009A1F' }}>{time}</span>
+            </h1>;
         };
 
-        return <h1 className="detailRowText"><span className="greyText">Zatvoreno: </span> <span style={{color: '#C50505'}}>{time}</span></h1>;
+        return <h1 className="detailRowText">
+            <span className="greyText">Zatvoreno: </span>
+            <span style={{ color: '#C50505' }}>{time}</span>
+        </h1>;
     }
 
     return (
@@ -67,8 +75,15 @@ function Details(props) {
                 </i>
                 {getRadnoVreme()}
             </div>
-            <p>O mestu: {props.data.Details.Opis}</p>
-            <button>Rezervisi</button>
+            <div className="detailAbout">
+                <div className="detailsRowSimple">
+                    <i className="material-icons detailIcon greyText">
+                        info
+                    </i>
+                    <h1 className="detailRowText greyText">O mestu</h1>
+                </div>
+                <p className="detailsAboutText">{props.data.Details.Opis}</p>
+            </div>
         </div>
     );
 }
