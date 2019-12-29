@@ -5,7 +5,7 @@
   margin-left: 10px;
 }
 
-.poepleIcon {
+.peopleIcon {
   color: grey;
   display: inline-block;
 }
@@ -68,7 +68,6 @@
   padding-right: 10px;
   height: 70px;
   box-shadow: 0 6px 9px rgba(0, 0, 0, 0.16), 0 6px 9px rgba(0, 0, 0, 0.23);
-
 }
 
 .detailsTitle {
@@ -79,4 +78,33 @@
   width: 50px;
   height: 50px;
   border-radius: 100px;
+}
+
+.greyText {
+  color: #707070;
+}
+
+.detailsRow {
+  display: flex;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.clickableRow {
+  background-color: #FCA731;
+  color: white;
+  cursor: pointer;
+}
+
+.detailRowText {
+  text-align: center;
+  width: 95%;
+}
+
+.detailIcon {
+  width: 5%;
 }

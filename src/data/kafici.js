@@ -8,7 +8,7 @@ const kafici = [
         Details: {
             Opis: 'Hej haj helou',
             Slike: ['', '', ''],
-            RadnoVreme: '07:00 - 23:30',
+            RadnoVreme: '06:00 - 23:30',
             Lokacija: '',
             Meni: ''
         },
