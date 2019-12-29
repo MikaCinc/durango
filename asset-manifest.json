@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/durango/static/css/main.90c079c6.chunk.css",
+    "main.js": "/durango/static/js/main.7ab8063a.chunk.js",
+    "main.js.map": "/durango/static/js/main.7ab8063a.chunk.js.map",
+    "runtime-main.js": "/durango/static/js/runtime-main.faf610aa.js",
+    "runtime-main.js.map": "/durango/static/js/runtime-main.faf610aa.js.map",
+    "static/js/2.e4081139.chunk.js": "/durango/static/js/2.e4081139.chunk.js",
+    "static/js/2.e4081139.chunk.js.map": "/durango/static/js/2.e4081139.chunk.js.map",
+    "index.html": "/durango/index.html",
+    "precache-manifest.e9b1419a18f5df1761c02cac7c104ab2.js": "/durango/precache-manifest.e9b1419a18f5df1761c02cac7c104ab2.js",
+    "service-worker.js": "/durango/service-worker.js",
+    "static/css/main.90c079c6.chunk.css.map": "/durango/static/css/main.90c079c6.chunk.css.map",
+    "static/js/2.e4081139.chunk.js.LICENSE": "/durango/static/js/2.e4081139.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.faf610aa.js",
+    "static/js/2.e4081139.chunk.js",
+    "static/css/main.90c079c6.chunk.css",
+    "static/js/main.7ab8063a.chunk.js"
+  ]
+}
