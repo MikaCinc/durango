@@ -32,7 +32,7 @@ function App(props) {
 
   const filterBySearch = (arr = data) => {
     let filtered = arr.filter(({ Title }) => {
-      return Title.trim().toLowerCase().indexOf(search) > -1;
+      return Title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
     });
 
     return _.orderBy(filtered, 'BrojSlobodnihMesta', 'desc');
