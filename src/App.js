@@ -21,30 +21,6 @@ function App(props) {
     };
   }, [])
 
-  useEffect(() => {
-    if (window.location.search !== queryString.stringify({ 'view': selected })) {
-      if (selected) {
-        window.history.replaceState(
-          {},
-          '',
-          window.location.protocol +
-          '//' +
-          window.location.host +
-          '?' +
-          queryString.stringify({ 'view': selected })
-        )
-      } else {
-        window.history.replaceState(
-          {},
-          '',
-          window.location.protocol +
-          '//' +
-          window.location.host +
-          '?'
-        )
-      }
-    }
-  }, [selected])
 
   const filterBySearch = (arr = data) => {
     let filtered = arr.filter(({ Title }) => {
