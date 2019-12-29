@@ -94,24 +94,6 @@ function App(props) {
         }
       </Fragment>
     )
-
-    Search()
-    filterBySearch().map((Kafic) => {
-      return <div
-        key={Kafic.ID}
-        className="singleLine"
-        style={{
-          backgroundColor: Kafic.BrojSlobodnihMesta > 0 ? '#00ff00' : '#ff0000',
-        }}
-      >
-        <img className="listLogo" src={'./slike/' + Kafic.Logo} />
-        <h1>{Kafic.Title}</h1>
-        <p>Slobodnih mesta: {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
-        <button onClick={() => {
-          setSelected(Kafic.ID)
-        }}>Details</button>
-      </div>
-    })
   }
 
   return (
