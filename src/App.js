@@ -21,6 +21,14 @@ function App(props) {
     };
   }, [])
 
+  useEffect(() => {
+    if(selected) {
+      window.history.pushState({}, '', window.location.pathname + "?" + queryString.stringify({ 'view': selected }));
+    }else {
+      window.history.pushState({}, '', window.location.pathname);
+    }
+  }, [selected])
+
 
   const filterBySearch = (arr = data) => {
     let filtered = arr.filter(({ Title }) => {
