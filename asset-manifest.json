@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/durango/static/css/main.684f63f1.chunk.css",
-    "main.js": "/durango/static/js/main.eb451930.chunk.js",
-    "main.js.map": "/durango/static/js/main.eb451930.chunk.js.map",
+    "main.js": "/durango/static/js/main.9e24db34.chunk.js",
+    "main.js.map": "/durango/static/js/main.9e24db34.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.faf610aa.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.faf610aa.js.map",
     "static/js/2.78417200.chunk.js": "/durango/static/js/2.78417200.chunk.js",
     "static/js/2.78417200.chunk.js.map": "/durango/static/js/2.78417200.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.870ee4b0dec7355d6d7391ac92dadafa.js": "/durango/precache-manifest.870ee4b0dec7355d6d7391ac92dadafa.js",
+    "precache-manifest.bbd765836ba32179ccc930bc6f922c57.js": "/durango/precache-manifest.bbd765836ba32179ccc930bc6f922c57.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/main.684f63f1.chunk.css.map": "/durango/static/css/main.684f63f1.chunk.css.map",
     "static/js/2.78417200.chunk.js.LICENSE": "/durango/static/js/2.78417200.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.faf610aa.js",
     "static/js/2.78417200.chunk.js",
     "static/css/main.684f63f1.chunk.css",
-    "static/js/main.eb451930.chunk.js"
+    "static/js/main.9e24db34.chunk.js"
   ]
 }
