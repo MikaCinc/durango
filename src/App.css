@@ -29,6 +29,16 @@ h1 {
   width: 100%;
 }
 
+.noResults {
+  text-align: center;
+  margin-top: 5rem;
+  color: #B0B0B0;
+}
+
+.noResultsIcon {
+  font-size: 8rem;
+}
+
 .mainHeader {
   background-color: #3261D5;
   text-align: center;

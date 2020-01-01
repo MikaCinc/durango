@@ -12,8 +12,10 @@ import Details from './Details';
 import Slide from 'react-reveal/Slide';
 
 function App(props) {
+  const [noResults, setNoResults] = useState(false);
+  const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('w');
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
@@ -30,6 +32,14 @@ function App(props) {
       window.history.pushState({}, '', window.location.pathname);
     }
   }, [selected])
+
+  useEffect(() => {
+    setFiltered(filterBySearch())
+  }, [search])
+
+  useEffect(() => {
+    setNoResults(filtered.length === 0);
+  }, [filtered])
 
 
   const filterBySearch = (arr = data) => {
@@ -51,15 +61,25 @@ function App(props) {
           placeholder="Pretraži..."
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value)
+            setSearch(e.target.value);
           }} />
       </div>
     )
   }
 
   const List = () => {
-    return (
-      filterBySearch().map((Kafic) => {
+    return noResults
+      ? <div className="noResults boldText">
+        <h1>
+          Mesto koje tražite nije pronađeno
+        </h1>
+        <i
+          className="material-icons noResultsIcon"
+        >
+          sentiment_very_dissatisfied
+      </i>
+      </div>
+      : filtered.map((Kafic) => {
         return <div
           key={Kafic.ID}
           className="singleLine button"
@@ -82,7 +102,7 @@ function App(props) {
             </i>
         </div>
       })
-    )
+
   }
 
   const ListAndSearch = () => {
