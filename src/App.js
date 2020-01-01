@@ -8,6 +8,8 @@ import _ from 'lodash';
 import queryString from 'query-string';
 /* Pages */
 import Details from './Details';
+/* Bootstrap */
+import { Collapse } from 'react-bootstrap';
 
 function App(props) {
   const [selected, setSelected] = useState(null);
@@ -22,9 +24,9 @@ function App(props) {
   }, [])
 
   useEffect(() => {
-    if(selected) {
+    if (selected) {
       window.history.pushState({}, '', window.location.pathname + "?" + queryString.stringify({ 'view': selected }));
-    }else {
+    } else {
       window.history.pushState({}, '', window.location.pathname);
     }
   }, [selected])
@@ -46,7 +48,7 @@ function App(props) {
         </i>
         <input
           className="searchInput"
-          placeholder="Search..."
+          placeholder="Pretraži..."
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
@@ -66,18 +68,18 @@ function App(props) {
           }}
         >
           <img className="listLogo" src={'./slike/' + Kafic.Logo} />
-          <h1 className="lineTitle">{Kafic.Title}</h1>
-          <div className="lineCounter">
-            <p className="lineFreeSeats">{Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}</p>
-            <i
-              className="material-icons peopleIcon"
-              style={{
-                color: Kafic.BrojSlobodnihMesta > 0 ? '#3261D5' : '#ff0000',
-              }}
-            >
-              people
+          <h1 className="lineTitle boldText">{Kafic.Title}</h1>
+          <p className="lineFreeSeats boldText greyText">
+            {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}
+          </p>
+          <i
+            className="material-icons peopleIcon"
+            style={{
+              color: Kafic.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+            }}
+          >
+            people
             </i>
-          </div>
         </div>
       })
     )
@@ -86,9 +88,12 @@ function App(props) {
   const ListAndSearch = () => {
     return (
       <Fragment>
-        {
-          Search()
-        }
+        <div className="mainHeader">
+          <p className="mainTitle">Durango</p>
+          {
+            Search()
+          }
+        </div>
         {
           List()
         }
@@ -98,16 +103,24 @@ function App(props) {
 
   return (
     <div className="App">
-      <div className="list">
-        {
-          !selected && ListAndSearch()
-        }
-      </div>
-      <div className='details'>
-        {
-          selected && <Details data={_.find(data, { 'ID': selected })} setSelected={setSelected} />
-        }
-      </div>
+      <Collapse
+        in={!selected}
+      >
+        <div className="list">
+          {
+            !selected && ListAndSearch()
+          }
+        </div>
+      </Collapse>
+      <Collapse
+        in={selected}
+      >
+        <div className='details'>
+          {
+            selected && <Details data={_.find(data, { 'ID': selected })} setSelected={setSelected} />
+          }
+        </div>
+      </Collapse>
     </div>
   );
 }

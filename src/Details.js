@@ -5,7 +5,7 @@ import './App.css';
 import _ from 'lodash';
 import moment from 'moment';
 
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Carousel } from 'react-bootstrap';
 
 
 function Details(props) {
@@ -48,11 +48,31 @@ function Details(props) {
         </h1>;
     }
 
+    const renderCarousel = () => {
+        return (
+            <Carousel>
+                {
+                    ['kafic1.jpg', 'kafic2.jpg', 'kafic3.jpg'].map((item, index) => {
+                        return <Carousel.Item key={index}>
+                            <img
+                                className="d-block w-100"
+                                src={'./slike/carouselMock/' + item}
+                                alt={(index + 1) + '. slika'}
+                            />
+                            {/* <Carousel.Caption>
+                                <h3>{'Glavni tekst ' + (index + 1)}</h3>
+                                <p>{'Tekst opisa ' + (index + 1)}</p>
+                            </Carousel.Caption> */}
+                        </Carousel.Item>
+                    })
+                }
+            </Carousel>
+        )
+    }
+
     return (
         <div>
             <div className="detailsHeader">
-                <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
-                <h1 className="detailsTitle">{props.data.Title}</h1>
                 <div
                     className="goBack"
                     onClick={() => {
@@ -64,12 +84,14 @@ function Details(props) {
                     </i>
                     <span>Nazad</span>
                 </div>
+                <h1 className="detailsTitle boldText">{props.data.Title}</h1>
+                <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
             </div>
             <div className="detailsRow">
-                <h1 className="greyText">
+                <h1 className="greyText boldText">
                     Slobodnih mesta:
                     <span style={{
-                        color: props.data.BrojSlobodnihMesta > 0 ? '#3261D5' : '#ff0000',
+                        color: props.data.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
                     }}>
                         {
                             ' ' + props.data.BrojSlobodnihMesta + ' '
@@ -89,19 +111,25 @@ function Details(props) {
                 </i>
                 <h1 className="detailRowText">Napravi rezervaciju</h1>
             </div>
-            <div className="detailsRow clickableRow" onClick={() => {
-                window.open(props.data.Details.Lokacija, '_blank');
-            }}>
-                <i className="material-icons detailIcon">
-                    map
-                </i>
-                <h1 className="detailRowText">Prikaži na mapi</h1>
-            </div>
+            {
+                renderCarousel()
+            }
             <div className="detailsRow">
                 <i className="material-icons detailIcon greyText">
                     access_time
                 </i>
                 {getRadnoVreme()}
+            </div>
+            <div
+                className="detailsRow clickableRow"
+                onClick={() => {
+                    window.open(props.data.Details.Lokacija, '_blank');
+                }}
+            >
+                <i className="material-icons detailIcon">
+                    map
+                </i>
+                <h1 className="detailRowText">Prikaži na mapi</h1>
             </div>
             <div className="detailAbout">
                 <div className="detailsRowSimple">
@@ -119,39 +147,48 @@ function Details(props) {
                 centered
             >
                 <Modal.Body>
-                    <div className="modalUpper">
-                        <div className="modalInputDiv greyText">
-                            <p>Broj mesta</p>
-                            <p><span onClick={() => {
-                                if (seats > 1) {
-                                    setSeats(seats - 1)
-                                }
-                            }}> - </span>{seats}<span onClick={() => {
-                                setSeats(seats + 1)
-                            }}> + </span></p>
-                        </div>
-                        <div className="modalInputDiv greyText">
-                            Vreme
-                        </div>
+                    <div className="modalInputDiv w-50">
+                        <h5 className="greyText boldText">Broj mesta</h5>
+                        <p className="modalInputText greyText ">
+                            <span
+                                className="clickable"
+                                onClick={() => {
+                                    if (seats > 1) {
+                                        setSeats(seats - 1)
+                                    }
+                                }}
+                            > - </span>
+                            <span>{seats}</span>
+                            <span
+                                className="clickable"
+                                onClick={() => {
+                                    setSeats(seats + 1)
+                                }}
+                            > + </span>
+                        </p>
                     </div>
-                    <div className="modalLower">
-                        <button
-                            className="buttonReserve"
-                            onClick={() => {
-                                handleClose()
-                            }}
-                        >
-                            Rezerviši
-                        </button>
-                        <button
-                            className="buttonCancel"
-                            onClick={() => {
-                                handleClose()
-                            }}
-                        >
-                            Odustani
-                        </button>
+                    <div className="modalInputDiv">
+                        <h5 className="greyText boldText">Datum & vreme</h5>
+                        <p className="greyText modalInputTextDate">
+                            12/01/2020 21:30
+                        </p>
                     </div>
+                    <button
+                        className="buttonReserve boldText"
+                        onClick={() => {
+                            handleClose()
+                        }}
+                    >
+                        Rezerviši
+                        </button>
+                    <button
+                        className="buttonCancel boldText"
+                        onClick={() => {
+                            handleClose()
+                        }}
+                    >
+                        Odustani
+                        </button>
                 </Modal.Body>
             </Modal>
         </div>
