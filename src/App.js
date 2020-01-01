@@ -15,7 +15,7 @@ function App(props) {
   const [noResults, setNoResults] = useState(false);
   const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
-  const [search, setSearch] = useState('w');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
