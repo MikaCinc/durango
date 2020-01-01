@@ -19,6 +19,16 @@ h1 {
   cursor: pointer;
 }
 
+.list{
+  display: inline-block;
+  width: 100%;
+}
+
+.details{
+  display: inline-block;
+  width: 100%;
+}
+
 .mainHeader {
   background-color: #3261D5;
   text-align: center;

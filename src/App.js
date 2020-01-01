@@ -8,8 +8,8 @@ import _ from 'lodash';
 import queryString from 'query-string';
 /* Pages */
 import Details from './Details';
-/* Bootstrap */
-import { Collapse } from 'react-bootstrap';
+/* Animations */
+import Slide from 'react-reveal/Slide';
 
 function App(props) {
   const [selected, setSelected] = useState(null);
@@ -103,24 +103,31 @@ function App(props) {
 
   return (
     <div className="App">
-      <Collapse
-        in={!selected}
+      <Slide
+        when={!selected}
+        collapse
+        left
+        duration={300}
       >
         <div className="list">
           {
             !selected && ListAndSearch()
           }
         </div>
-      </Collapse>
-      <Collapse
-        in={selected}
+      </Slide>
+      <Slide
+        when={selected}
+        collapse
+        right
+        delay={10}
+        duration={300}
       >
         <div className='details'>
           {
             selected && <Details data={_.find(data, { 'ID': selected })} setSelected={setSelected} />
           }
         </div>
-      </Collapse>
+      </Slide>
     </div>
   );
 }
