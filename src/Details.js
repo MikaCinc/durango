@@ -25,16 +25,22 @@ function Details(props) {
         let time = props.data.Details.RadnoVreme,
             timeStart = time.split(' - ')[0],
             timeEnd = time.split(' - ')[1],
-            currentTime = moment();
+            currentTime = moment(),
+            flag = false;
 
-        if (currentTime.isBetween(moment(timeStart, 'HH:mm'), moment(timeEnd, 'HH:mm'))) {
+        if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment('05:00', 'HH:mm'))) {
+            flag = true;
+        };
+
+        if (currentTime.isBetween(moment(timeStart, 'HH:mm'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
             return <h1
                 className="detailRowText"
             >
                 <span className="greyText">Otvoreno: </span>
                 <span style={{ color: '#009A1F' }}>{time}</span>
-            </h1>;
+            </h1>
         };
+
 
         return <h1 className="detailRowText">
             <span className="greyText">Zatvoreno: </span>
