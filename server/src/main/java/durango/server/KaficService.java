@@ -30,7 +30,7 @@ public class KaficService {
         kreirajKafic(2, "Sqare", "/sqare.png", 15, 7, "Blablabla", new String[]{"lalalal slika 1", "laalala 2","lslslslsls 3"}, "00-24", "lok", "meni");
         kreirajKafic(3, "Sqare", "/sqare.png", 15, 7, "Blablabla", new String[]{"lalalal slika 1", "laalala 2","lslslslsls 3"}, "00-24", "lok", "meni");
         kreirajKafic(4, "Sqare", "/sqare.png", 15, 7, "Blablabla", new String[]{"lalalal slika 1", "laalala 2","lslslslsls 3"}, "00-24", "lok", "meni");
-        kreirajKafic(4, "Sqare", "/sqare.png", 15, 7, "Blablabla", new String[]{"lalalal slika 1", "laalala 2","lslslslsls 3"}, "00-24", "lok", "meni");
+        kreirajKafic(5, "Sqare", "/sqare.png", 15, 7, "Blablabla", new String[]{"lalalal slika 1", "laalala 2","lslslslsls 3"}, "00-24", "lok", "meni");
         }
 
     public ArrayList<Kafic> getKafici(){
