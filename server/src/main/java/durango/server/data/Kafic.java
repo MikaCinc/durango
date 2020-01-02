@@ -1,27 +1,12 @@
 package durango.server.data;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
-
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
 public class Kafic {
 
-    @Id
     private int id;
     private String title;
     private String logo;
     private int brojMesta;
     private int brojSlobodnihMesta;
-
-    public Kafic(){
-    }
 
     public Kafic(int id, String title, String logo, int brojMesta, int brojSlobodnihMesta){
         this.id = id;
