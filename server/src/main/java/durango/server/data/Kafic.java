@@ -7,13 +7,15 @@ public class Kafic {
     private String logo;
     private int brojMesta;
     private int brojSlobodnihMesta;
+    private KaficDetalji details;
 
-    public Kafic(int id, String title, String logo, int brojMesta, int brojSlobodnihMesta){
+    public Kafic(int id, String title, String logo, int brojMesta, int brojSlobodnihMesta, KaficDetalji details){
         this.id = id;
         this.title = title;
         this.logo = logo;
         this.brojMesta = brojMesta;
         this.brojSlobodnihMesta = brojSlobodnihMesta;
+        this.details = details;
     }
 
     public int getid() {
@@ -36,6 +38,10 @@ public class Kafic {
         return brojSlobodnihMesta;
     }
 
+    public KaficDetalji getDetails(){
+        return details;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -54,5 +60,9 @@ public class Kafic {
 
     public void setBrojSlobodnihMesta(int brojSlobodnihMesta) {
         this.brojSlobodnihMesta = brojSlobodnihMesta;
+    }
+
+    public void setDetails(KaficDetalji details){
+        this.details = details;
     }
 }

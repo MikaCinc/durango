@@ -20,24 +20,19 @@ public class GreetingController {
         return kaficService.getKafici();
     }
 
-    @GetMapping("/lista-detalja")
-    public ArrayList<KaficDetalji> listaDetalja(){
-        return kaficService.getKaficiDetaljiList();
-    }
+    //@GetMapping("/lista-detalja")
+    //public ArrayList<KaficDetalji> listaDetalja(){
+     //   return kaficService.getKaficiDetaljiList();
+    //}
 
     @GetMapping("/kafic/{id}")
     public Kafic getKafic(@PathVariable int id){
         return kaficService.getKafic(id);
     }
 
-    @GetMapping("/kafic-detalji/{id}")
-    public KaficDetalji getDetalje(@PathVariable int id){
-        return kaficService.getKaficDetalji(id);
-    }
-
     @PostMapping(value = "/kafic")
-    public void kreirajKafic(@RequestBody Kafic kafic, KaficDetalji kaficDetalji){
-        kaficService.kreirajKafic(kafic, kaficDetalji);
+    public void kreirajKafic(@RequestBody Kafic kafic){
+        kaficService.kreirajKafic(kafic);
     }
 
     //User connection handler
