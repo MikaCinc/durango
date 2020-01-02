@@ -1,5 +1,6 @@
-package durango.server.data;
+package durango.server;
 
+import durango.server.data.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

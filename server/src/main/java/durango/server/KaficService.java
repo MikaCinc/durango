@@ -1,5 +1,7 @@
-package durango.server.data;
+package durango.server;
 
+import durango.server.data.Kafic;
+import durango.server.data.KaficDetalji;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
