@@ -51,7 +51,7 @@ const LoginScreen = props => {
             </div>
         </Zoom>
         <GoogleLogin
-            clientId="873302302315-rlkjr1k6vmguo4t0ovhgmf0qjltilai5.apps.googleusercontent.com"
+            clientId="873302302315-mv8lh0772kbe55nvh687qpv8ddvlv9t0.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={responseGoogleSuccess}
             onFailure={responseGoogleFailure}
