@@ -4,6 +4,7 @@ import './App.css';
 /* Data */
 import data from './data/kafici';
 import Logo from './Logo.png';
+import Logo2 from './Logo2.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
@@ -45,7 +46,7 @@ function App(props) {
   }, [selected])
 
   useEffect(() => {
-    setFiltered(filterBySearch())
+    setFiltered(filterBySearch());
   }, [search])
 
   useEffect(() => {
@@ -120,7 +121,7 @@ function App(props) {
     return (
       <Fragment>
         <div className="mainHeader">
-          <img src={Logo} className="logoHeader" />
+          <img src={Logo2} className="logoHeader" />
           {
             Search()
           }

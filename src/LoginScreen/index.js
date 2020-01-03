@@ -36,7 +36,7 @@ const LoginScreen = props => {
         >
             <img className="loginLogo" src={Logo} />
         </Fade>
-        <p className="loginParagraph">Pogledajte tačan broj slobodnih mesta u vašem omiljenom kafiću ili restoranu i rezervišite mesto za posebne prilike</p>
+        <p className="loginParagraph">Pogledajte tačan broj slobodnih mesta u svom omiljenom kafiću ili restoranu i rezervišite mesto za posebne prilike</p>
         <Zoom
             when={isSuccess}
             bottom
