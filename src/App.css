@@ -4,11 +4,12 @@
 }
 
 .button:hover {
-  background: #bbff00 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+  background: #b0b0b0 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 
 h1 {
   font-size: 26px;
+  margin-bottom: 0rem;
 }
 
 .boldText {
@@ -19,12 +20,108 @@ h1 {
   cursor: pointer;
 }
 
-.list{
+.loginScreen {
+  background-image: linear-gradient( rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(./LoginScreen/bg.jpeg);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-position: center;
+}
+
+.loginLogo {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  width: 75%;
+  height: auto;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.loginParagraph {
+  color: white;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  width: 75%;
+  display: block;
+}
+
+.loginProfileImageLoaded {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  height: auto;
+  width: 100px;
+}
+
+.facebook-btn {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: auto;
+  background-color: #3b5998;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  color: white;
+}
+
+.facebook-icon {
+  height: 42px;
+  display: inline-block;
+}
+
+.facebook-text {
+  color: white;
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.google-btn {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: auto;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.google-icon {
+  height: 42px;
+  display: inline-block;
+}
+
+.google-text {
+  color: #707070;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 0px;
+}
+
+.list {
   display: inline-block;
   width: 100%;
 }
 
-.details{
+.details {
   display: inline-block;
   width: 100%;
 }
@@ -54,6 +151,13 @@ h1 {
   color: white;
   font-size: 14px;
   font-weight: 800;
+}
+
+.logoHeader {
+  width: 75px;
+  height: auto;
+  align-self: center;
+  margin: 5px;
 }
 
 #searchIcon {
@@ -141,23 +245,30 @@ h1 {
 }
 
 .detailsRow {
-  display: flex;
+  position: relative;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  align-items: center;
-  justify-content: center;
   height: 50px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 .detailRowText {
+  position: absolute;
+  text-align: left;
   text-align: center;
-  /* position: absolute; */
-  width: 95%;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 
 .detailIcon {
-  width: 5%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: left;
 }
 
 .detailAbout {
@@ -167,9 +278,8 @@ h1 {
 }
 
 .detailsRowSimple {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 50px;
 }
 
 .clickableRow {

@@ -26,13 +26,19 @@ function Details(props) {
             timeStart = time.split(' - ')[0],
             timeEnd = time.split(' - ')[1],
             currentTime = moment(),
-            flag = false;
+            flag = false,
+            sFlag = false,
+            lowerLimit = '05:00';
 
-        if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment('05:00', 'HH:mm'))) {
+        if (currentTime.isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
+            sFlag = true;
+        };
+
+        if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
             flag = true;
         };
 
-        if (currentTime.isBetween(moment(timeStart, 'HH:mm'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
+        if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
             return <h1
                 className="detailRowText"
             >
@@ -88,7 +94,7 @@ function Details(props) {
                 <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
             </div>
             <div className="detailsRow">
-                <h1 className="greyText boldText">
+                <h1 className="detailRowText greyText boldText">
                     Slobodnih mesta:
                     <span style={{
                         color: props.data.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',

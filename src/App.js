@@ -3,19 +3,31 @@ import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 /* Data */
 import data from './data/kafici';
+import Logo from './Logo.png';
+import Logo2 from './Logo2.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
 /* Pages */
 import Details from './Details';
+import LoginScreen from './LoginScreen';
 /* Animations */
 import Slide from 'react-reveal/Slide';
+import Zoom from 'react-reveal/Zoom';
+/* LOGIN */
 
 function App(props) {
+  const [authorized, setAuthorized] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
+
+  /* useEffect(() => {
+    fetch('http://localhost:7000/lista-kafica')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []) */
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
@@ -34,7 +46,7 @@ function App(props) {
   }, [selected])
 
   useEffect(() => {
-    setFiltered(filterBySearch())
+    setFiltered(filterBySearch());
   }, [search])
 
   useEffect(() => {
@@ -109,7 +121,7 @@ function App(props) {
     return (
       <Fragment>
         <div className="mainHeader">
-          <p className="mainTitle">Durango</p>
+          <img src={Logo2} className="logoHeader" />
           {
             Search()
           }
@@ -121,8 +133,8 @@ function App(props) {
     )
   }
 
-  return (
-    <div className="App">
+  const mainScreen = () => {
+    return (
       <Slide
         when={!selected}
         collapse
@@ -135,6 +147,11 @@ function App(props) {
           }
         </div>
       </Slide>
+    )
+  }
+
+  const detailsScreen = () => {
+    return (
       <Slide
         when={selected}
         collapse
@@ -148,6 +165,38 @@ function App(props) {
           }
         </div>
       </Slide>
+    )
+  }
+
+  const loginScreen = () => {
+    return (
+      <LoginScreen
+        authorized={authorized}
+        setAuthorized={setAuthorized}
+      />
+    )
+  }
+
+  return (
+    <div className="App">
+      {
+        authorized && <Fragment>
+          {
+            mainScreen()
+          }
+          {
+
+            detailsScreen()
+          }
+        </Fragment>
+      }
+      {
+        !authorized && <Fragment>
+          {
+            loginScreen()
+          }
+        </Fragment>
+      }
     </div>
   );
 }
