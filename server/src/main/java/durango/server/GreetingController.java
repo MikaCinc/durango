@@ -4,8 +4,6 @@ import durango.server.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class GreetingController {
@@ -16,14 +14,9 @@ public class GreetingController {
 
     //Cafe connection handler
     @GetMapping("/lista-kafica")
-    public ArrayList<Kafic> listaKafica(){
+    public Iterable<Kafic> listaKafica(){
         return kaficService.getKafici();
     }
-
-    //@GetMapping("/lista-detalja")
-    //public ArrayList<KaficDetalji> listaDetalja(){
-     //   return kaficService.getKaficiDetaljiList();
-    //}
 
     @GetMapping("/kafic/{id}")
     public Kafic getKafic(@PathVariable int id){
@@ -44,5 +37,17 @@ public class GreetingController {
     @PostMapping("/kreiraj-korisnika")
     public int kreirajKorisnika(@RequestBody User user){
         return userService.createUser(user);
+    }
+
+    @GetMapping("lista-korisnika")
+    public Iterable<User> getUsers(){
+        return userService.getUsers();
+    }
+
+    //FOR TESTING PURPOSES ONLY
+    @GetMapping("/bla")
+    public void bla(){
+        userService.createUser(new User(0, "sdsds", "sdfgdg", "gjhjh", true));
+        kaficService.kreirajKafic();
     }
 }

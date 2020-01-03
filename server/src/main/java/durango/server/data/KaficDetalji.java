@@ -1,13 +1,20 @@
 package durango.server.data;
 
-public class KaficDetalji {
-    private final String opis;
-    private final String[] slike;
-    private final String radnoVreme;
-    private final String lokacija;
-    private final String meni;
+import javax.persistence.Embeddable;
 
-    public KaficDetalji(String opis, String[] slike, String radnoVreme, String lokacija, String meni){
+@Embeddable
+public class KaficDetalji {
+    private String opis;
+    private String slike;
+    private String radnoVreme;
+    private String lokacija;
+    private String meni;
+
+    public KaficDetalji(){
+
+    }
+
+    public KaficDetalji(String opis, String slike, String radnoVreme, String lokacija, String meni){
         this.opis = opis;
         this.slike = slike;
         this.radnoVreme = radnoVreme;
@@ -19,7 +26,7 @@ public class KaficDetalji {
         return opis;
     }
 
-    public String[] getSlike() {
+    public String getSlike() {
         return slike;
     }
 
@@ -33,5 +40,25 @@ public class KaficDetalji {
 
     public String getMeni() {
         return meni;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public void setSlike(String slike) {
+        this.slike = slike;
+    }
+
+    public void setRadnoVreme(String radnoVreme) {
+        this.radnoVreme = radnoVreme;
+    }
+
+    public void setLokacija(String lokacija) {
+        this.lokacija = lokacija;
+    }
+
+    public void setMeni(String meni) {
+        this.meni = meni;
     }
 }

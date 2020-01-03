@@ -1,13 +1,25 @@
 package durango.server.data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Kafic {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String title;
     private String logo;
     private int brojMesta;
     private int brojSlobodnihMesta;
     private KaficDetalji details;
+
+    public Kafic(){
+
+    }
 
     public Kafic(int id, String title, String logo, int brojMesta, int brojSlobodnihMesta, KaficDetalji details){
         this.id = id;
