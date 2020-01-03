@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8e0e6ef579668e4c9287512f18169b69",
+    "revision": "de6d35c841aac287c220ec92a6b79979",
     "url": "/durango/index.html"
   },
   {
-    "revision": "5fb8f0f7f6628f2e2923",
+    "revision": "171c39e0734a67b163cb",
     "url": "/durango/static/css/main.6c90eb12.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/js/2.db3b325a.chunk.js.LICENSE"
   },
   {
-    "revision": "5fb8f0f7f6628f2e2923",
-    "url": "/durango/static/js/main.e64eae00.chunk.js"
+    "revision": "171c39e0734a67b163cb",
+    "url": "/durango/static/js/main.1d6a7b97.chunk.js"
   },
   {
     "revision": "c854f09ffe5643a05685",
