@@ -17,6 +17,12 @@ function App(props) {
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
 
+  /* useEffect(() => {
+    fetch('http://localhost:7000/lista-kafica')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []) */
+
   useEffect(() => {
     let query = queryString.parse(window.location.search);
 

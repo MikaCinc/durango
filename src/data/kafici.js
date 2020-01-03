@@ -40,7 +40,7 @@ const kafici = [
             Lokacija: 'https://www.google.com/maps/place/Caffe+bar+Dnevna+soba/@43.3196389,21.896984,15z/data=!4m5!3m4!1s0x0:0xf0256956dfa8b74d!8m2!3d43.3196389!4d21.896984?hl=sr',
             Meni: ''
         },
-    },
+    }
 ]
 
 export default kafici;
