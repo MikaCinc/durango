@@ -94,7 +94,7 @@ function Details(props) {
                 <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
             </div>
             <div className="detailsRow">
-                <h1 className="greyText boldText">
+                <h1 className="detailRowText greyText boldText">
                     Slobodnih mesta:
                     <span style={{
                         color: props.data.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
