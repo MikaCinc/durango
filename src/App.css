@@ -4,7 +4,7 @@
 }
 
 .button:hover {
-  background: #bbff00 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+  background: #b0b0b0 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 
 h1 {
