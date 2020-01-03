@@ -3,6 +3,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 /* Data */
 import data from './data/kafici';
+import Logo from './Logo.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
@@ -115,7 +116,7 @@ function App(props) {
     return (
       <Fragment>
         <div className="mainHeader">
-          <p className="mainTitle">Durango</p>
+          <img src={Logo} className="logoHeader" />
           {
             Search()
           }

@@ -57,6 +57,13 @@ h1 {
   font-weight: 800;
 }
 
+.logoHeader {
+  width: 75px;
+  height: auto;
+  align-self: center;
+  background-color: white;
+}
+
 #searchIcon {
   color: white;
 }
