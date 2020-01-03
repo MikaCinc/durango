@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import { Fade, Zoom } from 'react-reveal';
 
 /* Logo */
@@ -24,6 +25,16 @@ const LoginScreen = props => {
     const responseGoogleFailure = (response) => {
         // console.log(response)
         alert('Something is wrong with Google login')
+    }
+
+    const responseFacebook = (response) => {
+        // console.log(response)
+        setIsSuccess(true);
+        setProfileImage(response.picture.data.url)
+        setProfileName(response.name)
+        setTimeout(() => {
+            props.setAuthorized(true);
+        }, 2000)
     }
 
     return <div className="loginScreen">
@@ -69,6 +80,33 @@ const LoginScreen = props => {
                     <p className="google-text"><b>Sign in with Google</b></p>
                 </div>
             )}
+        />
+        <FacebookLogin
+            appId="503529696932140"
+            autoLoad={false}
+            fields="name,email,picture"
+            authType="reauthenticate"
+            tag={
+                renderProps => (
+                    <div
+                        className="facebook-btn"
+                        onClick={renderProps.onClick}
+                    >
+                        <img
+                            className="facebook-icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/267px-F_icon.svg.png"
+                        />
+                        <p className="facebook-text"><b>Sign in with Facebook</b></p>
+                    </div>
+                )
+            }
+            /* onClick={(nesto) => {
+                console.log('nesto', nesto)
+            }} */
+            callback={responseFacebook}
+            onFailure={() => {
+                console.log('Something is wrong with Facebook sign in')
+            }}
         />
     </div>;
 };
