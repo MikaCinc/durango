@@ -9,10 +9,14 @@ import _ from 'lodash';
 import queryString from 'query-string';
 /* Pages */
 import Details from './Details';
+import LoginScreen from './LoginScreen';
 /* Animations */
 import Slide from 'react-reveal/Slide';
+import Zoom from 'react-reveal/Zoom';
+/* LOGIN */
 
 function App(props) {
+  const [authorized, setAuthorized] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
@@ -128,8 +132,8 @@ function App(props) {
     )
   }
 
-  return (
-    <div className="App">
+  const mainScreen = () => {
+    return (
       <Slide
         when={!selected}
         collapse
@@ -142,6 +146,11 @@ function App(props) {
           }
         </div>
       </Slide>
+    )
+  }
+
+  const detailsScreen = () => {
+    return (
       <Slide
         when={selected}
         collapse
@@ -155,6 +164,38 @@ function App(props) {
           }
         </div>
       </Slide>
+    )
+  }
+
+  const loginScreen = () => {
+    return (
+      <LoginScreen
+        authorized={authorized}
+        setAuthorized={setAuthorized}
+      />
+    )
+  }
+
+  return (
+    <div className="App">
+      {
+        authorized && <Fragment>
+          {
+            mainScreen()
+          }
+          {
+
+            detailsScreen()
+          }
+        </Fragment>
+      }
+      {
+        !authorized && <Fragment>
+          {
+            loginScreen()
+          }
+        </Fragment>
+      }
     </div>
   );
 }
