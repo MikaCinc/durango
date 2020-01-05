@@ -55,11 +55,11 @@ function App(props) {
 
 
   const filterBySearch = (arr = data) => {
-    let filtered = arr.filter(({ Title }) => {
-      return Title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
+    let filtered = arr.filter(({ title }) => {
+      return title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
     });
 
-    return _.orderBy(filtered, 'BrojSlobodnihMesta', 'desc');
+    return _.orderBy(filtered, 'brojSlobodnihMesta', 'desc');
   }
 
   const Search = () => {
@@ -93,21 +93,21 @@ function App(props) {
       </div>
       : filtered.map((Kafic) => {
         return <div
-          key={Kafic.ID}
+          key={Kafic.id}
           className="singleLine button"
           onClick={() => {
-            setSelected(Kafic.ID)
+            setSelected(Kafic.id)
           }}
         >
-          <img className="listLogo" src={'./slike/' + Kafic.Logo} />
-          <h1 className="lineTitle boldText">{Kafic.Title}</h1>
+          <img className="listLogo" src={'./slike/' + Kafic.logo} />
+          <h1 className="linetitle boldText">{Kafic.title}</h1>
           <p className="lineFreeSeats boldText greyText">
-            {Kafic.BrojSlobodnihMesta} / {Kafic.BrojMesta}
+            {Kafic.brojSlobodnihMesta} / {Kafic.brojMesta}
           </p>
           <i
             className="material-icons peopleIcon"
             style={{
-              color: Kafic.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+              color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
             }}
           >
             people
@@ -161,7 +161,7 @@ function App(props) {
       >
         <div className='details'>
           {
-            selected && <Details data={_.find(data, { 'ID': selected })} setSelected={setSelected} />
+            selected && <Details data={_.find(data, { 'id': selected })} setSelected={setSelected} />
           }
         </div>
       </Slide>

@@ -22,7 +22,7 @@ function Details(props) {
     const handleShow = () => setShowModal(true);
 
     const getRadnoVreme = () => {
-        let time = props.data.Details.RadnoVreme,
+        let time = props.data.details.radnoVreme,
             timeStart = time.split(' - ')[0],
             timeEnd = time.split(' - ')[1],
             currentTime = moment(),
@@ -90,20 +90,20 @@ function Details(props) {
                     </i>
                     <span>Nazad</span>
                 </div>
-                <h1 className="detailsTitle boldText">{props.data.Title}</h1>
-                <img src={'./slike/' + props.data.Logo} className="detailsLogo" />
+                <h1 className="detailsTitle boldText">{props.data.title}</h1>
+                <img src={'./slike/' + props.data.logo} className="detailsLogo" />
             </div>
             <div className="detailsRow">
                 <h1 className="detailRowText greyText boldText">
                     Slobodnih mesta:
                     <span style={{
-                        color: props.data.BrojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+                        color: props.data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
                     }}>
                         {
-                            ' ' + props.data.BrojSlobodnihMesta + ' '
+                            ' ' + props.data.brojSlobodnihMesta + ' '
                         }
                     </span>
-                    / {props.data.BrojMesta}
+                    / {props.data.brojMesta}
                 </h1>
             </div>
             <div
@@ -129,7 +129,7 @@ function Details(props) {
             <div
                 className="detailsRow clickableRow"
                 onClick={() => {
-                    window.open(props.data.Details.Lokacija, '_blank');
+                    window.open(props.data.details.lokacija, '_blank');
                 }}
             >
                 <i className="material-icons detailIcon">
@@ -144,7 +144,7 @@ function Details(props) {
                     </i>
                     <h1 className="detailRowText greyText">O mestu</h1>
                 </div>
-                <p className="detailsAboutText">{props.data.Details.Opis}</p>
+                <p className="detailsAboutText">{props.data.details.opis}</p>
             </div>
 
             <Modal
