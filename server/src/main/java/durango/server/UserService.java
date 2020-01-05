@@ -27,4 +27,13 @@ public class UserService {
     public int createUser(User user){
         return userRepository.save(user).getId();
     }
+
+    public int obrisiKorisnika(Integer id){
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }
