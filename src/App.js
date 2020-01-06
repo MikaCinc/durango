@@ -3,7 +3,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 /* Data */
 import mockData from './data/kafici';
-import Logo from './Logo.png';
+// import Logo from './Logo.png';
 import Logo2 from './Logo2.png';
 /* Libraries */
 import _ from 'lodash';
@@ -13,8 +13,11 @@ import Details from './Details';
 import LoginScreen from './LoginScreen';
 /* Animations */
 import Slide from 'react-reveal/Slide';
-import Zoom from 'react-reveal/Zoom';
+// import Zoom from 'react-reveal/Zoom';
 /* LOGIN */
+/* LOADER */
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from 'react-loader-spinner';
 
 const placeholderObj = {
   id: 0,
@@ -48,14 +51,17 @@ function App(props) {
           if (!data || !data.length) {
             setData(mockData);
           } else {
-            setData(data);
+            //Doing this just to show loader for a little bit :)
+            setTimeout(() => {
+              setData(data);
+            }, 1500)
           }
         }).catch(() => {
           console.log('error')
           setData(mockData);
         });
     }
-  }, [authorized])
+  }, [authorized]);
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
@@ -63,7 +69,7 @@ function App(props) {
     if (query.view) {
       setSelected(parseInt(query.view, 10));
     };
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (selected) {
@@ -71,15 +77,15 @@ function App(props) {
     } else {
       window.history.pushState({}, '', window.location.pathname);
     }
-  }, [selected])
+  }, [selected]);
 
   useEffect(() => {
     setFiltered(filterBySearch());
-  }, [search, data])
+  }, [search, data]);
 
   useEffect(() => {
-    setNoResults(filtered.length === 0);
-  }, [filtered])
+    setNoResults(filtered.length === 0 && data.length);
+  }, [filtered]);
 
 
   const filterBySearch = (arr = data) => {
@@ -225,6 +231,15 @@ function App(props) {
           }
         </Fragment>
       }
+      <div className="loader">
+        <Loader
+          type="Grid"
+          color="#3261D5"
+          height={100}
+          width={100}
+          visible={data.length === 0 && authorized}
+        />
+      </div>
     </div>
   );
 }
