@@ -2,7 +2,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 /* Data */
-import data from './data/kafici';
+import mockData from './data/kafici';
 import Logo from './Logo.png';
 import Logo2 from './Logo2.png';
 /* Libraries */
@@ -16,18 +16,46 @@ import Slide from 'react-reveal/Slide';
 import Zoom from 'react-reveal/Zoom';
 /* LOGIN */
 
+const placeholderObj = {
+  id: 0,
+  title: '',
+  logo: '',
+  brojMesta: 0,
+  brojSlobodnihMesta: 0,
+  details: {
+    opis: '',
+    slike: '',
+    radnoVreme: '',
+    lokacija: '',
+    meni: ''
+  }
+}
+
 function App(props) {
+  const [data, setData] = useState([]);
   const [authorized, setAuthorized] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
   const [search, setSearch] = useState('');
 
-  /* useEffect(() => {
-    fetch('http://localhost:7000/lista-kafica')
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }, []) */
+  useEffect(() => {
+    if (authorized) {
+      fetch('http://178.17.17.197:7000/lista-kafica')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          if (!data || !data.length) {
+            setData(mockData);
+          } else {
+            setData(data);
+          }
+        }).catch(() => {
+          console.log('error')
+          setData(mockData);
+        });
+    }
+  }, [authorized])
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
@@ -47,7 +75,7 @@ function App(props) {
 
   useEffect(() => {
     setFiltered(filterBySearch());
-  }, [search])
+  }, [search, data])
 
   useEffect(() => {
     setNoResults(filtered.length === 0);
@@ -161,7 +189,7 @@ function App(props) {
       >
         <div className='details'>
           {
-            selected && <Details data={_.find(data, { 'id': selected })} setSelected={setSelected} />
+            selected && <Details data={_.find(data, { 'id': selected }) || placeholderObj} setSelected={setSelected} />
           }
         </div>
       </Slide>

@@ -12,6 +12,10 @@ h1 {
   margin-bottom: 0rem;
 }
 
+.app {
+  overflow: hidden;
+}
+
 .boldText {
   font-weight: 600;
 }
@@ -124,6 +128,7 @@ h1 {
 .details {
   display: inline-block;
   width: 100%;
+  overflow-y: hidden;
 }
 
 .noResults {
