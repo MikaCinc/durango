@@ -4,7 +4,7 @@ import durango.server.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class GreetingController {
     @Autowired
@@ -23,9 +23,14 @@ public class GreetingController {
         return kaficService.getKafic(id);
     }
 
-    @PostMapping(value = "/kafic")
+    @PostMapping("/kafic")
     public void kreirajKafic(@RequestBody Kafic kafic){
         kaficService.kreirajKafic(kafic);
+    }
+
+    @DeleteMapping("/kafic")
+    public int obrisiKafic(@RequestBody int id){
+        return kaficService.obrisiKafic(id);
     }
 
     //User connection handler
@@ -39,10 +44,16 @@ public class GreetingController {
         return userService.createUser(user);
     }
 
-    @GetMapping("lista-korisnika")
+    @GetMapping("/lista-korisnika")
     public Iterable<User> getUsers(){
         return userService.getUsers();
     }
+
+    @DeleteMapping("/korisnik")
+    public Integer obrisiKorisnika(@RequestBody Integer id){
+        return userService.obrisiKorisnika(id);
+    }
+
 
     //FOR TESTING PURPOSES ONLY
     @GetMapping("/bla")
@@ -50,4 +61,5 @@ public class GreetingController {
         userService.createUser(new User(0, "sdsds", "sdfgdg", "gjhjh", true));
         kaficService.kreirajKafic();
     }
+
 }

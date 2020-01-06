@@ -5,6 +5,8 @@ import durango.server.data.KaficDetalji;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Service
 public class KaficService {
 
@@ -28,8 +30,14 @@ public class KaficService {
         kaficRepository.save(kafic);
     }
 
-
     public void kreirajKafic(){
         kaficRepository.save(new Kafic(0, "Sqare", "/sqare.png", 15, 7, new KaficDetalji("Blablabla", "lalalal slika 1", "00-24", "lok", "meni")));
+    }
+
+    public Integer obrisiKafic(int id){
+        if(kaficRepository.existsById(id)){
+            kaficRepository.deleteById(id);
+            return 1;
+        }else return 0;
     }
 }
