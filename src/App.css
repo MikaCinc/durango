@@ -59,6 +59,15 @@ h1 {
   display: block;
 }
 
+.loginDetailsDiv {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 9rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .loginProfileImageLoaded {
   margin-top: 2rem;
   margin-bottom: 1rem;
