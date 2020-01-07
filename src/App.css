@@ -1,3 +1,12 @@
+body {
+  /* overflow: hidden; */
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .button {
   background-position: center;
   transition: background 0.8s;

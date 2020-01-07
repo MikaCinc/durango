@@ -43,7 +43,7 @@ function App(props) {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (authorized) {
+    /* if (authorized) {
       fetch('http://178.17.17.197:7000/lista-kafica')
         .then(response => response.json())
         .then(data => {
@@ -61,6 +61,8 @@ function App(props) {
           setData(mockData);
         });
     }
+ */
+    setData(mockData);
   }, [authorized]);
 
   useEffect(() => {
