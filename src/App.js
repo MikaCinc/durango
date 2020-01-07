@@ -60,9 +60,14 @@ function App(props) {
           console.log('error')
           setData(mockData);
         });
+    } */
+
+    if (authorized) {
+      setTimeout(() => {
+        setData(mockData);
+      }, 1500)
     }
- */
-    setData(mockData);
+
   }, [authorized]);
 
   useEffect(() => {
