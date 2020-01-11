@@ -1,11 +1,13 @@
 /* React */
 import React, { useState } from 'react';
-import './App.css';
+import '../App.css';
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
 
-import { Button, Modal, Carousel } from 'react-bootstrap';
+import { Modal, Carousel } from 'react-bootstrap';
+
+// import data from '../data/kafici.js';
 
 
 function Details(props) {

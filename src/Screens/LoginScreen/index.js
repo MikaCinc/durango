@@ -5,7 +5,7 @@ import FacebookLogin from 'react-facebook-login';
 import { Fade, Zoom } from 'react-reveal';
 
 /* Logo */
-import Logo from '../Logo.png';
+import Logo from '../../ExtendedLogo/Logo.png';
 
 const LoginScreen = props => {
     const [isSuccess, setIsSuccess] = useState(false);
