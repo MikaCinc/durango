@@ -36,7 +36,7 @@ const placeholderObj = {
 
 function App(props) {
   const [data, setData] = useState([]);
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(true);
   const [noResults, setNoResults] = useState(false);
   const [filtered, setFiltered] = useState([...data]);
   const [selected, setSelected] = useState(null);
@@ -61,14 +61,20 @@ function App(props) {
           setData(mockData);
         });
     } */
+    
+    setData(mockData);
 
-    if (authorized) {
+    /* if (authorized) {
       setTimeout(() => {
         setData(mockData);
       }, 1500)
-    }
+    } */
 
   }, [authorized]);
+
+  useEffect(() => {
+    console.log(window.location.href)
+  }, [window.location.href])
 
   useEffect(() => {
     let query = queryString.parse(window.location.search);
