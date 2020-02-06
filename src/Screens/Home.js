@@ -3,6 +3,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 /* Data */
 import mockData from '../data/kafici';
 import Logo from '../ExtendedLogo/Logo.png';
+import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
@@ -139,12 +140,13 @@ const Home = props => {
             ? <div className="noResults boldText">
                 <h1>
                     Mesto koje tražite nije pronađeno
-          </h1>
-                <i
+                </h1>
+                {/* <i
                     className="material-icons noResultsIcon"
                 >
                     sentiment_very_dissatisfied
-        </i>
+        </i> */}
+                <img className="noResultsIcon" src={noResultsIcon} />
             </div>
             : filtered.map((Kafic) => {
                 return <div
@@ -182,9 +184,9 @@ const Home = props => {
                     }
                 </div>
                 <div className="listHolder">
-                {
-                    List()
-                }
+                    {
+                        List()
+                    }
                 </div>
             </Fragment>
         )
