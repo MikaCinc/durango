@@ -83,7 +83,7 @@ function Details(props) {
                     className="goBack"
                     onClick={() => {
                         // props.setSelected(null)
-                        props.history.push('/home')
+                        props.history.push('durango/home')
                     }}
                 >
                     <i className="material-icons">
@@ -130,7 +130,7 @@ function Details(props) {
                 </i>
             </div>
             <div className="detailsRow clickableRow" onClick={() => {
-                props.history.push(`/${data.id}/more`);
+                props.history.push(`durango/${data.id}/more`);
             }}>
                 <h1 className="detailRowText boldText">O mestu</h1>
                 <i className="material-icons detailIconClickable">

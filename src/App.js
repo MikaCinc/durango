@@ -15,13 +15,13 @@ function App(props) {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/:id" component={Details} />
-        <Route exact path="/:id/more" component={MoreDetails} />
-        {/* <Route exact path="/:id/reserve" component={MoreDetails} /> */}
-        <Route exact path="/restaurant" component={Restaurant} />
+        <Route exact path="/durango/" component={Login} />
+        <Route exact path="/durango/login" component={Login} />
+        <Route exact path="/durango/home" component={Home} />
+        <Route exact path="/durango/:id" component={Details} />
+        <Route exact path="/durango/:id/more" component={MoreDetails} />
+        <Route exact path="/durango/restaurant" component={Restaurant} />
+        {/* <Route exact path="durango/:id/reserve" component={MoreDetails} /> */}
       </Switch>
     </Router>
   )
