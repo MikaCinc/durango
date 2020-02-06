@@ -18,20 +18,10 @@ import Slide from 'react-reveal/Slide';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 
-const placeholderObj = {
-    id: 0,
-    title: '',
-    logo: '',
-    brojMesta: 0,
-    brojSlobodnihMesta: 0,
-    details: {
-        opis: '',
-        slike: '',
-        radnoVreme: '',
-        lokacija: '',
-        meni: ''
-    }
-}
+/* Images */
+import vinyl from '../slike/vinyl.png';
+import Square from '../slike/Square.jpg';
+import dnevnaSoba from '../slike/dnevnaSoba.jpg';
 
 const Home = props => {
     const [data, setData] = useState([]);
@@ -155,6 +145,23 @@ const Home = props => {
         )
     }
 
+    const getSrc = (title) => {
+        switch(title) {
+            case 'vinyl': {
+                return vinyl;
+            };
+            case 'Square': {
+                return Square;
+            };
+            case 'dnevnaSoba': {
+                return dnevnaSoba;
+            };
+            default: {
+                return Square;
+            }
+        }
+    }
+
     const List = () => {
         return noResults
             ? <div className="noResults boldText">
@@ -176,7 +183,7 @@ const Home = props => {
                         props.history.push(`/${Kafic.id}`);
                     }}
                 >
-                    <img className="listLogo" src={'./slike/' + Kafic.logo} />
+                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
                     <h1 className="linetitle boldText">{Kafic.title}</h1>
                     <p className="lineFreeSeats boldText greyText">
                         {Kafic.brojSlobodnihMesta}
