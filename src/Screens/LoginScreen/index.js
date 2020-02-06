@@ -22,7 +22,7 @@ const LoginScreen = props => {
             setProfileName(User.name)
             setTimeout(() => {
                 // props.setAuthorized(true);
-                props.history.replace('/home')
+                props.history.push('/durango/home')
             }, 2000)
         }
 
@@ -45,7 +45,7 @@ const LoginScreen = props => {
 
         setTimeout(() => {
             // props.setAuthorized(true);
-            props.history.push('durango/home')
+            props.history.push('/durango/home')
         }, 2000);
     }
 
@@ -61,7 +61,7 @@ const LoginScreen = props => {
         setProfileName(response.name)
         setTimeout(() => {
             // props.setAuthorized(true);
-            props.history.push('durango/home')
+            props.history.push('/durango/home')
         }, 2000)
     }
 

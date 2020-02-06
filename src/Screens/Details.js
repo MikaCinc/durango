@@ -13,6 +13,11 @@ import { useParams } from "react-router-dom";
 
 import mockData from '../data/kafici.js';
 
+/* Images */
+import vinyl from '../slike/vinyl.png';
+import Square from '../slike/Square.jpg';
+import dnevnaSoba from '../slike/dnevnaSoba.jpg';
+
 const placeholderObj = {
     id: 0,
     title: '',
@@ -76,6 +81,23 @@ function Details(props) {
         </p>;
     }
 
+    const getSrc = (title) => {
+        switch(title) {
+            case 'vinyl': {
+                return vinyl;
+            };
+            case 'Square': {
+                return Square;
+            };
+            case 'dnevnaSoba': {
+                return dnevnaSoba;
+            };
+            default: {
+                return Square;
+            }
+        }
+    }
+
     return (
         <div>
             <div className="detailsHeader">
@@ -83,7 +105,7 @@ function Details(props) {
                     className="goBack"
                     onClick={() => {
                         // props.setSelected(null)
-                        props.history.push('durango/home')
+                        props.history.push('/durango/home')
                     }}
                 >
                     <i className="material-icons">
@@ -100,7 +122,7 @@ function Details(props) {
                     </i> */}
                     {getRadnoVreme()}
                 </div>
-                <img src={'./slike/' + data.logo} className="detailsLogo" />
+                <img src={getSrc(data.logo.split('.')[0])} className="detailsLogo" />
             </div>
             <div className="detailsRow">
                 <h1 className="detailRowText">
@@ -130,7 +152,7 @@ function Details(props) {
                 </i>
             </div>
             <div className="detailsRow clickableRow" onClick={() => {
-                props.history.push(`durango/${data.id}/more`);
+                props.history.push(`/durango/${data.id}/more`);
             }}>
                 <h1 className="detailRowText boldText">O mestu</h1>
                 <i className="material-icons detailIconClickable">

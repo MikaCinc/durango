@@ -66,7 +66,7 @@ const Home = props => {
                 setLoaded(true);
             }, 1200)
         } else {
-            props.history.push('durango/login');
+            props.history.push('/durango/login');
         }
 
     }, []);
@@ -180,7 +180,7 @@ const Home = props => {
                     key={Kafic.id}
                     className="singleLine button"
                     onClick={() => {
-                        props.history.push(`durango/${Kafic.id}`);
+                        props.history.push(`/durango/${Kafic.id}`);
                     }}
                 >
                     <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />

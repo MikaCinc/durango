@@ -21,7 +21,7 @@ function App(props) {
         <Route exact path="/durango/:id" component={Details} />
         <Route exact path="/durango/:id/more" component={MoreDetails} />
         <Route exact path="/durango/restaurant" component={Restaurant} />
-        {/* <Route exact path="durango/:id/reserve" component={MoreDetails} /> */}
+        {/* <Route exact path="/durango/:id/reserve" component={MoreDetails} /> */}
       </Switch>
     </Router>
   )
