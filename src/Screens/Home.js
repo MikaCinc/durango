@@ -35,17 +35,19 @@ const placeholderObj = {
 
 const Home = props => {
     const [data, setData] = useState([]);
-    const [authorized, setAuthorized] = useState(false);
     const [noResults, setNoResults] = useState(false);
     const [filtered, setFiltered] = useState([...data]);
-    const [selected, setSelected] = useState(null);
+    const [loaded, setLoaded] = useState(false);
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        setAuthorized(isAuthorized);
-    }, [])
+        let User = JSON.parse(localStorage.getItem('User')),
+            authorized = false;
 
-    useEffect(() => {
+        if (User && User.id) {
+            authorized = true;
+        }
+
         /* if (authorized) {
           fetch('http://178.17.17.197:7000/lista-kafica')
             .then(response => response.json())
@@ -67,29 +69,17 @@ const Home = props => {
 
         // setData(mockData);
 
+
         if (authorized) {
             setTimeout(() => {
                 setData(mockData);
-            }, 1500)
-        }
-
-    }, [authorized]);
-
-    useEffect(() => {
-        let query = queryString.parse(window.location.search);
-
-        if (query.view) {
-            setSelected(parseInt(query.view, 10));
-        };
-    }, []);
-
-    useEffect(() => {
-        if (selected) {
-            window.history.pushState({}, '', window.location.pathname + "?" + queryString.stringify({ 'view': selected }));
+                setLoaded(true);
+            }, 1200)
         } else {
-            window.history.pushState({}, '', window.location.pathname);
+            props.history.push('/login');
         }
-    }, [selected]);
+
+    }, []);
 
     useEffect(() => {
         setFiltered(filterBySearch());
@@ -98,6 +88,27 @@ const Home = props => {
     useEffect(() => {
         setNoResults(filtered.length === 0 && data.length);
     }, [filtered]);
+
+    /* useEffect(() => {
+        let int = null;
+        clearInterval(int);
+        int = setInterval(() => {
+            setData(simulateUpdateData())
+        }, 1000)
+    }, []); */
+
+    /* const simulateUpdateData = () => {
+        return [...data].map(item => {
+            return {
+                ...item,
+                brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
+            }
+        })
+    } */
+
+    /* const getNewNumber = (old) => {
+        return Math.floor(Math.random() * 10) > 5 ? old + 1 : old - 1;
+    } */
 
     const isAuthorized = () => {
         let User = JSON.parse(localStorage.getItem('User'));
@@ -162,7 +173,6 @@ const Home = props => {
                     key={Kafic.id}
                     className="singleLine button"
                     onClick={() => {
-                        // setSelected(Kafic.id)
                         props.history.push(`/${Kafic.id}`);
                     }}
                 >
@@ -204,47 +214,13 @@ const Home = props => {
 
     const mainScreen = () => {
         return (
-            <Slide
-                when={!selected}
-                collapse
-                left
-                duration={300}
-            >
-                <div className="list">
-                    {
-                        !selected && ListAndSearch()
-                    }
-                </div>
-            </Slide>
+            <div className="list">
+                {
+                    ListAndSearch()
+                }
+            </div>
         )
     }
-
-    const detailsScreen = () => {
-        return (
-            <Slide
-                when={selected}
-                collapse
-                right
-                delay={10}
-                duration={300}
-            >
-                <div className='details'>
-                    {
-                        selected && <Details data={_.find(data, { 'id': selected }) || placeholderObj} setSelected={setSelected} />
-                    }
-                </div>
-            </Slide>
-        )
-    }
-
-    /* const loginScreen = () => {
-        return (
-            <LoginScreen
-                authorized={authorized}
-                setAuthorized={setAuthorized}
-            />
-        )
-    } */
 
     return (
         <div className="App">
@@ -253,31 +229,13 @@ const Home = props => {
                     mainScreen()
                 }
             </Fragment>
-            {/* {
-                authorized && <Fragment>
-                    {
-                        mainScreen()
-                    }
-                    {
-
-                        detailsScreen()
-                    }
-                </Fragment>
-            } */}
-            {/* {
-                !authorized && <Fragment>
-                    {
-                        loginScreen()
-                    }
-                </Fragment>
-            } */}
             <div className="loader">
                 <Loader
                     type="Grid"
                     color="#3185FC"
                     height={100}
                     width={100}
-                    visible={data.length === 0 && authorized}
+                    visible={data.length === 0 && !loaded}
                 />
             </div>
         </div>

@@ -22,7 +22,7 @@ const LoginScreen = props => {
             setProfileName(User.name)
             setTimeout(() => {
                 // props.setAuthorized(true);
-                props.history.push('/home')
+                props.history.replace('/home')
             }, 2000)
         }
 
