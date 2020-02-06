@@ -157,12 +157,12 @@ const Home = props => {
                     <img className="listLogo" src={'./slike/' + Kafic.logo} />
                     <h1 className="linetitle boldText">{Kafic.title}</h1>
                     <p className="lineFreeSeats boldText greyText">
-                        {Kafic.brojSlobodnihMesta} / {Kafic.brojMesta}
+                        {Kafic.brojSlobodnihMesta}
                     </p>
                     <i
                         className="material-icons peopleIcon"
                         style={{
-                            color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+                            color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#C50505',
                         }}
                     >
                         people
@@ -181,9 +181,11 @@ const Home = props => {
                         Search()
                     }
                 </div>
+                <div className="listHolder">
                 {
                     List()
                 }
+                </div>
             </Fragment>
         )
     }
@@ -255,7 +257,7 @@ const Home = props => {
             <div className="loader">
                 <Loader
                     type="Grid"
-                    color="#3261D5"
+                    color="#3185FC"
                     height={100}
                     width={100}
                     visible={data.length === 0 && authorized}
