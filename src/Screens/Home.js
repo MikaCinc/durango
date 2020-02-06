@@ -2,8 +2,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 /* Data */
 import mockData from '../data/kafici';
-// import Logo from './Logo.png';
-import Logo2 from '../ExtendedLogo/Logo2.png';
+import Logo from '../ExtendedLogo/Logo.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
@@ -71,9 +70,9 @@ const Home = props => {
 
     }, [authorized]);
 
-/*     useEffect(() => {
-        console.log(window.location.href)
-    }, [window.location.href]) */
+    /*     useEffect(() => {
+            console.log(window.location.href)
+        }, [window.location.href]) */
 
     useEffect(() => {
         let query = queryString.parse(window.location.search);
@@ -111,9 +110,9 @@ const Home = props => {
     const Search = () => {
         return (
             <div className="search">
-                <i className="material-icons" id="searchIcon">
+                <i className="material-icons searchIcon">
                     search
-          </i>
+                </i>
                 <input
                     className="searchInput"
                     placeholder="Pretraži..."
@@ -121,6 +120,16 @@ const Home = props => {
                     onChange={(e) => {
                         setSearch(e.target.value);
                     }} />
+                {
+                    search && <i
+                        className="material-icons resetSearchIcon"
+                        onClick={() => {
+                            setSearch('');
+                        }}
+                    >
+                        close
+                    </i>
+                }
             </div>
         )
     }
@@ -167,7 +176,7 @@ const Home = props => {
         return (
             <Fragment>
                 <div className="mainHeader">
-                    <img src={Logo2} className="logoHeader" />
+                    <img src={Logo} className="logoHeader" />
                     {
                         Search()
                     }
