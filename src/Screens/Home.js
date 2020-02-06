@@ -42,6 +42,10 @@ const Home = props => {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
+        setAuthorized(isAuthorized);
+    }, [])
+
+    useEffect(() => {
         /* if (authorized) {
           fetch('http://178.17.17.197:7000/lista-kafica')
             .then(response => response.json())
@@ -71,10 +75,6 @@ const Home = props => {
 
     }, [authorized]);
 
-    /*     useEffect(() => {
-            console.log(window.location.href)
-        }, [window.location.href]) */
-
     useEffect(() => {
         let query = queryString.parse(window.location.search);
 
@@ -99,6 +99,15 @@ const Home = props => {
         setNoResults(filtered.length === 0 && data.length);
     }, [filtered]);
 
+    const isAuthorized = () => {
+        let User = JSON.parse(localStorage.getItem('User'));
+
+        if (User && User.id) {
+            return true;
+        }
+
+        return false;
+    }
 
     const filterBySearch = (arr = data) => {
         let filtered = arr.filter(({ title }) => {
@@ -153,7 +162,8 @@ const Home = props => {
                     key={Kafic.id}
                     className="singleLine button"
                     onClick={() => {
-                        setSelected(Kafic.id)
+                        // setSelected(Kafic.id)
+                        props.history.push(`/${Kafic.id}`);
                     }}
                 >
                     <img className="listLogo" src={'./slike/' + Kafic.logo} />
@@ -227,18 +237,23 @@ const Home = props => {
         )
     }
 
-    const loginScreen = () => {
+    /* const loginScreen = () => {
         return (
             <LoginScreen
                 authorized={authorized}
                 setAuthorized={setAuthorized}
             />
         )
-    }
+    } */
 
     return (
         <div className="App">
-            {
+            <Fragment>
+                {
+                    mainScreen()
+                }
+            </Fragment>
+            {/* {
                 authorized && <Fragment>
                     {
                         mainScreen()
@@ -248,14 +263,14 @@ const Home = props => {
                         detailsScreen()
                     }
                 </Fragment>
-            }
-            {
+            } */}
+            {/* {
                 !authorized && <Fragment>
                     {
                         loginScreen()
                     }
                 </Fragment>
-            }
+            } */}
             <div className="loader">
                 <Loader
                     type="Grid"

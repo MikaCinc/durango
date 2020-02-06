@@ -21,7 +21,8 @@ const LoginScreen = props => {
             setProfileImage(User.imageUrl)
             setProfileName(User.name)
             setTimeout(() => {
-                props.setAuthorized(true);
+                // props.setAuthorized(true);
+                props.history.push('/home')
             }, 2000)
         }
 
@@ -43,7 +44,8 @@ const LoginScreen = props => {
         localStorage.setItem('User', JSON.stringify(obj));
 
         setTimeout(() => {
-            props.setAuthorized(true);
+            // props.setAuthorized(true);
+            props.history.push('/home')
         }, 2000);
     }
 
@@ -58,7 +60,8 @@ const LoginScreen = props => {
         setProfileImage(response.picture.data.url)
         setProfileName(response.name)
         setTimeout(() => {
-            props.setAuthorized(true);
+            // props.setAuthorized(true);
+            props.history.push('/home')
         }, 2000)
     }
 

@@ -1,5 +1,5 @@
 /* React */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 /* Libraries */
 import _ from 'lodash';
@@ -9,10 +9,29 @@ import Logo from '../ExtendedLogo/Logo.png';
 
 import { Modal, Carousel } from 'react-bootstrap';
 
-// import data from '../data/kafici.js';
+import { useParams } from "react-router-dom";
+
+import mockData from '../data/kafici.js';
+
+const placeholderObj = {
+    id: 0,
+    title: '',
+    logo: '',
+    brojMesta: 0,
+    brojSlobodnihMesta: 0,
+    details: {
+        opis: '',
+        slike: '',
+        radnoVreme: '',
+        lokacija: '',
+        meni: ''
+    }
+}
 
 function Details(props) {
+    let { id } = useParams();
 
+    const [data, setData] = useState({ ...placeholderObj });
     const [seats, setSeats] = useState(3);
 
     const [showModal, setShowModal] = useState(false);
@@ -20,8 +39,14 @@ function Details(props) {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
+    useEffect(() => {
+        let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
+
+        setData(findData);
+    }, []);
+
     const getRadnoVreme = () => {
-        let time = props.data.details.radnoVreme,
+        let time = data.details.radnoVreme,
             timeStart = time.split(' - ')[0],
             timeEnd = time.split(' - ')[1],
             currentTime = moment(),
@@ -38,7 +63,7 @@ function Details(props) {
         };
 
         if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
-            return <p>
+            return <p className="randoVremeParagraph">
                 <span className="greyText">Otvoreno: </span>
                 <span style={{ color: '#009A1F' }}>{time}</span>
             </p>
@@ -57,7 +82,8 @@ function Details(props) {
                 <div
                     className="goBack"
                     onClick={() => {
-                        props.setSelected(null)
+                        // props.setSelected(null)
+                        props.history.push('/home')
                     }}
                 >
                     <i className="material-icons">
@@ -68,25 +94,25 @@ function Details(props) {
             </div>
             <div className="detailsSubheader">
                 <div>
-                    <h1 className="detailsTitle boldText">{props.data.title}</h1>
+                    <h1 className="detailsTitle boldText">{data.title}</h1>
                     {/* <i className="material-icons greyText">
                         access_time
                     </i> */}
                     {getRadnoVreme()}
                 </div>
-                <img src={'./slike/' + props.data.logo} className="detailsLogo" />
+                <img src={'./slike/' + data.logo} className="detailsLogo" />
             </div>
             <div className="detailsRow">
                 <h1 className="detailRowText">
                     Slobodnih mesta:
                     <span style={{
-                        color: props.data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+                        color: data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
                     }}>
                         {
-                            ' ' + props.data.brojSlobodnihMesta + ' '
+                            ' ' + data.brojSlobodnihMesta + ' '
                         }
                     </span>
-                    / {props.data.brojMesta}
+                    / {data.brojMesta}
                 </h1>
                 <i className="material-icons detailIcon">
                     people
@@ -103,7 +129,9 @@ function Details(props) {
                     book
                 </i>
             </div>
-            <div className="detailsRow clickableRow">
+            <div className="detailsRow clickableRow" onClick={() => {
+                props.history.push(`/${data.id}/more`);
+            }}>
                 <h1 className="detailRowText boldText">O mestu</h1>
                 <i className="material-icons detailIconClickable">
                     info
