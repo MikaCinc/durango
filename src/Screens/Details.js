@@ -134,7 +134,7 @@ function Details(props) {
                             ' ' + data.brojSlobodnihMesta + ' '
                         }
                     </span>
-                    / {data.brojMesta}
+                    {/* / {data.brojMesta} */}
                 </h1>
                 <i className="material-icons detailIcon">
                     people
@@ -143,7 +143,8 @@ function Details(props) {
             <div
                 className="detailsRow clickableRow"
                 onClick={() => {
-                    handleShow()
+                    // handleShow()
+                    props.history.push(`/durango/${data.id}/reserve`);
                 }}
             >
                 <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
