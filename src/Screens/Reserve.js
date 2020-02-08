@@ -7,13 +7,9 @@ import { useParams } from "react-router-dom";
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 /* Components */
-import { Carousel } from 'react-bootstrap';
+import DatePicker from 'react-date-picker';
 /* Data */
 import mockData from '../data/kafici.js';
-/* Slike */
-import kafic1 from '../carouselMock/kafic1.jpg';
-import kafic2 from '../carouselMock/kafic2.jpg';
-import kafic3 from '../carouselMock/kafic3.jpg';
 
 const placeholderObj = {
     id: 0,
@@ -34,6 +30,7 @@ function Reserve(props) {
 
     let { id } = useParams();
     const [data, setData] = useState({ ...placeholderObj });
+    const [date, setDate] = useState(new Date());
 
     useEffect(() => {
         let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
@@ -58,8 +55,43 @@ function Reserve(props) {
             </div>
             <div className="reserveContainer">
                 <h3 className="reserveText">Datum rezervacije</h3>
-
+                <div className="reserveCalendarContainer">
+                    <DatePicker
+                        onChange={(value) => {
+                            setDate(value)
+                        }}
+                        value={date}
+                        calendarIcon={
+                            <i className="material-icons">
+                                calendar_today
+                            </i>
+                        }
+                        maxDetail="month"
+                        minDate={new Date()}
+                        maxDate={moment().add(3, 'day').toDate()}
+                        calendarClassName="reserveCalendarMain"
+                        className="reserveCalendar"
+                    />
+                </div>
                 <h3 className="reserveText">Vreme rezervacije</h3>
+                <div className="reserveTimeContainer">
+                    <DatePicker
+                        onChange={(value) => {
+                            setDate(value)
+                        }}
+                        value={date}
+                        calendarIcon={
+                            <i className="material-icons">
+                                calendar_today
+                            </i>
+                        }
+                        maxDetail="month"
+                        minDate={new Date()}
+                        maxDate={moment().add(3, 'day').toDate()}
+                        calendarClassName="reserveCalendarMain"
+                        className="reserveCalendar"
+                    />
+                </div>
                 <h3 className="reserveText">Broj mesta</h3>
             </div>
             <div
