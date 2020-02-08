@@ -71,6 +71,7 @@ function Reserve(props) {
                                 calendar_today
                             </i>
                         }
+                        format="MM/dd/yyyy"
                         maxDetail="month"
                         minDate={new Date()}
                         maxDate={moment().add(3, 'day').toDate()}
