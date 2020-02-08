@@ -32,12 +32,16 @@ function Reserve(props) {
     let { id } = useParams();
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
+    const [time, setTime] = useState(moment().add(15, 'minutes').format('HH:mm'));
+    const [seats, setSeats] = useState(3);
 
     useEffect(() => {
         let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);
+
+    console.log(time)
 
     return (
         <div>
@@ -56,7 +60,7 @@ function Reserve(props) {
             </div>
             <div className="reserveContainer">
                 <h3 className="reserveText">Datum rezervacije</h3>
-                <div className="reserveCalendarContainer">
+                <div className="reserveCalendarContainer boldText">
                     <DatePicker
                         onChange={(value) => {
                             setDate(value)
@@ -75,25 +79,46 @@ function Reserve(props) {
                     />
                 </div>
                 <h3 className="reserveText">Vreme rezervacije</h3>
-                <div className="reserveTimeContainer">
-                    <DatePicker
+                <div className="reserveTimeContainer boldText">
+                    <TimePicker
                         onChange={(value) => {
-                            setDate(value)
+                            setTime(value);
                         }}
-                        value={date}
-                        calendarIcon={
-                            <i className="material-icons">
-                                calendar_today
+                        format={'HH:mm'}
+                        // minTime={moment().toDate()}
+                        value={time}
+                        disableClock={true}
+                        isOpen={false}
+                        clockIcon={
+                            <i className="material-icons reserveClockIcon">
+                                access_time
                             </i>
                         }
-                        maxDetail="month"
-                        minDate={new Date()}
-                        maxDate={moment().add(3, 'day').toDate()}
-                        calendarClassName="reserveCalendarMain"
-                        className="reserveCalendar"
+                        className="reserveTime"
                     />
                 </div>
                 <h3 className="reserveText">Broj mesta</h3>
+                <div className="reserveSeatsContainer">
+                    <button
+                        onClick={() => {
+                            setSeats(seats + 1)
+                        }}
+                        className="reserveSeatsButton"
+                    >+</button>
+                    <div
+                        className="reserveSeatsCounter boldText"
+                    >
+                        {seats}
+                    </div>
+                    <button
+                        onClick={() => {
+                            if (seats > 1) {
+                                setSeats(seats - 1)
+                            };
+                        }}
+                        className="reserveSeatsButton"
+                    >-</button>
+                </div>
             </div>
             <div
                 className="detailsRow clickableRow"
