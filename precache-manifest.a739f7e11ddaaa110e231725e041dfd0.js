@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6eb35cef70ef1cf317093b0aaec20ed7",
+    "revision": "b73f6aa34e1b2a454501ef2fd5cd9618",
     "url": "/durango/index.html"
   },
   {
