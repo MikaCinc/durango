@@ -9,6 +9,7 @@ import Logo from '../ExtendedLogo/Logo.png';
 /* Components */
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
+import { Modal } from 'react-bootstrap';
 /* Data */
 import mockData from '../data/kafici.js';
 
@@ -34,6 +35,11 @@ function Reserve(props) {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(moment().add(15, 'minutes').format('HH:mm'));
     const [seats, setSeats] = useState(3);
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     useEffect(() => {
         let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
@@ -124,7 +130,7 @@ function Reserve(props) {
             <div
                 className="detailsRow clickableRow"
                 onClick={() => {
-                    props.history.push(`/durango/${data.id}`);
+                    handleShow(true);
                 }}
             >
                 <h1 className="detailRowText boldText">Rezerviši</h1>
@@ -143,6 +149,31 @@ function Reserve(props) {
                     close
                 </i>
             </div>
+            <Modal
+                show={showModal}
+                onHide={handleClose}
+                centered
+            >
+                <Modal.Body>
+                    <div className="reserveModalContainer">
+                        <img src={Logo} className="reserveModalLogo" />
+                        <h3 className="boldText reserveModalTitle">Čestitamo!</h3>
+                        <p className="reserveModalExplanation">
+                            Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.
+                        Ne zaboravite da se pojavite najkasnije do {time}.
+                        </p>
+                        <div
+                            className="detailsRow clickableRow w-50"
+                            onClick={() => {
+                                handleClose();
+                                props.history.push(`/durango/${data.id}`);
+                            }}
+                        >
+                            <h1 className="detailRowText boldText">OK</h1>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }

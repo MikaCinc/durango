@@ -7,7 +7,7 @@ import moment from 'moment';
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 
-import { Modal, Carousel } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import { useParams } from "react-router-dom";
 
@@ -37,12 +37,6 @@ function Details(props) {
     let { id } = useParams();
 
     const [data, setData] = useState({ ...placeholderObj });
-    const [seats, setSeats] = useState(3);
-
-    const [showModal, setShowModal] = useState(false);
-
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
 
     useEffect(() => {
         let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
@@ -160,57 +154,6 @@ function Details(props) {
                     info
                 </i>
             </div>
-
-            <Modal
-                show={showModal}
-                onHide={handleClose}
-                centered
-            >
-                <Modal.Body>
-                    <div className="modalInputDiv w-50">
-                        <h5 className="greyText boldText">Broj mesta</h5>
-                        <p className="modalInputText greyText ">
-                            <span
-                                className="clickable"
-                                onClick={() => {
-                                    if (seats > 1) {
-                                        setSeats(seats - 1)
-                                    }
-                                }}
-                            > - </span>
-                            <span>{seats}</span>
-                            <span
-                                className="clickable"
-                                onClick={() => {
-                                    setSeats(seats + 1)
-                                }}
-                            > + </span>
-                        </p>
-                    </div>
-                    <div className="modalInputDiv">
-                        <h5 className="greyText boldText">Datum & vreme</h5>
-                        <p className="greyText modalInputTextDate">
-                            12/01/2020 21:30
-                        </p>
-                    </div>
-                    <button
-                        className="buttonReserve boldText"
-                        onClick={() => {
-                            handleClose()
-                        }}
-                    >
-                        Rezerviši
-                        </button>
-                    <button
-                        className="buttonCancel boldText"
-                        onClick={() => {
-                            handleClose()
-                        }}
-                    >
-                        Odustani
-                        </button>
-                </Modal.Body>
-            </Modal>
         </div>
     );
 }
