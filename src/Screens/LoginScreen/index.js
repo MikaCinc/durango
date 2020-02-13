@@ -75,7 +75,7 @@ const LoginScreen = props => {
         >
             <img className="loginLogo" src={Logo} />
         </Fade>
-        <p className="loginParagraph">Pogledajte tačan broj slobodnih mesta u svom omiljenom kafiću ili restoranu i rezervišite mesto za posebne prilike!</p>
+        <p className="loginParagraph">Najlakši način za pregled broja slobodnih mesta u kafiću ili restoranu!</p>
         <Zoom
             when={isSuccess}
             bottom
@@ -116,6 +116,7 @@ const LoginScreen = props => {
                     autoLoad={false}
                     fields="name,email,picture"
                     authType="reauthenticate"
+                    isDisabled={true} //@todo
                     tag={
                         renderProps => (
                             <div
