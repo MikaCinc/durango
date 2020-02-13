@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "446118b6c43d68a7bd9422e2b538f825",
+    "revision": "1f0198dabf5becce33454f0e661f4e30",
     "url": "/durango/index.html"
   },
   {
-    "revision": "1d3f2b9775d1a1825a78",
+    "revision": "64e9d540c4c1fa457dbd",
     "url": "/durango/static/css/2.1a0c9633.chunk.css"
   },
   {
-    "revision": "c0806761c7926a58d4b0",
+    "revision": "29f1b460a7678fbaf940",
     "url": "/durango/static/css/main.e2dabfb7.chunk.css"
   },
   {
-    "revision": "1d3f2b9775d1a1825a78",
-    "url": "/durango/static/js/2.deb82bec.chunk.js"
+    "revision": "64e9d540c4c1fa457dbd",
+    "url": "/durango/static/js/2.9648984d.chunk.js"
   },
   {
     "revision": "fabe6e8bc1203e177b62cd9daebbf511",
-    "url": "/durango/static/js/2.deb82bec.chunk.js.LICENSE"
+    "url": "/durango/static/js/2.9648984d.chunk.js.LICENSE"
   },
   {
-    "revision": "c0806761c7926a58d4b0",
-    "url": "/durango/static/js/main.72fc7ff3.chunk.js"
+    "revision": "29f1b460a7678fbaf940",
+    "url": "/durango/static/js/main.353cf629.chunk.js"
   },
   {
     "revision": "c854f09ffe5643a05685",
