@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, useEffect, Fragment } from 'react';
+import React from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
@@ -12,20 +12,20 @@ import Restaurant from './Screens/Restaurant';
 import MoreDetails from './Screens/MoreDetails';
 import Reserve from './Screens/Reserve';
 
-function App(props) {
+const App = (props) => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/durango/" component={Login} />
-        <Route exact path="/durango/login" component={Login} />
-        <Route exact path="/durango/home" component={Home} />
-        <Route exact path="/durango/:id" component={Details} />
-        <Route exact path="/durango/:id/more" component={MoreDetails} />
-        <Route exact path="/durango/:id/reserve" component={Reserve} />
-        <Route exact path="/durango/restaurant" component={Restaurant} />
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/durango/" component={Login} />
+          <Route exact path="/durango/login" component={Login} />
+          <Route exact path="/durango/home" component={Home} />
+          <Route exact path="/durango/:id" component={Details} />
+          <Route exact path="/durango/:id/more" component={MoreDetails} />
+          <Route exact path="/durango/:id/reserve" component={Reserve} />
+          <Route exact path="/durango/restaurant" component={Restaurant} />
+        </Switch>
+      </Router>
   )
 }
 

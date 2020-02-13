@@ -1,17 +1,27 @@
 /* React */
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext
+} from 'react';
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
 import { useParams } from "react-router-dom";
+
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
+
 /* Components */
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
 import { Modal } from 'react-bootstrap';
+
 /* Data */
 import mockData from '../data/kafici.js';
+
+/* Context */
+import { DataContext } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -29,8 +39,9 @@ const placeholderObj = {
 }
 
 function Reserve(props) {
-
     let { id } = useParams();
+    const contextData = useContext(DataContext);
+
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(moment().add(15, 'minutes').format('HH:mm'));
@@ -42,12 +53,10 @@ function Reserve(props) {
     const handleShow = () => setShowModal(true);
 
     useEffect(() => {
-        let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);
-
-    console.log(time)
 
     return (
         <div>

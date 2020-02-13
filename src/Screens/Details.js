@@ -1,5 +1,9 @@
 /* React */
-import React, { useState, useEffect } from 'react';
+import React, {
+    useState,
+    useEffect,
+    useContext
+} from 'react';
 import '../App.css';
 /* Libraries */
 import _ from 'lodash';
@@ -7,16 +11,16 @@ import moment from 'moment';
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 
-import { Modal } from 'react-bootstrap';
-
 import { useParams } from "react-router-dom";
-
 import mockData from '../data/kafici.js';
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
 import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
+
+/* Context */
+import { DataContext } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -35,11 +39,12 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
+    const contextData = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
     useEffect(() => {
-        let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);
@@ -76,7 +81,7 @@ function Details(props) {
     }
 
     const getSrc = (title) => {
-        switch(title) {
+        switch (title) {
             case 'vinyl': {
                 return vinyl;
             };

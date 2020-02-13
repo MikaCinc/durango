@@ -1,5 +1,10 @@
 /* React */
-import React, { useState, useEffect, Fragment } from 'react';
+import React, {
+    useState,
+    useEffect,
+    Fragment,
+    useContext
+} from 'react';
 /* Data */
 import mockData from '../data/kafici';
 import Logo from '../ExtendedLogo/Logo.png';
@@ -7,13 +12,8 @@ import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
-/* Pages */
-import Details from './Details';
-import LoginScreen from './LoginScreen';
 /* Animations */
 import Slide from 'react-reveal/Slide';
-// import Zoom from 'react-reveal/Zoom';
-/* LOGIN */
 /* LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
@@ -23,7 +23,12 @@ import vinyl from '../slike/vinyl.png';
 import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
 
+/* Context */
+import { DataContext } from '../Context/dataContext';
+
 const Home = props => {
+    const contextData = useContext(DataContext);
+
     const [data, setData] = useState([]);
     const [noResults, setNoResults] = useState(false);
     const [filtered, setFiltered] = useState([...data]);
@@ -62,9 +67,10 @@ const Home = props => {
 
         if (authorized) {
             setTimeout(() => {
-                setData(mockData);
+                // setData(mockData);
+                setData(contextData);
                 setLoaded(true);
-            }, 1200)
+            }, 300)
         } else {
             props.history.push('/durango/login');
         }
@@ -146,7 +152,7 @@ const Home = props => {
     }
 
     const getSrc = (title) => {
-        switch(title) {
+        switch (title) {
             case 'vinyl': {
                 return vinyl;
             };

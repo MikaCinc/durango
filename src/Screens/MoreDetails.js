@@ -1,5 +1,9 @@
 /* React */
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext
+} from 'react';
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
@@ -14,6 +18,9 @@ import mockData from '../data/kafici.js';
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
 import kafic3 from '../carouselMock/kafic3.jpg';
+
+/* Context */
+import { DataContext } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -30,13 +37,15 @@ const placeholderObj = {
     }
 }
 
-function MoreDetails(props) {
 
+function MoreDetails(props) {
     let { id } = useParams();
+    const contextData = useContext(DataContext);
+
     const [data, setData] = useState({ ...placeholderObj });
 
     useEffect(() => {
-        let findData = { ..._.find(mockData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);
@@ -76,7 +85,7 @@ function MoreDetails(props) {
 
     const renderCarousel = () => {
         return (
-            <Carousel style={{marginBottom: '10px'}}>
+            <Carousel style={{ marginBottom: '10px' }}>
                 {
                     [kafic1, kafic2, kafic3].map((item, index) => {
                         return <Carousel.Item key={index}>
@@ -140,9 +149,9 @@ function MoreDetails(props) {
 
             <div className="detailAbout">
                 <div className="detailsRow">
-                <h1 className="detailRowText boldText">O mestu</h1>
-                <i className="material-icons detailIcon">
-                    info
+                    <h1 className="detailRowText boldText">O mestu</h1>
+                    <i className="material-icons detailIcon">
+                        info
                 </i>
                 </div>
                 <p className="detailsAboutText">{data.details.opis}</p>
