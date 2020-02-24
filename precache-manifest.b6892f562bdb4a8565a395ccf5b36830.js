@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1f0198dabf5becce33454f0e661f4e30",
+    "revision": "7c066374c13a96aaf1d6c8e66c54315d",
     "url": "/durango/index.html"
   },
   {
-    "revision": "64e9d540c4c1fa457dbd",
-    "url": "/durango/static/css/2.1a0c9633.chunk.css"
+    "revision": "5d665d54e586c0712b2e",
+    "url": "/durango/static/css/2.68cf785e.chunk.css"
   },
   {
-    "revision": "29f1b460a7678fbaf940",
-    "url": "/durango/static/css/main.e2dabfb7.chunk.css"
+    "revision": "362142fc68ee76d2a547",
+    "url": "/durango/static/css/main.98b504b1.chunk.css"
   },
   {
-    "revision": "64e9d540c4c1fa457dbd",
-    "url": "/durango/static/js/2.9648984d.chunk.js"
+    "revision": "5d665d54e586c0712b2e",
+    "url": "/durango/static/js/2.92fcd6ec.chunk.js"
   },
   {
     "revision": "fabe6e8bc1203e177b62cd9daebbf511",
-    "url": "/durango/static/js/2.9648984d.chunk.js.LICENSE"
+    "url": "/durango/static/js/2.92fcd6ec.chunk.js.LICENSE"
   },
   {
-    "revision": "29f1b460a7678fbaf940",
-    "url": "/durango/static/js/main.353cf629.chunk.js"
+    "revision": "362142fc68ee76d2a547",
+    "url": "/durango/static/js/main.e2bb6f42.chunk.js"
   },
   {
     "revision": "c854f09ffe5643a05685",
@@ -38,6 +38,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "9f8d819452481bd0d6f1883e999ecc47",
     "url": "/durango/static/media/bg.9f8d8194.jpeg"
+  },
+  {
+    "revision": "dc50e706f04a81a106e04c85faa88124",
+    "url": "/durango/static/media/durangoCaffe.dc50e706.png"
   },
   {
     "revision": "4fbc8bcd9853c00e645acf9a7ecc7e85",
