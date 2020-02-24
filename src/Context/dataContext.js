@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useContext,
+    useState
+} from 'react';
 import kafici from '../data/kafici';
 
 /* Packages */
 import _ from 'lodash';
 
-/* export const DataContext = React.createContext(
-    kafici // default value
-); */
+/* LOADER */
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from 'react-loader-spinner';
 
 
 let DataContext;
@@ -97,7 +101,7 @@ const DataProvider = (props) => {
         int = setInterval(() => {
             setData(simulateUpdateData())
             // console.log(simulateUpdateData())
-        }, 400)
+        }, 600)
 
         return () => {
             clearInterval(int);
@@ -106,7 +110,7 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), _.random(3));
+            randomIDs = _.slice(_.shuffle(IDs), _.random(4));
 
         return [...Data].map(item => {
             if (_.includes(randomIDs, item.id)) {
@@ -179,6 +183,7 @@ const DataProvider = (props) => {
             }}
         >
             {props.children}
+            <LoaderComponent />
         </Provider>
     )
 }
@@ -195,6 +200,20 @@ const DataConsumer = (props) => {
             }}
         </Consumer>
     )
+}
+
+const LoaderComponent = () => {
+    const { loading } = useContext(DataContext);
+
+    return <div className="loader">
+        <Loader
+            type="Grid"
+            color="#3185FC"
+            height={100}
+            width={100}
+            visible={loading}
+        />
+    </div>
 }
 
 export {

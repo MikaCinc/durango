@@ -82,9 +82,9 @@ const getSrc = (title) => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, noResults } = useContext(DataContext);
+    const { filteredData, noResults, loading } = useContext(DataContext);
 
-    if (!(Array.isArray(filteredData) && filteredData.length)) {
+    if (!(Array.isArray(filteredData) && filteredData.length) || loading) {
         return null;
     }
 
@@ -161,12 +161,7 @@ const LoaderComponent = () => {
 const Home = props => {
     return (
         <div className="App">
-            <Fragment>
-                <MainScreen history={props.history} />
-            </Fragment>
-            <div className="loader">
-                <LoaderComponent />
-            </div>
+            <MainScreen history={props.history} />
         </div>
     );
 };

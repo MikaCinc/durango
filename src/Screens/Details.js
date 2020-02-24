@@ -2,7 +2,8 @@
 import React, {
     useState,
     useEffect,
-    useContext
+    useContext,
+    Fragment
 } from 'react';
 import '../App.css';
 /* Libraries */
@@ -40,7 +41,7 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const { Data } = useContext(DataContext);
+    const { Data, loading } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -101,6 +102,59 @@ function Details(props) {
         }
     }
 
+    const restOfPage = () => {
+        return (
+            <Fragment>
+                <div className="detailsSubheader">
+                    <div>
+                        <h1 className="detailsTitle boldText">{data.title}</h1>
+                        {/* <i className="material-icons greyText">
+                        access_time
+                    </i> */}
+                        {getRadnoVreme()}
+                    </div>
+                    <img src={getSrc(data.logo.split('.')[0])} className="detailsLogo" />
+                </div>
+                <div className="detailsRow">
+                    <h1 className="detailRowText">
+                        Slobodnih mesta:
+                    <span style={{
+                            color: data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+                        }}>
+                            {
+                                ' ' + data.brojSlobodnihMesta + ' '
+                            }
+                        </span>
+                        {/* / {data.brojMesta} */}
+                    </h1>
+                    <i className="material-icons detailIcon">
+                        people
+                </i>
+                </div>
+                <div
+                    className="detailsRow clickableRow"
+                    onClick={() => {
+                        // handleShow()
+                        props.history.push(`/durango/app/${data.id}/reserve`);
+                    }}
+                >
+                    <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
+                    <i className="material-icons detailIconClickable">
+                        book
+                </i>
+                </div>
+                <div className="detailsRow clickableRow" onClick={() => {
+                    props.history.push(`/durango/app/${data.id}/more`);
+                }}>
+                    <h1 className="detailRowText boldText">O mestu</h1>
+                    <i className="material-icons detailIconClickable">
+                        info
+                </i>
+                </div>
+            </Fragment>
+        )
+    }
+
     return (
         <div>
             <div className="detailsHeader">
@@ -117,52 +171,9 @@ function Details(props) {
                 </div>
                 <img src={Logo} className="detailsDurangoLogo" />
             </div>
-            <div className="detailsSubheader">
-                <div>
-                    <h1 className="detailsTitle boldText">{data.title}</h1>
-                    {/* <i className="material-icons greyText">
-                        access_time
-                    </i> */}
-                    {getRadnoVreme()}
-                </div>
-                <img src={getSrc(data.logo.split('.')[0])} className="detailsLogo" />
-            </div>
-            <div className="detailsRow">
-                <h1 className="detailRowText">
-                    Slobodnih mesta:
-                    <span style={{
-                        color: data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
-                    }}>
-                        {
-                            ' ' + data.brojSlobodnihMesta + ' '
-                        }
-                    </span>
-                    {/* / {data.brojMesta} */}
-                </h1>
-                <i className="material-icons detailIcon">
-                    people
-                </i>
-            </div>
-            <div
-                className="detailsRow clickableRow"
-                onClick={() => {
-                    // handleShow()
-                    props.history.push(`/durango/app/${data.id}/reserve`);
-                }}
-            >
-                <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
-                <i className="material-icons detailIconClickable">
-                    book
-                </i>
-            </div>
-            <div className="detailsRow clickableRow" onClick={() => {
-                props.history.push(`/durango/app/${data.id}/more`);
-            }}>
-                <h1 className="detailRowText boldText">O mestu</h1>
-                <i className="material-icons detailIconClickable">
-                    info
-                </i>
-            </div>
+            {
+                !loading && restOfPage()
+            }
         </div>
     );
 }

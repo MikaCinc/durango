@@ -2,7 +2,8 @@
 import React, {
     useEffect,
     useState,
-    useContext
+    useContext,
+    Fragment
 } from 'react';
 /* Libraries */
 import _ from 'lodash';
@@ -38,7 +39,7 @@ const placeholderObj = {
 
 function MoreDetails(props) {
     let { id } = useParams();
-    const { Data } = useContext(DataContext);
+    const { Data, loading } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -46,7 +47,7 @@ function MoreDetails(props) {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
-    }, []);
+    }, [Data]);
 
     const getRadnoVreme = () => {
         let time = data.details.radnoVreme,
@@ -104,6 +105,48 @@ function MoreDetails(props) {
         )
     }
 
+    const restOfPage = () => {
+        return (
+            <Fragment>
+                {
+                    renderCarousel()
+                }
+                <div
+                    className="detailsRow clickableRow"
+                    onClick={() => {
+                        window.open(data.details.lokacija, '_blank');
+                    }}
+                >
+                    <h1 className="detailRowText boldText">Prikaži na mapi</h1>
+                    <i className="material-icons detailIconClickable">
+                        map
+                </i>
+                </div>
+                <div
+                    className="detailsRow clickableRow"
+                    onClick={() => {
+                        alert('Coming soon')
+                    }}
+                >
+                    <h1 className="detailRowText boldText">Meni</h1>
+                    <i className="material-icons detailIconClickable">
+                        menu_book
+                </i>
+                </div>
+
+                <div className="detailAbout">
+                    <div className="detailsRow">
+                        <h1 className="detailRowText boldText">O mestu</h1>
+                        <i className="material-icons detailIcon">
+                            info
+                </i>
+                    </div>
+                    <p className="detailsAboutText">{data.details.opis}</p>
+                </div>
+            </Fragment>
+        )
+    }
+
     return (
         <div>
             <div className="detailsHeader">
@@ -120,40 +163,8 @@ function MoreDetails(props) {
                 <img src={Logo} className="detailsDurangoLogo" />
             </div>
             {
-                renderCarousel()
+                !loading && restOfPage()
             }
-            <div
-                className="detailsRow clickableRow"
-                onClick={() => {
-                    window.open(data.details.lokacija, '_blank');
-                }}
-            >
-                <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                <i className="material-icons detailIconClickable">
-                    map
-                </i>
-            </div>
-            <div
-                className="detailsRow clickableRow"
-                onClick={() => {
-                    alert('Coming soon')
-                }}
-            >
-                <h1 className="detailRowText boldText">Meni</h1>
-                <i className="material-icons detailIconClickable">
-                    menu_book
-                </i>
-            </div>
-
-            <div className="detailAbout">
-                <div className="detailsRow">
-                    <h1 className="detailRowText boldText">O mestu</h1>
-                    <i className="material-icons detailIcon">
-                        info
-                </i>
-                </div>
-                <p className="detailsAboutText">{data.details.opis}</p>
-            </div>
         </div>
     );
 }
