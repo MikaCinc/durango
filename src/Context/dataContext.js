@@ -13,7 +13,7 @@ let DataContext;
 
 const { Provider, Consumer } = DataContext = React.createContext({});
 
-const DataProvider = (props, {history}) => {
+const DataProvider = (props) => {
 
     const [Data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -92,7 +92,7 @@ const DataProvider = (props, {history}) => {
                 setLoading(false);
             }, 1200)
         } else {
-            history.push('/durango/app/login');
+            props.history.push('/durango/app/login');
         }
 
         return () => {
