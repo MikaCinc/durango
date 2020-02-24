@@ -6,7 +6,6 @@ import React, {
     useContext
 } from 'react';
 /* Data */
-import mockData from '../data/kafici';
 import Logo from '../ExtendedLogo/Logo.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
@@ -24,234 +23,149 @@ import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
 
 /* Context */
-import { DataContext } from '../Context/dataContext';
+import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Home = props => {
-    const contextData = useContext(DataContext);
+const Search = () => {
+    const { changeSearch } = useContext(DataContext);
 
-    const [data, setData] = useState([]);
-    const [noResults, setNoResults] = useState(false);
-    const [filtered, setFiltered] = useState([...data]);
-    const [loaded, setLoaded] = useState(false);
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        let User = JSON.parse(localStorage.getItem('User')),
-            authorized = false;
+        changeSearch(search);
+    }, [search]);
 
-        if (User && User.id) {
-            authorized = true;
-        }
-
-        /* if (authorized) {
-          fetch('http://178.17.17.197:7000/lista-kafica')
-            .then(response => response.json())
-            .then(data => {
-              console.log(data)
-              if (!data || !data.length) {
-                setData(mockData);
-              } else {
-                //Doing this just to show loader for a little bit :)
-                setTimeout(() => {
-                  setData(data);
-                }, 1500)
-              }
-            }).catch(() => {
-              console.log('error')
-              setData(mockData);
-            });
-        } */
-
-        // setData(mockData);
-
-
-        if (authorized) {
-            setTimeout(() => {
-                // setData(mockData);
-                setData(contextData);
-                setLoaded(true);
-            }, 300)
-        } else {
-            props.history.push('/durango/login');
-        }
-
-    }, []);
-
-    useEffect(() => {
-        setFiltered(filterBySearch());
-    }, [search, data]);
-
-    useEffect(() => {
-        setNoResults(filtered.length === 0 && data.length);
-    }, [filtered]);
-
-    /* useEffect(() => {
-        let int = null;
-        clearInterval(int);
-        int = setInterval(() => {
-            setData(simulateUpdateData())
-        }, 1000)
-    }, []); */
-
-    /* const simulateUpdateData = () => {
-        return [...data].map(item => {
-            return {
-                ...item,
-                brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
-            }
-        })
-    } */
-
-    /* const getNewNumber = (old) => {
-        return Math.floor(Math.random() * 10) > 5 ? old + 1 : old - 1;
-    } */
-
-    const isAuthorized = () => {
-        let User = JSON.parse(localStorage.getItem('User'));
-
-        if (User && User.id) {
-            return true;
-        }
-
-        return false;
-    }
-
-    const filterBySearch = (arr = data) => {
-        let filtered = arr.filter(({ title }) => {
-            return title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
-        });
-
-        return _.orderBy(filtered, 'brojSlobodnihMesta', 'desc');
-    }
-
-    const Search = () => {
-        return (
-            <div className="search">
-                <i className="material-icons searchIcon">
-                    search
+    return (
+        <div className="search">
+            <i className="material-icons searchIcon">
+                search
+            </i>
+            <input
+                className="searchInput"
+                placeholder="Pretraži..."
+                value={search}
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                }} />
+            {
+                search && <i
+                    className="material-icons resetSearchIcon"
+                    onClick={() => {
+                        setSearch('');
+                    }}
+                >
+                    close
                 </i>
-                <input
-                    className="searchInput"
-                    placeholder="Pretraži..."
-                    value={search}
-                    onChange={(e) => {
-                        setSearch(e.target.value);
-                    }} />
-                {
-                    search && <i
-                        className="material-icons resetSearchIcon"
-                        onClick={() => {
-                            setSearch('');
-                        }}
-                    >
-                        close
-                    </i>
-                }
-            </div>
-        )
-    }
-
-    const getSrc = (title) => {
-        switch (title) {
-            case 'vinyl': {
-                return vinyl;
-            };
-            case 'Square': {
-                return Square;
-            };
-            case 'dnevnaSoba': {
-                return dnevnaSoba;
-            };
-            default: {
-                return Square;
             }
+        </div>
+    )
+}
+
+const getSrc = (title) => {
+    switch (title) {
+        case 'vinyl': {
+            return vinyl;
+        };
+        case 'Square': {
+            return Square;
+        };
+        case 'dnevnaSoba': {
+            return dnevnaSoba;
+        };
+        default: {
+            return Square;
         }
     }
+}
 
-    const List = () => {
-        return noResults
-            ? <div className="noResults boldText">
+const List = ({history}) => {
+    const { filteredData, noResults } = useContext(DataContext);
+
+    if (!(Array.isArray(filteredData) && filteredData.length)) {
+        return null;
+    }
+
+    if (noResults) {
+        return (
+            <div className="noResults boldText">
                 <h1>
                     Mesto koje tražite nije pronađeno
                 </h1>
-                {/* <i
-                    className="material-icons noResultsIcon"
-                >
-                    sentiment_very_dissatisfied
-        </i> */}
                 <img className="noResultsIcon" src={noResultsIcon} />
             </div>
-            : filtered.map((Kafic) => {
-                return <div
-                    key={Kafic.id}
-                    className="singleLine button"
-                    onClick={() => {
-                        props.history.push(`/durango/${Kafic.id}`);
-                    }}
-                >
-                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                    <h1 className="linetitle boldText">{Kafic.title}</h1>
-                    <p className="lineFreeSeats boldText greyText">
-                        {Kafic.brojSlobodnihMesta}
-                    </p>
-                    <i
-                        className="material-icons peopleIcon"
-                        style={{
-                            color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#C50505',
-                        }}
-                    >
-                        people
-              </i>
-                </div>
-            })
-
-    }
-
-    const ListAndSearch = () => {
-        return (
-            <Fragment>
-                <div className="mainHeader">
-                    <img src={Logo} className="logoHeader" />
-                    {
-                        Search()
-                    }
-                </div>
-                <div className="listHolder">
-                    {
-                        List()
-                    }
-                </div>
-            </Fragment>
         )
     }
 
-    const mainScreen = () => {
-        return (
-            <div className="list">
-                {
-                    ListAndSearch()
-                }
-            </div>
-        )
-    }
-
-    return (
-        <div className="App">
-            <Fragment>
-                {
-                    mainScreen()
-                }
-            </Fragment>
-            <div className="loader">
-                <Loader
-                    type="Grid"
-                    color="#3185FC"
-                    height={100}
-                    width={100}
-                    visible={data.length === 0 && !loaded}
-                />
-            </div>
+    return filteredData.map((Kafic) => {
+        return <div
+            key={Kafic.id}
+            className="singleLine button"
+            onClick={() => {
+                history.push(`/durango/${Kafic.id}`);
+            }}
+        >
+            <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+            <h1 className="linetitle boldText">{Kafic.title}</h1>
+            <p className="lineFreeSeats boldText greyText">
+                {Kafic.brojSlobodnihMesta}
+            </p>
+            <i
+                className="material-icons peopleIcon"
+                style={{
+                    color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#C50505',
+                }}
+            >
+                people
+          </i>
         </div>
+    })
+}
+
+const ListAndSearch = ({history}) => {
+    return (
+        <Fragment>
+            <div className="mainHeader">
+                <img src={Logo} className="logoHeader" />
+                <Search />
+            </div>
+            <div className="listHolder">
+                <List history={history} />
+            </div>
+        </Fragment>
+    )
+}
+
+const MainScreen = ({history}) => {
+    return (
+        <div className="list">
+            <ListAndSearch history={history} />
+        </div>
+    )
+}
+
+const LoaderComponent = () => {
+    const { loading } = useContext(DataContext);
+
+    return <Loader
+        type="Grid"
+        color="#3185FC"
+        height={100}
+        width={100}
+        visible={loading}
+    />
+}
+
+const Home = props => {
+    return (
+        <DataProvider>
+            <div className="App">
+                <Fragment>
+                    <MainScreen history={props.history} />
+                </Fragment>
+                <div className="loader">
+                    <LoaderComponent />
+                </div>
+            </div>
+        </DataProvider>
     );
 };
 

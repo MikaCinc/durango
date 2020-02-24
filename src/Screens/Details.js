@@ -20,7 +20,7 @@ import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
 
 /* Context */
-import { DataContext } from '../Context/dataContext';
+import DataContext, {DataProvider} from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -39,12 +39,12 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const contextData = useContext(DataContext);
+    const {Data} = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
     useEffect(() => {
-        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);

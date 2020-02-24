@@ -21,7 +21,7 @@ import { Modal } from 'react-bootstrap';
 import mockData from '../data/kafici.js';
 
 /* Context */
-import { DataContext } from '../Context/dataContext';
+import DataContext, { DataProvider } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -40,7 +40,7 @@ const placeholderObj = {
 
 function Reserve(props) {
     let { id } = useParams();
-    const contextData = useContext(DataContext);
+    const { Data } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
@@ -53,7 +53,7 @@ function Reserve(props) {
     const handleShow = () => setShowModal(true);
 
     useEffect(() => {
-        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);

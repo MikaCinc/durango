@@ -12,15 +12,13 @@ import { useParams } from "react-router-dom";
 import Logo from '../ExtendedLogo/Logo.png';
 /* Components */
 import { Carousel } from 'react-bootstrap';
-/* Data */
-import mockData from '../data/kafici.js';
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
 import kafic3 from '../carouselMock/kafic3.jpg';
 
 /* Context */
-import { DataContext } from '../Context/dataContext';
+import DataContext, { DataProvider } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -40,12 +38,12 @@ const placeholderObj = {
 
 function MoreDetails(props) {
     let { id } = useParams();
-    const contextData = useContext(DataContext);
+    const { Data } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
     useEffect(() => {
-        let findData = { ..._.find(contextData, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
     }, []);
@@ -107,56 +105,58 @@ function MoreDetails(props) {
     }
 
     return (
-        <div>
-            <div className="detailsHeader">
+        <DataProvider>
+            <div>
+                <div className="detailsHeader">
+                    <div
+                        className="goBack"
+                        onClick={() => {
+                            props.history.push(`/durango/${data.id}`)
+                        }}
+                    >
+                        <i className="material-icons">
+                            arrow_back_ios
+                    </i>
+                    </div>
+                    <img src={Logo} className="detailsDurangoLogo" />
+                </div>
+                {
+                    renderCarousel()
+                }
                 <div
-                    className="goBack"
+                    className="detailsRow clickableRow"
                     onClick={() => {
-                        props.history.push(`/durango/${data.id}`)
+                        window.open(data.details.lokacija, '_blank');
                     }}
                 >
-                    <i className="material-icons">
-                        arrow_back_ios
-                    </i>
+                    <h1 className="detailRowText boldText">Prikaži na mapi</h1>
+                    <i className="material-icons detailIconClickable">
+                        map
+                </i>
                 </div>
-                <img src={Logo} className="detailsDurangoLogo" />
-            </div>
-            {
-                renderCarousel()
-            }
-            <div
-                className="detailsRow clickableRow"
-                onClick={() => {
-                    window.open(data.details.lokacija, '_blank');
-                }}
-            >
-                <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                <i className="material-icons detailIconClickable">
-                    map
+                <div
+                    className="detailsRow clickableRow"
+                    onClick={() => {
+                        alert('Coming soon')
+                    }}
+                >
+                    <h1 className="detailRowText boldText">Meni</h1>
+                    <i className="material-icons detailIconClickable">
+                        menu_book
                 </i>
-            </div>
-            <div
-                className="detailsRow clickableRow"
-                onClick={() => {
-                    alert('Coming soon')
-                }}
-            >
-                <h1 className="detailRowText boldText">Meni</h1>
-                <i className="material-icons detailIconClickable">
-                    menu_book
-                </i>
-            </div>
+                </div>
 
-            <div className="detailAbout">
-                <div className="detailsRow">
-                    <h1 className="detailRowText boldText">O mestu</h1>
-                    <i className="material-icons detailIcon">
-                        info
+                <div className="detailAbout">
+                    <div className="detailsRow">
+                        <h1 className="detailRowText boldText">O mestu</h1>
+                        <i className="material-icons detailIcon">
+                            info
                 </i>
+                    </div>
+                    <p className="detailsAboutText">{data.details.opis}</p>
                 </div>
-                <p className="detailsAboutText">{data.details.opis}</p>
             </div>
-        </div>
+        </DataProvider>
     );
 }
 
