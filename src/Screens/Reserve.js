@@ -64,7 +64,7 @@ function Reserve(props) {
                 <div
                     className="goBack"
                     onClick={() => {
-                        props.history.push(`/durango/${data.id}`);
+                        props.history.push(`/durango/app/${data.id}`);
                     }}
                 >
                     <i className="material-icons">
@@ -150,7 +150,7 @@ function Reserve(props) {
             <div
                 className="detailsRow clickableRowCancel"
                 onClick={() => {
-                    props.history.push(`/durango/${data.id}`);
+                    props.history.push(`/durango/app/${data.id}`);
                 }}
             >
                 <h1 className="detailRowText boldText">Otkaži</h1>
@@ -175,7 +175,7 @@ function Reserve(props) {
                             className="detailsRow clickableRow w-50"
                             onClick={() => {
                                 handleClose();
-                                props.history.push(`/durango/${data.id}`);
+                                props.history.push(`/durango/app/${data.id}`);
                             }}
                         >
                             <h1 className="detailRowText boldText">OK</h1>

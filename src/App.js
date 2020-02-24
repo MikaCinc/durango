@@ -12,20 +12,33 @@ import Restaurant from './Screens/Restaurant';
 import MoreDetails from './Screens/MoreDetails';
 import Reserve from './Screens/Reserve';
 
+/* Context */
+import DataContext, { DataProvider } from './Context/dataContext';
+
+const UserStackOfScreens = ({history}) => {
+  return (
+    <DataProvider history={history}>
+      <Switch>
+        <Route exact path="/durango/app/home" component={Home} />
+        <Route exact path="/durango/app/:id" component={Details} />
+        <Route exact path="/durango/app/:id/more" component={MoreDetails} />
+        <Route exact path="/durango/app/:id/reserve" component={Reserve} />
+      </Switch>
+    </DataProvider>
+  );
+}
+
 const App = (props) => {
   return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/durango/" component={Login} />
-          <Route exact path="/durango/login" component={Login} />
-          <Route exact path="/durango/home" component={Home} />
-          <Route exact path="/durango/:id" component={Details} />
-          <Route exact path="/durango/:id/more" component={MoreDetails} />
-          <Route exact path="/durango/:id/reserve" component={Reserve} />
-          <Route exact path="/durango/restaurant" component={Restaurant} />
-        </Switch>
-      </Router>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/durango/" component={Login} />
+        <Route exact path="/durango/app/login" component={Login} />
+        <Route path="/durango/app" component={UserStackOfScreens} />
+        <Route exact path="/durango/restaurant" component={Restaurant} />
+      </Switch>
+    </Router>
   )
 }
 

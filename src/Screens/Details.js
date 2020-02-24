@@ -20,7 +20,7 @@ import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
 
 /* Context */
-import DataContext, {DataProvider} from '../Context/dataContext';
+import DataContext, { DataProvider } from '../Context/dataContext';
 
 const placeholderObj = {
     id: 0,
@@ -39,7 +39,7 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const {Data} = useContext(DataContext);
+    const { Data } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -104,7 +104,7 @@ function Details(props) {
                     className="goBack"
                     onClick={() => {
                         // props.setSelected(null)
-                        props.history.push('/durango/home')
+                        props.history.push('/durango/app/home')
                     }}
                 >
                     <i className="material-icons">
@@ -143,7 +143,7 @@ function Details(props) {
                 className="detailsRow clickableRow"
                 onClick={() => {
                     // handleShow()
-                    props.history.push(`/durango/${data.id}/reserve`);
+                    props.history.push(`/durango/app/${data.id}/reserve`);
                 }}
             >
                 <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
@@ -152,7 +152,7 @@ function Details(props) {
                 </i>
             </div>
             <div className="detailsRow clickableRow" onClick={() => {
-                props.history.push(`/durango/${data.id}/more`);
+                props.history.push(`/durango/app/${data.id}/more`);
             }}>
                 <h1 className="detailRowText boldText">O mestu</h1>
                 <i className="material-icons detailIconClickable">

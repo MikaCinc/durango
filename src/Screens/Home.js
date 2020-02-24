@@ -77,7 +77,7 @@ const getSrc = (title) => {
     }
 }
 
-const List = ({history}) => {
+const List = ({ history }) => {
     const { filteredData, noResults } = useContext(DataContext);
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
@@ -100,7 +100,7 @@ const List = ({history}) => {
             key={Kafic.id}
             className="singleLine button"
             onClick={() => {
-                history.push(`/durango/${Kafic.id}`);
+                history.push(`/durango/app/${Kafic.id}`);
             }}
         >
             <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
@@ -120,7 +120,7 @@ const List = ({history}) => {
     })
 }
 
-const ListAndSearch = ({history}) => {
+const ListAndSearch = ({ history }) => {
     return (
         <Fragment>
             <div className="mainHeader">
@@ -134,7 +134,7 @@ const ListAndSearch = ({history}) => {
     )
 }
 
-const MainScreen = ({history}) => {
+const MainScreen = ({ history }) => {
     return (
         <div className="list">
             <ListAndSearch history={history} />
@@ -156,16 +156,14 @@ const LoaderComponent = () => {
 
 const Home = props => {
     return (
-        <DataProvider>
-            <div className="App">
-                <Fragment>
-                    <MainScreen history={props.history} />
-                </Fragment>
-                <div className="loader">
-                    <LoaderComponent />
-                </div>
+        <div className="App">
+            <Fragment>
+                <MainScreen history={props.history} />
+            </Fragment>
+            <div className="loader">
+                <LoaderComponent />
             </div>
-        </DataProvider>
+        </div>
     );
 };
 

@@ -105,58 +105,56 @@ function MoreDetails(props) {
     }
 
     return (
-        <DataProvider>
-            <div>
-                <div className="detailsHeader">
-                    <div
-                        className="goBack"
-                        onClick={() => {
-                            props.history.push(`/durango/${data.id}`)
-                        }}
-                    >
-                        <i className="material-icons">
-                            arrow_back_ios
+        <div>
+            <div className="detailsHeader">
+                <div
+                    className="goBack"
+                    onClick={() => {
+                        props.history.push(`/durango/app/${data.id}`)
+                    }}
+                >
+                    <i className="material-icons">
+                        arrow_back_ios
                     </i>
-                    </div>
-                    <img src={Logo} className="detailsDurangoLogo" />
                 </div>
-                {
-                    renderCarousel()
-                }
-                <div
-                    className="detailsRow clickableRow"
-                    onClick={() => {
-                        window.open(data.details.lokacija, '_blank');
-                    }}
-                >
-                    <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                    <i className="material-icons detailIconClickable">
-                        map
-                </i>
-                </div>
-                <div
-                    className="detailsRow clickableRow"
-                    onClick={() => {
-                        alert('Coming soon')
-                    }}
-                >
-                    <h1 className="detailRowText boldText">Meni</h1>
-                    <i className="material-icons detailIconClickable">
-                        menu_book
-                </i>
-                </div>
-
-                <div className="detailAbout">
-                    <div className="detailsRow">
-                        <h1 className="detailRowText boldText">O mestu</h1>
-                        <i className="material-icons detailIcon">
-                            info
-                </i>
-                    </div>
-                    <p className="detailsAboutText">{data.details.opis}</p>
-                </div>
+                <img src={Logo} className="detailsDurangoLogo" />
             </div>
-        </DataProvider>
+            {
+                renderCarousel()
+            }
+            <div
+                className="detailsRow clickableRow"
+                onClick={() => {
+                    window.open(data.details.lokacija, '_blank');
+                }}
+            >
+                <h1 className="detailRowText boldText">Prikaži na mapi</h1>
+                <i className="material-icons detailIconClickable">
+                    map
+                </i>
+            </div>
+            <div
+                className="detailsRow clickableRow"
+                onClick={() => {
+                    alert('Coming soon')
+                }}
+            >
+                <h1 className="detailRowText boldText">Meni</h1>
+                <i className="material-icons detailIconClickable">
+                    menu_book
+                </i>
+            </div>
+
+            <div className="detailAbout">
+                <div className="detailsRow">
+                    <h1 className="detailRowText boldText">O mestu</h1>
+                    <i className="material-icons detailIcon">
+                        info
+                </i>
+                </div>
+                <p className="detailsAboutText">{data.details.opis}</p>
+            </div>
+        </div>
     );
 }
 

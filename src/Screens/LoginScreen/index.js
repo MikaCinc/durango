@@ -14,16 +14,21 @@ const LoginScreen = props => {
 
     useEffect(() => {
         // localStorage.removeItem('User')
-        let User = JSON.parse(localStorage.getItem('User'));
+        let User = JSON.parse(localStorage.getItem('User')),
+        timeout = null;
 
         if (User && User.id) {
             setIsSuccess(true);
             setProfileImage(User.imageUrl)
             setProfileName(User.name)
-            setTimeout(() => {
+            timeout = setTimeout(() => {
                 // props.setAuthorized(true);
-                props.history.push('/durango/home')
+                props.history.push('/durango/app/home')
             }, 2000)
+        }
+
+        return () => {
+            clearTimeout(timeout);
         }
 
     }, []);
@@ -45,7 +50,7 @@ const LoginScreen = props => {
 
         setTimeout(() => {
             // props.setAuthorized(true);
-            props.history.push('/durango/home')
+            props.history.push('/durango/app/home')
         }, 2000);
     }
 
@@ -61,7 +66,7 @@ const LoginScreen = props => {
         setProfileName(response.name)
         setTimeout(() => {
             // props.setAuthorized(true);
-            props.history.push('/durango/home')
+            props.history.push('/durango/app/home')
         }, 2000)
     }
 

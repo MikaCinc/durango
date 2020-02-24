@@ -13,7 +13,7 @@ let DataContext;
 
 const { Provider, Consumer } = DataContext = React.createContext({});
 
-const DataProvider = (props) => {
+const DataProvider = (props, {history}) => {
 
     const [Data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -87,11 +87,12 @@ const DataProvider = (props) => {
         
         if (authorized) {
             timeout = setTimeout(() => {
+                console.log('loaded')
                 setData(kafici);
                 setLoading(false);
             }, 300)
         } else {
-            props.history.push('/durango/login');
+            history.push('/durango/app/login');
         }
 
         return () => {
