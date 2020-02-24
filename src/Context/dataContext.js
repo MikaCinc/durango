@@ -34,28 +34,6 @@ const DataProvider = (props) => {
             });
     } */
 
-
-    /* useEffect(() => {
-        let int = null;
-        clearInterval(int);
-        int = setInterval(() => {
-            setData(simulateUpdateData())
-        }, 1000)
-    }, []); */
-
-    /* const simulateUpdateData = () => {
-        return [...data].map(item => {
-            return {
-                ...item,
-                brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
-            }
-        })
-    } */
-
-    /* const getNewNumber = (old) => {
-        return Math.floor(Math.random() * 10) > 5 ? old + 1 : old - 1;
-    } */
-
     const updateWithMockData = () => {
         let User = JSON.parse(localStorage.getItem('User')),
             authorized = false,
@@ -84,7 +62,7 @@ const DataProvider = (props) => {
             });
         } */
 
-        
+
         if (authorized) {
             timeout = setTimeout(() => {
                 console.log('loaded')
@@ -112,6 +90,41 @@ const DataProvider = (props) => {
     useEffect(() => {
         setNoResults(filteredData.length === 0 && filteredData.length);
     }, [filteredData]);
+
+    useEffect(() => {
+        let int = null;
+
+        int = setInterval(() => {
+            setData(simulateUpdateData())
+            // console.log(simulateUpdateData())
+        }, 400)
+
+        return () => {
+            clearInterval(int);
+        }
+    }, [Data]);
+
+    const simulateUpdateData = () => {
+        let IDs = _.map(Data, 'id'),
+            randomIDs = _.slice(_.shuffle(IDs), _.random(3));
+
+        return [...Data].map(item => {
+            if (_.includes(randomIDs, item.id)) {
+                return {
+                    ...item,
+                    brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
+                }
+            }
+
+            return {
+                ...item
+            }
+        })
+    }
+
+    const getNewNumber = (old) => {
+        return Math.floor(Math.random() * 10) > 5 || old < 1 ? old + 1 : old - 1;
+    }
 
     const isAuthorized = () => {
         let User = JSON.parse(localStorage.getItem('User'));
