@@ -90,7 +90,7 @@ const DataProvider = (props, {history}) => {
                 console.log('loaded')
                 setData(kafici);
                 setLoading(false);
-            }, 300)
+            }, 1200)
         } else {
             history.push('/durango/app/login');
         }
