@@ -18,6 +18,7 @@ import mockData from '../data/kafici.js';
 import vinyl from '../slike/vinyl.png';
 import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
+import durangoCaffe from '../slike/durangoCaffe.png';
 
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
@@ -47,7 +48,7 @@ function Details(props) {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
-    }, []);
+    }, [Data]);
 
     const getRadnoVreme = () => {
         let time = data.details.radnoVreme,
@@ -91,8 +92,11 @@ function Details(props) {
             case 'dnevnaSoba': {
                 return dnevnaSoba;
             };
+            case 'durangoCaffe': {
+                return durangoCaffe;
+            };
             default: {
-                return Square;
+                return durangoCaffe;
             }
         }
     }

@@ -21,6 +21,7 @@ import Loader from 'react-loader-spinner';
 import vinyl from '../slike/vinyl.png';
 import Square from '../slike/Square.jpg';
 import dnevnaSoba from '../slike/dnevnaSoba.jpg';
+import durangoCaffe from '../slike/durangoCaffe.png';
 
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
@@ -70,6 +71,9 @@ const getSrc = (title) => {
         };
         case 'dnevnaSoba': {
             return dnevnaSoba;
+        };
+        case 'durangoCaffe': {
+            return durangoCaffe;
         };
         default: {
             return Square;
