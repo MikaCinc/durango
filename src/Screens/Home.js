@@ -8,14 +8,19 @@ import React, {
 /* Data */
 import Logo from '../ExtendedLogo/Logo.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
+
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
+import { getRadnoVreme } from '../library/common';
+
 /* Animations */
 import Slide from 'react-reveal/Slide';
-/* LOADER */
+
+/* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
+import Badge from 'react-bootstrap/Badge'
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
@@ -81,11 +86,30 @@ const getSrc = (title) => {
     }
 }
 
+const getTrimmedTitle = (title, n) => {
+    if (title.length > 15) {
+        return title.slice(0, 15) + '...';
+    }
+
+    return title;
+}
+
+const CustomBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
+    return (
+        <div
+            className="listBadge"
+            style={{ backgroundColor: color }}
+        >
+            {label}
+        </div>
+    )
+}
+
 const List = ({ history }) => {
     const { filteredData, loading } = useContext(DataContext);
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
-        if(loading) return null;
+        if (loading) return null;
 
         return (
             <div className="noResults boldText">
@@ -98,26 +122,35 @@ const List = ({ history }) => {
     }
 
     return filteredData.map((Kafic) => {
+        let isOpen = getRadnoVreme(Kafic.details.radnoVreme);
+
         return <div
             key={Kafic.id}
-            className="singleLine button"
+            className={isOpen ? "singleLine button" : "singleLine button closedObject"}
             onClick={() => {
                 history.push(`/durango/app/${Kafic.id}`);
             }}
         >
             <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-            <h1 className="linetitle boldText">{Kafic.title}</h1>
+            <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
             <p className="lineFreeSeats boldText greyText">
                 {Kafic.brojSlobodnihMesta}
             </p>
             <i
                 className="material-icons peopleIcon"
                 style={{
-                    color: Kafic.brojSlobodnihMesta > 0 ? '#3185FC' : '#C50505',
+                    color: isOpen
+                        ? Kafic.brojSlobodnihMesta > 0
+                            ? '#3185FC'
+                            : '#C50505'
+                        : 'gray'
                 }}
             >
                 people
-          </i>
+            </i>
+            {
+                !isOpen && <CustomBadge />
+            }
         </div>
     })
 }

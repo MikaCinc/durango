@@ -58,6 +58,21 @@ const kafici = [
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
             meni: ''
         }
+    },
+    {
+        id: 5,
+        title: 'Uvek zatvoren objekat',
+        logo: 'durangoCaffe.png',
+        brojMesta: 10,
+        brojSlobodnihMesta: 0,
+        rezervacija: null,
+        details: {
+            opis: 'Mi smo zatvoreni često!!1',
+            slike: '',
+            radnoVreme: '07:30 - 07:31',
+            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            meni: ''
+        }
     }
 ]
 

@@ -161,6 +161,21 @@ h1 {
   width: 100%;
 }
 
+.closedObject {
+  border: 5px solid gray;
+}
+
+.listBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 10px;
+  color: white;
+  padding-left: 5px;
+  padding-top: 2px;
+  border-top-left-radius: 7px;
+}
+
 .details {
   display: inline-block;
   width: 100%;
@@ -244,6 +259,7 @@ h1 {
 }
 
 .singleLine {
+  position: relative; /* Potrebno da bi badge bio na svom mestu */
   display: flex;
   align-items: center;
   height: 75px;
