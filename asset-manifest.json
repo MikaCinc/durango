@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/durango/static/css/main.ccac918f.chunk.css",
-    "main.js": "/durango/static/js/main.df457ad6.chunk.js",
-    "main.js.map": "/durango/static/js/main.df457ad6.chunk.js.map",
+    "main.css": "/durango/static/css/main.eeb30745.chunk.css",
+    "main.js": "/durango/static/js/main.f0618db6.chunk.js",
+    "main.js.map": "/durango/static/js/main.f0618db6.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.faf610aa.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.faf610aa.js.map",
     "static/css/2.7907bd37.chunk.css": "/durango/static/css/2.7907bd37.chunk.css",
     "static/js/2.ba1704fd.chunk.js": "/durango/static/js/2.ba1704fd.chunk.js",
     "static/js/2.ba1704fd.chunk.js.map": "/durango/static/js/2.ba1704fd.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.10508997d995ecb289ec8136a8672cc2.js": "/durango/precache-manifest.10508997d995ecb289ec8136a8672cc2.js",
+    "precache-manifest.ed8bad497317ddcd753571ec627f674b.js": "/durango/precache-manifest.ed8bad497317ddcd753571ec627f674b.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.7907bd37.chunk.css.map": "/durango/static/css/2.7907bd37.chunk.css.map",
-    "static/css/main.ccac918f.chunk.css.map": "/durango/static/css/main.ccac918f.chunk.css.map",
+    "static/css/main.eeb30745.chunk.css.map": "/durango/static/css/main.eeb30745.chunk.css.map",
     "static/js/2.ba1704fd.chunk.js.LICENSE": "/durango/static/js/2.ba1704fd.chunk.js.LICENSE",
     "static/media/Logo.png": "/durango/static/media/Logo.3544053f.png",
     "static/media/Square.jpg": "/durango/static/media/Square.e9ca113d.jpg",
@@ -21,13 +21,13 @@
     "static/media/kafic1.jpg": "/durango/static/media/kafic1.4fbc8bcd.jpg",
     "static/media/kafic2.jpg": "/durango/static/media/kafic2.9ff91612.jpg",
     "static/media/kafic3.jpg": "/durango/static/media/kafic3.ba378676.jpg",
-    "static/media/noResults.png": "/durango/static/media/noResults.b87586f5.png"
+    "static/media/noResults.png": "/durango/static/media/noResults.a2f08766.png"
   },
   "entrypoints": [
     "static/js/runtime-main.faf610aa.js",
     "static/css/2.7907bd37.chunk.css",
     "static/js/2.ba1704fd.chunk.js",
-    "static/css/main.ccac918f.chunk.css",
-    "static/js/main.df457ad6.chunk.js"
+    "static/css/main.eeb30745.chunk.css",
+    "static/js/main.f0618db6.chunk.js"
   ]
 }

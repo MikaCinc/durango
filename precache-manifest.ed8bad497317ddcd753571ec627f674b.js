@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "24b5c331fef151c727af1552690db187",
+    "revision": "af5fe0d13fe0eeca8eb79d03ddd3d028",
     "url": "/durango/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/css/2.7907bd37.chunk.css"
   },
   {
-    "revision": "761c98425ea789768c7b",
-    "url": "/durango/static/css/main.ccac918f.chunk.css"
+    "revision": "8da2b00438c5ccbfccb3",
+    "url": "/durango/static/css/main.eeb30745.chunk.css"
   },
   {
     "revision": "04e005442f693d519a91",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/js/2.ba1704fd.chunk.js.LICENSE"
   },
   {
-    "revision": "761c98425ea789768c7b",
-    "url": "/durango/static/js/main.df457ad6.chunk.js"
+    "revision": "8da2b00438c5ccbfccb3",
+    "url": "/durango/static/js/main.f0618db6.chunk.js"
   },
   {
     "revision": "c854f09ffe5643a05685",
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/media/kafic3.ba378676.jpg"
   },
   {
-    "revision": "b87586f52ad33266d25739536b93c21a",
-    "url": "/durango/static/media/noResults.b87586f5.png"
+    "revision": "a2f0876699ef9518387b918e37337de3",
+    "url": "/durango/static/media/noResults.a2f08766.png"
   }
 ]);
