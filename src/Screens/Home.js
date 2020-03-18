@@ -87,8 +87,8 @@ const getSrc = (title) => {
 }
 
 const getTrimmedTitle = (title, n) => {
-    if (title.length > 15) {
-        return title.slice(0, 15) + '...';
+    if (title.length > 13) {
+        return title.slice(0, 13) + '...';
     }
 
     return title;
@@ -155,7 +155,7 @@ const List = ({ history }) => {
                     }}
                 >
                     <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                    <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
                     <p className="lineFreeSeats boldText greyText">
                         {Kafic.brojSlobodnihMesta}
                     </p>
