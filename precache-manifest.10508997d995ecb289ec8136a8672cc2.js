@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5c72e095b5aa0e07cf4d3ba557622cd6",
+    "revision": "24b5c331fef151c727af1552690db187",
     "url": "/durango/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/css/2.7907bd37.chunk.css"
   },
   {
-    "revision": "895010b2f85d72ebf2c9",
-    "url": "/durango/static/css/main.d408ae5b.chunk.css"
+    "revision": "761c98425ea789768c7b",
+    "url": "/durango/static/css/main.ccac918f.chunk.css"
   },
   {
     "revision": "04e005442f693d519a91",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/js/2.ba1704fd.chunk.js.LICENSE"
   },
   {
-    "revision": "895010b2f85d72ebf2c9",
-    "url": "/durango/static/js/main.0158909a.chunk.js"
+    "revision": "761c98425ea789768c7b",
+    "url": "/durango/static/js/main.df457ad6.chunk.js"
   },
   {
     "revision": "c854f09ffe5643a05685",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/media/bg.9f8d8194.jpeg"
   },
   {
-    "revision": "dc50e706f04a81a106e04c85faa88124",
-    "url": "/durango/static/media/durangoCaffe.dc50e706.png"
+    "revision": "c2ad9033c820eb98f85d08d0a322eb16",
+    "url": "/durango/static/media/durangoCaffe.c2ad9033.png"
   },
   {
     "revision": "4fbc8bcd9853c00e645acf9a7ecc7e85",
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/durango/static/media/kafic3.ba378676.jpg"
   },
   {
-    "revision": "f98a6bd3fbb001d36041a5628f09e6d2",
-    "url": "/durango/static/media/noResults.f98a6bd3.png"
+    "revision": "b87586f52ad33266d25739536b93c21a",
+    "url": "/durango/static/media/noResults.b87586f5.png"
   }
 ]);
