@@ -100,7 +100,7 @@ const Separator = () => {
     )
 }
 
-const LabelBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
+const LabelBadge = ({ label = 'ZATVORENO', color = '#B0B0B0' }) => {
     return (
         <div
             className="listBadge"
@@ -193,7 +193,7 @@ const List = ({ history }) => {
                     <i
                         className="material-icons peopleIcon"
                         style={{
-                            color: 'gray'
+                            color: '#B0B0B0'
                         }}
                     >
                         people

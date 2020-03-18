@@ -154,6 +154,12 @@ const DataProvider = (props) => {
         setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
     };
 
+    const filterByFavoriti = () => {
+        let filtered = Data.filter(({ favorit }) => favorit);
+
+        setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
+    };
+
     const changeData = ({ id, ...restOfData }) => {
         let nextState = [...Data];
 
