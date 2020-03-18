@@ -23,8 +23,6 @@ const DataProvider = (props) => {
     const [filteredData, setFilteredData] = useState([]);
     const [loading, setLoading] = useState(true);
     // const [authorized, setAuthorized] = useState(false);
-
-    const [noResults, setNoResults] = useState(false);
     const [search, setSearch] = useState('');
 
     /* const updateFromServer = () => {
@@ -90,10 +88,6 @@ const DataProvider = (props) => {
     useEffect(() => {
         filterBySearch(search);
     }, [search, Data]);
-
-    useEffect(() => {
-        setNoResults(filteredData.length === 0 && filteredData.length);
-    }, [filteredData]);
 
     useEffect(() => {
         let int = null;
@@ -175,7 +169,6 @@ const DataProvider = (props) => {
             value={{
                 Data,
                 filteredData,
-                noResults,
                 changeSearch,
                 changeData,
                 loading,

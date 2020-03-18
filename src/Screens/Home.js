@@ -82,13 +82,11 @@ const getSrc = (title) => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, noResults, loading } = useContext(DataContext);
+    const { filteredData, loading } = useContext(DataContext);
 
-    if (!(Array.isArray(filteredData) && filteredData.length) || loading) {
-        return null;
-    }
+    if (!(Array.isArray(filteredData) && filteredData.length)) {
+        if(loading) return null;
 
-    if (noResults) {
         return (
             <div className="noResults boldText">
                 <h1>
