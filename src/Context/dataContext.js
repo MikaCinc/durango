@@ -132,7 +132,8 @@ const DataProvider = (props) => {
     }
 
     const getNewNumber = (old) => {
-        return Math.floor(Math.random() * 10) > 5 || old < 1 ? old + 1 : old - 1;
+        let bulk = Math.floor(Math.random() * 3);
+        return Math.floor(Math.random() * 10) > 5 || old < 3 ? old + bulk : old - bulk;
     }
 
     const isAuthorized = () => {
