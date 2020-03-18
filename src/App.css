@@ -187,9 +187,7 @@ h1 {
   margin-right: auto;
   background-color: gray;
   color: white;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 3px;
+  padding: 3px 10px;
   border-radius: 7px;
   cursor: context-menu;
 }

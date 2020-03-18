@@ -10,7 +10,7 @@ const isOpen = (radnoVreme) => {
         lowerLimit = '05:00';
 
     if (currentTime.isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
-        sFlag = true;
+        sFlag = true; //@todo zašto ovo radim ovde?? Postoji bug ako je ušo u ovaj if da su svi otvoreni...
     };
 
     if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
