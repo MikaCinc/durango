@@ -133,7 +133,7 @@ const DataProvider = (props) => {
 
     const getNewNumber = (old) => {
         let bulk = Math.floor(Math.random() * 3);
-        return Math.floor(Math.random() * 10) > 5 || old <= 3 ? old + bulk : old - bulk;
+        return Math.floor(Math.random() * 10) > 5 || old < 3 ? old + bulk : old - bulk;
     }
 
     const isAuthorized = () => {
@@ -154,19 +154,19 @@ const DataProvider = (props) => {
         setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
     };
 
-    const changeData = ({ ID, ...restOfData }) => {
+    const changeData = ({ id, ...restOfData }) => {
         let nextState = [...Data];
 
-        if (!!_.find(Data, { ID })) {
+        if (!!_.find(Data, { id })) {
             nextState = Data.map((item) => {
-                if (item.ID === ID) {
-                    return { ID, ...restOfData };
+                if (item.id === id) {
+                    return { id, ...restOfData };
                 }
 
                 return item;
             });
         } else {
-            nextState = [{ ID, ...restOfData }, ...nextState];
+            nextState = [{ id, ...restOfData }, ...nextState];
         }
 
         return setData(nextState);

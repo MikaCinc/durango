@@ -41,7 +41,7 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const { Data, loading } = useContext(DataContext);
+    const { Data, loading, changeData } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -150,6 +150,23 @@ function Details(props) {
                     <i className="material-icons detailIconClickable">
                         info
                 </i>
+                </div>
+                <div className="detailsRow clickableRow" onClick={() => {
+                    changeData({
+                        ...data,
+                        favorit: !data.favorit
+                    });
+                }}>
+                    <h1 className="detailRowText boldText">
+                        {
+                            data.favorit
+                                ? 'Ukloni iz favorita'
+                                : 'Dodaj u favorite'
+                        }
+                    </h1>
+                    <i className="material-icons detailIconClickable">
+                        {data.favorit ? 'star' : 'star_outline'}
+                    </i>
                 </div>
             </Fragment>
         )

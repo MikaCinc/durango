@@ -176,6 +176,22 @@ h1 {
   border-top-left-radius: 7px;
 }
 
+.favoritBadgeContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: gray;
+  color: gold;
+  border-bottom-left-radius: 7px;
+  border-top-right-radius: 3px;
+}
+
+.favoritBadge {
+  margin: 1px 6px 2px 9px;
+  display: flex;
+  align-self: center;
+}
+
 .listSeparator {
   display: inline-block;
   position: relative;

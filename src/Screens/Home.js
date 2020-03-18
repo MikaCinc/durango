@@ -100,13 +100,30 @@ const Separator = () => {
     )
 }
 
-const CustomBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
+const LabelBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
     return (
         <div
             className="listBadge"
             style={{ backgroundColor: color }}
         >
             {label}
+        </div>
+    )
+}
+
+const FavoritBadge = () => {
+    return (
+        <div
+            className="favoritBadgeContainer"
+        >
+            <i
+                className="material-icons favoritBadge"
+                style={{
+                    fontSize: '18px'
+                }}
+            >
+                star
+            </i>
         </div>
     )
 }
@@ -152,10 +169,13 @@ const List = ({ history }) => {
                     >
                         people
                     </i>
+                    {
+                        Kafic.favorit && <FavoritBadge />
+                    }
                 </div>
             })
         }
-        <Separator/>
+        <Separator />
         {
             sortedClosed.map(Kafic => {
                 return <div
@@ -177,8 +197,11 @@ const List = ({ history }) => {
                         }}
                     >
                         people
-                </i>
-                    <CustomBadge />
+                    </i>
+                    {
+                        Kafic.favorit && <FavoritBadge />
+                    }
+                    <LabelBadge />
                 </div>
             })
         }

@@ -70,7 +70,6 @@ const kafici = [
         brojMesta: 10,
         brojSlobodnihMesta: 0,
         favorit: true,
-        favorit: false,
         rezervacija: null,
         details: {
             opis: 'Mi smo zatvoreni često!!1',
