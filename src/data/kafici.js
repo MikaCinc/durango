@@ -5,6 +5,7 @@ const kafici = [
         logo: 'vinyl.png',
         brojMesta: 32,
         brojSlobodnihMesta: 15,
+        favorit: false,
         rezervacija: null,
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -20,6 +21,7 @@ const kafici = [
         logo: 'Square.jpg',
         brojMesta: 68,
         brojSlobodnihMesta: 14,
+        favorit: false,
         rezervacija: null,
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -35,6 +37,7 @@ const kafici = [
         logo: 'dnevnaSoba.jpg',
         brojMesta: 42,
         brojSlobodnihMesta: 0,
+        favorit: false,
         rezervacija: null,
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -50,6 +53,7 @@ const kafici = [
         logo: 'durangoCaffe.png',
         brojMesta: 90,
         brojSlobodnihMesta: 7,
+        favorit: true,
         rezervacija: null,
         details: {
             opis: 'Jedini kafić u gradu gde možete maziti naše slatke kućne ljubimce dok ispijate kafu sa svojim društvom',
@@ -65,11 +69,13 @@ const kafici = [
         logo: 'durangoCaffe.png',
         brojMesta: 10,
         brojSlobodnihMesta: 0,
+        favorit: true,
+        favorit: false,
         rezervacija: null,
         details: {
             opis: 'Mi smo zatvoreni često!!1',
             slike: '',
-            radnoVreme: '07:30 - 07:31',
+            radnoVreme: '06:00 - 07:31',
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
             meni: ''
         }

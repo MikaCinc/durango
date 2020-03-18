@@ -12,7 +12,7 @@ import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
-import { getRadnoVreme } from '../library/common';
+import { isOpen } from '../library/common';
 
 /* Animations */
 import Slide from 'react-reveal/Slide';
@@ -94,6 +94,12 @@ const getTrimmedTitle = (title, n) => {
     return title;
 }
 
+const Separator = () => {
+    return (
+        <div className="listSeparator">Zatvoreni</div>
+    )
+}
+
 const CustomBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
     return (
         <div
@@ -106,7 +112,7 @@ const CustomBadge = ({ label = 'ZATVORENO', color = 'gray' }) => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, loading } = useContext(DataContext);
+    const { filteredData, sortedOpen, sortedClosed, loading } = useContext(DataContext);
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
         if (loading) return null;
@@ -121,38 +127,62 @@ const List = ({ history }) => {
         )
     }
 
-    return filteredData.map((Kafic) => {
-        let isOpen = getRadnoVreme(Kafic.details.radnoVreme);
-
-        return <div
-            key={Kafic.id}
-            className={isOpen ? "singleLine button" : "singleLine button closedObject"}
-            onClick={() => {
-                history.push(`/durango/app/${Kafic.id}`);
-            }}
-        >
-            <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-            <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
-            <p className="lineFreeSeats boldText greyText">
-                {Kafic.brojSlobodnihMesta}
-            </p>
-            <i
-                className="material-icons peopleIcon"
-                style={{
-                    color: isOpen
-                        ? Kafic.brojSlobodnihMesta > 0
-                            ? '#3185FC'
-                            : '#C50505'
-                        : 'gray'
-                }}
-            >
-                people
-            </i>
-            {
-                !isOpen && <CustomBadge />
-            }
-        </div>
-    })
+    return <Fragment>
+        {
+            sortedOpen.map(Kafic => {
+                return <div
+                    key={Kafic.id}
+                    className="singleLine button"
+                    onClick={() => {
+                        history.push(`/durango/app/${Kafic.id}`);
+                    }}
+                >
+                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                    <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                    <p className="lineFreeSeats boldText greyText">
+                        {Kafic.brojSlobodnihMesta}
+                    </p>
+                    <i
+                        className="material-icons peopleIcon"
+                        style={{
+                            color: Kafic.brojSlobodnihMesta > 0
+                                ? '#3185FC'
+                                : '#C50505'
+                        }}
+                    >
+                        people
+                    </i>
+                </div>
+            })
+        }
+        <Separator/>
+        {
+            sortedClosed.map(Kafic => {
+                return <div
+                    key={Kafic.id}
+                    className="singleLine button closedObject"
+                    onClick={() => {
+                        history.push(`/durango/app/${Kafic.id}`);
+                    }}
+                >
+                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                    <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                    <p className="lineFreeSeats boldText greyText">
+                        {Kafic.brojSlobodnihMesta}
+                    </p>
+                    <i
+                        className="material-icons peopleIcon"
+                        style={{
+                            color: 'gray'
+                        }}
+                    >
+                        people
+                </i>
+                    <CustomBadge />
+                </div>
+            })
+        }
+    </Fragment>
 }
 
 const ListAndSearch = ({ history }) => {

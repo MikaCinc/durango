@@ -5,8 +5,9 @@ import React, {
 } from 'react';
 import kafici from '../data/kafici';
 
-/* Packages */
+/* Packages & libraries */
 import _ from 'lodash';
+import { isOpen } from '../library/common';
 
 /* LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -18,12 +19,17 @@ let DataContext;
 const { Provider, Consumer } = DataContext = React.createContext({});
 
 const DataProvider = (props) => {
-
+    // Original data
     const [Data, setData] = useState([]);
+    // Filtered
     const [filteredData, setFilteredData] = useState([]);
+    const [search, setSearch] = useState('');
+    // Sorted
+    const [sortedOpen, setSortedOpen] = useState([]);
+    const [sortedClosed, setSortedClosed] = useState([]);
+
     const [loading, setLoading] = useState(true);
     // const [authorized, setAuthorized] = useState(false);
-    const [search, setSearch] = useState('');
 
     /* const updateFromServer = () => {
         return fetch("/update/all")
@@ -90,6 +96,11 @@ const DataProvider = (props) => {
     }, [search, Data]);
 
     useEffect(() => {
+        setSortedOpen([...filteredData.filter(item => isOpen(item.details.radnoVreme))]);
+        setSortedClosed([...filteredData.filter(item => !isOpen(item.details.radnoVreme))]);
+    }, [filteredData]);
+
+    useEffect(() => {
         let int = null;
 
         int = setInterval(() => {
@@ -107,7 +118,7 @@ const DataProvider = (props) => {
             randomIDs = _.slice(_.shuffle(IDs), _.random(4));
 
         return [...Data].map(item => {
-            if (_.includes(randomIDs, item.id)) {
+            if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {
                 return {
                     ...item,
                     brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
@@ -169,6 +180,8 @@ const DataProvider = (props) => {
             value={{
                 Data,
                 filteredData,
+                sortedOpen,
+                sortedClosed,
                 changeSearch,
                 changeData,
                 loading,

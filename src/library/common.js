@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const getRadnoVreme = (radnoVreme) => {
+const isOpen = (radnoVreme) => {
     let time = radnoVreme,
         timeStart = time.split(' - ')[0],
         timeEnd = time.split(' - ')[1],
@@ -17,14 +17,14 @@ const getRadnoVreme = (radnoVreme) => {
         flag = true;
     };
 
-    /* if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
+    if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
         return true;
-    }; */
+    };
 
 
     return false;
 }
 
 export {
-    getRadnoVreme
+    isOpen
 }
