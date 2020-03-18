@@ -186,7 +186,7 @@ const List = ({ history }) => {
                     }}
                 >
                     <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                    <h1 className="linetitle boldText">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                    <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
                     <p className="lineFreeSeats boldText greyText">
                         {Kafic.brojSlobodnihMesta}
                     </p>
