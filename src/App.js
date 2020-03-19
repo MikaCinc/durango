@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 /* PWA */
 import '@pwabuilder/pwainstall'
+import '@pwabuilder/pwaupdate'
 
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
@@ -41,10 +42,9 @@ const App = (props) => {
         <Route path="/durango/app" component={UserStackOfScreens} />
         <Route exact path="/durango/restaurant" component={Restaurant} />
       </Switch>
-      <pwa-install
-        showopen
-        explainer="Durango može biti instaliran"
-      ></pwa-install>
+      <pwa-update
+        swpath="serviceWorker.js"
+      />
     </Router>
   )
 }
