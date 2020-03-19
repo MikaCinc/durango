@@ -47,7 +47,7 @@ const Search = () => {
             </i>
             <input
                 className="searchInput"
-                placeholder="Pretraži..."
+                placeholder="Pretraži.........test....."
                 value={search}
                 onChange={(e) => {
                     setSearch(e.target.value);
