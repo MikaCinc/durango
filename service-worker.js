@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/durango/precache-manifest.e7bf7acbabd84a1afd748ec87a795e6e.js"
+  "/durango/precache-manifest.3018490bfcdf5511cf7c174f20e01589.js"
 );
 
 self.addEventListener('message', (event) => {
