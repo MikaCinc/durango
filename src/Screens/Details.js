@@ -113,7 +113,16 @@ function Details(props) {
                     </i> */}
                         {getRadnoVreme()}
                     </div>
-                    <img src={getSrc(data.logo.split('.')[0])} className="detailsLogo" />
+                    <img
+                        src={getSrc(data.logo.split('.')[0])}
+                        className={
+                            `detailsLogo reveal-focus-${
+                            data.brojSlobodnihMesta > 0
+                                ? 'blue'
+                                : 'red'
+                            }`
+                        }
+                    />
                 </div>
                 <div className="detailsRow">
                     <h1 className="detailRowText">

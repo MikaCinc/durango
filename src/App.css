@@ -614,3 +614,51 @@ h1 {
   margin-top: 15px;
   padding: 3px;
 }
+
+/* GLOWING FLUENT EFFECT */
+
+.reveal-focus-blue {
+  /* border: 1px solid transparent !important; */
+	/* outline: 5px solid transparent !important; */
+	position: relative !important;
+	/* border-color: #000 !important; */
+	outline-color: #3185FC !important;
+	box-shadow: 0 0 15px 3px #3185FC !important;
+	animation: glowfade-blue 2s ease-in-out;
+	-moz-animation: glowfade-blue 2s ease-in-out;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	z-index: 1 !important;
+}
+
+@keyframes glowfade-blue {
+	from {
+		box-shadow: 0 0 20px 5px #3185FC;
+	}
+	to {
+		box-shadow: 0 0 10px 3px #3185FC;
+	}
+}
+
+.reveal-focus-red {
+  /* border: 1px solid transparent !important; */
+	/* outline: 5px solid transparent !important; */
+	position: relative !important;
+	/* border-color: #000 !important; */
+	outline-color: red !important;
+	box-shadow: 0 0 15px 3px red !important;
+	animation: glowfade-red 2s ease-in-out;
+	-moz-animation: glowfade-red 2s ease-in-out;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+	z-index: 1 !important;
+}
+
+@keyframes glowfade-red {
+	from {
+		box-shadow: 0 0 20px 5px red;
+	}
+	to {
+		box-shadow: 0 0 10px 3px red;
+	}
+}
