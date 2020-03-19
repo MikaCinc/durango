@@ -78,7 +78,7 @@ const DataProvider = (props) => {
                 setLoading(false);
             }, 1200)
         } else {
-            props.history.push('/durango/app/login');
+            props.history.push('/durango/app-login');
         }
 
         return () => {
