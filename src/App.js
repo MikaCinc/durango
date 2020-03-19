@@ -4,6 +4,9 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
+/* PWA */
+import '@pwabuilder/pwainstall'
+
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
 import Home from './Screens/Home';
@@ -15,7 +18,7 @@ import Reserve from './Screens/Reserve';
 /* Context */
 import DataContext, { DataProvider } from './Context/dataContext';
 
-const UserStackOfScreens = ({history}) => {
+const UserStackOfScreens = ({ history }) => {
   return (
     <DataProvider history={history}>
       <Switch>
@@ -38,6 +41,10 @@ const App = (props) => {
         <Route path="/durango/app" component={UserStackOfScreens} />
         <Route exact path="/durango/restaurant" component={Restaurant} />
       </Switch>
+      <pwa-install
+        showopen
+        explainer="Durango može biti instaliran"
+      ></pwa-install>
     </Router>
   )
 }
