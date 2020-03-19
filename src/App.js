@@ -22,6 +22,7 @@ const UserStackOfScreens = ({ history }) => {
   return (
     <DataProvider history={history}>
       <Switch>
+        <Route exact path="/durango/app/login" component={Login} />
         <Route exact path="/durango/app/home" component={Home} />
         <Route exact path="/durango/app/:id" component={Details} />
         <Route exact path="/durango/app/:id/more" component={MoreDetails} />
@@ -37,7 +38,6 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/durango/" component={Login} />
-        <Route exact path="/durango/app/login" component={Login} />
         <Route path="/durango/app" component={UserStackOfScreens} />
         <Route exact path="/durango/restaurant" component={Restaurant} />
       </Switch>
