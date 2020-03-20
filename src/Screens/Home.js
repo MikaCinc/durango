@@ -12,7 +12,6 @@ import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
-import { isOpen } from '../library/common';
 
 /* Animations */
 import Slide from 'react-reveal/Slide';

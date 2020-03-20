@@ -15,6 +15,8 @@ import Logo from '../ExtendedLogo/Logo.png';
 import { useParams } from "react-router-dom";
 import mockData from '../data/kafici.js';
 
+import { isOpen } from '../library/common';
+
 /* Images */
 import vinyl from '../slike/vinyl.png';
 import Square from '../slike/Square.jpg';
@@ -52,33 +54,11 @@ function Details(props) {
     }, [Data]);
 
     const getRadnoVreme = () => {
-        let time = data.details.radnoVreme,
-            timeStart = time.split(' - ')[0],
-            timeEnd = time.split(' - ')[1],
-            currentTime = moment(),
-            flag = false,
-            sFlag = false,
-            lowerLimit = '05:00';
-
-        if (currentTime.isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
-            sFlag = true;
-        };
-
-        if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
-            flag = true;
-        };
-
-        if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
-            return <p className="randoVremeParagraph">
-                <span className="greyText">Otvoreno: </span>
-                <span style={{ color: '#009A1F' }}>{time}</span>
-            </p>
-        };
-
+        const open = isOpen(data.details.radnoVreme);
 
         return <p className="randoVremeParagraph">
-            <span className="greyText">Zatvoreno: </span>
-            <span style={{ color: '#C50505' }}>{time}</span>
+            <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
+            <span style={{ color: open ? '#009A1F':'#C50505' }}>{data.details.radnoVreme}</span>
         </p>;
     }
 
@@ -117,7 +97,7 @@ function Details(props) {
                         src={getSrc(data.logo.split('.')[0])}
                         className={
                             `detailsLogo reveal-focus-${
-                            data.brojSlobodnihMesta > 0
+                            data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
                                 ? 'blue'
                                 : 'red'
                             }`
