@@ -49,39 +49,6 @@ function MoreDetails(props) {
         setData(findData);
     }, [Data]);
 
-    const getRadnoVreme = () => {
-        let time = data.details.radnoVreme,
-            timeStart = time.split(' - ')[0],
-            timeEnd = time.split(' - ')[1],
-            currentTime = moment(),
-            flag = false,
-            sFlag = false,
-            lowerLimit = '05:00';
-
-        if (currentTime.isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
-            sFlag = true;
-        };
-
-        if (moment(timeEnd, 'HH:mm').isBetween(moment('00:00', 'HH:mm'), moment(lowerLimit, 'HH:mm'))) {
-            flag = true;
-        };
-
-        if (currentTime.isBetween(moment(timeStart, 'HH:mm').subtract(sFlag ? 1 : 0, 'days'), moment(timeEnd, 'HH:mm').add(flag ? 1 : 0, 'days'))) {
-            return <h1
-                className="detailRowText"
-            >
-                <span className="greyText">Otvoreno: </span>
-                <span style={{ color: '#009A1F' }}>{time}</span>
-            </h1>
-        };
-
-
-        return <h1 className="detailRowText">
-            <span className="greyText">Zatvoreno: </span>
-            <span style={{ color: '#C50505' }}>{time}</span>
-        </h1>;
-    }
-
     const renderCarousel = () => {
         return (
             <Carousel style={{ marginBottom: '10px' }}>
@@ -112,6 +79,45 @@ function MoreDetails(props) {
                     renderCarousel()
                 }
                 <div
+                    className="detailsRowMini"
+                >
+                    <p className="detailRowTextMini">
+                        <span className="boldText">Adresa: </span>
+                        {data.details.adresa}
+                    </p>
+                    <i className="material-icons detailIcon">
+                        location_on
+                    </i>
+                </div>
+                <div
+                    className="detailsRowMini"
+                >
+                    <p className="detailRowTextMini">
+                        <span className="boldText">Telefon: </span>
+                        {data.details.brojTelefona}
+                    </p>
+                    <i className="material-icons detailIcon">
+                        phone
+                    </i>
+                </div>
+                <div
+                    className="detailsRowMini"
+                >
+                    <p className="detailRowTextMini">
+                        <span className="boldText">Radno vreme: </span>
+                        {data.details.radnoVreme}
+                    </p>
+                    <i className="material-icons detailIcon">
+                        watch_later
+                    </i>
+                </div>
+                <div
+                    className="detailAbout"
+                >
+                    {data.details.opis.slice(0, 135) + '...'}
+                </div>
+
+                <div
                     className="detailsRow clickableRow"
                     onClick={() => {
                         window.open(data.details.lokacija, '_blank');
@@ -132,16 +138,6 @@ function MoreDetails(props) {
                     <i className="material-icons detailIconClickable">
                         menu_book
                 </i>
-                </div>
-
-                <div className="detailAbout">
-                    <div className="detailsRow">
-                        <h1 className="detailRowText boldText">O mestu</h1>
-                        <i className="material-icons detailIcon">
-                            info
-                </i>
-                    </div>
-                    <p className="detailsAboutText">{data.details.opis}</p>
                 </div>
             </Fragment>
         )

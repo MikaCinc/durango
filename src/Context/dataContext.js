@@ -132,7 +132,7 @@ const DataProvider = (props) => {
     }
 
     const getNewNumber = (old) => {
-        let bulk = Math.floor(Math.random() * 3);
+        let bulk = Math.floor(Math.random() * 4);
         return Math.floor(Math.random() * 10) > 5 || old < 3 ? old + bulk : old - bulk;
     }
 

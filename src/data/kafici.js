@@ -12,7 +12,9 @@ const kafici = [
             slike: '',
             radnoVreme: '9:00 - 23:30',
             lokacija: 'https://www.google.com/maps/place/Vinyl+Cafe/@43.3179874,21.8948292,15z/data=!4m5!3m4!1s0x0:0xa52fd515620420f!8m2!3d43.3179874!4d21.8948292?hl=sr',
-            meni: ''
+            meni: '',
+            adresa: 'Majakovskog bb 13/4',
+            brojTelefona: '(064) 776-332'
         }
     },
     {
@@ -28,7 +30,9 @@ const kafici = [
             slike: '',
             radnoVreme: '18:00 - 04:15',
             lokacija: 'https://www.google.com/maps/place/Square+Cafe/@43.3203283,21.917684,15z/data=!4m5!3m4!1s0x0:0xa63c72132475dc46!8m2!3d43.3203283!4d21.917684?hl=sr',
-            meni: ''
+            meni: '',
+            adresa: 'Majakovskog bb 13/4',
+            brojTelefona: '(064) 776-332'
         }
     },
     {
@@ -44,7 +48,9 @@ const kafici = [
             slike: '',
             radnoVreme: '06:50 - 00:10',
             lokacija: 'https://www.google.com/maps/place/Caffe+bar+Dnevna+soba/@43.3196389,21.896984,15z/data=!4m5!3m4!1s0x0:0xf0256956dfa8b74d!8m2!3d43.3196389!4d21.896984?hl=sr',
-            meni: ''
+            meni: '',
+            adresa: 'Majakovskog bb 13/4',
+            brojTelefona: '(064) 776-332'
         }
     },
     {
@@ -60,7 +66,9 @@ const kafici = [
             slike: '',
             radnoVreme: '05:30 - 04:50',
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
-            meni: ''
+            meni: '',
+            adresa: 'Majakovskog bb 13/4',
+            brojTelefona: '(064) 776-332'
         }
     },
     {
@@ -76,7 +84,9 @@ const kafici = [
             slike: '',
             radnoVreme: '07:30 - 07:31',
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
-            meni: ''
+            meni: '',
+            adresa: 'Majakovskog bb 13/4',
+            brojTelefona: '(064) 776-332'
         }
     }
 ]
