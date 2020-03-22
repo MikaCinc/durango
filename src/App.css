@@ -692,3 +692,19 @@ h1 {
 		box-shadow: 0 0 10px 3px red;
 	}
 }
+
+/* CLAPS */
+
+.clapsContainer {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50px;
+  padding: 20px;
+  background: linear-gradient(135deg, gray 0%, #FF9933 100%);
+  color: white;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  margin-left: 20px;
+}

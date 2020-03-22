@@ -41,6 +41,30 @@ const placeholderObj = {
     }
 }
 
+const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
+    const { changeData } = useContext(DataContext);
+
+    return (
+        <div
+            className="clapsContainer"
+            onClick={() => {
+                changeData({
+                    ...data,
+                    details: {
+                        ...details,
+                        userAplauza: userAplauza + 1,
+                        ukupnoAplauza: userAplauza < 5 ? ukupnoAplauza + 1 : ukupnoAplauza,
+                        brojOcena: userAplauza === 0 ? brojOcena + 1 : brojOcena
+                    }
+                })
+            }}
+        >
+            <span>👏</span>
+            <span>{ukupnoAplauza}</span>
+        </div>
+    )
+}
+
 function Details(props) {
     let { id } = useParams();
     const { Data, loading, changeData } = useContext(DataContext);
@@ -58,7 +82,7 @@ function Details(props) {
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F':'#C50505' }}>{data.details.radnoVreme}</span>
+            <span style={{ color: open ? '#009A1F' : '#C50505' }}>{data.details.radnoVreme}</span>
         </p>;
     }
 
@@ -179,6 +203,9 @@ function Details(props) {
             </div>
             {
                 !loading && restOfPage()
+            }
+            {
+                !loading && <Claps data={data} />
             }
         </div>
     );
