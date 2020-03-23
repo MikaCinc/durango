@@ -437,6 +437,12 @@ h1 {
   margin-left: auto;
 }
 
+.detailIconBlue {
+  flex: 0 1 auto;
+  color: #3185FC;
+  margin-left: auto;
+}
+
 .detailIconClickable {
   flex: 0 1 auto;
   color: #98C2FE;
@@ -707,4 +713,9 @@ h1 {
   cursor: pointer;
   user-select: none;
   margin-left: 20px;
+  transition-duration: 0.1s;
+}
+
+.clapsContainer:active {
+  padding: 25px;
 }

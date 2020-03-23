@@ -6,16 +6,17 @@ import React, {
     Fragment
 } from 'react';
 import '../App.css';
+
 /* Libraries */
 import _ from 'lodash';
-import moment from 'moment';
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
-
+/* Router */
 import { useParams } from "react-router-dom";
-import mockData from '../data/kafici.js';
-
+/* Library */
 import { isOpen } from '../library/common';
+/* Components */
+import Claps from '../Components/Claps';
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
@@ -39,30 +40,6 @@ const placeholderObj = {
         lokacija: '',
         meni: ''
     }
-}
-
-const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
-    const { changeData } = useContext(DataContext);
-
-    return (
-        <div
-            className="clapsContainer"
-            onClick={() => {
-                changeData({
-                    ...data,
-                    details: {
-                        ...details,
-                        userAplauza: userAplauza + 1,
-                        ukupnoAplauza: userAplauza < 5 ? ukupnoAplauza + 1 : ukupnoAplauza,
-                        brojOcena: userAplauza === 0 ? brojOcena + 1 : brojOcena
-                    }
-                })
-            }}
-        >
-            <span>👏</span>
-            <span>{ukupnoAplauza}</span>
-        </div>
-    )
 }
 
 function Details(props) {

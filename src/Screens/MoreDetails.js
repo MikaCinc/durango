@@ -9,10 +9,12 @@ import React, {
 import _ from 'lodash';
 import moment from 'moment';
 import { useParams } from "react-router-dom";
+import { roundToPrecision } from '../library/common';
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 /* Components */
 import { Carousel } from 'react-bootstrap';
+import Claps from '../Components/Claps';
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
@@ -85,7 +87,7 @@ function MoreDetails(props) {
                         <span className="boldText">Adresa: </span>
                         {data.details.adresa}
                     </p>
-                    <i className="material-icons detailIcon">
+                    <i className="material-icons detailIconBlue">
                         location_on
                     </i>
                 </div>
@@ -96,8 +98,21 @@ function MoreDetails(props) {
                         <span className="boldText">Telefon: </span>
                         {data.details.brojTelefona}
                     </p>
-                    <i className="material-icons detailIcon">
+                    <i className="material-icons detailIconBlue">
                         phone
+                    </i>
+                </div>
+                <div
+                    className="detailsRowMini"
+                >
+                    <p className="detailRowTextMini">
+                        <span className="boldText">Prosečno👏: </span>
+                        {(data.details.ukupnoAplauza / data.details.brojOcena).toPrecision(2)}
+                        <span className="boldText"> Ukupno👏: </span>
+                        {data.details.ukupnoAplauza}
+                    </p>
+                    <i className="material-icons detailIconBlue">
+                        rate_review
                     </i>
                 </div>
                 <div
@@ -107,7 +122,7 @@ function MoreDetails(props) {
                         <span className="boldText">Radno vreme: </span>
                         {data.details.radnoVreme}
                     </p>
-                    <i className="material-icons detailIcon">
+                    <i className="material-icons detailIconBlue">
                         watch_later
                     </i>
                 </div>
@@ -160,6 +175,9 @@ function MoreDetails(props) {
             </div>
             {
                 !loading && restOfPage()
+            }
+            {
+                !loading && <Claps data={data} />
             }
         </div>
     );

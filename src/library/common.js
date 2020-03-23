@@ -45,6 +45,12 @@ const isOpen = (radnoVreme) => {
     return false;
 }
 
+const roundToPrecision = (x, precision) => {
+    var y = +x + (precision === undefined ? 0.5 : precision / 2);
+    return y - (y % (precision === undefined ? 1 : +precision));
+}
+
 export {
-    isOpen
+    isOpen,
+    roundToPrecision
 }
