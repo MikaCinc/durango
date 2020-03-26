@@ -11,6 +11,7 @@ import DataContext, { DataProvider } from '../Context/dataContext';
 const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
     const { changeData } = useContext(DataContext);
 
+
     return (
         <div
             className="clapsContainer"
