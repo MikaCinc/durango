@@ -11,7 +11,6 @@ import DataContext, { DataProvider } from '../Context/dataContext';
 const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
     const { changeData } = useContext(DataContext);
 
-
     return (
         <div
             className="clapsContainer"
@@ -30,7 +29,7 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
             <span>👏</span>
             <span className="boldText">{ukupnoAplauza}</span>
         </div>
-    )
+    ) 
 }
 
 export default Claps;

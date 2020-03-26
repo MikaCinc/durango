@@ -25,7 +25,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-spring": "^8.0.27",
-    "react-time-picker": "^3.9.0"
+    "react-time-picker": "^3.9.0",
+    "react-use-gesture": "^7.0.5"
   },
   "scripts": {
     "start": "react-scripts start NODE_ENV=production",
