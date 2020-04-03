@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import { isOpen } from '../library/common';
 /* Components */
 import Claps from '../Components/Claps';
+import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
@@ -163,7 +164,7 @@ function Details(props) {
     }
 
     return (
-        <div>
+        <AbsoluteWrapper>
             <div className="detailsHeader">
                 <div
                     className="goBack"
@@ -184,7 +185,7 @@ function Details(props) {
             {
                 !loading && <Claps data={data} />
             }
-        </div>
+        </AbsoluteWrapper>
     );
 }
 

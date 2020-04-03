@@ -17,6 +17,7 @@ import Logo from '../ExtendedLogo/Logo.png';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
 import { Modal } from 'react-bootstrap';
+import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Data */
 import mockData from '../data/kafici.js';
@@ -177,24 +178,26 @@ function Reserve(props) {
     }
 
     return (
-        <div>
-            <div className="detailsHeader">
-                <div
-                    className="goBack"
-                    onClick={() => {
-                        props.history.push(`/durango/app/${data.id}`);
-                    }}
-                >
-                    <i className="material-icons">
-                        arrow_back_ios
+        <AbsoluteWrapper>
+            <div>
+                <div className="detailsHeader">
+                    <div
+                        className="goBack"
+                        onClick={() => {
+                            props.history.push(`/durango/app/${data.id}`);
+                        }}
+                    >
+                        <i className="material-icons">
+                            arrow_back_ios
                     </i>
+                    </div>
+                    <img src={Logo} className="detailsDurangoLogo" />
                 </div>
-                <img src={Logo} className="detailsDurangoLogo" />
+                {
+                    !loading && restOfPage()
+                }
             </div>
-            {
-                !loading && restOfPage()
-            }
-        </div>
+        </AbsoluteWrapper>
     );
 }
 

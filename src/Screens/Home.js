@@ -20,6 +20,7 @@ import Slide from 'react-reveal/Slide';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import Badge from 'react-bootstrap/Badge'
+import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
@@ -243,9 +244,11 @@ const LoaderComponent = () => {
 
 const Home = props => {
     return (
-        <div className="App">
-            <MainScreen history={props.history} />
-        </div>
+        <AbsoluteWrapper>
+            <div className="App">
+                <MainScreen history={props.history} />
+            </div>
+        </AbsoluteWrapper>
     );
 };
 

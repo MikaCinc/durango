@@ -16,6 +16,7 @@ import Logo from '../ExtendedLogo/Logo.png';
 import { Carousel } from 'react-bootstrap';
 import Claps from '../Components/Claps';
 import { Spring } from 'react-spring/renderprops';
+import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
@@ -174,27 +175,29 @@ function MoreDetails(props) {
     }
 
     return (
-        <div>
-            <div className="detailsHeader">
-                <div
-                    className="goBack"
-                    onClick={() => {
-                        props.history.push(`/durango/app/${data.id}`)
-                    }}
-                >
-                    <i className="material-icons">
-                        arrow_back_ios
+        <AbsoluteWrapper>
+            <div>
+                <div className="detailsHeader">
+                    <div
+                        className="goBack"
+                        onClick={() => {
+                            props.history.push(`/durango/app/${data.id}`)
+                        }}
+                    >
+                        <i className="material-icons">
+                            arrow_back_ios
                     </i>
+                    </div>
+                    <img src={Logo} className="detailsDurangoLogo" />
                 </div>
-                <img src={Logo} className="detailsDurangoLogo" />
+                {
+                    !loading && restOfPage()
+                }
+                {
+                    !loading && <Claps data={data} />
+                }
             </div>
-            {
-                !loading && restOfPage()
-            }
-            {
-                !loading && <Claps data={data} />
-            }
-        </div>
+        </AbsoluteWrapper>
     );
 }
 
