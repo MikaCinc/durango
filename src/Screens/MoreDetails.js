@@ -43,7 +43,7 @@ const placeholderObj = {
 
 function MoreDetails(props) {
     let { id } = useParams();
-    const { Data, loading } = useContext(DataContext);
+    const { Data, loading, setCurrentData } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -51,6 +51,7 @@ function MoreDetails(props) {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
+        setCurrentData(findData);
     }, [Data]);
 
     const renderCarousel = () => {

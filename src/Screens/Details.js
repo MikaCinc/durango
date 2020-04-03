@@ -45,7 +45,7 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const { Data, loading, changeData } = useContext(DataContext);
+    const { Data, loading, changeData, setCurrentData } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -53,6 +53,7 @@ function Details(props) {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
+        setCurrentData(findData);
     }, [Data]);
 
     const getRadnoVreme = () => {

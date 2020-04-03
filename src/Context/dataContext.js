@@ -9,6 +9,9 @@ import kafici from '../data/kafici';
 import _ from 'lodash';
 import { isOpen } from '../library/common';
 
+/* Router */
+import { useParams } from "react-router-dom";
+
 /* LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
@@ -19,6 +22,7 @@ let DataContext;
 const { Provider, Consumer } = DataContext = React.createContext({});
 
 const DataProvider = (props) => {
+    let { id } = useParams();
     // Original data
     const [Data, setData] = useState([]);
     // Filtered
@@ -27,6 +31,8 @@ const DataProvider = (props) => {
     // Sorted
     const [sortedOpen, setSortedOpen] = useState([]);
     const [sortedClosed, setSortedClosed] = useState([]);
+    // Current page/data
+    const [currentData, setCurrentData] = useState({});
 
     const [loading, setLoading] = useState(true);
     // const [authorized, setAuthorized] = useState(false);
@@ -192,7 +198,9 @@ const DataProvider = (props) => {
                 changeSearch,
                 changeData,
                 loading,
-                filterBySearch
+                filterBySearch,
+                currentData,
+                setCurrentData
             }}
         >
             {props.children}
