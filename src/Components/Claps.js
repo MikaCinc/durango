@@ -12,8 +12,8 @@ import RubberBand from 'react-reveal/RubberBand';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Claps = () => {
-    const { changeData, currentData, currentData: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } } = useContext(DataContext);
+const Claps = ({data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
+    const { changeData } = useContext(DataContext);
 
     const [showSlider, setShowSlider] = useState(false);
     const [localClaps, setLocalClaps] = useState(0);
@@ -57,7 +57,7 @@ const Claps = () => {
     const finishedRating = () => {
         setShowSlider(false);
         changeData({
-            ...currentData,
+            ...data,
             details: {
                 ...details,
                 userAplauza: localClaps,
