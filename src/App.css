@@ -743,3 +743,8 @@ emoji-slider {
   --emoji-slider-bar-color: gray;
   --emoji-slider-bar-active-color: orange;
 }
+
+/* Input Panel */
+.IP-time {
+  font-size: 32px;
+}

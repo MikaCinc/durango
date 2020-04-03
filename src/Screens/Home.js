@@ -5,6 +5,7 @@ import React, {
     Fragment,
     useContext
 } from 'react';
+
 /* Data */
 import Logo from '../ExtendedLogo/Logo.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
