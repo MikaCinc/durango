@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/durango/static/css/main.99690e71.chunk.css",
-    "main.js": "/durango/static/js/main.fbc56009.chunk.js",
-    "main.js.map": "/durango/static/js/main.fbc56009.chunk.js.map",
+    "main.js": "/durango/static/js/main.262d3b81.chunk.js",
+    "main.js.map": "/durango/static/js/main.262d3b81.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
     "static/js/2.4237fb4d.chunk.js": "/durango/static/js/2.4237fb4d.chunk.js",
     "static/js/2.4237fb4d.chunk.js.map": "/durango/static/js/2.4237fb4d.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.7b2326f85dc78bfed1c3527225ec62c9.js": "/durango/precache-manifest.7b2326f85dc78bfed1c3527225ec62c9.js",
+    "precache-manifest.2fed8de9b311d3869098478dfb2aea5b.js": "/durango/precache-manifest.2fed8de9b311d3869098478dfb2aea5b.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
     "static/css/main.99690e71.chunk.css.map": "/durango/static/css/main.99690e71.chunk.css.map",
@@ -28,6 +28,6 @@
     "static/css/2.d753d4d8.chunk.css",
     "static/js/2.4237fb4d.chunk.js",
     "static/css/main.99690e71.chunk.css",
-    "static/js/main.fbc56009.chunk.js"
+    "static/js/main.262d3b81.chunk.js"
   ]
 }
