@@ -9,8 +9,12 @@ import {
   __RouterContext
 } from "react-router-dom";
 
-import { useTransition, animated } from "react-spring";
-import AbsoluteWrapper from './Components/AbsoluteWrapper';
+import Fade from 'react-reveal/Fade';
+
+import {
+  CSSTransition,
+  TransitionGroup
+} from 'react-transition-group';
 
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
@@ -26,26 +30,50 @@ import DataContext, { DataProvider } from './Context/dataContext';
 const UserStackOfScreens = ({ history }) => {
 
   const { location } = useContext(__RouterContext);
-  const transitions = useTransition(location, location => location.pathname, {
-    from: { opacity: 0, transform: "translate(100%, 0)" },
-    enter: { opacity: 1, transform: "translate(0%, 0)" },
-    leave: { opacity: 0, transform: "translate(-50%, 0)" }
-  });
+
+  /*  return (
+     <Route
+       render={() => {
+         const { pathname } = location;
+         return (
+           <DataProvider history={history}>
+             <TransitionGroup>
+               <CSSTransition
+                 key={pathname}
+                 classNames="page"
+                 timeout={{
+                   enter: 1000,
+                   exit: 1000,
+                 }}
+               >
+                 <Route
+                   location={location}
+                   render={() => (
+                     <Switch>
+                       <Route key={1} exact path="/durango/app/home" component={Home} />
+                       <Route key={2} exact path="/durango/app/:id" component={Details} />
+                       <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
+                       <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} />
+                     </Switch>
+                   )}
+                 />
+               </CSSTransition>
+             </TransitionGroup>
+           </DataProvider>
+         );
+       }}
+     />
+   ) */
 
   return (
     <Fragment>
       <DataProvider history={history}>
-        {
-          transitions.map(({ item, props, key }) => (
-            <animated.div key={key} style={props}>
-              <Switch location={item}>
-                <Route exact path="/durango/app/home" component={Home} />
-                <Route exact path="/durango/app/:id" component={Details} />
-                <Route exact path="/durango/app/:id/more" component={MoreDetails} />
-                <Route exact path="/durango/app/:id/reserve" component={Reserve} />
-              </Switch>
-            </animated.div >
-          ))}
+        <Switch location={location}>
+          <Route key={1} exact path="/durango/app/home" component={Home} />
+          <Route key={2} exact path="/durango/app/:id" component={Details} />
+          <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
+          <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} />
+        </Switch>
       </DataProvider >
     </Fragment>
 

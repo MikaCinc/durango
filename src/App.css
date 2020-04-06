@@ -291,7 +291,8 @@ h1 {
 }
 
 .singleLine {
-  position: relative; /* Potrebno da bi badge bio na svom mestu */
+  position: relative;
+  /* Potrebno da bi badge bio na svom mestu */
   display: flex;
   align-items: center;
   height: 75px;
@@ -544,7 +545,7 @@ h1 {
   text-align: center;
   height: 75px;
   width: 125px;
-  padding: 20px; 
+  padding: 20px;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -655,54 +656,54 @@ h1 {
 
 .reveal-focus-blue {
   /* border: 1px solid transparent !important; */
-	/* outline: 5px solid transparent !important; */
-	position: relative !important;
-	/* border-color: #000 !important; */
-	outline-color: #3185FC !important;
-	box-shadow: 0 0 15px 3px #3185FC !important;
-	animation: glowfade-blue 2s ease-in-out;
-	-moz-animation: glowfade-blue 2s ease-in-out;
-	animation-direction: alternate;
-	animation-iteration-count: infinite;
-	z-index: 1 !important;
+  /* outline: 5px solid transparent !important; */
+  position: relative !important;
+  /* border-color: #000 !important; */
+  outline-color: #3185FC !important;
+  box-shadow: 0 0 15px 3px #3185FC !important;
+  animation: glowfade-blue 2s ease-in-out;
+  -moz-animation: glowfade-blue 2s ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  z-index: 1 !important;
 }
 
 @keyframes glowfade-blue {
-	from {
-		box-shadow: 0 0 20px 5px #3185FC;
-	}
-	to {
-		box-shadow: 0 0 10px 3px #3185FC;
-	}
+  from {
+    box-shadow: 0 0 20px 5px #3185FC;
+  }
+  to {
+    box-shadow: 0 0 10px 3px #3185FC;
+  }
 }
 
 .reveal-focus-red {
   /* border: 1px solid transparent !important; */
-	/* outline: 5px solid transparent !important; */
-	position: relative !important;
-	/* border-color: #000 !important; */
-	outline-color: red !important;
-	box-shadow: 0 0 15px 3px red !important;
-	animation: glowfade-red 2s ease-in-out;
-	-moz-animation: glowfade-red 2s ease-in-out;
-	animation-direction: alternate;
-	animation-iteration-count: infinite;
-	z-index: 1 !important;
+  /* outline: 5px solid transparent !important; */
+  position: relative !important;
+  /* border-color: #000 !important; */
+  outline-color: red !important;
+  box-shadow: 0 0 15px 3px red !important;
+  animation: glowfade-red 2s ease-in-out;
+  -moz-animation: glowfade-red 2s ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  z-index: 1 !important;
 }
 
 @keyframes glowfade-red {
-	from {
-		box-shadow: 0 0 20px 5px red;
-	}
-	to {
-		box-shadow: 0 0 10px 3px red;
-	}
+  from {
+    box-shadow: 0 0 20px 5px red;
+  }
+  to {
+    box-shadow: 0 0 10px 3px red;
+  }
 }
 
 /* CLAPS */
 
 .clapsContainer {
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   margin-left: 20px;
   margin-right: 20px;
@@ -744,7 +745,43 @@ emoji-slider {
   --emoji-slider-bar-active-color: orange;
 }
 
+.page {
+  height: 100vh;
+  padding: calc(15% + 1.5em) 5% 5%;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  transition: transform 1s ease-in-out;
+}
+
+.page-enter {
+  transform: translate(-100%, 0);
+}
+
+.page-enter-active {
+  transform: translate(0, 0);
+}
+
+.page-exit {
+  transform: translate(-100%, 0);
+}
+
+.page--prev.page-enter {
+  transform: translate(100%, 0);
+}
+
+.page--prev.page-enter-active {
+  transform: translate(0, 0);
+}
+
+.page--prev.page-exit {
+  transform: translate(100%, 0);
+}
+
 /* Input Panel */
+
 .IP-time {
   font-size: 32px;
 }

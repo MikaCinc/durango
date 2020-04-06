@@ -183,7 +183,7 @@ function MoreDetails(props) {
     }
 
     return (
-        <AbsoluteWrapper>
+        // <AbsoluteWrapper>
             <div>
                 <div className="detailsHeader">
                     <div
@@ -205,7 +205,7 @@ function MoreDetails(props) {
                     !loading && <Claps data={data} />
                 }
             </div>
-        </AbsoluteWrapper>
+        // </AbsoluteWrapper>
     );
 }
 
