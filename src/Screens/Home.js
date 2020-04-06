@@ -16,7 +16,8 @@ import queryString from 'query-string';
 
 /* Animations */
 import Pulse from 'react-reveal/Pulse';
-import Fade from 'react-reveal/Fade'; 
+import Fade from 'react-reveal/Fade';
+import Bounce from 'react-reveal/Bounce';
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -118,14 +119,16 @@ const FavoritBadge = () => {
         <div
             className="favoritBadgeContainer"
         >
-            <i
-                className="material-icons favoritBadge"
-                style={{
-                    fontSize: '18px'
-                }}
-            >
-                star
+            <Bounce>
+                <i
+                    className="material-icons favoritBadge"
+                    style={{
+                        fontSize: '18px'
+                    }}
+                >
+                    star
             </i>
+            </Bounce>
         </div>
     )
 }

@@ -24,7 +24,7 @@ import Claps from '../Components/Claps';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Animations */
-import Rotate from 'react-reveal/Rotate';
+import Bounce from 'react-reveal/Bounce';
 import Roll from 'react-reveal/Roll';
 
 /* Images */
@@ -169,9 +169,16 @@ function Details(props) {
                                 : 'Dodaj u favorite'
                         }
                     </h1>
-                    <i className="material-icons detailIconClickable">
-                        {data.favorit ? 'star' : 'star_outline'}
-                    </i>
+                    <Bounce
+                        spy={data.favorit}
+                    >
+                        <i
+                            className="material-icons detailIconClickable"
+                            style={{ color: data.favorit ? 'gold' : '' }}
+                        >
+                            {data.favorit ? 'star' : 'star_outline'}
+                        </i>
+                    </Bounce>
                 </div>
             </Fragment>
         )
