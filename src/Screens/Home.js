@@ -35,13 +35,7 @@ import durangoCaffe from '../slike/durangoCaffe.png';
 import DataContext, { DataProvider } from '../Context/dataContext';
 
 const Search = () => {
-    const { changeSearch } = useContext(DataContext);
-
-    const [search, setSearch] = useState('');
-
-    useEffect(() => {
-        changeSearch(search);
-    }, [search]);
+    const { search, changeSearch } = useContext(DataContext);
 
     return (
         <div className="search">
@@ -53,13 +47,13 @@ const Search = () => {
                 placeholder="Pretraži..."
                 value={search}
                 onChange={(e) => {
-                    setSearch(e.target.value);
+                    changeSearch(e.target.value);
                 }} />
             {
                 search && <i
                     className="material-icons resetSearchIcon"
                     onClick={() => {
-                        setSearch('');
+                        changeSearch('');
                     }}
                 >
                     close
@@ -222,11 +216,26 @@ const List = ({ history }) => {
 }
 
 const ListAndSearch = ({ history }) => {
+    const { toggleFilters, changeSearch } = useContext(DataContext);
+    const [FbyFav, setFbyFav] = useState(false);
+
     return (
         <Fragment>
             <div className="mainHeader">
                 <img src={Logo} className="logoHeader" />
                 <Search />
+            </div>
+            <div className="filtersContainer">
+                <div
+                    className="filterChip"
+                    onClick={() => {
+                        toggleFilters('omiljeni');
+                        changeSearch('');
+                        setFbyFav(!FbyFav);
+                    }}
+                >
+                    {FbyFav ? 'Prikaži sve': 'Prikaži omiljene'}
+                </div>
             </div>
             <div className="listHolder">
                 <List history={history} />

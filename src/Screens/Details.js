@@ -165,8 +165,8 @@ function Details(props) {
                     <h1 className="detailRowText boldText">
                         {
                             data.favorit
-                                ? 'Ukloni iz favorita'
-                                : 'Dodaj u favorite'
+                                ? 'Ukloni iz omiljenih'
+                                : 'Dodaj u omiljene'
                         }
                     </h1>
                     <Bounce

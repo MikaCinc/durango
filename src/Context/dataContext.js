@@ -28,6 +28,7 @@ const DataProvider = (props) => {
     // Filtered
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
+    const [filters, setFilters] = useState([]);
     // Sorted
     const [sortedOpen, setSortedOpen] = useState([]);
     const [sortedClosed, setSortedClosed] = useState([]);
@@ -99,7 +100,12 @@ const DataProvider = (props) => {
 
     useEffect(() => {
         filterBySearch(search);
-    }, [search, Data]);
+        
+        if (filters.indexOf('omiljeni') !== -1) {
+            filterByOmiljeni();
+        }
+
+    }, [search, Data, filters]);
 
     useEffect(() => {
         setSortedOpen([...filteredData.filter(item => isOpen(item.details.radnoVreme))]);
@@ -160,7 +166,7 @@ const DataProvider = (props) => {
         setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
     };
 
-    const filterByFavoriti = () => {
+    const filterByOmiljeni = () => {
         let filtered = Data.filter(({ favorit }) => favorit);
 
         setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
@@ -188,6 +194,18 @@ const DataProvider = (props) => {
         setSearch(value);
     }
 
+    const toggleFilters = (value) => {
+        let nextFilters = [...filters];
+
+        if (nextFilters.indexOf(value) === -1) {
+            nextFilters.push(value);
+        } else {
+            nextFilters = nextFilters.filter(f => f !== value);
+        }
+
+        return setFilters(nextFilters);
+    }
+
     return (
         <Provider
             value={{
@@ -195,10 +213,12 @@ const DataProvider = (props) => {
                 filteredData,
                 sortedOpen,
                 sortedClosed,
+                search,
                 changeSearch,
                 changeData,
                 loading,
                 filterBySearch,
+                toggleFilters,
                 currentData,
                 setCurrentData
             }}
