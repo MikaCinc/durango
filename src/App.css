@@ -278,6 +278,10 @@ h1 {
   color: white;
 }
 
+.searchInput::placeholder {
+  color: white;
+}
+
 .resetSearchIcon {
   color: white;
   margin-right: 5px;
@@ -349,11 +353,15 @@ h1 {
 }
 
 .detailsHeader {
+  /* position: fixed;
+  top: 0; */
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
+  width: 100%;
+  z-index: 1000;
   padding: 20px;
   height: 75px;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
@@ -762,41 +770,6 @@ h1 {
 emoji-slider {
   --emoji-slider-bar-color: gray;
   --emoji-slider-bar-active-color: orange;
-}
-
-.page {
-  height: 100vh;
-  padding: calc(15% + 1.5em) 5% 5%;
-  overflow-y: auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  -webkit-overflow-scrolling: touch;
-  transition: transform 1s ease-in-out;
-}
-
-.page-enter {
-  transform: translate(-100%, 0);
-}
-
-.page-enter-active {
-  transform: translate(0, 0);
-}
-
-.page-exit {
-  transform: translate(-100%, 0);
-}
-
-.page--prev.page-enter {
-  transform: translate(100%, 0);
-}
-
-.page--prev.page-enter-active {
-  transform: translate(0, 0);
-}
-
-.page--prev.page-exit {
-  transform: translate(100%, 0);
 }
 
 /* Input Panel */

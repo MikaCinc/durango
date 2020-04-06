@@ -1,0 +1,7 @@
+1) Sticky header component:
+https://pantaley.com/blog/Create-sticky-header-only-with-React-Hooks/
+
+2) Chained filters
+
+3) List reorder animation:
+http://joshwcomeau.github.io/react-flip-move/examples/#/shuffle?_k=36ondc

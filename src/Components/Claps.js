@@ -27,6 +27,9 @@ const Claps = ({data, data: { details, details: { userAplauza, ukupnoAplauza, br
         });
 
         return () => {
+            slider.current.removeEventListener('change', (e) => {
+                onChange(e.detail.value);
+            });
             clearTimeout(interval);
         }
     }, []);
