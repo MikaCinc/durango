@@ -22,7 +22,7 @@ import { Spring } from 'react-spring/renderprops';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Animations */
-import Fade from 'react-reveal/Fade'; 
+import Fade from 'react-reveal/Fade';
 
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
@@ -63,7 +63,10 @@ function MoreDetails(props) {
 
     const renderCarousel = () => {
         return (
-            <Carousel style={{ marginBottom: '10px' }}>
+            <Carousel
+                style={{ marginBottom: '10px' }}
+                interval={3000}
+            >
                 {
                     [kafic1, kafic2, kafic3].map((item, index) => {
                         return <Carousel.Item key={index}>
@@ -184,27 +187,27 @@ function MoreDetails(props) {
 
     return (
         // <AbsoluteWrapper>
-            <div>
-                <div className="detailsHeader">
-                    <div
-                        className="goBack"
-                        onClick={() => {
-                            props.history.push(`/durango/app/${data.id}`)
-                        }}
-                    >
-                        <i className="material-icons">
-                            arrow_back_ios
+        <div>
+            <div className="detailsHeader">
+                <div
+                    className="goBack"
+                    onClick={() => {
+                        props.history.push(`/durango/app/${data.id}`)
+                    }}
+                >
+                    <i className="material-icons">
+                        arrow_back_ios
                     </i>
-                    </div>
-                    <img src={Logo} className="detailsDurangoLogo" />
                 </div>
-                {
-                    !loading && restOfPage()
-                }
-                {
-                    !loading && <Claps data={data} />
-                }
+                <img src={Logo} className="detailsDurangoLogo" />
             </div>
+            {
+                !loading && restOfPage()
+            }
+            {
+                !loading && <Claps data={data} />
+            }
+        </div>
         // </AbsoluteWrapper>
     );
 }
