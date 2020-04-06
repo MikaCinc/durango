@@ -5,18 +5,25 @@ import React, {
     useContext,
     Fragment
 } from 'react';
+
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
 import { useParams } from "react-router-dom";
 import { roundToPrecision } from '../library/common';
+
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
+
 /* Components */
 import { Carousel } from 'react-bootstrap';
 import Claps from '../Components/Claps';
 import { Spring } from 'react-spring/renderprops';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
+
+/* Animations */
+import Fade from 'react-reveal/Fade'; 
+
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
@@ -169,7 +176,7 @@ function MoreDetails(props) {
                     <h1 className="detailRowText boldText">Meni</h1>
                     <i className="material-icons detailIconClickable">
                         menu_book
-                </i>
+                    </i>
                 </div>
             </Fragment>
         )

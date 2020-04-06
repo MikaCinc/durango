@@ -4,7 +4,7 @@ const kafici = [
         title: 'Vinyl',
         logo: 'vinyl.png',
         brojMesta: 32,
-        brojSlobodnihMesta: 15,
+        brojSlobodnihMesta: 10,
         favorit: false,
         rezervacija: null,
         details: {
@@ -46,7 +46,7 @@ const kafici = [
         title: 'Dnevna soba',
         logo: 'dnevnaSoba.jpg',
         brojMesta: 42,
-        brojSlobodnihMesta: 0,
+        brojSlobodnihMesta: 10,
         favorit: false,
         rezervacija: null,
         details: {
@@ -67,7 +67,7 @@ const kafici = [
         title: 'Durango Caffe',
         logo: 'durangoCaffe.png',
         brojMesta: 90,
-        brojSlobodnihMesta: 7,
+        brojSlobodnihMesta: 10,
         favorit: true,
         rezervacija: null,
         details: {

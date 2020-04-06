@@ -15,7 +15,8 @@ import _ from 'lodash';
 import queryString from 'query-string';
 
 /* Animations */
-import Slide from 'react-reveal/Slide';
+import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade'; 
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -148,32 +149,40 @@ const List = ({ history }) => {
     return <Fragment>
         {
             sortedOpen.map(Kafic => {
-                return <div
+                return <Fade
                     key={Kafic.id}
-                    className="singleLine button"
-                    onClick={() => {
-                        history.push(`/durango/app/${Kafic.id}`);
-                    }}
+                    duration={300}
+                    bottom
+                    opposite
+                    cascade
                 >
-                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                    <p className="lineFreeSeats boldText greyText">
-                        {Kafic.brojSlobodnihMesta}
-                    </p>
-                    <i
-                        className="material-icons peopleIcon"
-                        style={{
-                            color: Kafic.brojSlobodnihMesta > 0
-                                ? '#3185FC'
-                                : '#C50505'
+                    <div
+                        key={Kafic.id}
+                        className="singleLine button"
+                        onClick={() => {
+                            history.push(`/durango/app/${Kafic.id}`);
                         }}
                     >
-                        people
-                    </i>
-                    {
-                        Kafic.favorit && <FavoritBadge />
-                    }
-                </div>
+                        <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                        <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                        <p className="lineFreeSeats boldText greyText">
+                            {Kafic.brojSlobodnihMesta}
+                        </p>
+                        <i
+                            className="material-icons peopleIcon"
+                            style={{
+                                color: Kafic.brojSlobodnihMesta > 0
+                                    ? '#3185FC'
+                                    : '#C50505'
+                            }}
+                        >
+                            people
+                        </i>
+                        {
+                            Kafic.favorit && <FavoritBadge />
+                        }
+                    </div>
+                </Fade>
             })
         }
         <Separator />

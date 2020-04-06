@@ -9,15 +9,23 @@ import '../App.css';
 
 /* Libraries */
 import _ from 'lodash';
+
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
+
 /* Router */
 import { useParams } from "react-router-dom";
+
 /* Library */
 import { isOpen } from '../library/common';
+
 /* Components */
 import Claps from '../Components/Claps';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
+
+/* Animations */
+import Rotate from 'react-reveal/Rotate';
+import Roll from 'react-reveal/Roll';
 
 /* Images */
 import vinyl from '../slike/vinyl.png';
@@ -96,16 +104,21 @@ function Details(props) {
                     </i> */}
                         {getRadnoVreme()}
                     </div>
-                    <img
-                        src={getSrc(data.logo.split('.')[0])}
-                        className={
-                            `detailsLogo reveal-focus-${
-                            data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
-                                ? 'blue'
-                                : 'red'
-                            }`
-                        }
-                    />
+                    <Roll
+                        right
+                        duration={700}
+                    >
+                        <img
+                            src={getSrc(data.logo.split('.')[0])}
+                            className={
+                                `detailsLogo reveal-focus-${
+                                data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
+                                    ? 'blue'
+                                    : 'red'
+                                }`
+                            }
+                        />
+                    </Roll>
                 </div>
                 <div className="detailsRow">
                     <h1 className="detailRowText">
