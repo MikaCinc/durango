@@ -12,12 +12,12 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.0/8 are considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === '[::1]' ||
+  // 127.0.0.0/8 are considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
 export function register(config) {
@@ -31,7 +31,9 @@ export function register(config) {
       return;
     }
 
-    window.addEventListener('load', () => {
+    //CHANGED
+    //window.addEventListener('load', () => {
+    const doRegister = () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
@@ -43,63 +45,80 @@ export function register(config) {
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
+            'worker. To learn more, visit https://bit.ly/CRA-PWA'
           );
         });
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
       }
-    });
+    };
+
+    // ADDED
+    // EITHER CALL REGISTER IMMEDIATELY, OR WAIT FOR WINDOW LOAD (CURRENT BEHAVIOR)
+    if (config && config.immediate) {
+      doRegister();
+    } else {
+      window.addEventListener('load', doRegister);
+    }
   }
 }
 
 function registerValidSW(swUrl, config) {
-  navigator.serviceWorker
-    .register(swUrl)
-    .then(registration => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        if (installingWorker == null) {
-          return;
-        }
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              // At this point, the updated precached content has been fetched,
-              // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
-              if(window.confirm('Dostupno je ažuriranje. Potvrdi za refresh:')) {
-                navigator.serviceWorker.skipWaiting();
-              }
-              console.log(
-                'New content is available and will be used when all ' +
+  if (config && config.immediate) {
+    // TO MY SURPRISE, THESE TWO LINES RE-TRIGGERED ALL OF THE APPROPRIATE BEHAVIOR
+    navigator.serviceWorker.getRegistration(swUrl).then(registration => {
+      registration && registration.update();
+    });
+  } else {
+    navigator.serviceWorker
+      .register(swUrl)
+      .then(registration => {
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          if (installingWorker == null) {
+            return;
+          }
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // At this point, the updated precached content has been fetched,
+                // but the previous service worker will still serve the older
+                // content until all client tabs are closed.
+                if (window.confirm('Restartuj aplikaciju za ažuriranje')) {
+                  window.loaction.reload();
+                  navigator.serviceWorker.skipWaiting();
+                }
+
+                console.log(
+                  'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
-              );
+                );
 
-              // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              alert('Sadržaj je keširan za offline korišćenje.');
-              console.log('Content is cached for offline use.');
+                // Execute callback
+                if (config && config.onUpdate) {
+                  config.onUpdate(registration);
+                }
+              } else {
+                // At this point, everything has been precached.
+                // It's the perfect time to display a
+                // "Content is cached for offline use." message.
+                alert('Sadržaj je keširan za offline korišćenje.');
+                console.log('Content is cached for offline use.');
 
-              // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
+                // Execute callback
+                if (config && config.onSuccess) {
+                  config.onSuccess(registration);
+                }
               }
             }
-          }
+          };
         };
-      };
-    })
-    .catch(error => {
-      console.error('Error during service worker registration:', error);
-    });
+      })
+      .catch(error => {
+        console.error('Error during service worker registration:', error);
+      });
+  }
 }
 
 function checkValidServiceWorker(swUrl, config) {

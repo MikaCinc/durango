@@ -44,11 +44,12 @@ const Search = () => {
             </i>
             <input
                 className="searchInput"
-                placeholder="Pretraži...!!!"
+                placeholder="Pretraži...test"
                 value={search}
                 onChange={(e) => {
                     changeSearch(e.target.value);
-                }} />
+                }}
+            />
             {
                 search && <i
                     className="material-icons resetSearchIcon"
@@ -234,7 +235,7 @@ const ListAndSearch = ({ history }) => {
                         setFbyFav(!FbyFav);
                     }}
                 >
-                    {FbyFav ? 'Prikaži sve': 'Prikaži omiljene'}
+                    {FbyFav ? 'Prikaži sve' : 'Prikaži omiljene'}
                 </div>
             </div>
             <div className="listHolder">
