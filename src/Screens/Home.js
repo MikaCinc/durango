@@ -44,7 +44,7 @@ const Search = () => {
             </i>
             <input
                 className="searchInput"
-                placeholder="Pretraži...test"
+                placeholder="Pretraži..."
                 value={search}
                 onChange={(e) => {
                     changeSearch(e.target.value);
@@ -217,7 +217,7 @@ const List = ({ history }) => {
 }
 
 const ListAndSearch = ({ history }) => {
-    const { toggleFilters, changeSearch } = useContext(DataContext);
+    const { toggleFilters, changeSearch, loading } = useContext(DataContext);
     const [FbyFav, setFbyFav] = useState(false);
 
     return (
@@ -226,18 +226,20 @@ const ListAndSearch = ({ history }) => {
                 <img src={Logo} className="logoHeader" />
                 <Search />
             </div>
-            <div className="filtersContainer">
-                <div
-                    className="filterChip"
-                    onClick={() => {
-                        toggleFilters('omiljeni');
-                        changeSearch('');
-                        setFbyFav(!FbyFav);
-                    }}
-                >
-                    {FbyFav ? 'Prikaži sve' : 'Prikaži omiljene'}
+            {
+                !loading && <div className="filtersContainer">
+                    <div
+                        className="filterChip"
+                        onClick={() => {
+                            toggleFilters('omiljeni');
+                            changeSearch('');
+                            setFbyFav(!FbyFav);
+                        }}
+                    >
+                        {FbyFav ? 'Prikaži sve' : 'Prikaži omiljene'}
+                    </div>
                 </div>
-            </div>
+            }
             <div className="listHolder">
                 <List history={history} />
             </div>
