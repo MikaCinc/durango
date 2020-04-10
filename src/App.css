@@ -4,6 +4,7 @@
 
 :root {
   --primary : #3185FC;
+  --sharp-blues: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 }
 
 body {
@@ -528,7 +529,7 @@ h1 {
 }
 
 .clickableRow {
-  background-color: var(--primary);
+  background-image: linear-gradient(to right, #00c6fb 0%, #005bea 100%);
   color: white;
   cursor: pointer;
   font-weight: 800 !important;
