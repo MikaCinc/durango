@@ -20,7 +20,7 @@ const LoginScreen = props => {
         if (User && User.ID) {
             setIsSuccess(true);
             setProfileImage(User.imageUrl)
-            setProfileName(User.name)
+            setProfileName(User.Name)
             timeout = setTimeout(() => {
                 // props.setAuthorized(true);
                 props.history.push('/durango/app/home')
