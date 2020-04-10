@@ -12,7 +12,7 @@ import RubberBand from 'react-reveal/RubberBand';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Claps = ({data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
+const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
     const { changeData } = useContext(DataContext);
 
     const [showSlider, setShowSlider] = useState(false);
