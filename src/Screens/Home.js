@@ -217,8 +217,7 @@ const List = ({ history }) => {
 }
 
 const ListAndSearch = ({ history }) => {
-    const { toggleFilters, changeSearch, loading } = useContext(DataContext);
-    const [FbyFav, setFbyFav] = useState(false);
+    const { toggleFilters, changeSearch, loading, filters } = useContext(DataContext);
 
     return (
         <Fragment>
@@ -233,10 +232,13 @@ const ListAndSearch = ({ history }) => {
                         onClick={() => {
                             toggleFilters('omiljeni');
                             changeSearch('');
-                            setFbyFav(!FbyFav);
                         }}
                     >
-                        {FbyFav ? 'Prikaži sve' : 'Prikaži omiljene'}
+                        {
+                            filters.indexOf('omiljeni') !== -1
+                                ? 'Prikaži sve'
+                                : 'Prikaži omiljene'
+                        }
                     </div>
                 </div>
             }

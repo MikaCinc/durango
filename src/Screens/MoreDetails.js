@@ -192,7 +192,7 @@ function MoreDetails(props) {
                 <div
                     className="goBack"
                     onClick={() => {
-                        props.history.push(`/durango/app/${data.id}`)
+                        props.history.push(`/durango/app/${data.id}`);
                     }}
                 >
                     <i className="material-icons">

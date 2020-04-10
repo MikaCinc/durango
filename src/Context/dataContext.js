@@ -239,6 +239,7 @@ const DataProvider = (props) => {
                 changeData,
                 loading,
                 filterBySearch,
+                filters,
                 toggleFilters,
                 currentData,
                 setCurrentData
