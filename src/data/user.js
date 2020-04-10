@@ -1,7 +1,8 @@
 let User= {
     ID: '',
-    Title: '',
+    Name: '',
     Email: '',
     Location: '',
     canReserve: true,
+    Favourites: []
 };

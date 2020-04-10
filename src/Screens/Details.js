@@ -108,16 +108,18 @@ function Details(props) {
                         right
                         duration={700}
                     >
-                        <img
-                            src={getSrc(data.logo.split('.')[0])}
-                            className={
-                                `detailsLogo reveal-focus-${
-                                data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
-                                    ? 'blue'
-                                    : 'red'
-                                }`
-                            }
-                        />
+                        <div>
+                            <img
+                                src={getSrc(data.logo.split('.')[0])}
+                                className={
+                                    `detailsLogo reveal-focus-${
+                                    data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
+                                        ? 'blue'
+                                        : 'red'
+                                    }`
+                                }
+                            />
+                        </div>
                     </Roll>
                 </div>
                 <div className="detailsRow">

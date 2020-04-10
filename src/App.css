@@ -687,7 +687,7 @@ h1 {
   position: relative !important;
   /* border-color: #000 !important; */
   outline-color: #3185FC !important;
-  box-shadow: 0 0 15px 3px #3185FC !important;
+  /* box-shadow: 0 0 15px 3px #3185FC !important; */
   animation: glowfade-blue 2s ease-in-out;
   -moz-animation: glowfade-blue 2s ease-in-out;
   animation-direction: alternate;
@@ -710,7 +710,7 @@ h1 {
   position: relative !important;
   /* border-color: #000 !important; */
   outline-color: red !important;
-  box-shadow: 0 0 15px 3px red !important;
+  /* box-shadow: 0 0 15px 3px red !important; */
   animation: glowfade-red 2s ease-in-out;
   -moz-animation: glowfade-red 2s ease-in-out;
   animation-direction: alternate;
