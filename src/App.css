@@ -319,7 +319,7 @@ h1 {
   transition-duration: 0.4s;
 }
 
-.filterChip:hover {
+.filterChipActive {
   color: white;
   background-color: transparent;
 }

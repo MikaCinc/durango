@@ -233,14 +233,14 @@ const ListAndSearch = ({ history }) => {
                 !loading && <div className="filtersContainer">
                     <div className="filterChipContainer">
                         <div
-                            className="filterChip"
+                            className={`filterChip ${isTurnedOn() ? 'filterChipActive' : ''}`}
                             onClick={() => {
                                 toggleFilters('omiljeni');
                                 changeSearch('');
                             }}
                         >
                             {
-                                filters.indexOf('omiljeni') !== -1
+                                isTurnedOn()
                                     ? 'Prikaži sve'
                                     : 'Prikaži omiljene'
                             }

@@ -97,6 +97,8 @@ const DataProvider = (props) => {
     useEffect(() => {
         // updateFromServer();
         updateWithMockData();
+        /* Experiment @todo */
+        localStorage.setItem('User', JSON.stringify(User));
     }, [User]);
 
     useEffect(() => {
