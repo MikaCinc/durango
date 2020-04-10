@@ -219,6 +219,10 @@ const List = ({ history }) => {
 const ListAndSearch = ({ history }) => {
     const { toggleFilters, changeSearch, loading, filters } = useContext(DataContext);
 
+    const isTurnedOn = () => {
+        return filters.indexOf('omiljeni') !== -1
+    }
+
     return (
         <Fragment>
             <div className="mainHeader">
