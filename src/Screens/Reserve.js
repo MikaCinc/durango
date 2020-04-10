@@ -107,10 +107,12 @@ function Reserve(props) {
                     <div className="reserveSeatsContainer">
                         <button
                             onClick={() => {
-                                setSeats(seats + 1)
+                                if (seats > 1) {
+                                    setSeats(seats - 1)
+                                };
                             }}
                             className="reserveSeatsButton"
-                        >+</button>
+                        >-</button>
                         <div
                             className="reserveSeatsCounter boldText"
                         >
@@ -118,12 +120,10 @@ function Reserve(props) {
                         </div>
                         <button
                             onClick={() => {
-                                if (seats > 1) {
-                                    setSeats(seats - 1)
-                                };
+                                setSeats(seats + 1)
                             }}
                             className="reserveSeatsButton"
-                        >-</button>
+                        >+</button>
                     </div>
                 </div>
                 <div

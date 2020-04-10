@@ -537,7 +537,7 @@ h1 {
 }
 
 .clickableRowCancel {
-  background-color: #FCA731;
+  background-image: linear-gradient(to left, #f83600 0%, #f9d423 100%);
   color: white;
   cursor: pointer;
   font-weight: 800 !important;
