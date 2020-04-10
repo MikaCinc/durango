@@ -301,7 +301,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   /* background-color: #3185FC; */
-  background: linear-gradient(24deg, rgba(49,133,252,1) 0%, rgb(87, 87, 190) 100%);
+  background: linear-gradient(24deg, rgba(49, 133, 252, 1) 0%, rgb(87, 87, 190) 100%);
   color: white;
   padding: 3px 10px;
   border-radius: 20px;
@@ -435,6 +435,30 @@ h1 {
   min-height: 35px;
   max-height: 350px;
   background-color: white;
+}
+
+/* 1x2 grid */
+
+.detailsRow2Container {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.detailsRow2Container>div {
+  background-color: white;
+  height: 35px;
+  width: 100px;
+  margin-left: 10px;
+  text-align: left;
+  border-radius: 10px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 10px;
 }
 
 .detailRowText {

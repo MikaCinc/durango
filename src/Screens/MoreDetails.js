@@ -126,21 +126,50 @@ function MoreDetails(props) {
                     </i>
                 </div>
                 <div
-                    className="detailsRowMini"
+                    className="detailsRow2Container"
                 >
-                    <p className="detailRowTextMini">
-                        <span className="boldText">Prosečno👏: </span>
+                    <div>
+                        <span className="boldText mr-1">Muzika: </span>
+                        {
+                            'Pop'
+                        }
+                    </div>
+                    <div>
+                        <span className="boldText mr-1">Glasnoća: </span>
+                        <span className="d-flex">
+                            {
+                                [1, 2, 3].map((i) => {
+                                    return (
+                                        <i
+                                            className="material-icons detailIconBlue"
+                                            style={{
+                                                fontSize: '18px'
+                                            }}
+                                            key={i}
+                                        >
+                                            music_note
+                                        </i>
+                                    )
+                                })
+                            }
+                        </span>
+                    </div>
+                </div>
+                <div
+                    className="detailsRow2Container"
+                >
+                    <div>
+                        <span className="boldText mr-1">Prosečno 👏: </span>
                         {
                             (data.details.ukupnoAplauza / data.details.brojOcena).toPrecision(2)
                         }
-                        <span className="boldText"> Ukupno👏: </span>
+                    </div>
+                    <div>
+                        <span className="boldText mr-1">Ukupno 👏: </span>
                         {
                             renderNumber(data.details.ukupnoAplauza)
                         }
-                    </p>
-                    <i className="material-icons detailIconBlue">
-                        rate_review
-                    </i>
+                    </div>
                 </div>
                 <div
                     className="detailsRowMini"
