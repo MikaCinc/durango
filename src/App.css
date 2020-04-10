@@ -2,6 +2,10 @@
   outline: none;
 }
 
+:root {
+  --primary : #3185FC;
+}
+
 body {
   /* overflow: hidden; */
   scrollbar-width: none;
@@ -293,20 +297,31 @@ h1 {
   margin-bottom: 15px;
 }
 
-.filterChip {
+.filterChipContainer {
   display: inline-block;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   margin-left: auto;
   margin-right: auto;
-  /* background-color: #3185FC; */
-  background: linear-gradient(24deg, rgba(49, 133, 252, 1) 0%, rgb(87, 87, 190) 100%);
-  color: white;
+  border-radius: 20px;
+  background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+  padding: 3px;
+}
+
+.filterChip {
+  background-color: white;
+  color: black;
   padding: 3px 10px;
   border-radius: 20px;
   cursor: pointer;
   user-select: none;
+  transition-duration: 0.4s;
+}
+
+.filterChip:hover {
+  color: white;
+  background-color: transparent;
 }
 
 .peopleIcon {
@@ -492,7 +507,7 @@ h1 {
 
 .detailIconBlue {
   flex: 0 1 auto;
-  color: #3185FC;
+  color: var(--primary);
   margin-left: auto;
 }
 
@@ -513,7 +528,7 @@ h1 {
 }
 
 .clickableRow {
-  background-color: #3185FC;
+  background-color: var(--primary);
   color: white;
   cursor: pointer;
   font-weight: 800 !important;
@@ -648,7 +663,7 @@ h1 {
 
 .goBack {
   flex: 0 1 auto;
-  color: #3185FC;
+  color: var(--primary);
   display: flex;
   cursor: pointer;
   margin-right: auto;
@@ -680,7 +695,7 @@ h1 {
 
 .buttonReserve {
   width: 100%;
-  background-color: #3185FC;
+  background-color: var(--primary);
   border-radius: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   text-transform: uppercase;
@@ -711,7 +726,7 @@ h1 {
   /* outline: 5px solid transparent !important; */
   position: relative !important;
   /* border-color: #000 !important; */
-  outline-color: #3185FC !important;
+  outline-color: var(--primary) !important;
   /* box-shadow: 0 0 15px 3px #3185FC !important; */
   animation: glowfade-blue 2s ease-in-out;
   -moz-animation: glowfade-blue 2s ease-in-out;
@@ -722,10 +737,10 @@ h1 {
 
 @keyframes glowfade-blue {
   from {
-    box-shadow: 0 0 20px 5px #3185FC;
+    box-shadow: 0 0 20px 5px var(--primary);
   }
   to {
-    box-shadow: 0 0 10px 3px #3185FC;
+    box-shadow: 0 0 10px 3px var(--primary);
   }
 }
 

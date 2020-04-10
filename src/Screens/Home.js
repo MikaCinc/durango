@@ -227,18 +227,20 @@ const ListAndSearch = ({ history }) => {
             </div>
             {
                 !loading && <div className="filtersContainer">
-                    <div
-                        className="filterChip"
-                        onClick={() => {
-                            toggleFilters('omiljeni');
-                            changeSearch('');
-                        }}
-                    >
-                        {
-                            filters.indexOf('omiljeni') !== -1
-                                ? 'Prikaži sve'
-                                : 'Prikaži omiljene'
-                        }
+                    <div className="filterChipContainer">
+                        <div
+                            className="filterChip"
+                            onClick={() => {
+                                toggleFilters('omiljeni');
+                                changeSearch('');
+                            }}
+                        >
+                            {
+                                filters.indexOf('omiljeni') !== -1
+                                    ? 'Prikaži sve'
+                                    : 'Prikaži omiljene'
+                            }
+                        </div>
                     </div>
                 </div>
             }
