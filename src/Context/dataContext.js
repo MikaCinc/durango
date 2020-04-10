@@ -23,6 +23,12 @@ const { Provider, Consumer } = DataContext = React.createContext({});
 
 const DataProvider = (props) => {
     let { id } = useParams();
+    // User
+    const [User, setUser] = useState(
+        {
+            ...JSON.parse(localStorage.getItem('User'))
+        }
+    );
     // Original data
     const [Data, setData] = useState([]);
     // Filtered
@@ -50,13 +56,8 @@ const DataProvider = (props) => {
     } */
 
     const updateWithMockData = () => {
-        let User = JSON.parse(localStorage.getItem('User')),
-            authorized = false,
+        let authorized = isAuthorized(),
             timeout;
-
-        if (User && User.id) {
-            authorized = true;
-        }
 
         /* if (authorized) {
           fetch('http://178.17.17.197:7000/lista-kafica')
@@ -96,11 +97,11 @@ const DataProvider = (props) => {
     useEffect(() => {
         // updateFromServer();
         updateWithMockData();
-    }, []);
+    }, [User]);
 
     useEffect(() => {
         filterBySearch(search);
-        
+
         if (filters.indexOf('omiljeni') !== -1) {
             filterByOmiljeni();
         }
@@ -151,7 +152,7 @@ const DataProvider = (props) => {
     const isAuthorized = () => {
         let User = JSON.parse(localStorage.getItem('User'));
 
-        if (User && User.id) {
+        if (User && User.ID) {
             return true;
         }
 
@@ -167,10 +168,28 @@ const DataProvider = (props) => {
     };
 
     const filterByOmiljeni = () => {
-        let filtered = Data.filter(({ favorit }) => favorit);
+        let filtered = Data.filter(({ id }) => User.Favourites.indexOf(id) !== -1);
 
         setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
     };
+
+    const toggleFavourite = (fav) => {
+        let nextState = {...User};
+
+        if (nextState.Favourites.indexOf(fav) === -1) {
+            nextState = {
+                ...User,
+                Favourites: [
+                    ...nextState.Favourites,
+                    fav
+                ]
+            }
+        } else {
+            nextState.Favourites = nextState.Favourites.filter(f => f !== fav);
+        }
+
+        return setUser(nextState);
+    }
 
     const changeData = ({ id, ...restOfData }) => {
         let nextState = [...Data];
@@ -209,6 +228,8 @@ const DataProvider = (props) => {
     return (
         <Provider
             value={{
+                User,
+                toggleFavourite,
                 Data,
                 filteredData,
                 sortedOpen,

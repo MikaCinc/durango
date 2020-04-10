@@ -15,9 +15,9 @@ const LoginScreen = props => {
     useEffect(() => {
         // localStorage.removeItem('User')
         let User = JSON.parse(localStorage.getItem('User')),
-        timeout = null;
+            timeout = null;
 
-        if (User && User.id) {
+        if (User && User.ID) {
             setIsSuccess(true);
             setProfileImage(User.imageUrl)
             setProfileName(User.name)
@@ -40,10 +40,14 @@ const LoginScreen = props => {
         setProfileName(response.profileObj.name)
 
         let obj = {
-            id: response.profileObj.googleId,
-            email: response.profileObj.email,
+            ID: response.profileObj.googleId,
+            Email: response.profileObj.email,
             imageUrl: response.profileObj.imageUrl,
-            name: response.profileObj.name
+            Name: response.profileObj.name,
+            Location: '',
+            canReserve: true,
+            Favourites: [1, 5],
+            Reservation: {}
         };
 
         localStorage.setItem('User', JSON.stringify(obj));

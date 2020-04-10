@@ -53,7 +53,7 @@ const placeholderObj = {
 
 function Details(props) {
     let { id } = useParams();
-    const { Data, loading, changeData, setCurrentData } = useContext(DataContext);
+    const { Data, loading, changeData, setCurrentData, User, toggleFavourite } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -63,6 +63,10 @@ function Details(props) {
         setData(findData);
         setCurrentData(findData);
     }, [Data]);
+
+    const isFavourite = () => {
+        return User.Favourites.indexOf(data.id) !== -1
+    }
 
     const getRadnoVreme = () => {
         const open = isOpen(data.details.radnoVreme);
@@ -159,26 +163,23 @@ function Details(props) {
                 </i>
                 </div>
                 <div className="detailsRow clickableRow" onClick={() => {
-                    changeData({
-                        ...data,
-                        favorit: !data.favorit
-                    });
+                    toggleFavourite(data.id);
                 }}>
                     <h1 className="detailRowText boldText">
                         {
-                            data.favorit
+                            isFavourite()
                                 ? 'Ukloni iz omiljenih'
                                 : 'Dodaj u omiljene'
                         }
                     </h1>
                     <Bounce
-                        spy={data.favorit}
+                        spy={User.Favourites}
                     >
                         <i
                             className="material-icons detailIconClickable"
-                            style={{ color: data.favorit ? 'gold' : '' }}
+                            style={{ color: isFavourite() ? 'gold' : '' }}
                         >
-                            {data.favorit ? 'star' : 'star_outline'}
+                            {isFavourite() ? 'star' : 'star_outline'}
                         </i>
                     </Bounce>
                 </div>

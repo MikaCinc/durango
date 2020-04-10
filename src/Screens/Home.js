@@ -129,7 +129,7 @@ const FavoritBadge = () => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, sortedOpen, sortedClosed, loading } = useContext(DataContext);
+    const { filteredData, sortedOpen, sortedClosed, loading, User } = useContext(DataContext);
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
         if (loading) return null;
@@ -177,7 +177,7 @@ const List = ({ history }) => {
                             people
                         </i>
                         {
-                            Kafic.favorit && <FavoritBadge />
+                            User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                         }
                     </div>
                 </Fade>
@@ -207,7 +207,7 @@ const List = ({ history }) => {
                         people
                     </i>
                     {
-                        Kafic.favorit && <FavoritBadge />
+                        User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                     }
                     <LabelBadge />
                 </div>
