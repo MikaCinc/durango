@@ -154,28 +154,31 @@ const List = ({ history }) => {
                     opposite
                     cascade
                 >
+
                     <div
                         key={Kafic.id}
-                        className="singleLine button"
+                        className="normalObject button"
                         onClick={() => {
                             history.push(`/durango/app/${Kafic.id}`);
                         }}
                     >
-                        <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                        <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                        <p className="lineFreeSeats boldText greyText">
-                            {Kafic.brojSlobodnihMesta}
-                        </p>
-                        <i
-                            className="material-icons peopleIcon"
-                            style={{
-                                color: Kafic.brojSlobodnihMesta > 0
-                                    ? '#3185FC'
-                                    : '#C50505'
-                            }}
-                        >
-                            people
-                        </i>
+                        <div className="singleLine">
+                            <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                            <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                            <p className="lineFreeSeats boldText greyText">
+                                {Kafic.brojSlobodnihMesta}
+                            </p>
+                            <i
+                                className="material-icons peopleIcon"
+                                style={{
+                                    color: Kafic.brojSlobodnihMesta > 0
+                                        ? '#3185FC'
+                                        : '#C50505'
+                                }}
+                            >
+                                people
+                            </i>
+                        </div>
                         {
                             User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                         }
@@ -188,28 +191,30 @@ const List = ({ history }) => {
             sortedClosed.map(Kafic => {
                 return <div
                     key={Kafic.id}
-                    className="singleLine button closedObject"
+                    className="closedObject button"
                     onClick={() => {
                         history.push(`/durango/app/${Kafic.id}`);
                     }}
                 >
-                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                    <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                    <p className="lineFreeSeats boldText greyText">
-                        {Kafic.brojSlobodnihMesta}
-                    </p>
-                    <i
-                        className="material-icons peopleIcon"
-                        style={{
-                            color: '#B0B0B0'
-                        }}
-                    >
-                        people
-                    </i>
+                    <div className="singleLine">
+                        <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                        <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                        <p className="lineFreeSeats boldText greyText">
+                            {Kafic.brojSlobodnihMesta}
+                        </p>
+                        <i
+                            className="material-icons peopleIcon"
+                            style={{
+                                color: '#B0B0B0'
+                            }}
+                        >
+                            people
+                        </i>
+                        <LabelBadge />
+                    </div>
                     {
                         User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                     }
-                    <LabelBadge />
                 </div>
             })
         }

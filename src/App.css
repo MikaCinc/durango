@@ -16,14 +16,14 @@ body {
   display: none;
 }
 
-.button {
+/* .button {
   background-position: center;
   transition: background 0.8s;
 }
 
 .button:hover {
   background: #b0b0b0 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-}
+} */
 
 h1 {
   font-size: 26px;
@@ -165,10 +165,6 @@ h1 {
   width: 100%;
 }
 
-.closedObject {
-  border: 4px solid #B0B0B0;
-}
-
 .listBadge {
   position: absolute;
   bottom: 0;
@@ -178,16 +174,19 @@ h1 {
   padding-left: 5px;
   padding-top: 2px;
   border-top-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
 }
 
 .favoritBadgeContainer {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #B0B0B0;
+  background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%);
   color: gold;
   border-bottom-left-radius: 7px;
-  border-top-right-radius: 3px;
+  border-top-right-radius: 7px;
+  z-index: 1000;
 }
 
 .favoritBadge {
@@ -205,7 +204,7 @@ h1 {
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #B0B0B0;
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
   color: white;
   padding: 3px 10px;
   border-radius: 7px;
@@ -330,6 +329,25 @@ h1 {
   display: inline-block;
 }
 
+.normalObject {
+  position: relative;
+  padding: 4px;
+  background-color: white;;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.closedObject {
+  position: relative;
+  /* border: 4px solid #B0B0B0; */
+  padding: 4px;
+  background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
 .singleLine {
   position: relative;
   /* Potrebno da bi badge bio na svom mestu */
@@ -338,10 +356,10 @@ h1 {
   height: 75px;
   padding: 12px;
   cursor: pointer;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  border-radius: 7px;
+  
   background-color: white;
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  
 }
 
 .lineCounter {
