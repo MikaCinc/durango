@@ -147,14 +147,7 @@ const List = ({ history }) => {
     return <Fragment>
         {
             sortedOpen.map(Kafic => {
-                return <Fade
-                    key={Kafic.id}
-                    duration={300}
-                    bottom
-                    opposite
-                    cascade
-                >
-
+                return (
                     <div
                         key={Kafic.id}
                         className="normalObject button"
@@ -162,28 +155,36 @@ const List = ({ history }) => {
                             history.push(`/durango/app/${Kafic.id}`);
                         }}
                     >
-                        <div className="singleLine">
-                            <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                            <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                            <p className="lineFreeSeats boldText greyText">
-                                {Kafic.brojSlobodnihMesta}
-                            </p>
-                            <i
-                                className="material-icons peopleIcon"
-                                style={{
-                                    color: Kafic.brojSlobodnihMesta > 0
-                                        ? '#3185FC'
-                                        : '#C50505'
-                                }}
-                            >
-                                people
+                        <Fade
+                            key={Kafic.id}
+                            duration={300}
+                            bottom
+                            opposite
+                            cascade
+                        >
+                            <div className="singleLine">
+                                <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                                <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                                <p className="lineFreeSeats boldText greyText">
+                                    {Kafic.brojSlobodnihMesta}
+                                </p>
+                                <i
+                                    className="material-icons peopleIcon"
+                                    style={{
+                                        color: Kafic.brojSlobodnihMesta > 0
+                                            ? '#3185FC'
+                                            : '#C50505'
+                                    }}
+                                >
+                                    people
                             </i>
-                        </div>
+                            </div>
+                        </Fade>
                         {
                             User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                         }
                     </div>
-                </Fade>
+                )
             })
         }
         <Separator />
