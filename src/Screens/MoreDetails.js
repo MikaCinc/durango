@@ -107,10 +107,21 @@ function MoreDetails(props) {
                     className="detailsRowMini"
                 >
                     <p className="detailRowTextMini">
+                        <span className="boldText">Naziv: </span>
+                        {data.title}
+                    </p>
+                    <i className="material-icons-outlined detailIconBlue">
+                        title
+                    </i>
+                </div>
+                <div
+                    className="detailsRowMini"
+                >
+                    <p className="detailRowTextMini">
                         <span className="boldText">Adresa: </span>
                         {data.details.adresa}
                     </p>
-                    <i className="material-icons detailIconBlue">
+                    <i className="material-icons-outlined detailIconBlue">
                         location_on
                     </i>
                 </div>
@@ -121,7 +132,7 @@ function MoreDetails(props) {
                         <span className="boldText">Telefon: </span>
                         {data.details.brojTelefona}
                     </p>
-                    <i className="material-icons detailIconBlue">
+                    <i className="material-icons-outlined detailIconBlue">
                         phone
                     </i>
                 </div>
@@ -141,7 +152,7 @@ function MoreDetails(props) {
                                 [1, 2, 3].map((i) => {
                                     return (
                                         <i
-                                            className="material-icons detailIconBlue"
+                                            className="material-icons-outlined detailIconBlue"
                                             style={{
                                                 fontSize: '18px'
                                             }}
@@ -178,7 +189,7 @@ function MoreDetails(props) {
                         <span className="boldText">Radno vreme: </span>
                         {data.details.radnoVreme}
                     </p>
-                    <i className="material-icons detailIconBlue">
+                    <i className="material-icons-outlined detailIconBlue">
                         watch_later
                     </i>
                 </div>
@@ -195,7 +206,7 @@ function MoreDetails(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                    <i className="material-icons detailIconClickable">
+                    <i className="material-icons-outlined detailIconClickable">
                         map
                 </i>
                 </div>
@@ -206,7 +217,7 @@ function MoreDetails(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Meni</h1>
-                    <i className="material-icons detailIconClickable">
+                    <i className="material-icons-outlined detailIconClickable">
                         menu_book
                     </i>
                 </div>
@@ -224,7 +235,7 @@ function MoreDetails(props) {
                         props.history.push(`/durango/app/${data.id}`);
                     }}
                 >
-                    <i className="material-icons">
+                    <i className="material-icons-outlined">
                         arrow_back_ios
                     </i>
                 </div>

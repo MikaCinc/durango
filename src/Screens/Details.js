@@ -103,7 +103,7 @@ function Details(props) {
                 <div className="detailsSubheader">
                     <div>
                         <h1 className="detailsTitle boldText">{data.title}</h1>
-                        {/* <i className="material-icons greyText">
+                        {/* <i className="material-icons-outlined greyText">
                         access_time
                     </i> */}
                         {getRadnoVreme()}
@@ -138,7 +138,7 @@ function Details(props) {
                         </span>
                         {/* / {data.brojMesta} */}
                     </h1>
-                    <i className="material-icons detailIcon">
+                    <i className="material-icons-outlined detailIcon">
                         people
                 </i>
                 </div>
@@ -150,7 +150,7 @@ function Details(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
-                    <i className="material-icons detailIconClickable">
+                    <i className="material-icons-outlined detailIconClickable">
                         book
                 </i>
                 </div>
@@ -158,7 +158,7 @@ function Details(props) {
                     props.history.push(`/durango/app/${data.id}/more`);
                 }}>
                     <h1 className="detailRowText boldText">O mestu</h1>
-                    <i className="material-icons detailIconClickable">
+                    <i className="material-icons-outlined detailIconClickable">
                         info
                 </i>
                 </div>

@@ -39,7 +39,7 @@ const Search = () => {
 
     return (
         <div className="search">
-            <i className="material-icons searchIcon">
+            <i className="material-icons-outlined searchIcon">
                 search
             </i>
             <input
@@ -52,7 +52,7 @@ const Search = () => {
             />
             {
                 search && <i
-                    className="material-icons resetSearchIcon"
+                    className="material-icons-outlined resetSearchIcon"
                     onClick={() => {
                         changeSearch('');
                     }}
@@ -116,7 +116,7 @@ const FavoritBadge = () => {
         >
             <Bounce>
                 <i
-                    className="material-icons favoritBadge"
+                    className="material-icons-outlined favoritBadge"
                     style={{
                         fontSize: '18px'
                     }}
@@ -169,7 +169,7 @@ const List = ({ history }) => {
                                     {Kafic.brojSlobodnihMesta}
                                 </p>
                                 <i
-                                    className="material-icons peopleIcon"
+                                    className="material-icons-outlined peopleIcon"
                                     style={{
                                         color: Kafic.brojSlobodnihMesta > 0
                                             ? '#3185FC'
@@ -204,7 +204,7 @@ const List = ({ history }) => {
                             {Kafic.brojSlobodnihMesta}
                         </p>
                         <i
-                            className="material-icons peopleIcon"
+                            className="material-icons-outlined peopleIcon"
                             style={{
                                 color: '#B0B0B0'
                             }}
