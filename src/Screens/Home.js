@@ -269,18 +269,6 @@ const MainScreen = ({ history }) => {
     )
 }
 
-const LoaderComponent = () => {
-    const { loading } = useContext(DataContext);
-
-    return <Loader
-        type="Grid"
-        color="#3185FC"
-        height={100}
-        width={100}
-        visible={loading}
-    />
-}
-
 const Home = props => {
     return (
         <AbsoluteWrapper>
