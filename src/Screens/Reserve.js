@@ -178,11 +178,7 @@ function Reserve(props) {
     }
 
     return (
-        <AbsoluteWrapper>
-            {
-                !loading && restOfPage()
-            }
-        </AbsoluteWrapper>
+        !loading && restOfPage()
     );
 }
 
