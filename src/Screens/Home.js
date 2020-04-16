@@ -192,37 +192,46 @@ const List = ({ history }) => {
             }
         </FlipMove>
         <Separator />
-        {
-            sortedClosed.map(Kafic => {
-                return <div
-                    key={Kafic.id}
-                    className="closedObject button"
-                    onClick={() => {
-                        history.push(`/durango/app/${Kafic.id}`);
-                    }}
-                >
-                    <div className="singleLine">
-                        <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                        <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                        <p className="lineFreeSeats boldText greyText">
-                            {Kafic.brojSlobodnihMesta}
-                        </p>
-                        <i
-                            className="material-icons-outlined peopleIcon"
-                            style={{
-                                color: '#B0B0B0'
-                            }}
-                        >
-                            people
+        <FlipMove
+            duration={500}
+            easing="ease-out"
+            appearAnimation="none"
+            enterAnimation="none"
+            leaveAnimation="none"
+            staggerDurationBy={100}
+        >
+            {
+                sortedClosed.map(Kafic => {
+                    return <div
+                        key={Kafic.id}
+                        className="closedObject button"
+                        onClick={() => {
+                            history.push(`/durango/app/${Kafic.id}`);
+                        }}
+                    >
+                        <div className="singleLine">
+                            <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                            <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                            <p className="lineFreeSeats boldText greyText">
+                                {Kafic.brojSlobodnihMesta}
+                            </p>
+                            <i
+                                className="material-icons-outlined peopleIcon"
+                                style={{
+                                    color: '#B0B0B0'
+                                }}
+                            >
+                                people
                         </i>
-                        <LabelBadge />
+                            <LabelBadge />
+                        </div>
+                        {
+                            User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
+                        }
                     </div>
-                    {
-                        User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
-                    }
-                </div>
-            })
-        }
+                })
+            }
+        </FlipMove>
     </Fragment>
 }
 
