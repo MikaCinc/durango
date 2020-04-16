@@ -15,16 +15,11 @@ import _ from 'lodash';
 import queryString from 'query-string';
 
 /* Animations */
-import Pulse from 'react-reveal/Pulse';
 import Fade from 'react-reveal/Fade';
-import Bounce from 'react-reveal/Bounce';
-
 import FlipMove from 'react-flip-move';
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from 'react-loader-spinner';
-import Badge from 'react-bootstrap/Badge'
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Images */
