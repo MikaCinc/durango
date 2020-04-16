@@ -10,12 +10,13 @@ import _ from 'lodash';
 
 /* Components */
 import Claps from '../Components/Claps';
+import DetailsHeader from '../Components/DetailsHeader';
 
 /* Router */
-import { 
-    useParams, 
+import {
+    useParams,
     Route,
-    Switch
+    Switch,
 } from "react-router-dom";
 
 /* Pages / Screens */
@@ -26,7 +27,7 @@ import Reserve from '../Screens/Reserve';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const ObjectProfileStackOfScreens = () => {
+const ObjectProfileStackOfScreens = (props) => {
     let { id } = useParams();
 
     const { Data, loading } = useContext(DataContext);
@@ -38,8 +39,23 @@ const ObjectProfileStackOfScreens = () => {
         setData(findData);
     }, [Data]);
 
+    const getBackURL = () => {
+        const { history: { location: { pathname } } } = props;
+
+        let splitted = pathname.split('/');
+
+        if (['more', 'reserve'].indexOf(splitted[splitted.length - 1]) !== -1) {
+            return `/durango/app/${data.id}`;
+        } else {
+            return `/durango/app/home`;
+        }
+    }
+
     return (
         <Fragment>
+            {
+                data && <DetailsHeader history={props.history} back={getBackURL()} />
+            }
             <Switch>
                 <Route key={2} exact path="/durango/app/:id" component={Details} />
                 <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />

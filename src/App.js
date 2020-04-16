@@ -31,7 +31,7 @@ import ObjectProfileStackOfScreens from './Stacks/ObjectProfileStackOfScreens';
 /* Context */
 import DataContext, { DataProvider } from './Context/dataContext';
 
-const UserStackOfScreens = ({ history, match }) => {
+const UserStackOfScreens = ({ history }) => {
   const { location } = useContext(__RouterContext);
 
   return (
@@ -39,7 +39,7 @@ const UserStackOfScreens = ({ history, match }) => {
       <DataProvider history={history}>
         <Switch location={location}>
           <Route key={1} exact path="/durango/app/home" component={Home} />
-          <Route path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens/>} />
+          <Route path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history}/>} />
         </Switch>
       </DataProvider >
     </Fragment>

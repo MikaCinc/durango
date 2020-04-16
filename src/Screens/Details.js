@@ -188,28 +188,7 @@ function Details(props) {
     }
 
     return (
-        <AbsoluteWrapper>
-            <div className="detailsHeader">
-                <div
-                    className="goBack"
-                    onClick={() => {
-                        // props.setSelected(null)
-                        props.history.push('/durango/app/home')
-                    }}
-                >
-                    <i className="material-icons">
-                        arrow_back_ios
-                    </i>
-                </div>
-                <img src={Logo} className="detailsDurangoLogo" />
-            </div>
-            {
-                !loading && restOfPage()
-            }
-            {
-                // !loading && <Claps data={data} />
-            }
-        </AbsoluteWrapper>
+        !loading && restOfPage()
     );
 }
 

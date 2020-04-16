@@ -141,7 +141,7 @@ const List = ({ history }) => {
 
     return <Fragment>
         <FlipMove
-            duration={500}
+            duration={300}
             easing="ease-out"
             appearAnimation="none"
             enterAnimation="none"
@@ -193,7 +193,7 @@ const List = ({ history }) => {
         </FlipMove>
         <Separator />
         <FlipMove
-            duration={500}
+            duration={300}
             easing="ease-out"
             appearAnimation="none"
             enterAnimation="none"

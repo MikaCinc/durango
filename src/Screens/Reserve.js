@@ -179,24 +179,9 @@ function Reserve(props) {
 
     return (
         <AbsoluteWrapper>
-            <div>
-                <div className="detailsHeader">
-                    <div
-                        className="goBack"
-                        onClick={() => {
-                            props.history.push(`/durango/app/${data.id}`);
-                        }}
-                    >
-                        <i className="material-icons">
-                            arrow_back_ios
-                    </i>
-                    </div>
-                    <img src={Logo} className="detailsDurangoLogo" />
-                </div>
-                {
-                    !loading && restOfPage()
-                }
-            </div>
+            {
+                !loading && restOfPage()
+            }
         </AbsoluteWrapper>
     );
 }
