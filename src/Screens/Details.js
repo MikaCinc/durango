@@ -207,7 +207,7 @@ function Details(props) {
                 !loading && restOfPage()
             }
             {
-                !loading && <Claps data={data} />
+                // !loading && <Claps data={data} />
             }
         </AbsoluteWrapper>
     );

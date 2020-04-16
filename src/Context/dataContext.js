@@ -22,7 +22,7 @@ let DataContext;
 const { Provider, Consumer } = DataContext = React.createContext({});
 
 const DataProvider = (props) => {
-    let { id } = useParams();
+    // let { id } = useParams();
     // User
     const [User, setUser] = useState(
         {

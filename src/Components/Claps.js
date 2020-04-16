@@ -5,9 +5,12 @@ import React, {
     useState
 } from 'react';
 
+/* webComponent */
 import 'emoji-slider';
 
+/* Animations */
 import RubberBand from 'react-reveal/RubberBand';
+import { Spring } from 'react-spring/renderprops';
 
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
@@ -70,6 +73,25 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
         })
     }
 
+    const renderNumber = (num) => {
+        return (
+            <Spring
+                from={{ number: 0 }}
+                to={{ number: parseInt(num, 10) }}>
+                {
+                    props =>
+                        <span className="boldText">
+                            {
+                                showSlider
+                                    ? `+${localClaps}`
+                                    : Math.ceil(props.number)
+                            }
+                        </span>
+                }
+            </Spring>
+        )
+    }
+
     return (
         <div
             className="clapsContainer"
@@ -94,15 +116,9 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
                 }}
             >
                 <span>👏</span>
-                <span className="boldText">
-                    {
-                        showSlider
-                            ? userAplauza === 0
-                                ? `+${localClaps}`
-                                : userAplauza
-                            : ukupnoAplauza
-                    }
-                </span>
+                {
+                    renderNumber(ukupnoAplauza)
+                }
             </div>
         </div>
     )

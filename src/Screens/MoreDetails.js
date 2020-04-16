@@ -17,11 +17,10 @@ import Logo from '../ExtendedLogo/Logo.png';
 
 /* Components */
 import { Carousel } from 'react-bootstrap';
-import Claps from '../Components/Claps';
-import { Spring } from 'react-spring/renderprops';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Animations */
+import { Spring } from 'react-spring/renderprops';
 import Fade from 'react-reveal/Fade';
 
 /* Slike */
@@ -50,7 +49,7 @@ const placeholderObj = {
 
 function MoreDetails(props) {
     let { id } = useParams();
-    const { Data, loading, setCurrentData } = useContext(DataContext);
+    const { Data, loading } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
 
@@ -58,7 +57,6 @@ function MoreDetails(props) {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
 
         setData(findData);
-        setCurrentData(findData);
     }, [Data]);
 
     const renderCarousel = () => {
@@ -243,9 +241,6 @@ function MoreDetails(props) {
             </div>
             {
                 !loading && restOfPage()
-            }
-            {
-                !loading && <Claps data={data} />
             }
         </div>
         // </AbsoluteWrapper>
