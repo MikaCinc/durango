@@ -76,7 +76,7 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
     const renderNumber = (num) => {
         return (
             <Spring
-                from={{ number: 0 }}
+                from={{ number: 100 }}
                 to={{ number: parseInt(num, 10) }}>
                 {
                     props =>
