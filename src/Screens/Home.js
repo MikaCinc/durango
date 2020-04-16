@@ -19,6 +19,8 @@ import Pulse from 'react-reveal/Pulse';
 import Fade from 'react-reveal/Fade';
 import Bounce from 'react-reveal/Bounce';
 
+import FlipMove from 'react-flip-move';
+
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
@@ -114,16 +116,14 @@ const FavoritBadge = () => {
         <div
             className="favoritBadgeContainer"
         >
-            <Bounce>
-                <i
-                    className="material-icons-outlined favoritBadge"
-                    style={{
-                        fontSize: '18px'
-                    }}
-                >
-                    star
+            <i
+                className="material-icons-outlined favoritBadge"
+                style={{
+                    fontSize: '18px'
+                }}
+            >
+                star
             </i>
-            </Bounce>
         </div>
     )
 }
@@ -145,48 +145,57 @@ const List = ({ history }) => {
     }
 
     return <Fragment>
-        {
-            sortedOpen.map(Kafic => {
-                return (
-                    <div
-                        key={Kafic.id}
-                        className="normalObject button"
-                        onClick={() => {
-                            history.push(`/durango/app/${Kafic.id}`);
-                        }}
-                    >
-                        <Fade
+        <FlipMove
+            duration={500}
+            easing="ease-out"
+            appearAnimation="none"
+            enterAnimation="none"
+            leaveAnimation="none"
+            staggerDurationBy={100}
+        >
+            {
+                sortedOpen.map(Kafic => {
+                    return (
+                        <div
                             key={Kafic.id}
-                            duration={300}
-                            bottom
-                            opposite
-                            cascade
+                            className="normalObject button"
+                            onClick={() => {
+                                history.push(`/durango/app/${Kafic.id}`);
+                            }}
                         >
-                            <div className="singleLine">
-                                <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
-                                <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
-                                <p className="lineFreeSeats boldText greyText">
-                                    {Kafic.brojSlobodnihMesta}
-                                </p>
-                                <i
-                                    className="material-icons-outlined peopleIcon"
-                                    style={{
-                                        color: Kafic.brojSlobodnihMesta > 0
-                                            ? '#3185FC'
-                                            : '#C50505'
-                                    }}
-                                >
-                                    people
+                            <Fade
+                                key={Kafic.id}
+                                duration={300}
+                                bottom
+                                opposite
+                                cascade
+                            >
+                                <div className="singleLine">
+                                    <img className="listLogo" src={getSrc(Kafic.logo.split('.')[0])} />
+                                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                                    <p className="lineFreeSeats boldText greyText">
+                                        {Kafic.brojSlobodnihMesta}
+                                    </p>
+                                    <i
+                                        className="material-icons-outlined peopleIcon"
+                                        style={{
+                                            color: Kafic.brojSlobodnihMesta > 0
+                                                ? '#3185FC'
+                                                : '#C50505'
+                                        }}
+                                    >
+                                        people
                             </i>
-                            </div>
-                        </Fade>
-                        {
-                            User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
-                        }
-                    </div>
-                )
-            })
-        }
+                                </div>
+                            </Fade>
+                            {
+                                User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
+                            }
+                        </div>
+                    )
+                })
+            }
+        </FlipMove>
         <Separator />
         {
             sortedClosed.map(Kafic => {
