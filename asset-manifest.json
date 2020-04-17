@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/durango/static/css/main.5641b41c.chunk.css",
-    "main.js": "/durango/static/js/main.a73ca1c2.chunk.js",
-    "main.js.map": "/durango/static/js/main.a73ca1c2.chunk.js.map",
+    "main.css": "/durango/static/css/main.4fd62dd1.chunk.css",
+    "main.js": "/durango/static/js/main.66cbaec6.chunk.js",
+    "main.js.map": "/durango/static/js/main.66cbaec6.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
     "static/js/2.8298564e.chunk.js": "/durango/static/js/2.8298564e.chunk.js",
     "static/js/2.8298564e.chunk.js.map": "/durango/static/js/2.8298564e.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.46b307416eee7386b7658d75b90d53da.js": "/durango/precache-manifest.46b307416eee7386b7658d75b90d53da.js",
+    "precache-manifest.e387990bce2b12329dcc9048f82223f4.js": "/durango/precache-manifest.e387990bce2b12329dcc9048f82223f4.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
-    "static/css/main.5641b41c.chunk.css.map": "/durango/static/css/main.5641b41c.chunk.css.map",
+    "static/css/main.4fd62dd1.chunk.css.map": "/durango/static/css/main.4fd62dd1.chunk.css.map",
     "static/js/2.8298564e.chunk.js.LICENSE.txt": "/durango/static/js/2.8298564e.chunk.js.LICENSE.txt",
     "static/media/Logo.png": "/durango/static/media/Logo.2c257583.png",
     "static/media/App.css": "/durango/static/media/bg.9f8d8194.jpeg",
@@ -25,7 +25,7 @@
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
     "static/js/2.8298564e.chunk.js",
-    "static/css/main.5641b41c.chunk.css",
-    "static/js/main.a73ca1c2.chunk.js"
+    "static/css/main.4fd62dd1.chunk.css",
+    "static/js/main.66cbaec6.chunk.js"
   ]
 }
