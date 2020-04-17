@@ -98,6 +98,66 @@ const kafici = [
             brojOcena: 38,
             userAplauza: 0,
         }
+    },
+    {
+        id: 6,
+        title: 'Niš noću',
+        logo: 'nisNocu.jpg',
+        brojMesta: 32,
+        brojSlobodnihMesta: 25,
+        rezervacije: [],
+        details: {
+            opis: 'Pazite se, mi volimo da vas slikamo noću!',
+            slike: '',
+            radnoVreme: '21:30 - 04:50',
+            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            meni: '',
+            adresa: 'Centar grada',
+            brojTelefona: '(064) 776-332',
+            ukupnoAplauza: 563,
+            brojOcena: 194,
+            userAplauza: 0,
+        }
+    },
+    {
+        id: 7,
+        title: 'Okrug caffe',
+        logo: 'okrug.jpg',
+        brojMesta: 20,
+        brojSlobodnihMesta: 3,
+        rezervacije: [],
+        details: {
+            opis: 'Kod nas uvek možete da čitate knjige iz trilogija "Gospodar prstenova" i "Hobiti"',
+            slike: '',
+            radnoVreme: '6:30 - 01:45',
+            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            meni: '',
+            adresa: 'Bulevar',
+            brojTelefona: '(064) 776-332',
+            ukupnoAplauza: 287,
+            brojOcena: 62,
+            userAplauza: 0,
+        }
+    },
+    {
+        id: 8,
+        title: 'Zrnce caffe',
+        logo: 'zrnce.png',
+        brojMesta: 58,
+        brojSlobodnihMesta: 41,
+        rezervacije: [],
+        details: {
+            opis: 'I ako smo zrnce mi nismo mali!',
+            slike: '',
+            radnoVreme: '7:25 - 03:45',
+            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            meni: '',
+            adresa: 'Nepoznata adresa',
+            brojTelefona: '(064) 776-332',
+            ukupnoAplauza: 33,
+            brojOcena: 10,
+            userAplauza: 0,
+        }
     }
 ]
 

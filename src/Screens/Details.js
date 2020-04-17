@@ -27,12 +27,6 @@ import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 import Bounce from 'react-reveal/Bounce';
 import Roll from 'react-reveal/Roll';
 
-/* Images */
-import vinyl from '../slike/vinyl.png';
-import Square from '../slike/Square.jpg';
-import dnevnaSoba from '../slike/dnevnaSoba.jpg';
-import durangoCaffe from '../slike/durangoCaffe.png';
-
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
@@ -77,26 +71,6 @@ function Details(props) {
         </p>;
     }
 
-    const getSrc = (title) => {
-        switch (title) {
-            case 'vinyl': {
-                return vinyl;
-            };
-            case 'Square': {
-                return Square;
-            };
-            case 'dnevnaSoba': {
-                return dnevnaSoba;
-            };
-            case 'durangoCaffe': {
-                return durangoCaffe;
-            };
-            default: {
-                return durangoCaffe;
-            }
-        }
-    }
-
     const restOfPage = () => {
         return (
             <Fragment>
@@ -114,7 +88,9 @@ function Details(props) {
                     >
                         <div>
                             <img
-                                src={getSrc(data.logo.split('.')[0])}
+                                src={
+                                    `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                }
                                 className={
                                     `detailsLogo reveal-focus-${
                                     data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0

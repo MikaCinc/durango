@@ -12,12 +12,6 @@ import { useParams } from "react-router-dom";
 import Logo from '../../ExtendedLogo/Logo.png';
 import kafici from '../../data/kafici';
 
-/* Images */
-import vinyl from '../../slike/vinyl.png';
-import Square from '../../slike/Square.jpg';
-import dnevnaSoba from '../../slike/dnevnaSoba.jpg';
-import durangoCaffe from '../../slike/durangoCaffe.png';
-
 const Restaurant = ({ history }) => {
     let { id } = useParams();
 
@@ -65,26 +59,6 @@ const Restaurant = ({ history }) => {
         </p>;
     }
 
-    const getSrc = (title) => {
-        switch (title) {
-            case 'vinyl': {
-                return vinyl;
-            };
-            case 'Square': {
-                return Square;
-            };
-            case 'dnevnaSoba': {
-                return dnevnaSoba;
-            };
-            case 'durangoCaffe': {
-                return durangoCaffe;
-            };
-            default: {
-                return durangoCaffe;
-            }
-        }
-    }
-
     const updateFreeSeats = (value) => {
         if (!value) return;
 
@@ -112,7 +86,9 @@ const Restaurant = ({ history }) => {
                             {getRadnoVreme()}
                         </div>
                         <img
-                            src={getSrc(data.logo.split('.')[0])}
+                            src={
+                                `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                            }
                             className={
                                 `detailsLogo reveal-focus-${
                                 data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
@@ -158,7 +134,7 @@ const Restaurant = ({ history }) => {
                                 </button>
                             )
                         }
-                        <br/>
+                        <br />
                         <button style={{ backgroundColor: 'blue' }}>Ima mesta</button>
                     </div>
                 </div>
