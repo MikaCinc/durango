@@ -167,36 +167,6 @@ h1 {
   width: 100%;
 }
 
-.listBadge {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 10px;
-  color: white;
-  padding-left: 5px;
-  padding-top: 2px;
-  border-top-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-  background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
-}
-
-.favoritBadgeContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%);
-  color: gold;
-  border-bottom-left-radius: 7px;
-  border-top-right-radius: 7px;
-  z-index: 1000;
-}
-
-.favoritBadge {
-  margin: 1px 6px 2px 9px;
-  display: flex;
-  align-self: center;
-}
-
 .listSeparator {
   display: inline-block;
   position: relative;
@@ -334,20 +304,21 @@ h1 {
   display: inline-block;
 }
 
-.normalObject {
-  position: relative;
-  padding: 4px;
-  background-color: white;;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-}
-
 .closedObject {
   position: relative;
   /* border: 4px solid #B0B0B0; */
   padding: 4px;
   background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.normalObject {
+  position: relative;
+  padding: 4px;
+  /* background: linear-gradient(to top right, #00c6fb 30%, #005bea 100%); */
+  background-color: white;
   margin-bottom: 12px;
   border-radius: 10px;
   box-shadow: var(--shadow);
@@ -362,9 +333,39 @@ h1 {
   padding: 8px;
   cursor: pointer;
   border-radius: 7px;
-  
   background-color: white;
-  
+}
+
+.favoritBadgeContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%);
+  /* background-image: transparent; */
+  /* background: #005bea; */
+  color: gold;
+  border-bottom-left-radius: 7px;
+  border-top-right-radius: 7px;
+  z-index: 1;
+}
+
+.favoritBadge {
+  margin: 1px 6px 2px 9px;
+  display: flex;
+  align-self: center;
+}
+
+.listBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 10px;
+  color: white;
+  padding-left: 5px;
+  padding-top: 2px;
+  border-top-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
 }
 
 .lineCounter {
