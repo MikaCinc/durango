@@ -149,7 +149,7 @@ const kafici = [
         details: {
             opis: 'I ako smo zrnce mi nismo mali!',
             slike: '',
-            radnoVreme: '7:25 - 03:45',
+            radnoVreme: '7:25 - 03:46',
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
             meni: '',
             adresa: 'Nepoznata adresa',
