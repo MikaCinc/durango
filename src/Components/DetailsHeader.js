@@ -1,7 +1,5 @@
 import React, {
-    useContext,
     useEffect,
-    useRef,
     useState
 } from 'react';
 
@@ -12,8 +10,22 @@ import Logo from '../ExtendedLogo/Logo.png';
 import RubberBand from 'react-reveal/RubberBand';
 
 const DetailsHeader = (props) => {
+    const [isSticky, setSticky] = useState(false);
+
+    const handleScroll = () => {
+        setSticky(window.pageYOffset !== 0);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <div className="detailsHeader">
+        <div className={`detailsHeader ${isSticky ? ' stickyDetailsHeader' : ''}`}>
             <div
                 className="goBack"
                 onClick={() => {
@@ -24,7 +36,7 @@ const DetailsHeader = (props) => {
                     arrow_back_ios
                 </i>
             </div>
-            <img src={Logo} className="detailsDurangoLogo" />
+            <img src={Logo} className={`detailsDurangoLogo ${isSticky ? ' stickyDurangoLogo' : ''}`} />
         </div>
     )
 }

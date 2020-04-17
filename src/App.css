@@ -233,6 +233,7 @@ h1 {
 }
 
 .mainHeader {
+  position: sticky;
   background-color: white;
   text-align: center;
   display: flex;
@@ -261,6 +262,9 @@ h1 {
 }
 
 .search {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -401,6 +405,12 @@ h1 {
   padding: 20px;
   height: 75px;
   box-shadow: var(--shadow);
+  transition-duration: 0.2s;
+  /* margin-top: 0.01px; @todo this is hack so sticky animation can work */
+}
+
+.stickyDetailsHeader {
+  height: 50px;
 }
 
 .detailsSubheader {
@@ -420,6 +430,11 @@ h1 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  transition-duration: 0.2s;
+}
+
+.stickyDurangoLogo {
+  width: 150px;
 }
 
 .detailsTitle {
@@ -573,7 +588,7 @@ h1 {
 
 .reserveContainer {
   padding: 20px;
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 

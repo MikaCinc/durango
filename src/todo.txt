@@ -1,4 +1,1 @@
-1) Sticky header component:
-https://pantaley.com/blog/Create-sticky-header-only-with-React-Hooks/
-
 2) Chained filters
