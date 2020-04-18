@@ -84,7 +84,7 @@ function Details(props) {
                     </div>
                     <Roll
                         right
-                        duration={700}
+                        duration={500}
                     >
                         <div>
                             <img

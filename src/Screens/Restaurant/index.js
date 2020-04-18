@@ -135,7 +135,7 @@ const Restaurant = ({ history }) => {
                             )
                         }
                         <br />
-                        <button style={{ backgroundColor: 'blue' }}>Ima mesta</button>
+                        <button style={{ backgroundColor: 'blue', color: 'white' }}>Ima 10+ mesta</button>
                     </div>
                 </div>
             }
