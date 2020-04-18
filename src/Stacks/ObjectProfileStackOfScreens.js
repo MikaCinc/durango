@@ -24,8 +24,17 @@ import Details from '../Screens/Details';
 import MoreDetails from '../Screens/MoreDetails';
 import Reserve from '../Screens/Reserve';
 
+/* Animations */
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
+
+const routes = [
+    { path: '/durango/app/:id', name: 'Details', Component: Details },
+    { path: '/durango/app/:id/more', name: 'MoreDetails', Component: MoreDetails },
+    { path: '/durango/app/:id/reserve', name: 'Reserve', Component: Reserve },
+]
 
 const ObjectProfileStackOfScreens = (props) => {
     let { id } = useParams();
@@ -56,11 +65,40 @@ const ObjectProfileStackOfScreens = (props) => {
             {
                 data && <DetailsHeader history={props.history} back={getBackURL()} />
             }
-            <Switch>
-                <Route key={2} exact path="/durango/app/:id" component={Details} />
+            <div className="container">
+                <TransitionGroup>
+                    <CSSTransition
+                        in={true}
+                        timeout={300}
+                        classNames="page"
+                        unmountOnExit
+                        key={props.history.location.key} // Bez ovoga neće!
+                    >
+                        <Switch location={props.history.location}>
+                            {
+                                routes.map(({ path, Component }) => (
+                                    <Route
+                                        key={path}
+                                        exact
+                                        path={path}
+                                        render={
+                                            ({ match }) => (
+                                                <div className="page">
+                                                    <Component history={props.history} />
+                                                </div>
+                                            )
+                                        }
+                                    />
+                                ))
+                            }
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
+
+            {/* <Route key={2} exact path="/durango/app/:id" component={Details} />
                 <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
-                <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} />
-            </Switch>
+                <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} /> */}
             {
                 !loading && data && <Claps data={data} />
             }
