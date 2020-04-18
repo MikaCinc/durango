@@ -12,12 +12,10 @@ import moment from 'moment';
 import { useParams } from "react-router-dom";
 import { roundToPrecision } from '../library/common';
 
-/* Logo */
-import Logo from '../ExtendedLogo/Logo.png';
-
 /* Components */
 import { Carousel } from 'react-bootstrap';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
+import ReactImageAppear from 'react-image-appear';
 
 /* Animations */
 import { Spring } from 'react-spring/renderprops';
@@ -64,16 +62,29 @@ function MoreDetails(props) {
             <Carousel
                 style={{ marginBottom: '10px' }}
                 interval={3000}
+                slide={true}
             >
                 {
                     [kafic1, kafic2, kafic3].map((item, index) => {
                         return <Carousel.Item key={index}>
-                            <img
-                                className="d-block w-100"
-                                // src={'./slike/carouselMock/' + item}
+                            <ReactImageAppear
+                                className="d-block w-100 h-auto"
                                 src={item}
-                                alt={(index + 1) + '. slika'}
+                                // animation="fadeInRight"
+                                animationDuration="0.8s"
+                                easing="ease-in-out"
+                                showLoader={false}
+                                placeholderStyle={{ background: 'transparent', opacity: 1 }}
+                                placeholder={'https://www.transparenttextures.com/patterns/asfalt-light.png'}
                             />
+                            {/* <div>
+                                <img
+                                    className="d-block w-100"
+                                    // src={'./slike/carouselMock/' + item}
+                                    src={item}
+                                    alt={(index + 1) + '. slika'}
+                                />
+                            </div> */}
                             {/* <Carousel.Caption>
                                 <h3>{'Glavni tekst ' + (index + 1)}</h3>
                                 <p>{'Tekst opisa ' + (index + 1)}</p>
