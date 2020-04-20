@@ -10,8 +10,11 @@ import '../App.css';
 /* Libraries */
 import _ from 'lodash';
 
-/* Logo */
-import Logo from '../ExtendedLogo/Logo.png';
+/* Icons */
+// import Star from '../icons/star.svg';
+// import StarOutline from '../icons/starOutline.svg';
+import Star from '../icons/star.svg';
+import StarOutline from '../icons/star_white_border.svg';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -151,12 +154,13 @@ function Details(props) {
                     <Bounce
                         spy={User.Favourites}
                     >
-                        <i
+                        <img src={isFavourite() ? Star : StarOutline} className="svgIconSmaller" />
+                        {/* <i
                             className="material-icons detailIconClickable"
                             style={{ color: isFavourite() ? 'gold' : '' }}
                         >
                             {isFavourite() ? 'star' : 'star_outline'}
-                        </i>
+                        </i> */}
                     </Bounce>
                 </div>
             </Fragment>

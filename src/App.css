@@ -3,7 +3,7 @@
 }
 
 :root {
-  --primary : #3185FC;
+  --primary: #3185FC;
   --sharp-blues: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
   --shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   --mini-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
@@ -26,6 +26,30 @@ body {
 .button:hover {
   background: #b0b0b0 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 } */
+
+/* ICONS */
+
+.svgIconSmallest {
+  width: 18px;
+  height: 18px;
+}
+
+.svgIconSmaller {
+  width: 24px;
+  height: 24px;
+}
+
+.svgIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.svgIconBigger {
+  width: 36px;
+  height: 36px;
+}
+
+/* Other */
 
 h1 {
   font-size: 26px;
@@ -852,6 +876,7 @@ emoji-slider {
 }
 
 /* Route Animations */
+
 .container {
   position: relative;
 }

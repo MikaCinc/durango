@@ -18,6 +18,11 @@ import queryString from 'query-string';
 import Fade from 'react-reveal/Fade';
 import FlipMove from 'react-flip-move';
 
+/* Icons */
+import Star from '../icons/star.svg';
+import Seat from '../icons/seat.svg';
+import SeatGray from '../icons/seat_gray.svg';
+
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
@@ -85,14 +90,16 @@ const FavoritBadge = () => {
         <div
             className="favoritBadgeContainer"
         >
-            <i
+            {/* <i
                 className="material-icons-outlined favoritBadge"
                 style={{
                     fontSize: '18px'
                 }}
             >
                 star
-            </i>
+            </i> */}
+
+            <img src={Star} className="svgIconSmallest favoritBadge" />
         </div>
     )
 }
@@ -159,7 +166,8 @@ const List = ({ history }) => {
                                         }}
                                     >
                                         {/* people */}
-                                        event_seat
+                                        {/* event_seat */}
+                                        <img src={Seat} className="svgIcon" />
                             </i>
                                 </div>
                             </Fade>
@@ -207,7 +215,8 @@ const List = ({ history }) => {
                                 }}
                             >
                                 {/* people */}
-                                event_seat
+                                {/* event_seat */}
+                                <img src={SeatGray} className="svgIcon" />
                         </i>
                             <LabelBadge />
                         </div>

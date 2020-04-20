@@ -13,6 +13,13 @@ import { useParams } from "react-router-dom";
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 
+/* Icons */
+
+import Plus from '../icons/plus.svg';
+import Minus from '../icons/minus.svg';
+
+// import { Plus, Minus } from '../icons/index.js';
+
 /* Components */
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
@@ -112,7 +119,9 @@ function Reserve(props) {
                                 };
                             }}
                             className="reserveSeatsButton"
-                        >-</button>
+                        >
+                            <img className="svgIcon" src={Minus} />
+                        </button>
                         <div
                             className="reserveSeatsCounter boldText"
                         >
@@ -123,7 +132,10 @@ function Reserve(props) {
                                 setSeats(seats + 1)
                             }}
                             className="reserveSeatsButton"
-                        >+</button>
+                        >
+                            {/* <Plus width="40px" height="40px"/> */}
+                            <img className="svgIcon" src={Plus} />
+                        </button>
                     </div>
                 </div>
                 <div

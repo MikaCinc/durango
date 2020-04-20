@@ -6,6 +6,9 @@ import React, {
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 
+/* Icons */
+import BackArrow from '../icons/backArrow.svg';
+
 /* Animations */
 import RubberBand from 'react-reveal/RubberBand';
 
@@ -32,9 +35,10 @@ const DetailsHeader = (props) => {
                     props.history.push(props.back);
                 }}
             >
-                <i className="material-icons">
+                {/* <i className="material-icons">
                     arrow_back_ios
-                </i>
+                </i> */}
+                <img src={BackArrow} className="svgIconBigger" />
             </div>
             <img src={Logo} className={`detailsDurangoLogo ${isSticky ? ' stickyDurangoLogo' : ''}`} />
         </div>
