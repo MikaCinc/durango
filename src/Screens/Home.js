@@ -158,7 +158,8 @@ const List = ({ history }) => {
                                                 : '#C50505'
                                         }}
                                     >
-                                        people
+                                        {/* people */}
+                                        event_seat
                             </i>
                                 </div>
                             </Fade>
@@ -205,7 +206,8 @@ const List = ({ history }) => {
                                     color: '#B0B0B0'
                                 }}
                             >
-                                people
+                                {/* people */}
+                                event_seat
                         </i>
                             <LabelBadge />
                         </div>
