@@ -1,31 +1,38 @@
 {
   "files": {
-    "main.css": "/durango/static/css/main.a0a1e017.chunk.css",
-    "main.js": "/durango/static/js/main.e3a46675.chunk.js",
-    "main.js.map": "/durango/static/js/main.e3a46675.chunk.js.map",
+    "main.css": "/durango/static/css/main.5f09545f.chunk.css",
+    "main.js": "/durango/static/js/main.a54c434a.chunk.js",
+    "main.js.map": "/durango/static/js/main.a54c434a.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
-    "static/js/2.00e7a3ee.chunk.js": "/durango/static/js/2.00e7a3ee.chunk.js",
-    "static/js/2.00e7a3ee.chunk.js.map": "/durango/static/js/2.00e7a3ee.chunk.js.map",
+    "static/js/2.d6a1f4de.chunk.js": "/durango/static/js/2.d6a1f4de.chunk.js",
+    "static/js/2.d6a1f4de.chunk.js.map": "/durango/static/js/2.d6a1f4de.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.813f3845001bb83879fb1258fa2ed2f4.js": "/durango/precache-manifest.813f3845001bb83879fb1258fa2ed2f4.js",
+    "precache-manifest.d3fdaac62de5990ae1bd832f231f94bf.js": "/durango/precache-manifest.d3fdaac62de5990ae1bd832f231f94bf.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
-    "static/css/main.a0a1e017.chunk.css.map": "/durango/static/css/main.a0a1e017.chunk.css.map",
-    "static/js/2.00e7a3ee.chunk.js.LICENSE.txt": "/durango/static/js/2.00e7a3ee.chunk.js.LICENSE.txt",
-    "static/media/Logo.png": "/durango/static/media/Logo.2c257583.png",
+    "static/css/main.5f09545f.chunk.css.map": "/durango/static/css/main.5f09545f.chunk.css.map",
+    "static/js/2.d6a1f4de.chunk.js.LICENSE.txt": "/durango/static/js/2.d6a1f4de.chunk.js.LICENSE.txt",
+    "static/media/Logo.png": "/durango/static/media/Logo.eb5c53a5.png",
+    "static/media/backArrow.svg": "/durango/static/media/backArrow.5ad7c031.svg",
     "static/media/App.css": "/durango/static/media/bg.9f8d8194.jpeg",
     "static/media/kafic1.jpg": "/durango/static/media/kafic1.4fbc8bcd.jpg",
     "static/media/kafic2.jpg": "/durango/static/media/kafic2.9ff91612.jpg",
     "static/media/kafic3.jpg": "/durango/static/media/kafic3.ba378676.jpg",
-    "static/media/noResults.png": "/durango/static/media/noResults.a2f08766.png"
+    "static/media/minus.svg": "/durango/static/media/minus.70dc2030.svg",
+    "static/media/noResults.png": "/durango/static/media/noResults.a2f08766.png",
+    "static/media/plus.svg": "/durango/static/media/plus.ce5392aa.svg",
+    "static/media/seat.svg": "/durango/static/media/seat.1e91f677.svg",
+    "static/media/seat_gray.svg": "/durango/static/media/seat_gray.0fcc2739.svg",
+    "static/media/star.svg": "/durango/static/media/star.46cc7ae4.svg",
+    "static/media/star_white_border.svg": "/durango/static/media/star_white_border.825836a4.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
-    "static/js/2.00e7a3ee.chunk.js",
-    "static/css/main.a0a1e017.chunk.css",
-    "static/js/main.e3a46675.chunk.js"
+    "static/js/2.d6a1f4de.chunk.js",
+    "static/css/main.5f09545f.chunk.css",
+    "static/js/main.a54c434a.chunk.js"
   ]
 }
