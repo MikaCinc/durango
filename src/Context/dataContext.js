@@ -40,6 +40,8 @@ const DataProvider = (props) => {
     const [sortedClosed, setSortedClosed] = useState([]);
     // Current page/data
     const [currentData, setCurrentData] = useState({});
+    // Timer za rezervaciju
+    const [timer, setTimer] = useState(null);
 
     const [loading, setLoading] = useState(true);
     // const [authorized, setAuthorized] = useState(false);
@@ -127,6 +129,24 @@ const DataProvider = (props) => {
         }
     }, [Data]);
 
+    useEffect(() => {
+        let int;
+
+        if (timer === 900) {
+            int = setInterval(() => {
+                setTimer(timer - 1);
+            }, 1000);
+        } else if (timer === 0) {
+            clearInterval(int);
+        }
+
+        console.log(timer)
+
+        return () => {
+            clearInterval(int);
+        }
+    }, [timer]);
+
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
             randomIDs = _.slice(_.shuffle(IDs), _.random(4));
@@ -175,7 +195,7 @@ const DataProvider = (props) => {
     };
 
     const toggleFavourite = (fav) => {
-        let nextState = {...User};
+        let nextState = { ...User };
 
         if (nextState.Favourites.indexOf(fav) === -1) {
             nextState = {
@@ -190,6 +210,28 @@ const DataProvider = (props) => {
         }
 
         return setUser(nextState);
+    }
+
+    const fastReserve = (ID, Time) => {
+        /* let nextState = { ...User };
+
+        console.log(ID, Time);
+
+        if (nextState.Reservation.ID) {
+            //@todo provera
+        }
+
+        nextState = {
+            ...User,
+            Reservation: [
+                ID,
+                Time
+            ]
+        }
+
+        setTimer(900);
+
+        return setUser(nextState); */
     }
 
     const changeData = ({ id, ...restOfData }) => {
@@ -243,7 +285,10 @@ const DataProvider = (props) => {
                 filters,
                 toggleFilters,
                 currentData,
-                setCurrentData
+                setCurrentData,
+                fastReserve,
+                // setTimer,
+                timer
             }}
         >
             {props.children}

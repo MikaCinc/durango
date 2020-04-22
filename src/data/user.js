@@ -4,5 +4,9 @@ let User= {
     Email: '',
     Location: '',
     canReserve: true,
+    Reservation: {
+        ID: null,
+        Time: '',
+    },
     Favourites: []
 };

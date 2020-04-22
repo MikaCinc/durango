@@ -49,7 +49,7 @@ const placeholderObj = {
 
 function Reserve(props) {
     let { id } = useParams();
-    const { Data, loading } = useContext(DataContext);
+    const { Data, loading, fastReserve } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
@@ -168,7 +168,7 @@ function Reserve(props) {
                     <Modal.Body>
                         <div className="reserveModalContainer">
                             <img src={Logo} className="reserveModalLogo" />
-                            <h3 className="boldText reserveModalTitle">Čestitamo!</h3>
+                            <h3 className="boldText reserveModalTitle">Konobar je odobrio!</h3>
                             <p className="reserveModalExplanation">
                                 Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.
                     Ne zaboravite da se pojavite najkasnije do {time}.
@@ -178,6 +178,7 @@ function Reserve(props) {
                                 onClick={() => {
                                     handleClose();
                                     props.history.push(`/durango/app/${data.id}`);
+                                    fastReserve(data.id, time);
                                 }}
                             >
                                 <h1 className="detailRowText boldText">OK</h1>

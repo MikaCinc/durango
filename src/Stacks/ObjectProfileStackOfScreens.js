@@ -65,7 +65,7 @@ const ObjectProfileStackOfScreens = (props) => {
             {
                 data && <DetailsHeader history={props.history} back={getBackURL()} />
             }
-            {/* <div className="container"> */}
+            <div className="container">
                 <TransitionGroup>
                     <CSSTransition
                         in={true}
@@ -94,7 +94,7 @@ const ObjectProfileStackOfScreens = (props) => {
                         </Switch>
                     </CSSTransition>
                 </TransitionGroup>
-            {/* </div> */}
+            </div>
 
             {/* <Route key={2} exact path="/durango/app/:id" component={Details} />
                 <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
