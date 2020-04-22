@@ -223,7 +223,6 @@ h1 {
   width: 125px;
   height: 125px;
   margin-top: 10px;
-  /* opacity: 50%; */
 }
 
 .mainHeader {
@@ -418,7 +417,7 @@ h1 {
 }
 
 .detailsHeader {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   background-color: white;
@@ -883,6 +882,7 @@ emoji-slider {
 
 .page {
   position: absolute;
+  top: 75px; /* DetailsHeader je fixed sa visinom 75px */
   left: 0px;
   right: 0px;
 }

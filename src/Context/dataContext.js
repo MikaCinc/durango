@@ -81,7 +81,6 @@ const DataProvider = (props) => {
 
         if (authorized) {
             timeout = setTimeout(() => {
-                console.log('loaded')
                 setData(kafici);
                 setLoading(false);
             }, 1200)

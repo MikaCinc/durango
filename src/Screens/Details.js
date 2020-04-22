@@ -15,6 +15,7 @@ import _ from 'lodash';
 // import StarOutline from '../icons/starOutline.svg';
 import Star from '../icons/star.svg';
 import StarOutline from '../icons/star_white_border.svg';
+import Info from '../icons/info.svg';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -137,9 +138,10 @@ function Details(props) {
                     props.history.push(`/durango/app/${data.id}/more`);
                 }}>
                     <h1 className="detailRowText boldText">O mestu</h1>
-                    <i className="material-icons-outlined detailIconClickable">
+                    {/* <i className="material-icons-outlined detailIconClickable">
                         info
-                </i>
+                </i> */}
+                    <img src={Info} className="svgIconSmaller detailIconClickable" />
                 </div>
                 <div className="detailsRow clickableRow" onClick={() => {
                     toggleFavourite(data.id);
@@ -154,7 +156,7 @@ function Details(props) {
                     <Bounce
                         spy={User.Favourites}
                     >
-                        <img src={isFavourite() ? Star : StarOutline} className="svgIconSmaller" />
+                        <img src={isFavourite() ? Star : StarOutline} className="svgIconSmaller detailIconClickable" />
                         {/* <i
                             className="material-icons detailIconClickable"
                             style={{ color: isFavourite() ? 'gold' : '' }}

@@ -20,11 +20,12 @@ const DetailsHeader = (props) => {
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        //@todo animate on scroll
+        /* window.addEventListener('scroll', handleScroll);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-        };
+        }; */
     }, []);
 
     return (

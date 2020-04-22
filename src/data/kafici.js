@@ -17,6 +17,8 @@ const kafici = [
             ukupnoAplauza: 135,
             brojOcena: 38,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 3
         }
     },
     {
@@ -37,6 +39,8 @@ const kafici = [
             ukupnoAplauza: 148,
             brojOcena: 38,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 3
         }
     },
     {
@@ -57,6 +61,8 @@ const kafici = [
             ukupnoAplauza: 156,
             brojOcena: 38,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 2
         }
     },
     {
@@ -77,6 +83,8 @@ const kafici = [
             ukupnoAplauza: 190,
             brojOcena: 38,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 2
         }
     },
     {
@@ -97,6 +105,8 @@ const kafici = [
             ukupnoAplauza: 145,
             brojOcena: 38,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 1
         }
     },
     {
@@ -117,6 +127,8 @@ const kafici = [
             ukupnoAplauza: 563,
             brojOcena: 194,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 3
         }
     },
     {
@@ -137,6 +149,8 @@ const kafici = [
             ukupnoAplauza: 287,
             brojOcena: 62,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 1
         }
     },
     {
@@ -157,6 +171,8 @@ const kafici = [
             ukupnoAplauza: 33,
             brojOcena: 10,
             userAplauza: 0,
+            muzika: 'Pop',
+            volume: 1
         }
     }
 ]

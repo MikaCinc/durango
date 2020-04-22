@@ -128,6 +128,8 @@ const List = ({ history }) => {
             enterAnimation="none"
             leaveAnimation="none"
             staggerDurationBy={100}
+        // verticalAlignment="bottom"
+        // maintainContainerHeight="true"
         >
             {
                 sortedOpen.map(Kafic => {
@@ -168,7 +170,7 @@ const List = ({ history }) => {
                                         {/* people */}
                                         {/* event_seat */}
                                         <img src={Seat} className="svgIcon" />
-                            </i>
+                                    </i>
                                 </div>
                             </Fade>
                             {
@@ -179,7 +181,7 @@ const List = ({ history }) => {
                 })
             }
         </FlipMove>
-        <Separator />
+        {sortedClosed.length > 0 && <Separator />}
         <FlipMove
             duration={300}
             easing="ease-out"
@@ -187,6 +189,8 @@ const List = ({ history }) => {
             enterAnimation="none"
             leaveAnimation="none"
             staggerDurationBy={100}
+        // verticalAlignment="bottom"
+        // maintainContainerHeight="true"
         >
             {
                 sortedClosed.map(Kafic => {
@@ -217,7 +221,7 @@ const List = ({ history }) => {
                                 {/* people */}
                                 {/* event_seat */}
                                 <img src={SeatGray} className="svgIcon" />
-                        </i>
+                            </i>
                             <LabelBadge />
                         </div>
                         {

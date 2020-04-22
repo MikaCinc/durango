@@ -71,7 +71,7 @@ function MoreDetails(props) {
                                 className="d-block w-100 h-auto"
                                 src={item}
                                 // animation="fadeInRight"
-                                animationDuration="0.8s"
+                                animationDuration="0.5s"
                                 easing="ease-in-out"
                                 showLoader={false}
                                 placeholderStyle={{ background: 'transparent', opacity: 1 }}
@@ -151,7 +151,7 @@ function MoreDetails(props) {
                     <div>
                         <span className="boldText mr-1">Muzika: </span>
                         {
-                            'Pop'
+                            data.details.muzika
                         }
                     </div>
                     <div>
@@ -163,7 +163,10 @@ function MoreDetails(props) {
                                         <i
                                             className="material-icons-outlined detailIconBlue"
                                             style={{
-                                                fontSize: '18px'
+                                                fontSize: '18px',
+                                                color: _.inRange(i, 0, data.details.volume + 1)
+                                                    ? ''
+                                                    : 'gray'
                                             }}
                                             key={i}
                                         >
