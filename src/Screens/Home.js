@@ -23,6 +23,7 @@ import FlipMove from 'react-flip-move';
 import Star from '../icons/star.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
+import SeatOrange from '../icons/seat_orange.svg';
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -108,7 +109,7 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
             updateTimer();
             interval = setInterval(() => {
                 updateTimer();
-                if(!isReserved(object)) {
+                if (!isReserved(object)) {
                     // Timer is over!
                     // Do something
                     // And clearInterval
@@ -235,15 +236,15 @@ const List = ({ history }) => {
                                     </p>
                                     <i
                                         className="material-icons-outlined peopleIcon"
-                                        style={{
-                                            color: Kafic.brojSlobodnihMesta > 0
-                                                ? '#3185FC'
-                                                : '#C50505'
-                                        }}
                                     >
-                                        {/* people */}
-                                        {/* event_seat */}
-                                        <img src={Seat} className="svgIcon" />
+                                        <img
+                                            src={
+                                                Kafic.brojSlobodnihMesta > 0
+                                                ? Seat
+                                                : SeatOrange
+                                            }
+                                            className="svgIcon"
+                                        />
                                     </i>
                                     {
                                         isReserved(Kafic) && <LabelBadge

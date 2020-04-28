@@ -818,12 +818,12 @@ h1 {
   }
 }
 
-.reveal-focus-red {
+.reveal-focus-orange {
   /* border: 1px solid transparent !important; */
   /* outline: 5px solid transparent !important; */
   position: relative !important;
   /* border-color: #000 !important; */
-  outline-color: red !important;
+  outline-color: orangered !important;
   /* box-shadow: 0 0 15px 3px red !important; */
   animation: glowfade-red 2s ease-in-out;
   -moz-animation: glowfade-red 2s ease-in-out;
@@ -834,10 +834,10 @@ h1 {
 
 @keyframes glowfade-red {
   from {
-    box-shadow: 0 0 20px 5px red;
+    box-shadow: 0 0 20px 5px orangered;
   }
   to {
-    box-shadow: 0 0 10px 3px red;
+    box-shadow: 0 0 10px 3px orangered;
   }
 }
 

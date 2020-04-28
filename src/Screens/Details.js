@@ -16,6 +16,9 @@ import _ from 'lodash';
 import Star from '../icons/star.svg';
 import StarOutline from '../icons/star_white_border.svg';
 import Info from '../icons/info.svg';
+import Seat from '../icons/seat.svg';
+import SeatGray from '../icons/seat_gray.svg';
+import SeatOrange from '../icons/seat_orange.svg';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -92,7 +95,7 @@ function Details(props) {
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F' : '#C50505' }}>{data.details.radnoVreme}</span>
+            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.radnoVreme}</span>
         </p>;
     }
 
@@ -135,7 +138,7 @@ function Details(props) {
                                     `detailsLogo reveal-focus-${
                                     data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
                                         ? 'blue'
-                                        : 'red'
+                                        : 'orange'
                                     }`
                                 }
                             />
@@ -146,7 +149,7 @@ function Details(props) {
                     <h1 className="detailRowText">
                         Slobodnih mesta:
                     <span style={{
-                            color: data.brojSlobodnihMesta > 0 ? '#3185FC' : '#9A031E',
+                            color: data.brojSlobodnihMesta > 0 ? '#3185FC' : 'orangered',
                         }}>
                             {
                                 ' ' + data.brojSlobodnihMesta + ' '
@@ -154,9 +157,16 @@ function Details(props) {
                         </span>
                         {/* / {data.brojMesta} */}
                     </h1>
-                    <i className="material-icons-outlined detailIcon">
-                        people
-                </i>
+                    {/* <i className="material-icons-outlined detailIcon"> */}
+                        <img
+                            src={
+                                data.brojSlobodnihMesta > 0
+                                    ? Seat
+                                    : SeatOrange
+                            }
+                            className="svgIconSmaller"
+                        />
+                    {/* </i> */}
                 </div>
                 <div
                     className="detailsRow clickableRow"
