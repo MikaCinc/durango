@@ -74,71 +74,95 @@ const Restaurant = ({ history }) => {
                 <div
                     className="IP-time"
                 >
-                    {currentTime.format("MM/DD/YYYY HH:mm:ss")}
+                    {currentTime.format("HH:mm:ss")}
                 </div>
                 <img src={Logo} className="detailsDurangoLogo" />
             </div>
-            {
-                data.id && <div className="IP-dataLoaded">
-                    <div className="detailsSubheader">
-                        <div>
-                            <h1 className="detailsTitle boldText">{data.title}</h1>
-                            {getRadnoVreme()}
+            <div className="page container">
+                {
+                    data.id && <div className="IP-dataLoaded">
+                        <div className="detailsSubheader">
+                            <div>
+                                <h1 className="detailsTitle boldText">{data.title}</h1>
+                                {getRadnoVreme()}
+                            </div>
+                            <img
+                                src={
+                                    `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                }
+                                className={
+                                    `detailsLogo reveal-focus-${
+                                    data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
+                                        ? 'blue'
+                                        : 'red'
+                                    }`
+                                }
+                            />
                         </div>
-                        <img
-                            src={
-                                `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
-                            }
-                            className={
-                                `detailsLogo reveal-focus-${
-                                data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
-                                    ? 'blue'
-                                    : 'red'
-                                }`
-                            }
-                        />
-                    </div>
-                    <div className="IP-counter">
-                        <p>Ukupan broj mesta: {data.brojMesta}</p>
-                        <p>Broj slobodnih mesta:</p>
-                        <input
-                            value={data.brojSlobodnihMesta}
-                            onChange={(e) => updateFreeSeats(e.target.value)}
-                        />
+                        <div className="IP-counter-container">
+                            <div className="IP-input-sideButton">
+                                <button className="IP-input-nemaMesta IP-clickable">
+                                    Nemamo mesta
+                                </button>
+                            </div>
+                            <div className="IP-dial-container">
+                                {
+                                    [..._.range(1, 10)].map(i => {
+                                        return (
+                                            <button key={i} className="IP-dial-button IP-clickable">{i}</button>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className="IP-input-sideButton">
+                                <button className="IP-input-imaMesta IP-clickable">
+                                    Imamo 10+ mesta
+                                </button>
+                            </div>
+                            {/* <p>Ukupan broj mesta: {data.brojMesta}</p>
+                            <p>Broj slobodnih mesta:</p>
+                            <input
+                                value={data.brojSlobodnihMesta}
+                                onChange={(e) => updateFreeSeats(e.target.value)}
+                            />
 
-                        <h1>Zauzeto</h1>
-                        {
-                            [5, 4, 3, 2, 1].map(i =>
-                                <button
-                                    key={i}
-                                    style={{ backgroundColor: 'red' }}
-                                    onClick={(e) => {
-                                        updateFreeSeats(data.brojSlobodnihMesta - i);
-                                    }}
-                                >
-                                    {i}
-                                </button>
-                            )
-                        }
-                        <h1>Oslobođeno</h1>
-                        {
-                            [5, 4, 3, 2, 1].map(i =>
-                                <button
-                                    key={i}
-                                    style={{ backgroundColor: 'green' }}
-                                    onClick={(e) => {
-                                        updateFreeSeats(data.brojSlobodnihMesta + i);
-                                    }}
-                                >
-                                    {i}
-                                </button>
-                            )
-                        }
-                        <br />
-                        <button style={{ backgroundColor: 'blue', color: 'white' }}>Ima 10+ mesta</button>
+                            <h1>Zauzeto</h1>
+                            {
+                                [5, 4, 3, 2, 1].map(i =>
+                                    <button
+                                        key={i}
+                                        style={{ backgroundColor: 'red' }}
+                                        onClick={(e) => {
+                                            updateFreeSeats(data.brojSlobodnihMesta - i);
+                                        }}
+                                    >
+                                        {i}
+                                    </button>
+                                )
+                            }
+                            <h1>Oslobođeno</h1>
+                            {
+                                [5, 4, 3, 2, 1].map(i =>
+                                    <button
+                                        key={i}
+                                        style={{ backgroundColor: 'green' }}
+                                        onClick={(e) => {
+                                            updateFreeSeats(data.brojSlobodnihMesta + i);
+                                        }}
+                                    >
+                                        {i}
+                                    </button>
+                                )
+                            }
+                            <br />
+                            <button style={{ backgroundColor: 'blue', color: 'white' }}>Ima 10+ mesta</button> */}
+
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
+            <div className="IP-zatvoriOtvoriContainer">Zatvori</div>
+            <div className="IP-volumeContainer">Glasnoća</div>
         </div>
 
     );
