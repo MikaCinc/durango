@@ -9,6 +9,7 @@ import React, {
 /* Data */
 import Logo from '../ExtendedLogo/Logo.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
+import noFavoritesIcon from '../CustomIcons/noFavorites.png';
 
 /* Libraries */
 import _ from 'lodash';
@@ -165,7 +166,7 @@ const FavoritBadge = ({ color = '#596164' }) => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, sortedOpen, sortedClosed, loading, User } = useContext(DataContext);
+    const { filteredData, sortedOpen, sortedClosed, loading, User, filters } = useContext(DataContext);
 
     const isReserved = (obj) => {
         if (!User.Reservation) {
@@ -184,6 +185,17 @@ const List = ({ history }) => {
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
         if (loading) return null;
+
+        if (filters.indexOf('omiljeni') !== -1) {
+            return (
+                <div className="noResults boldText">
+                    <h1>
+                        Objekte koje označite zvezdicom pojaviće se ovde kao omiljeni
+                    </h1>
+                    <img className="noResultsIcon" src={noFavoritesIcon} />
+                </div>
+            )
+        }
 
         return (
             <div className="noResults boldText">

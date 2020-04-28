@@ -15,7 +15,6 @@ import { roundToPrecision } from '../library/common';
 /* Components */
 import { Carousel } from 'react-bootstrap';
 import AbsoluteWrapper from '../Components/AbsoluteWrapper';
-import ReactImageAppear from 'react-image-appear';
 
 /* Animations */
 import { Spring } from 'react-spring/renderprops';
@@ -71,30 +70,20 @@ function MoreDetails(props) {
         return (
             <Carousel
                 style={{ marginBottom: '10px' }}
-                interval={3000}
+                interval={2500}
                 slide={true}
             >
                 {
                     [kafic1, kafic2, kafic3].map((item, index) => {
                         return <Carousel.Item key={index}>
-                            <ReactImageAppear
-                                className="d-block w-100 h-auto"
-                                src={item}
-                                // animation="fadeInRight"
-                                animationDuration="0.5s"
-                                easing="ease-in-out"
-                                showLoader={false}
-                                placeholderStyle={{ background: 'transparent', opacity: 1 }}
-                                placeholder={'https://www.transparenttextures.com/patterns/asfalt-light.png'}
-                            />
-                            {/* <div>
+                            <div>
                                 <img
                                     className="d-block w-100"
                                     // src={'./slike/carouselMock/' + item}
                                     src={item}
                                     alt={(index + 1) + '. slika'}
                                 />
-                            </div> */}
+                            </div>
                             {/* <Carousel.Caption>
                                 <h3>{'Glavni tekst ' + (index + 1)}</h3>
                                 <p>{'Tekst opisa ' + (index + 1)}</p>

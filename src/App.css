@@ -214,9 +214,10 @@ h1 {
 }
 
 .noResults {
+  padding: 15px;
   text-align: center;
   margin-top: 5rem;
-  color: #B0B0B0;
+  color: grey;
 }
 
 .noResultsIcon {
@@ -474,7 +475,7 @@ h1 {
 
 .detailsTitle {
   color: black;
-  font-size: 34px;
+  font-size: 32px;
 }
 
 .randoVremeParagraph {

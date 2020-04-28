@@ -17,6 +17,8 @@ import Logo from '../ExtendedLogo/Logo.png';
 
 import Plus from '../icons/plus.svg';
 import Minus from '../icons/minus.svg';
+import Done from '../icons/doneWhite.svg';
+import Clear from '../icons/clearWhite.svg';
 
 // import { Plus, Minus } from '../icons/index.js';
 
@@ -145,9 +147,7 @@ function Reserve(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Rezerviši</h1>
-                    <i className="material-icons detailIconClickable">
-                        check
-            </i>
+                    <img className="svgIconSmaller" src={Done} />
                 </div>
                 <div
                     className="detailsRow clickableRowCancel"
@@ -156,9 +156,7 @@ function Reserve(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Otkaži</h1>
-                    <i className="material-icons detailIconClickable">
-                        close
-            </i>
+                    <img className="svgIconSmaller" src={Clear} />
                 </div>
                 <Modal
                     show={showModal}
