@@ -174,6 +174,28 @@ const kafici = [
             muzika: 'Pop',
             volume: 1
         }
+    },
+    {
+        id: 9,
+        title: 'Sailor',
+        logo: 'sailor.png',
+        brojMesta: 30,
+        brojSlobodnihMesta: 17,
+        rezervacije: [],
+        details: {
+            opis: 'Plovimo na talasima vaše kafe',
+            slike: '',
+            radnoVreme: '7:45 - 01:00',
+            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            meni: '',
+            adresa: 'Nepoznata adresa',
+            brojTelefona: '(064) 776-332',
+            ukupnoAplauza: 743,
+            brojOcena: 225,
+            userAplauza: 0,
+            muzika: 'Rock',
+            volume: 1
+        }
     }
 ]
 
