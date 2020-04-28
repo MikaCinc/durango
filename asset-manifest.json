@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/durango/static/css/main.987245da.chunk.css",
-    "main.js": "/durango/static/js/main.31db6438.chunk.js",
-    "main.js.map": "/durango/static/js/main.31db6438.chunk.js.map",
+    "main.js": "/durango/static/js/main.2f272edd.chunk.js",
+    "main.js.map": "/durango/static/js/main.2f272edd.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
-    "static/js/2.4e10834d.chunk.js": "/durango/static/js/2.4e10834d.chunk.js",
-    "static/js/2.4e10834d.chunk.js.map": "/durango/static/js/2.4e10834d.chunk.js.map",
+    "static/js/2.06943ad1.chunk.js": "/durango/static/js/2.06943ad1.chunk.js",
+    "static/js/2.06943ad1.chunk.js.map": "/durango/static/js/2.06943ad1.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.3bcdfa659739b6d9735d28b7b6a04a38.js": "/durango/precache-manifest.3bcdfa659739b6d9735d28b7b6a04a38.js",
+    "precache-manifest.27f4be5b9144548198f18d18edc908a5.js": "/durango/precache-manifest.27f4be5b9144548198f18d18edc908a5.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
     "static/css/main.987245da.chunk.css.map": "/durango/static/css/main.987245da.chunk.css.map",
-    "static/js/2.4e10834d.chunk.js.LICENSE.txt": "/durango/static/js/2.4e10834d.chunk.js.LICENSE.txt",
+    "static/js/2.06943ad1.chunk.js.LICENSE.txt": "/durango/static/js/2.06943ad1.chunk.js.LICENSE.txt",
     "static/media/Logo.png": "/durango/static/media/Logo.eb5c53a5.png",
     "static/media/audioBlue.svg": "/durango/static/media/audioBlue.d3318f47.svg",
     "static/media/audioLightblue.svg": "/durango/static/media/audioLightblue.c793620e.svg",
@@ -22,6 +22,7 @@
     "static/media/bookWhite.svg": "/durango/static/media/bookWhite.852d74cb.svg",
     "static/media/callBlue.svg": "/durango/static/media/callBlue.568b344d.svg",
     "static/media/clearWhite.svg": "/durango/static/media/clearWhite.a4ae806c.svg",
+    "static/media/defaultLogo.png": "/durango/static/media/defaultLogo.5735143b.png",
     "static/media/doneWhite.svg": "/durango/static/media/doneWhite.e030b88c.svg",
     "static/media/infoWhite.svg": "/durango/static/media/infoWhite.d4077530.svg",
     "static/media/kafic1.jpg": "/durango/static/media/kafic1.4fbc8bcd.jpg",
@@ -45,8 +46,8 @@
   "entrypoints": [
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
-    "static/js/2.4e10834d.chunk.js",
+    "static/js/2.06943ad1.chunk.js",
     "static/css/main.987245da.chunk.css",
-    "static/js/main.31db6438.chunk.js"
+    "static/js/main.2f272edd.chunk.js"
   ]
 }
