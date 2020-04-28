@@ -75,7 +75,7 @@ const kafici = [
         details: {
             opis: 'Jedini kafić u gradu gde možete maziti naše kućne ljubimce dok ispijate kafu sa svojim društvom',
             slike: '',
-            radnoVreme: '05:30 - 04:50',
+            radnoVreme: '05:30 - 05:31',
             lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
             meni: '',
             adresa: 'Majakovskog bb 13/4',
@@ -85,28 +85,6 @@ const kafici = [
             userAplauza: 0,
             muzika: 'Pop',
             volume: 2
-        }
-    },
-    {
-        id: 5,
-        title: 'Uvek zatvoren objekat',
-        logo: 'durangoCaffe.png',
-        brojMesta: 10,
-        brojSlobodnihMesta: 0,
-        rezervacije: [],
-        details: {
-            opis: 'Mi smo zatvoreni često!!1',
-            slike: '',
-            radnoVreme: '07:30 - 07:31',
-            lokacija: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
-            meni: '',
-            adresa: 'Majakovskog bb 13/4',
-            brojTelefona: '(064) 776-332',
-            ukupnoAplauza: 145,
-            brojOcena: 38,
-            userAplauza: 0,
-            muzika: 'Pop',
-            volume: 1
         }
     },
     {
