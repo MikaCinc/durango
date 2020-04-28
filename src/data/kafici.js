@@ -68,7 +68,7 @@ const kafici = [
     {
         id: 4,
         title: 'Durango Caffe',
-        logo: 'durangoCaffe.png',
+        logo: '',
         brojMesta: 90,
         brojSlobodnihMesta: 10,
         rezervacije: [],

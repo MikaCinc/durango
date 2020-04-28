@@ -10,6 +10,7 @@ import React, {
 import Logo from '../ExtendedLogo/Logo.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
 import noFavoritesIcon from '../CustomIcons/noFavorites.png';
+import defaultLogo from '../CustomIcons/defaultLogo.png';
 
 /* Libraries */
 import _ from 'lodash';
@@ -239,7 +240,9 @@ const List = ({ history }) => {
                                     <img
                                         className="listLogo"
                                         src={
-                                            `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                            Kafic.logo
+                                                ? `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                                : defaultLogo
                                         }
                                     />
                                     <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
@@ -252,8 +255,8 @@ const List = ({ history }) => {
                                         <img
                                             src={
                                                 Kafic.brojSlobodnihMesta > 0
-                                                ? Seat
-                                                : SeatOrange
+                                                    ? Seat
+                                                    : SeatOrange
                                             }
                                             className="svgIcon"
                                         />
@@ -300,7 +303,9 @@ const List = ({ history }) => {
                             <img
                                 className="listLogo"
                                 src={
-                                    `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                    Kafic.logo
+                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                        : defaultLogo
                                 }
                             />
                             <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
@@ -379,9 +384,9 @@ const MainScreen = ({ history }) => {
 const Home = props => {
     return (
         // <div className="container">
-            <div className="App">
-                <MainScreen history={props.history} />
-            </div>
+        <div className="App">
+            <MainScreen history={props.history} />
+        </div>
         // </div>
     );
 };

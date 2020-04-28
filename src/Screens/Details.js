@@ -21,6 +21,9 @@ import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
 import SeatOrange from '../icons/seat_orange.svg';
 
+/* Default Logo */
+import defaultLogo from '../CustomIcons/defaultLogo.png';
+
 /* Router */
 import { useParams } from "react-router-dom";
 
@@ -133,7 +136,9 @@ function Details(props) {
                         <div>
                             <img
                                 src={
-                                    `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                    data.logo
+                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                        : defaultLogo
                                 }
                                 className={
                                     `detailsLogo reveal-focus-${
