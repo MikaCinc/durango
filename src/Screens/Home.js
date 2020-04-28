@@ -378,11 +378,11 @@ const MainScreen = ({ history }) => {
 
 const Home = props => {
     return (
-        <AbsoluteWrapper>
+        // <div className="container">
             <div className="App">
                 <MainScreen history={props.history} />
             </div>
-        </AbsoluteWrapper>
+        // </div>
     );
 };
 
