@@ -15,7 +15,8 @@ import _ from 'lodash';
 // import StarOutline from '../icons/starOutline.svg';
 import Star from '../icons/star.svg';
 import StarOutline from '../icons/star_white_border.svg';
-import Info from '../icons/info.svg';
+import Info from '../icons/infoWhite.svg';
+import Book from '../icons/bookWhite.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
 import SeatOrange from '../icons/seat_orange.svg';
@@ -158,14 +159,14 @@ function Details(props) {
                         {/* / {data.brojMesta} */}
                     </h1>
                     {/* <i className="material-icons-outlined detailIcon"> */}
-                        <img
-                            src={
-                                data.brojSlobodnihMesta > 0
-                                    ? Seat
-                                    : SeatOrange
-                            }
-                            className="svgIconSmaller"
-                        />
+                    <img
+                        src={
+                            data.brojSlobodnihMesta > 0
+                                ? Seat
+                                : SeatOrange
+                        }
+                        className="svgIconSmaller"
+                    />
                     {/* </i> */}
                 </div>
                 <div
@@ -182,9 +183,10 @@ function Details(props) {
                                 : 'Napravi rezervaciju'
                         }
                     </h1>
-                    <i className="material-icons-outlined detailIconClickable">
-                        book
-                </i>
+                    <img
+                        src={Book}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div className="detailsRow clickableRow" onClick={() => {
                     props.history.push(`/durango/app/${data.id}/more`);

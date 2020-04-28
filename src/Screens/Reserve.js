@@ -167,7 +167,6 @@ function Reserve(props) {
                 >
                     <Modal.Body>
                         <div className="reserveModalContainer">
-                            <img src={Logo} className="reserveModalLogo" />
                             <h3 className="boldText reserveModalTitle">Konobar je odobrio!</h3>
                             <p className="reserveModalExplanation">
                                 Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.

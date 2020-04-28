@@ -21,6 +21,16 @@ import ReactImageAppear from 'react-image-appear';
 import { Spring } from 'react-spring/renderprops';
 import Fade from 'react-reveal/Fade';
 
+/* Icons */
+import Title from '../icons/titleBlue.svg';
+import Watch from '../icons/watchBlue.svg';
+import Call from '../icons/callBlue.svg';
+import Audio from '../icons/audioBlue.svg';
+import AudioLight from '../icons/audioLightblue.svg';
+import Location from '../icons/locationBlue.svg';
+import NearMe from '../icons/nearMeWhite.svg';
+import MenuBook from '../icons/menuBookWhite.svg';
+
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
 import kafic2 from '../carouselMock/kafic2.jpg';
@@ -119,9 +129,10 @@ function MoreDetails(props) {
                         <span className="boldText">Naziv: </span>
                         {data.title}
                     </p>
-                    <i className="material-icons-outlined detailIconBlue">
-                        title
-                    </i>
+                    <img
+                        src={Title}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div
                     className="detailsRowMini"
@@ -130,9 +141,10 @@ function MoreDetails(props) {
                         <span className="boldText">Adresa: </span>
                         {data.details.adresa}
                     </p>
-                    <i className="material-icons-outlined detailIconBlue">
-                        location_on
-                    </i>
+                    <img
+                        src={Location}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div
                     className="detailsRowMini"
@@ -141,9 +153,10 @@ function MoreDetails(props) {
                         <span className="boldText">Telefon: </span>
                         {data.details.brojTelefona}
                     </p>
-                    <i className="material-icons-outlined detailIconBlue">
-                        phone
-                    </i>
+                    <img
+                        src={Call}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div
                     className="detailsRow2Container"
@@ -160,18 +173,15 @@ function MoreDetails(props) {
                             {
                                 [1, 2, 3].map((i) => {
                                     return (
-                                        <i
-                                            className="material-icons-outlined detailIconBlue"
-                                            style={{
-                                                fontSize: '18px',
-                                                color: _.inRange(i, 0, data.details.volume + 1)
-                                                    ? ''
-                                                    : 'gray'
-                                            }}
+                                        <img
                                             key={i}
-                                        >
-                                            music_note
-                                        </i>
+                                            src={
+                                                _.inRange(i, 0, data.details.volume + 1)
+                                                    ? Audio
+                                                    : AudioLight
+                                            }
+                                            className="svgIconSmaller"
+                                        />
                                     )
                                 })
                             }
@@ -201,9 +211,10 @@ function MoreDetails(props) {
                         <span className="boldText">Radno vreme: </span>
                         {data.details.radnoVreme}
                     </p>
-                    <i className="material-icons-outlined detailIconBlue">
-                        watch_later
-                    </i>
+                    <img
+                        src={Watch}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div
                     className="detailAbout"
@@ -218,9 +229,10 @@ function MoreDetails(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                    <i className="material-icons-outlined detailIconClickable">
-                        map
-                </i>
+                    <img
+                        src={NearMe}
+                        className="svgIconSmaller"
+                    />
                 </div>
                 <div
                     className="detailsRow clickableRow"
@@ -229,9 +241,10 @@ function MoreDetails(props) {
                     }}
                 >
                     <h1 className="detailRowText boldText">Meni</h1>
-                    <i className="material-icons-outlined detailIconClickable">
-                        menu_book
-                    </i>
+                    <img
+                        src={MenuBook}
+                        className="svgIconSmaller"
+                    />
                 </div>
             </Fragment>
         )
