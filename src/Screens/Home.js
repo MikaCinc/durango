@@ -13,6 +13,7 @@ import noResultsIcon from '../CustomIcons/noResults.png';
 /* Libraries */
 import _ from 'lodash';
 import queryString from 'query-string';
+import moment from 'moment';
 
 /* Animations */
 import Fade from 'react-reveal/Fade';
@@ -74,21 +75,79 @@ const Separator = () => {
     )
 }
 
-const LabelBadge = ({ label = 'ZATVORENO', color = '#B0B0B0' }) => {
+const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, object }) => {
+    const { User } = useContext(DataContext);
+
+    const [timer, setTimer] = useState('');
+
+    const isReserved = (obj) => {
+        if (!User.Reservation || !obj) {
+            return false;
+        }
+
+        // Is current time behind Reserved Time
+        let flag = moment(User.Reservation.Time, 'HH:mm').isAfter();
+
+        if (flag && User.Reservation.ID === obj.id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    useEffect(() => {
+        let interval;
+
+        const updateTimer = () => {
+            setTimer(
+                moment.utc(moment(Reservation.Time, 'HH:mm').diff(moment(), 'seconds') * 1000).format('mm:ss')
+            );
+        }
+
+        if (isReserved(object)) {
+            updateTimer();
+            interval = setInterval(() => {
+                updateTimer();
+                if(!isReserved(object)) {
+                    // Timer is over!
+                    // Do something
+                    // And clearInterval
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div
             className="listBadge"
-            style={{ backgroundColor: color }}
+            style={
+                {
+                    backgroundColor: color,
+                    // backgroundImage: color,
+                    // color:
+                }
+            }
         >
-            {label}
+            {
+                label === 'REZERVISANO' ? label + ' | ' + timer : label
+
+            }
         </div>
     )
 }
 
-const FavoritBadge = () => {
+const FavoritBadge = ({ color = '#596164' }) => {
     return (
         <div
             className="favoritBadgeContainer"
+            style={
+                {
+                    backgroundColor: color
+                }
+            }
         >
             {/* <i
                 className="material-icons-outlined favoritBadge"
@@ -106,6 +165,21 @@ const FavoritBadge = () => {
 
 const List = ({ history }) => {
     const { filteredData, sortedOpen, sortedClosed, loading, User } = useContext(DataContext);
+
+    const isReserved = (obj) => {
+        if (!User.Reservation) {
+            return false;
+        }
+
+        // Is current time behind Reserved Time
+        let flag = moment(User.Reservation.Time, 'HH:mm').isAfter();
+
+        if (flag && User.Reservation.ID === obj.id) {
+            return true;
+        }
+
+        return false;
+    }
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
         if (loading) return null;
@@ -136,7 +210,7 @@ const List = ({ history }) => {
                     return (
                         <div
                             key={Kafic.id}
-                            className="normalObject button"
+                            className={`button ${isReserved(Kafic) ? 'reservedObject' : "normalObject"}`}
                             onClick={() => {
                                 history.push(`/durango/app/${Kafic.id}`);
                             }}
@@ -171,10 +245,18 @@ const List = ({ history }) => {
                                         {/* event_seat */}
                                         <img src={Seat} className="svgIcon" />
                                     </i>
+                                    {
+                                        isReserved(Kafic) && <LabelBadge
+                                            label="REZERVISANO"
+                                            color="#005bea"
+                                            Reservation={User.Reservation}
+                                            object={Kafic}
+                                        />
+                                    }
                                 </div>
                             </Fade>
                             {
-                                User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
+                                User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge color="#005bea" />
                             }
                         </div>
                     )

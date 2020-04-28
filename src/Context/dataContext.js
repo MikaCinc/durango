@@ -140,7 +140,7 @@ const DataProvider = (props) => {
             clearInterval(int);
         }
 
-        console.log(timer)
+        // console.log(timer)
 
         return () => {
             clearInterval(int);
@@ -213,9 +213,9 @@ const DataProvider = (props) => {
     }
 
     const fastReserve = (ID, Time) => {
-        /* let nextState = { ...User };
+        let nextState = { ...User };
 
-        console.log(ID, Time);
+        // console.log(ID, Time);
 
         if (nextState.Reservation.ID) {
             //@todo provera
@@ -223,15 +223,15 @@ const DataProvider = (props) => {
 
         nextState = {
             ...User,
-            Reservation: [
+            Reservation: {
                 ID,
                 Time
-            ]
+            }
         }
 
-        setTimer(900);
+        // setTimer(900);
 
-        return setUser(nextState); */
+        return setUser(nextState);
     }
 
     const changeData = ({ id, ...restOfData }) => {

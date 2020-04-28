@@ -337,10 +337,21 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.reservedObject {
+  position: relative;
+  padding: 4px;
+  background: linear-gradient(to top right, #00c6fb 30%, #005bea 100%);
+  /* background: linear-gradient(to bottom left, #f83600 0%, #f9d423 100%); */
+  /* background-color: white; */
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
 .normalObject {
   position: relative;
   padding: 4px;
-  /* background: linear-gradient(to top right, #00c6fb 30%, #005bea 100%); */
+  /* background: linear-gradient(to bottom left, #f83600 0%, #f9d423 100%); */
   background-color: white;
   margin-bottom: 12px;
   border-radius: 10px;
@@ -363,7 +374,7 @@ h1 {
   position: absolute;
   top: 0;
   right: 0;
-  background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%);
+  /* background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%); */
   /* background-image: transparent; */
   /* background: #005bea; */
   color: gold;
@@ -385,10 +396,11 @@ h1 {
   font-size: 10px;
   color: white;
   padding-left: 5px;
+  padding-right: 3px;
   padding-top: 2px;
   border-top-left-radius: 7px;
   border-bottom-right-radius: 7px;
-  background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
+  /* background-image: linear-gradient(to top left, #868f96 0%, #596164 100%); */
 }
 
 .lineCounter {

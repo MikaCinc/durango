@@ -22,6 +22,7 @@ import { useParams } from "react-router-dom";
 
 /* Library */
 import { isOpen } from '../library/common';
+import moment from 'moment';
 
 /* Components */
 import Claps from '../Components/Claps';
@@ -52,8 +53,8 @@ const placeholderObj = {
 function Details(props) {
     let { id } = useParams();
     const { Data, loading, changeData, setCurrentData, User, toggleFavourite } = useContext(DataContext);
-
     const [data, setData] = useState({ ...placeholderObj });
+    const [timer, setTimer] = useState('');
 
     useEffect(() => {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
@@ -61,6 +62,26 @@ function Details(props) {
         setData(findData);
         setCurrentData(findData);
     }, [Data]);
+
+
+    useEffect(() => {
+        let interval;
+
+        const updateTimer = () => {
+            setTimer(
+                moment.utc(moment(User.Reservation.Time, 'HH:mm').diff(moment(), 'seconds') * 1000).format('mm:ss')
+            );
+        }
+
+        if (isReserved(data)) {
+            updateTimer();
+            interval = setInterval(() => {
+                updateTimer();
+            }, 1000);
+        }
+
+        return () => clearInterval(interval);
+    }, [data]);
 
     const isFavourite = () => {
         return User.Favourites.indexOf(data.id) !== -1
@@ -73,6 +94,21 @@ function Details(props) {
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
             <span style={{ color: open ? '#009A1F' : '#C50505' }}>{data.details.radnoVreme}</span>
         </p>;
+    }
+
+    const isReserved = (obj) => {
+        if (!User.Reservation) {
+            return false;
+        }
+
+        // Is current time behind Reserved Time
+        let flag = moment(User.Reservation.Time, 'HH:mm').isAfter();
+
+        if (User.Reservation.ID === obj.id && flag) {
+            return true;
+        }
+
+        return false;
     }
 
     const restOfPage = () => {
@@ -129,7 +165,13 @@ function Details(props) {
                         props.history.push(`/durango/app/${data.id}/reserve`);
                     }}
                 >
-                    <h1 className="detailRowText boldText">Napravi rezervaciju</h1>
+                    <h1 className="detailRowText boldText">
+                        {
+                            isReserved(data)
+                                ? `Rezervisano: ${timer}`
+                                : 'Napravi rezervaciju'
+                        }
+                    </h1>
                     <i className="material-icons-outlined detailIconClickable">
                         book
                 </i>
