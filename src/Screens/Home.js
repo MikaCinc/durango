@@ -65,8 +65,8 @@ const Search = () => {
 }
 
 const getTrimmedTitle = (title, n) => {
-    if (title.length > 13) {
-        return title.slice(0, 13) + '...';
+    if (title.length > n) {
+        return title.slice(0, n) + '...';
     }
 
     return title;
@@ -224,7 +224,7 @@ const List = ({ history }) => {
                     return (
                         <div
                             key={Kafic.id}
-                            className={`button ${isReserved(Kafic) ? 'reservedObject' : "normalObject"}`}
+                            className={`button ${isReserved(Kafic) ? 'reservedObject' : "normalObject"} ${Kafic.preporuka ? 'preporukaObject' : ""}`}
                             onClick={() => {
                                 history.push(`/durango/app/${Kafic.id}`);
                             }}
@@ -245,7 +245,7 @@ const List = ({ history }) => {
                                                 : defaultLogo
                                         }
                                     />
-                                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 15)}</h1>
                                     <p className="lineFreeSeats boldText greyText">
                                         {Kafic.brojSlobodnihMesta}
                                     </p>
@@ -308,7 +308,7 @@ const List = ({ history }) => {
                                         : defaultLogo
                                 }
                             />
-                            <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 10)}</h1>
+                            <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 15)}</h1>
                             <p className="lineFreeSeats boldText greyText">
                                 {Kafic.brojSlobodnihMesta}
                             </p>

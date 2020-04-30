@@ -122,7 +122,7 @@ const DataProvider = (props) => {
         int = setInterval(() => {
             setData(simulateUpdateData())
             // console.log(simulateUpdateData())
-        }, 800)
+        }, 600)
 
         return () => {
             clearInterval(int);
@@ -149,13 +149,17 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), _.random(4));
+            randomIDs = _.slice(_.shuffle(IDs), 1);
 
         return [...Data].map(item => {
             if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {
                 return {
                     ...item,
-                    brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta)
+                    brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta),
+                    details: {
+                        ...item.details,
+                        volume: _.random(1, 3)
+                    }
                 }
             }
 

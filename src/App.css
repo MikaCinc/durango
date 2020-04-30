@@ -354,6 +354,10 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.preporukaObject {
+  background: linear-gradient(to top right, #f83600 0%, #f9d423 100%) !important;
+}
+
 .normalObject {
   position: relative;
   padding: 4px;
@@ -934,16 +938,34 @@ emoji-slider {
 }
 
 .IP-volumeContainer {
-  border-radius: 50px;
-  padding: 20px;
-  background: white;;
+  display: flex;
+  flex-direction: row;
   color: black;
   position: fixed;
   bottom: 20px;
   right: 20px;
+  user-select: none;
+}
+
+.IP-volume-label {
+  border-radius: 20px;
+  padding: 20px;
+  background: whitesmoke;
+  color: black;
+}
+
+.IP-volume-level {
+  border-radius: 50px;
+  padding: 20px;
+  background: white;
+  color: black;
   box-shadow: var(--shadow);
   cursor: pointer;
-  user-select: none;
+}
+
+.IP-volume-active {
+  background: var(--sharp-blues);
+  color: white;
 }
 
 .IP-zatvoriOtvoriContainer {
@@ -979,14 +1001,17 @@ emoji-slider {
 }
 
 .IP-dial-container {
+  display: block;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  width: 33%;
+  width: 100%;
+  padding: 10px;
 }
 
 .IP-dial-button {
+  display: block;
   width: 32%;
   padding-bottom: 32%; /* Same as width, sets height */
   margin-bottom: 2%; /* (100-32*3)/2 */
@@ -1020,4 +1045,50 @@ emoji-slider {
 
 .IP-clickable:active {
   padding: 5px;
+}
+
+.IP-center-upper {
+  display: flex;
+  padding: 10px;
+  flex-direction: row;
+}
+
+.IP-input {
+  flex: 2;
+  text-align: center;
+  border-radius: 50px;
+  padding: 20px;
+  border: 0px;
+  color: black;
+  box-shadow: var(--shadow);
+  transition-duration: 0.1s;
+  font-size: 24px;
+}
+
+.IP-center-ukupnoMesta {
+  flex: 1;
+  margin: 10px;
+  text-align: center;
+  border-radius: 50px;
+  padding: 20px;
+  background-color: whitesmoke;
+  border: 0px;
+  color: black;
+  transition-duration: 0.1s;
+  font-size: 24px;
+}
+
+.IP-center-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.IP-volume-level {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.IP-input-selected {
+  background: yellow !important;
+  color: black;
 }

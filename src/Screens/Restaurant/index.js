@@ -18,6 +18,8 @@ const Restaurant = ({ history }) => {
     // const [id, setId] = useState(null)
     const [currentTime, setCurrentTime] = useState(moment());
     const [data, setData] = useState({});
+    const [currentNumber, setCurrentNumber] = useState(3);
+    const [volume, setVolume] = useState(2);
 
     useEffect(() => {
         let ID = id;
@@ -39,6 +41,12 @@ const Restaurant = ({ history }) => {
 
         setData(findData);
     }, []);
+
+    useEffect(() => {
+        if (data.brojSlobodnihMesta || data.brojSlobodnihMesta === 0) {
+            setCurrentNumber(data.brojSlobodnihMesta);
+        }
+    }, [data]);
 
     useEffect(() => {
         let interval = setInterval(() => {
@@ -101,68 +109,101 @@ const Restaurant = ({ history }) => {
                         </div>
                         <div className="IP-counter-container">
                             <div className="IP-input-sideButton">
-                                <button className="IP-input-nemaMesta IP-clickable">
+                                <button
+                                    className={
+                                        `IP-input-nemaMesta IP-clickable ${
+                                        currentNumber === 0
+                                            ? 'IP-input-selected'
+                                            : ''
+                                        }`
+                                    }
+                                    onClick={() => {
+                                        setCurrentNumber(0)
+                                    }}>
                                     Nemamo mesta
                                 </button>
                             </div>
-                            <div className="IP-dial-container">
-                                {
-                                    [..._.range(1, 10)].map(i => {
-                                        return (
-                                            <button key={i} className="IP-dial-button IP-clickable">{i}</button>
-                                        )
-                                    })
-                                }
+                            <div className="IP-center-container">
+                                <div className="IP-center-upper">
+                                    <input
+                                        className="IP-input"
+                                        type="number"
+                                        value={currentNumber}
+                                        onChange={
+                                            (e) => {
+                                                let value = e.target.value;
+                                                if (value < 10 && value >= 0) {
+                                                    setCurrentNumber(e.target.value);
+                                                }
+                                            }
+                                        }
+                                    />
+                                    <div className="IP-center-ukupnoMesta">{data.brojMesta}</div>
+                                </div>
+                                <div className="IP-dial-container">
+                                    {
+                                        [..._.range(1, 10)].map(i => {
+                                            return (
+                                                <button
+                                                    key={i}
+                                                    className={
+                                                        `IP-dial-button IP-clickable ${
+                                                        currentNumber === i
+                                                            ? 'IP-input-selected'
+                                                            : ''
+                                                        }`
+                                                    }
+                                                    onClick={() => {
+                                                        setCurrentNumber(i)
+                                                    }}
+                                                >
+                                                    {i}
+                                                </button>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                             <div className="IP-input-sideButton">
-                                <button className="IP-input-imaMesta IP-clickable">
+                                <button
+                                    className={
+                                        `IP-input-imaMesta IP-clickable ${
+                                        currentNumber === 10
+                                            ? 'IP-input-selected'
+                                            : ''
+                                        }`
+                                    }
+                                    onClick={() => {
+                                        setCurrentNumber(10)
+                                    }}
+                                >
                                     Imamo 10+ mesta
                                 </button>
                             </div>
-                            {/* <p>Ukupan broj mesta: {data.brojMesta}</p>
-                            <p>Broj slobodnih mesta:</p>
-                            <input
-                                value={data.brojSlobodnihMesta}
-                                onChange={(e) => updateFreeSeats(e.target.value)}
-                            />
-
-                            <h1>Zauzeto</h1>
-                            {
-                                [5, 4, 3, 2, 1].map(i =>
-                                    <button
-                                        key={i}
-                                        style={{ backgroundColor: 'red' }}
-                                        onClick={(e) => {
-                                            updateFreeSeats(data.brojSlobodnihMesta - i);
-                                        }}
-                                    >
-                                        {i}
-                                    </button>
-                                )
-                            }
-                            <h1>Oslobođeno</h1>
-                            {
-                                [5, 4, 3, 2, 1].map(i =>
-                                    <button
-                                        key={i}
-                                        style={{ backgroundColor: 'green' }}
-                                        onClick={(e) => {
-                                            updateFreeSeats(data.brojSlobodnihMesta + i);
-                                        }}
-                                    >
-                                        {i}
-                                    </button>
-                                )
-                            }
-                            <br />
-                            <button style={{ backgroundColor: 'blue', color: 'white' }}>Ima 10+ mesta</button> */}
-
                         </div>
                     </div>
                 }
             </div>
             <div className="IP-zatvoriOtvoriContainer">Zatvori</div>
-            <div className="IP-volumeContainer">Glasnoća</div>
+            <div className="IP-volumeContainer">
+                <div className="IP-volume-label">
+                    Glasnoća
+                </div>
+                {
+                    ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
+                        return (
+                            <div
+                                className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
+                                onClick={() => {
+                                    setVolume(i + 1);
+                                }}
+                            >
+                                {level}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
 
     );

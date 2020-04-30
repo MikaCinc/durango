@@ -56,7 +56,7 @@ function Reserve(props) {
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(moment().add(15, 'minutes').format('HH:mm'));
-    const [seats, setSeats] = useState(3);
+    const [seats, setSeats] = useState(5);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -165,6 +165,7 @@ function Reserve(props) {
                 >
                     <Modal.Body>
                         <div className="reserveModalContainer">
+                            <img src={Logo} className="reserveModalLogo"/>
                             <h3 className="boldText reserveModalTitle">Konobar je odobrio!</h3>
                             <p className="reserveModalExplanation">
                                 Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.
