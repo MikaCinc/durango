@@ -27,7 +27,6 @@ import Call from '../icons/callBlue.svg';
 import Audio from '../icons/audioBlue.svg';
 import AudioLight from '../icons/audioLightblue.svg';
 import Location from '../icons/locationBlue.svg';
-import NearMe from '../icons/nearMeWhite.svg';
 import MenuBook from '../icons/menuBookWhite.svg';
 
 /* Slike */
@@ -209,19 +208,6 @@ function MoreDetails(props) {
                     className="detailAbout"
                 >
                     {data.details.opis.slice(0, 135) + '...'}
-                </div>
-
-                <div
-                    className="detailsRow clickableRow"
-                    onClick={() => {
-                        window.open(data.details.lokacija, '_blank');
-                    }}
-                >
-                    <h1 className="detailRowText boldText">Prikaži na mapi</h1>
-                    <img
-                        src={NearMe}
-                        className="svgIconSmaller"
-                    />
                 </div>
                 <div
                     className="detailsRow clickableRow"

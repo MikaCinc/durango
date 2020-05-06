@@ -20,6 +20,7 @@ import Book from '../icons/bookWhite.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
 import SeatOrange from '../icons/seat_orange.svg';
+import NearMe from '../icons/nearMeWhite.svg';
 
 /* Default Logo */
 import defaultLogo from '../CustomIcons/defaultLogo.png';
@@ -223,6 +224,18 @@ function Details(props) {
                             {isFavourite() ? 'star' : 'star_outline'}
                         </i> */}
                     </Bounce>
+                </div>
+                <div
+                    className="detailsRow clickableRow"
+                    onClick={() => {
+                        window.open(data.details.lokacija, '_blank');
+                    }}
+                >
+                    <h1 className="detailRowText boldText">Prikaži na mapi</h1>
+                    <img
+                        src={NearMe}
+                        className="svgIconSmaller"
+                    />
                 </div>
             </Fragment>
         )

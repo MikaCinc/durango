@@ -247,7 +247,11 @@ const List = ({ history }) => {
                                     />
                                     <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 15)}</h1>
                                     <p className="lineFreeSeats boldText greyText">
-                                        {Kafic.brojSlobodnihMesta}
+                                        {
+                                            Kafic.brojSlobodnihMesta >= 10
+                                                ? '10+'
+                                                : Kafic.brojSlobodnihMesta
+                                        }
                                     </p>
                                     <i
                                         className="material-icons-outlined peopleIcon"
@@ -310,7 +314,11 @@ const List = ({ history }) => {
                             />
                             <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 15)}</h1>
                             <p className="lineFreeSeats boldText greyText">
-                                {Kafic.brojSlobodnihMesta}
+                                {
+                                    Kafic.brojSlobodnihMesta >= 10
+                                        ? '10+'
+                                        : Kafic.brojSlobodnihMesta
+                                }
                             </p>
                             <i
                                 className="material-icons-outlined peopleIcon"
