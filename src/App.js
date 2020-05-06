@@ -6,6 +6,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
   __RouterContext,
   useParams
 } from "react-router-dom";
@@ -38,8 +39,9 @@ const UserStackOfScreens = ({ history }) => {
     <Fragment>
       <DataProvider history={history}>
         <Switch location={location}>
-          <Route key={1} exact path="/durango/app/home" component={Home} />
-          <Route path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history}/>} />
+          <Route key={1} exact path="/durango/app" render={() => (<Redirect to="/durango/app/home" />)}/>
+          <Route key={2} exact path="/durango/app/home" component={Home} />
+          <Route key={3} path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history}/>} />
         </Switch>
       </DataProvider >
     </Fragment>

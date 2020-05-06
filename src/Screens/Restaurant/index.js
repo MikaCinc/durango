@@ -8,6 +8,9 @@ import { isOpen } from '../../library/common';
 /* Router */
 import { useParams } from "react-router-dom";
 
+/* Default Logo */
+import defaultLogo from '../../CustomIcons/defaultLogo.png';
+
 /* Data */
 import Logo from '../../ExtendedLogo/Logo.png';
 import kafici from '../../data/kafici';
@@ -71,7 +74,7 @@ const Restaurant = ({ history }) => {
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F' : '#C50505' }}>{data.details.radnoVreme}</span>
+            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.radnoVreme}</span>
         </p>;
     }
 
@@ -105,7 +108,9 @@ const Restaurant = ({ history }) => {
                                 </div>
                                 <img
                                     src={
-                                        `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                        data.logo
+                                            ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                            : defaultLogo
                                     }
                                     className={
                                         `detailsLogo reveal-focus-${
@@ -141,8 +146,13 @@ const Restaurant = ({ history }) => {
                                             onChange={
                                                 (e) => {
                                                     let value = e.target.value;
+                                                    if(!value) {
+                                                        setCurrentNumber(0);
+                                                        return;
+                                                    }
+
                                                     if (value < 10 && value >= 0) {
-                                                        setCurrentNumber(parseInt(e.target.value), 10);
+                                                        setCurrentNumber(parseInt(value, 10));
                                                     }
                                                 }
                                             }
@@ -216,7 +226,6 @@ const Restaurant = ({ history }) => {
                 </div>
             }
         </div>
-
     );
 };
 
