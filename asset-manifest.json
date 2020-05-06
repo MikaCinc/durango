@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/durango/static/css/main.68b6e655.chunk.css",
-    "main.js": "/durango/static/js/main.fe75a1a8.chunk.js",
-    "main.js.map": "/durango/static/js/main.fe75a1a8.chunk.js.map",
+    "main.css": "/durango/static/css/main.bf499132.chunk.css",
+    "main.js": "/durango/static/js/main.0550bfbe.chunk.js",
+    "main.js.map": "/durango/static/js/main.0550bfbe.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
-    "static/js/2.f44dc4dd.chunk.js": "/durango/static/js/2.f44dc4dd.chunk.js",
-    "static/js/2.f44dc4dd.chunk.js.map": "/durango/static/js/2.f44dc4dd.chunk.js.map",
+    "static/js/2.24976148.chunk.js": "/durango/static/js/2.24976148.chunk.js",
+    "static/js/2.24976148.chunk.js.map": "/durango/static/js/2.24976148.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.4e12b90e924f3fbd86d7f1593b4239ba.js": "/durango/precache-manifest.4e12b90e924f3fbd86d7f1593b4239ba.js",
+    "precache-manifest.dad49654b20bb1841311469fb70b2f35.js": "/durango/precache-manifest.dad49654b20bb1841311469fb70b2f35.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
-    "static/css/main.68b6e655.chunk.css.map": "/durango/static/css/main.68b6e655.chunk.css.map",
-    "static/js/2.f44dc4dd.chunk.js.LICENSE.txt": "/durango/static/js/2.f44dc4dd.chunk.js.LICENSE.txt",
-    "static/media/Logo.png": "/durango/static/media/Logo.eb5c53a5.png",
+    "static/css/main.bf499132.chunk.css.map": "/durango/static/css/main.bf499132.chunk.css.map",
+    "static/js/2.24976148.chunk.js.LICENSE.txt": "/durango/static/js/2.24976148.chunk.js.LICENSE.txt",
+    "static/media/Logo.png": "/durango/static/media/Logo.3016ea48.png",
     "static/media/audioBlue.svg": "/durango/static/media/audioBlue.d3318f47.svg",
     "static/media/audioLightblue.svg": "/durango/static/media/audioLightblue.c793620e.svg",
     "static/media/backArrow.svg": "/durango/static/media/backArrow.5ad7c031.svg",
@@ -46,8 +46,8 @@
   "entrypoints": [
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
-    "static/js/2.f44dc4dd.chunk.js",
-    "static/css/main.68b6e655.chunk.css",
-    "static/js/main.fe75a1a8.chunk.js"
+    "static/js/2.24976148.chunk.js",
+    "static/css/main.bf499132.chunk.css",
+    "static/js/main.0550bfbe.chunk.js"
   ]
 }
