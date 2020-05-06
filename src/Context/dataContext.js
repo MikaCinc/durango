@@ -258,8 +258,6 @@ const DataProvider = (props) => {
             nextState = [{ id, ...restOfData }, ...nextState];
         }
 
-        console.log('newData', nextState)
-
         return setData(nextState);
     }
 
@@ -274,8 +272,6 @@ const DataProvider = (props) => {
                 }
             ]
         }
-
-        console.log(nextState)
 
         return setUser(nextState);
     }

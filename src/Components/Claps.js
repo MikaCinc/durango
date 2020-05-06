@@ -37,10 +37,6 @@ const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } 
     let interval;
 
     useEffect(() => {
-        console.log(data.details)
-    }, [data])
-
-    useEffect(() => {
         slider.current.addEventListener('change', (e) => {
             onChange(e.detail.value);
         });
@@ -54,7 +50,6 @@ const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } 
     }, []);
 
     const onChange = (value) => {
-        console.log(userAplauza())
         if (userAplauza() > 0) {
             alert('Hvala! Već si 👏 ovom objektu');
             return;
@@ -132,7 +127,6 @@ const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } 
             <div
                 className="clapsTriggerContainer"
                 onClick={() => {
-                    // console.log(userAplauza())
                     if (userAplauza() > 0) {
                         alert('Hvala! Već si 👏 ovom objektu');
                         return;
