@@ -3,6 +3,8 @@ import React, {
     useContext,
     useState
 } from 'react';
+
+/* Data */
 import kafici from '../data/kafici';
 
 /* Packages & libraries */
@@ -96,8 +98,12 @@ const DataProvider = (props) => {
     }
 
     useEffect(() => {
-        // updateFromServer();
         updateWithMockData();
+    }, []);
+
+    useEffect(() => {
+        // updateFromServer();
+        // updateWithMockData(); OVO NE DIRAJ
         /* Experiment @todo */
         localStorage.setItem('User', JSON.stringify(User));
     }, [User]);
@@ -121,7 +127,6 @@ const DataProvider = (props) => {
 
         int = setInterval(() => {
             setData(simulateUpdateData())
-            // console.log(simulateUpdateData())
         }, 1000)
 
         return () => {
@@ -253,7 +258,26 @@ const DataProvider = (props) => {
             nextState = [{ id, ...restOfData }, ...nextState];
         }
 
+        console.log('newData', nextState)
+
         return setData(nextState);
+    }
+
+    const changeClaps = ({ ID, userAplauza }) => {
+        let nextState = {
+            ...User,
+            Claps: [
+                ...User.Claps,
+                {
+                    ID,
+                    userAplauza
+                }
+            ]
+        }
+
+        console.log(nextState)
+
+        return setUser(nextState);
     }
 
     const changeSearch = (value) => {
@@ -276,6 +300,7 @@ const DataProvider = (props) => {
         <Provider
             value={{
                 User,
+                changeClaps,
                 toggleFavourite,
                 Data,
                 filteredData,

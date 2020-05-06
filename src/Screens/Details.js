@@ -66,6 +66,7 @@ function Details(props) {
 
     useEffect(() => {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
+        console.log('Details page:', findData)
 
         setData(findData);
         setCurrentData(findData);

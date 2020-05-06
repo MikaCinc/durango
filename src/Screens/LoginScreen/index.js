@@ -4,6 +4,9 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { Fade, Zoom } from 'react-reveal';
 
+/* Data */
+import User from '../../data/user';
+
 /* Logo */
 import Logo from '../../ExtendedLogo/Logo.png';
 
@@ -40,14 +43,11 @@ const LoginScreen = props => {
         setProfileName(response.profileObj.name)
 
         let obj = {
+            ...User,
             ID: response.profileObj.googleId,
             Email: response.profileObj.email,
             imageUrl: response.profileObj.imageUrl,
             Name: response.profileObj.name,
-            Location: '',
-            canReserve: true,
-            Favourites: [1, 5],
-            Reservation: {}
         };
 
         localStorage.setItem('User', JSON.stringify(obj));

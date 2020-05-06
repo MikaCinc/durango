@@ -5,6 +5,9 @@ import React, {
     useState
 } from 'react';
 
+/* Libraries */
+import _ from 'lodash';
+
 /* webComponent */
 import 'emoji-slider';
 
@@ -15,14 +18,27 @@ import { Spring } from 'react-spring/renderprops';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, brojOcena } } }) => {
-    const { changeData } = useContext(DataContext);
+const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } }) => {
+    const { changeData, User: { Claps }, changeClaps } = useContext(DataContext);
+
+    const userAplauza = () => {
+        let obj = _.find(Claps, { ID: data.id });
+        if (!obj) {
+            return 0;
+        }
+
+        return obj.userAplauza;
+    };
 
     const [showSlider, setShowSlider] = useState(false);
     const [localClaps, setLocalClaps] = useState(0);
 
     const slider = useRef(null);
     let interval;
+
+    useEffect(() => {
+        console.log(data.details)
+    }, [data])
 
     useEffect(() => {
         slider.current.addEventListener('change', (e) => {
@@ -38,7 +54,8 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
     }, []);
 
     const onChange = (value) => {
-        if (userAplauza > 0) {
+        console.log(userAplauza())
+        if (userAplauza() > 0) {
             alert('Hvala! Već si 👏 ovom objektu');
             return;
         } else {
@@ -62,15 +79,22 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
 
     const finishedRating = () => {
         setShowSlider(false);
+
+        // Update caffe
         changeData({
             ...data,
             details: {
                 ...details,
-                userAplauza: localClaps,
                 ukupnoAplauza: ukupnoAplauza + localClaps,
-                brojOcena: userAplauza === 0 ? brojOcena + 1 : brojOcena
+                brojOcena: userAplauza() === 0 ? brojOcena + 1 : brojOcena
             }
-        })
+        });
+
+        // Update User object
+        changeClaps({
+            ID: data.id,
+            userAplauza: localClaps
+        });
     }
 
     const renderNumber = (num) => {
@@ -108,7 +132,8 @@ const Claps = ({ data, data: { details, details: { userAplauza, ukupnoAplauza, b
             <div
                 className="clapsTriggerContainer"
                 onClick={() => {
-                    if (userAplauza > 0) {
+                    // console.log(userAplauza())
+                    if (userAplauza() > 0) {
                         alert('Hvala! Već si 👏 ovom objektu');
                         return;
                     }

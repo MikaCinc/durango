@@ -5,6 +5,7 @@ const kafici = [
         logo: 'vinyl.png',
         brojMesta: 32,
         brojSlobodnihMesta: 8,
+        azurirano: new Date(),
         rezervacija: [],
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -27,6 +28,7 @@ const kafici = [
         logo: 'distrikt.png',
         brojMesta: 68,
         brojSlobodnihMesta: 7,
+        azurirano: new Date(),
         rezervacija: [],
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -38,7 +40,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 148,
             brojOcena: 38,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 3
         }
@@ -49,6 +50,7 @@ const kafici = [
         logo: 'dnevnaSoba.jpg',
         brojMesta: 42,
         brojSlobodnihMesta: 0,
+        azurirano: new Date(),
         rezervacija: [],
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -60,7 +62,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 156,
             brojOcena: 38,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 2
         }
@@ -71,6 +72,7 @@ const kafici = [
         logo: '',
         brojMesta: 90,
         brojSlobodnihMesta: 10,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'Jedini kafić u gradu gde možete maziti naše kućne ljubimce dok ispijate kafu sa svojim društvom',
@@ -82,7 +84,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 190,
             brojOcena: 38,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 2
         }
@@ -93,6 +94,7 @@ const kafici = [
         logo: 'biro.png',
         brojMesta: 32,
         brojSlobodnihMesta: 24,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'Pazite se, mi volimo da vas slikamo noću!',
@@ -104,7 +106,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 563,
             brojOcena: 194,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 3
         }
@@ -116,6 +117,7 @@ const kafici = [
         preporuka: true,
         brojMesta: 20,
         brojSlobodnihMesta: 0,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'Kod nas uvek možete da čitate knjige iz trilogija "Gospodar prstenova" i "Hobiti"',
@@ -127,7 +129,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 287,
             brojOcena: 62,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 1
         }
@@ -138,6 +139,7 @@ const kafici = [
         logo: 'zrnce.png',
         brojMesta: 58,
         brojSlobodnihMesta: 41,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'I ako smo zrnce mi nismo mali!',
@@ -149,7 +151,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 33,
             brojOcena: 10,
-            userAplauza: 0,
             muzika: 'Pop',
             volume: 1
         }
@@ -160,6 +161,7 @@ const kafici = [
         logo: 'sailor.png',
         brojMesta: 30,
         brojSlobodnihMesta: 17,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'Plovimo na talasima vaše kafe',
@@ -171,7 +173,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 743,
             brojOcena: 225,
-            userAplauza: 0,
             muzika: 'Rock',
             volume: 1
         }
@@ -182,6 +183,7 @@ const kafici = [
         logo: 'zebrano.png',
         brojMesta: 45,
         brojSlobodnihMesta: 0,
+        azurirano: new Date(),
         rezervacije: [],
         details: {
             opis: 'Mazimo zebre!',
@@ -193,7 +195,6 @@ const kafici = [
             brojTelefona: '(064) 776-332',
             ukupnoAplauza: 1892,
             brojOcena: 712,
-            userAplauza: 0,
             muzika: 'Punk',
             volume: 2
         }
