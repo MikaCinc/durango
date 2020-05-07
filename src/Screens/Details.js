@@ -58,6 +58,31 @@ const placeholderObj = {
     }
 }
 
+const UkupnoMestaBadge = ({ color = 'white', object }) => {
+    // moment().locale('sr'); @todo
+
+    return (
+        <div
+            className="updatedBadge"
+            style={
+                {
+                    top: 0,
+                    right: 0,
+                    bottom: 'auto',
+                    left: 'auto',
+                    color,
+                    fontSize: '12px',
+                    background: object.brojSlobodnihMesta === 0
+                        ? 'linear-gradient(to bottom left, #f83600 0%, #f9d423 100%)'
+                        : 'linear-gradient(to bottom left, #00c6fb 0%, #005bea 100%)'
+                }
+            }
+        >
+            <p>Ukupno mesta: {object.brojMesta}</p>
+        </div>
+    )
+}
+
 const UpdatedBadge = ({ color = 'white', object }) => {
     // moment().locale('sr'); @todo
 
@@ -67,6 +92,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
             style={
                 {
                     color,
+                    fontSize: '12px',
                     background: object.brojSlobodnihMesta === 0
                         ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
                         : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
@@ -180,7 +206,11 @@ function Details(props) {
                             color: data.brojSlobodnihMesta > 0 ? '#3185FC' : 'orangered',
                         }}>
                             {
-                                ' ' + data.brojSlobodnihMesta + ' '
+                                ` ${
+                                data.brojSlobodnihMesta >= 10
+                                    ? '10+'
+                                    : data.brojSlobodnihMesta
+                                } `
                             }
                         </span>
                         {/* / {data.brojMesta} */}
@@ -191,10 +221,16 @@ function Details(props) {
                                 ? Seat
                                 : SeatOrange
                         }
-                        className="svgIconSmaller"
+                        className="svgIcon"
                     />
                     {
                         data.azurirano && <UpdatedBadge
+                            color="white"
+                            object={data}
+                        />
+                    }
+                    {
+                        data.brojMesta && <UkupnoMestaBadge
                             color="white"
                             object={data}
                         />
