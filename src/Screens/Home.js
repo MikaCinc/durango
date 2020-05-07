@@ -26,6 +26,7 @@ import Star from '../icons/star.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
 import SeatOrange from '../icons/seat_orange.svg';
+import watchBlue from '../icons/watchBlue.svg';
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -136,7 +137,6 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
         >
             {
                 label === 'REZERVISANO' ? label + ' | ' + timer : label
-
             }
         </div>
     )
@@ -162,6 +162,46 @@ const FavoritBadge = ({ color = '#596164' }) => {
             </i> */}
 
             <img src={Star} className="svgIconSmallest favoritBadge" />
+        </div>
+    )
+}
+
+const UpdatedBadge = ({ color = 'white', object }) => {
+    // moment().locale('sr'); @todo
+
+    const [label, setLabel] = useState(moment(object.azurirano).fromNow());
+
+    useEffect(() => {
+        let interval;
+
+        const updateLabel = () => {
+            setLabel(moment(object.azurirano).fromNow());
+        }
+
+        updateLabel();
+        interval = setInterval(() => {
+            updateLabel();
+            // clearInterval(interval);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [object.azurirano]);
+
+
+    return (
+        <div
+            className="updatedBadge"
+            style={
+                {
+                    color,
+                    background: object.brojSlobodnihMesta === 0
+                        ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
+                        : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
+                }
+            }
+        >
+            <p>{label}</p>
+            {/* <img src={watchBlue} className="svgIconSmallest updatedBadgeIcon" /> */}
         </div>
     )
 }
@@ -277,6 +317,12 @@ const List = ({ history }) => {
                             </Fade>
                             {
                                 User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge color="#005bea" />
+                            }
+                            {
+                                Kafic.azurirano && <UpdatedBadge
+                                    color="white"
+                                    object={Kafic}
+                                />
                             }
                         </div>
                     )

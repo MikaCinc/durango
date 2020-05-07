@@ -58,6 +58,27 @@ const placeholderObj = {
     }
 }
 
+const UpdatedBadge = ({ color = 'white', object }) => {
+    // moment().locale('sr'); @todo
+
+    return (
+        <div
+            className="updatedBadge"
+            style={
+                {
+                    color,
+                    background: object.brojSlobodnihMesta === 0
+                        ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
+                        : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
+                }
+            }
+        >
+            <p>Poslednje ažuriranje u: {moment(object.azurirano).format('HH:mm:ss')}</p>
+            {/* <img src={watchBlue} className="svgIconSmallest updatedBadgeIcon" /> */}
+        </div>
+    )
+}
+
 function Details(props) {
     let { id } = useParams();
     const { Data, loading, changeData, setCurrentData, User, toggleFavourite } = useContext(DataContext);
@@ -152,7 +173,7 @@ function Details(props) {
                         </div>
                     </Roll>
                 </div>
-                <div className="detailsRow">
+                <div className="detailsRowMax">
                     <h1 className="detailRowText">
                         Slobodnih mesta:
                     <span style={{
@@ -164,7 +185,6 @@ function Details(props) {
                         </span>
                         {/* / {data.brojMesta} */}
                     </h1>
-                    {/* <i className="material-icons-outlined detailIcon"> */}
                     <img
                         src={
                             data.brojSlobodnihMesta > 0
@@ -173,7 +193,12 @@ function Details(props) {
                         }
                         className="svgIconSmaller"
                     />
-                    {/* </i> */}
+                    {
+                        data.azurirano && <UpdatedBadge
+                            color="white"
+                            object={data}
+                        />
+                    }
                 </div>
                 <div
                     className="detailsRow clickableRow"

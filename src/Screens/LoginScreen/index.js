@@ -21,13 +21,13 @@ const LoginScreen = props => {
             timeout = null;
 
         if (User && User.ID) {
-            setIsSuccess(true);
             setProfileImage(User.imageUrl)
             setProfileName(User.Name)
+            setIsSuccess(true);
             timeout = setTimeout(() => {
                 // props.setAuthorized(true);
-                props.history.push('/durango/app/home')
-            }, 2000)
+                props.history.push('/durango/app/home');
+            }, 2000);
         }
 
         return () => {

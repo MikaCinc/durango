@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const kafici = [
     {
         id: 1,
@@ -5,7 +7,7 @@ const kafici = [
         logo: 'vinyl.png',
         brojMesta: 32,
         brojSlobodnihMesta: 8,
-        azurirano: new Date(),
+        azurirano: moment().subtract(15, 'minute'),
         rezervacija: [],
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -28,7 +30,7 @@ const kafici = [
         logo: 'distrikt.png',
         brojMesta: 68,
         brojSlobodnihMesta: 7,
-        azurirano: new Date(),
+        azurirano: moment().subtract(1, 'minute'),
         rezervacija: [],
         details: {
             opis: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -93,8 +95,8 @@ const kafici = [
         title: 'Biro Kafeterija',
         logo: 'biro.png',
         brojMesta: 32,
-        brojSlobodnihMesta: 24,
-        azurirano: new Date(),
+        brojSlobodnihMesta: 10,
+        azurirano: moment().subtract(1, 'hour'),
         rezervacije: [],
         details: {
             opis: 'Pazite se, mi volimo da vas slikamo noću!',
@@ -114,10 +116,10 @@ const kafici = [
         id: 7,
         title: 'Okrug caffe',
         logo: 'okrug.jpg',
-        preporuka: true,
+        // preporuka: true,
         brojMesta: 20,
         brojSlobodnihMesta: 0,
-        azurirano: new Date(),
+        azurirano: new Date(2018, 11, 24, 10, 33, 30, 0),
         rezervacije: [],
         details: {
             opis: 'Kod nas uvek možete da čitate knjige iz trilogija "Gospodar prstenova" i "Hobiti"',
@@ -138,8 +140,8 @@ const kafici = [
         title: 'Zrnce caffe',
         logo: 'zrnce.png',
         brojMesta: 58,
-        brojSlobodnihMesta: 41,
-        azurirano: new Date(),
+        brojSlobodnihMesta: 10,
+        azurirano: moment().subtract(6, 'hours'),
         rezervacije: [],
         details: {
             opis: 'I ako smo zrnce mi nismo mali!',
@@ -160,8 +162,8 @@ const kafici = [
         title: 'Sailor',
         logo: 'sailor.png',
         brojMesta: 30,
-        brojSlobodnihMesta: 17,
-        azurirano: new Date(),
+        brojSlobodnihMesta: 10,
+        azurirano: moment().subtract(6, 'minute'),
         rezervacije: [],
         details: {
             opis: 'Plovimo na talasima vaše kafe',
@@ -183,7 +185,7 @@ const kafici = [
         logo: 'zebrano.png',
         brojMesta: 45,
         brojSlobodnihMesta: 0,
-        azurirano: new Date(),
+        azurirano: moment().subtract(38, 'minute'),
         rezervacije: [],
         details: {
             opis: 'Mazimo zebre!',

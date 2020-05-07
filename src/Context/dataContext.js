@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 /* LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
+import moment from 'moment';
 
 
 let DataContext;
@@ -126,7 +127,7 @@ const DataProvider = (props) => {
         let int = null;
 
         int = setInterval(() => {
-            setData(simulateUpdateData())
+            setData(simulateUpdateData());
         }, 1000)
 
         return () => {
@@ -154,13 +155,14 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 1);
+            randomIDs = _.slice(_.shuffle(IDs), 0, 2);
 
         return [...Data].map(item => {
             if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {
                 return {
                     ...item,
                     brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta),
+                    azurirano: moment(),
                     details: {
                         ...item.details,
                         volume: _.random(1, 3)
@@ -176,7 +178,11 @@ const DataProvider = (props) => {
 
     const getNewNumber = (old) => {
         let bulk = Math.floor(Math.random() * 4);
-        return Math.floor(Math.random() * 10) > 5 || old < 3 ? old + bulk : old - bulk;
+        return Math.floor(Math.random() * 10) > 5 || old < 3
+            ? old > 10
+                ? old - bulk
+                : old + bulk
+            : old - bulk;
     }
 
     const isAuthorized = () => {
