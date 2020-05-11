@@ -24,7 +24,10 @@ import Claps from './Components/Claps';
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
 import Home from './Screens/Home';
-import Restaurant from './Screens/Restaurant';
+// Object
+import Restaurant from './Screens/Object/index';
+import ObjectSettings from './Screens/Object/ObjectSettings';
+import ObjectLogin from './Screens/Object/ObjectLogin';
 
 /* Stacks */
 import ObjectProfileStackOfScreens from './Stacks/ObjectProfileStackOfScreens';
@@ -49,6 +52,22 @@ const UserStackOfScreens = ({ history }) => {
   );
 }
 
+const ObjectStackOfScreens = ({ history }) => {
+  const { location } = useContext(__RouterContext);
+
+  return (
+    <Fragment>
+        <Switch location={location}>
+          <Route exact path="/durango/inputPanel" component={ObjectLogin} />
+          <Route exact path="/durango/inputPanel/login" component={ObjectLogin} />
+          <Route exact path="/durango/inputPanel/:id" component={Restaurant} />
+          <Route exact path="/durango/inputPanel/:id/settings" component={ObjectSettings} />
+        </Switch>
+    </Fragment>
+
+  );
+}
+
 const App = (props) => {
   return (
     <Router>
@@ -57,7 +76,7 @@ const App = (props) => {
         <Route exact path="/durango/app-login" component={Login} />
         <Route exact path="/durango/" component={Login} />
         <Route path="/durango/app" component={UserStackOfScreens} />
-        <Route path="/durango/inputPanel/:id?" component={Restaurant} />
+        <Route path="/durango/inputPanel" component={ObjectStackOfScreens} />
       </Switch>
     </Router>
   )

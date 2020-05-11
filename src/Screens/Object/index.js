@@ -90,12 +90,13 @@ const Restaurant = ({ history }) => {
     return (
         <div className="IP-Container">
             <div className="detailsHeader">
-                <div
-                    className="IP-time"
-                >
+                <div className="IP-time">
                     {currentTime.format("HH:mm:ss")}
                 </div>
                 <img src={Logo} className="detailsDurangoLogo" />
+                <i className="material-icons IP-settings-icon">
+                    settings
+                </i>
             </div>
             {
                 data.id && <div className="IP-data-loaded">
@@ -151,7 +152,7 @@ const Restaurant = ({ history }) => {
                                                         return;
                                                     }
 
-                                                    if (value < 10 && value >= 0) {
+                                                    if (value <= 10 && value >= 0) {
                                                         setCurrentNumber(parseInt(value, 10));
                                                     }
                                                 }
