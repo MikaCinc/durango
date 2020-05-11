@@ -303,7 +303,7 @@ function Details(props) {
     }
 
     return (
-        !loading && restOfPage()
+        !loading && data.id && restOfPage()
     );
 }
 
