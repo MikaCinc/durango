@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/durango/static/css/main.6ea85e54.chunk.css",
-    "main.js": "/durango/static/js/main.28638e92.chunk.js",
-    "main.js.map": "/durango/static/js/main.28638e92.chunk.js.map",
+    "main.css": "/durango/static/css/main.1ebd9e9a.chunk.css",
+    "main.js": "/durango/static/js/main.ee8ca353.chunk.js",
+    "main.js.map": "/durango/static/js/main.ee8ca353.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
-    "static/js/2.e6c7100e.chunk.js": "/durango/static/js/2.e6c7100e.chunk.js",
-    "static/js/2.e6c7100e.chunk.js.map": "/durango/static/js/2.e6c7100e.chunk.js.map",
+    "static/js/2.9cb582c2.chunk.js": "/durango/static/js/2.9cb582c2.chunk.js",
+    "static/js/2.9cb582c2.chunk.js.map": "/durango/static/js/2.9cb582c2.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.6587ce033cd793d055e815a0625b2ef0.js": "/durango/precache-manifest.6587ce033cd793d055e815a0625b2ef0.js",
+    "precache-manifest.4deb9523d98b04926c562da71c07865a.js": "/durango/precache-manifest.4deb9523d98b04926c562da71c07865a.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
-    "static/css/main.6ea85e54.chunk.css.map": "/durango/static/css/main.6ea85e54.chunk.css.map",
-    "static/js/2.e6c7100e.chunk.js.LICENSE.txt": "/durango/static/js/2.e6c7100e.chunk.js.LICENSE.txt",
+    "static/css/main.1ebd9e9a.chunk.css.map": "/durango/static/css/main.1ebd9e9a.chunk.css.map",
+    "static/js/2.9cb582c2.chunk.js.LICENSE.txt": "/durango/static/js/2.9cb582c2.chunk.js.LICENSE.txt",
     "static/media/Logo.png": "/durango/static/media/Logo.65cdebb3.png",
     "static/media/audioBlue.svg": "/durango/static/media/audioBlue.d3318f47.svg",
     "static/media/audioLightblue.svg": "/durango/static/media/audioLightblue.c793620e.svg",
@@ -46,8 +46,8 @@
   "entrypoints": [
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
-    "static/js/2.e6c7100e.chunk.js",
-    "static/css/main.6ea85e54.chunk.css",
-    "static/js/main.28638e92.chunk.js"
+    "static/js/2.9cb582c2.chunk.js",
+    "static/css/main.1ebd9e9a.chunk.css",
+    "static/js/main.ee8ca353.chunk.js"
   ]
 }
