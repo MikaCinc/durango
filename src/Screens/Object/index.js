@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 /* Libraries */
 import moment from 'moment';
@@ -15,12 +15,17 @@ import defaultLogo from '../../CustomIcons/defaultLogo.png';
 import Logo from '../../ExtendedLogo/Logo.png';
 import kafici from '../../data/kafici';
 
+/* Context */
+import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
+
 const Restaurant = ({ history }) => {
     let { id } = useParams();
 
+    const { object, loading } = useContext(ObjectContext);
+
     // const [id, setId] = useState(null)
     const [currentTime, setCurrentTime] = useState(moment());
-    const [data, setData] = useState({});
+    const [data, setData] = useState(Object);
     const [currentNumber, setCurrentNumber] = useState(3);
     const [volume, setVolume] = useState(2);
 

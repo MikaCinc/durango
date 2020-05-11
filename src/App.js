@@ -34,6 +34,7 @@ import ObjectProfileStackOfScreens from './Stacks/ObjectProfileStackOfScreens';
 
 /* Context */
 import DataContext, { DataProvider } from './Context/dataContext';
+import ObjectContext, { ObjectProvider } from './Context/objectContext';
 
 const UserStackOfScreens = ({ history }) => {
   const { location } = useContext(__RouterContext);
@@ -42,9 +43,9 @@ const UserStackOfScreens = ({ history }) => {
     <Fragment>
       <DataProvider history={history}>
         <Switch location={location}>
-          <Route key={1} exact path="/durango/app" render={() => (<Redirect to="/durango/app/home" />)}/>
+          <Route key={1} exact path="/durango/app" render={() => (<Redirect to="/durango/app/home" />)} />
           <Route key={2} exact path="/durango/app/home" component={Home} />
-          <Route key={3} path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history}/>} />
+          <Route key={3} path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
         </Switch>
       </DataProvider >
     </Fragment>
@@ -57,12 +58,14 @@ const ObjectStackOfScreens = ({ history }) => {
 
   return (
     <Fragment>
+      <ObjectProvider history={history}>
         <Switch location={location}>
           <Route exact path="/durango/inputPanel" component={ObjectLogin} />
           <Route exact path="/durango/inputPanel/login" component={ObjectLogin} />
           <Route exact path="/durango/inputPanel/:id" component={Restaurant} />
           <Route exact path="/durango/inputPanel/:id/settings" component={ObjectSettings} />
         </Switch>
+      </ObjectProvider>
     </Fragment>
 
   );

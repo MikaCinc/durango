@@ -155,7 +155,7 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 0, 2);
+            randomIDs = _.slice(_.shuffle(IDs), 0, 3);
 
         return [...Data].map(item => {
             if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {

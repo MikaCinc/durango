@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 /* Libraries */
 import moment from 'moment';
@@ -16,14 +16,28 @@ import defaultLogo from '../../CustomIcons/defaultLogo.png';
 import Logo from '../../ExtendedLogo/Logo.png';
 import kafici from '../../data/kafici';
 
+/* Context */
+import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
+
 const ObjectLogin = ({ history }) => {
+
+    const { setID, loading } = useContext(ObjectContext);
 
     const [title, setTitle] = useState("");
     const [key, setKey] = useState("");
-    const [id, setId] = useState(null);
+    const [id, setId] = useState("");
 
     useEffect(() => {
+        // while (!ID || !findData.id) {
+        //     ID = prompt("Unesi ID svog objekta:");
+        //     findData = { ..._.find(kafici, { 'id': parseInt(ID, 10) }) };
 
+        //     if (!findData.id) {
+        //         alert("Nije pronađen objekat sa ovim ID-em");
+        //     } else {
+        //         history.replace(`/durango/inputPanel/${findData.id}`);
+        //     }
+        // }
     }, []);
 
     return (
@@ -35,7 +49,15 @@ const ObjectLogin = ({ history }) => {
                 <p>Key</p>
                 <input className="IP-Login-Input" type="text" value={key} onChange={(e) => { setKey(e.target.value) }} /> */}
                 <p>ID Objekta:</p>
-                <input className="IP-Login-Input" type="number" value={id} onChange={(e) => { setId(e.target.value) }} />
+                <input className="IP-Login-Input" type="number" value={id} onChange={(e) => { setId(parseInt(e.target.value), 10) }} />
+                <button
+                    className="IP-input-imaMesta IP-clickable"
+                    onClick={() => {
+                        setID(id);
+                    }}
+                >
+                    Udji
+                </button>
             </div>
             <Particles
                 canvasClassName="IP-Login-Particles"

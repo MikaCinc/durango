@@ -1012,7 +1012,7 @@ emoji-slider {
 .IP-Login-Logo {
   width: 200px;
   height: auto;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .IP-time {
