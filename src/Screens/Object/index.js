@@ -19,36 +19,32 @@ import kafici from '../../data/kafici';
 import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
 
 const Restaurant = ({ history }) => {
-    let { id } = useParams();
+    const { id } = useParams();
 
-    const { object, loading } = useContext(ObjectContext);
+    const { Data, loading } = useContext(ObjectContext);
 
     // const [id, setId] = useState(null)
     const [currentTime, setCurrentTime] = useState(moment());
-    const [data, setData] = useState(Object);
+    const [data, setData] = useState({});
     const [currentNumber, setCurrentNumber] = useState(3);
     const [volume, setVolume] = useState(2);
 
     useEffect(() => {
-        let ID = id;
-        let findData = {};
+        if (!Data || !Data.length) return;
+        
+        let findData;
+
         if (id) {
-            findData = { ..._.find(kafici, { 'id': parseInt(ID, 10) }) };
+            findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
         }
 
-        while (!ID || !findData.id) {
-            ID = prompt("Unesi ID svog objekta:");
-            findData = { ..._.find(kafici, { 'id': parseInt(ID, 10) }) };
+        if (findData.id) {
+            setData(findData);
+        } /* else {
+            history.push('/durango/inputPanel/login');
+        } */
 
-            if (!findData.id) {
-                alert("Nije pronađen objekat sa ovim ID-em");
-            } else {
-                history.replace(`/durango/inputPanel/${findData.id}`);
-            }
-        }
-
-        setData(findData);
-    }, []);
+    }, [Data]);
 
     useEffect(() => {
         // Request na server
@@ -99,12 +95,17 @@ const Restaurant = ({ history }) => {
                     {currentTime.format("HH:mm:ss")}
                 </div>
                 <img src={Logo} className="detailsDurangoLogo" />
-                <i className="material-icons IP-settings-icon">
+                <i
+                    className="material-icons IP-settings-icon"
+                    onClick={() => {
+                        history.push('/durango/inputPanel/' + data.id + '/settings');
+                    }}
+                >
                     settings
                 </i>
             </div>
             {
-                data.id && <div className="IP-data-loaded">
+                data && data.id && <div className="IP-data-loaded">
                     <div className="page container">
                         <div className="IP-dataLoaded">
                             <div className="detailsSubheader">
@@ -152,7 +153,7 @@ const Restaurant = ({ history }) => {
                                             onChange={
                                                 (e) => {
                                                     let value = e.target.value;
-                                                    if(!value) {
+                                                    if (!value) {
                                                         setCurrentNumber(0);
                                                         return;
                                                     }

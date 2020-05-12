@@ -26,18 +26,21 @@ const { Provider, Consumer } = ObjectContext = React.createContext({});
 
 const ObjectProvider = (props) => {
 
-    const [ID, setID] = useState("");
+    const [Data, setData] = useState();
+    const [ID, setID] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [object, setObject] = useState(null);
+
+    useEffect(() => {
+        setData([...kafici]);
+    }, []);
 
     useEffect(() => {
         let findData = {};
         if (ID) {
-            findData = { ..._.find(kafici, { 'id': parseInt(ID, 10) }) };
+            findData = { ..._.find(Data, { 'id': parseInt(ID, 10) }) };
         }
 
         if (findData.id) {
-            setObject(findData);
             props.history.push('/durango/inputPanel/' + ID);
         }
     }, [ID]);
@@ -47,9 +50,8 @@ const ObjectProvider = (props) => {
             value={{
                 ID,
                 setID,
-                object,
-                setObject,
-                loading
+                loading,
+                Data,
             }}
         >
             {props.children}

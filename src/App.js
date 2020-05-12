@@ -19,7 +19,7 @@ import {
 } from 'react-transition-group';
 
 /* Components */
-import Claps from './Components/Claps';
+import AbsoluteWrapper from './Components/AbsoluteWrapper';
 
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
@@ -56,15 +56,47 @@ const UserStackOfScreens = ({ history }) => {
 const ObjectStackOfScreens = ({ history }) => {
   const { location } = useContext(__RouterContext);
 
+
+  const routes = [
+    { path: '/durango/inputPanel', Component: ObjectLogin },
+    { path: '/durango/inputPanel/login', Component: ObjectLogin },
+    { path: '/durango/inputPanel/:id', Component: Restaurant },
+    { path: '/durango/inputPanel/:id/settings', Component: ObjectSettings },
+  ]
+
   return (
     <Fragment>
       <ObjectProvider history={history}>
-        <Switch location={location}>
-          <Route exact path="/durango/inputPanel" component={ObjectLogin} />
-          <Route exact path="/durango/inputPanel/login" component={ObjectLogin} />
-          <Route exact path="/durango/inputPanel/:id" component={Restaurant} />
-          <Route exact path="/durango/inputPanel/:id/settings" component={ObjectSettings} />
-        </Switch>
+        <AbsoluteWrapper>
+          <TransitionGroup>
+            <CSSTransition
+              in={true}
+              timeout={300}
+              classNames="page"
+              unmountOnExit
+              key={history.location.key} // Bez ovoga neće!
+            >
+              <Switch location={history.location}>
+                {
+                  routes.map(({ path, Component }) => (
+                    <Route
+                      key={path}
+                      exact
+                      path={path}
+                      render={
+                        ({ match }) => (
+                          // <div className="page">
+                            <Component history={history} />
+                          // </div>
+                        )
+                      }
+                    />
+                  ))
+                }
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </AbsoluteWrapper>
       </ObjectProvider>
     </Fragment>
 

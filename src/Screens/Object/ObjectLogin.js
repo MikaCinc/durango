@@ -53,7 +53,7 @@ const ObjectLogin = ({ history }) => {
                 <button
                     className="IP-input-imaMesta IP-clickable"
                     onClick={() => {
-                        setID(id);
+                        history.push('/durango/inputPanel/' + id);
                     }}
                 >
                     Udji
