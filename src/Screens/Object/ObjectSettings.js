@@ -27,6 +27,14 @@ const ObjectSettings = ({ history }) => {
     const { Data, loading } = useContext(ObjectContext);
     const [data, setData] = useState({});
 
+    const [title, setTitle] = useState('');
+    const [brojMesta, setBrojMesta] = useState(1);
+    const [opis, setOpis] = useState('');
+    const [lokacija, setLokacija] = useState('');
+    const [adresa, setAdresa] = useState('');
+    const [muzika, setMuzika] = useState('');
+    const [brojTelefona, setBrojTelefona] = useState('');
+
     useEffect(() => {
         if (!Data || !Data.length) return;
 
@@ -43,6 +51,21 @@ const ObjectSettings = ({ history }) => {
         }
 
     }, [Data]);
+
+    useEffect(() => {
+        if (!data || !data.id) return;
+        
+        const { title, brojMesta, details: { lokacija, adresa, brojTelefona, muzika, opis } } = data;
+
+        setTitle(title);
+        setBrojMesta(brojMesta);
+        setOpis(opis);
+        setLokacija(lokacija);
+        setMuzika(muzika);
+        setAdresa(adresa);
+        setBrojTelefona(brojTelefona);
+
+    }, [data]);
 
     return (
         <div className="IP-Container">
@@ -61,9 +84,45 @@ const ObjectSettings = ({ history }) => {
             }
             {
                 data.id && <div className="page container">
-                    <div className="IP-Settings-Block">
-                        <p>Naziv</p>
-                        {/* <input type="text"  */}
+                    <div className="IP-Settings-Form">
+                        <div className="IP-Settings-Block">
+                            <p>Naziv</p>
+                            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Ukupan broj mesta</p>
+                            <input type="number" value={brojMesta} onChange={(e) => setBrojMesta(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Adresa</p>
+                            <input type="text" value={adresa} onChange={(e) => setAdresa(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Telefon</p>
+                            <input type="text" value={brojTelefona} onChange={(e) => setBrojTelefona(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Tip muzike</p>
+                            <input type="text" value={muzika} onChange={(e) => setMuzika(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Google Maps lokacija</p>
+                            <textarea type="text" value={lokacija} onChange={(e) => setLokacija(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p>Opis</p>
+                            <textarea type="text" value={opis} onChange={(e) => setOpis(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <button
+                                className="IP-input-imaMesta IP-clickable"
+                                onClick={() => {
+                                    // API Call
+                                }}
+                            >
+                                Sačuvaj
+                        </button>
+                        </div>
                     </div>
                 </div>
             }

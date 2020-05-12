@@ -1185,3 +1185,24 @@ emoji-slider {
   font-size: 32px;
   color: orangered;
 }
+
+.IP-Settings-Block {
+  margin: 10px;
+}
+
+.IP-Settings-Form {
+  z-index: 1000;
+  margin-top: 100px;  
+  margin-bottom: 100px;  
+  /* position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: var(--shadow);
+}
