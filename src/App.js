@@ -11,6 +11,10 @@ import {
   useParams
 } from "react-router-dom";
 
+/* Libraries */
+import 'moment/locale/sr';
+import moment from 'moment';
+
 /* Animations */
 import Fade from 'react-reveal/Fade';
 import {
@@ -18,19 +22,14 @@ import {
   TransitionGroup
 } from 'react-transition-group';
 
-/* Components */
-import AbsoluteWrapper from './Components/AbsoluteWrapper';
-
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
 import Home from './Screens/Home';
-// Object
-import Restaurant from './Screens/Object/index';
-import ObjectSettings from './Screens/Object/ObjectSettings';
 import ObjectLogin from './Screens/Object/ObjectLogin';
 
 /* Stacks */
 import ObjectProfileStackOfScreens from './Stacks/ObjectProfileStackOfScreens';
+import InputPanelStackOfScreens from './Stacks/InputPanelStackOfScreens';
 
 /* Context */
 import DataContext, { DataProvider } from './Context/dataContext';
@@ -56,47 +55,23 @@ const UserStackOfScreens = ({ history }) => {
 const ObjectStackOfScreens = ({ history }) => {
   const { location } = useContext(__RouterContext);
 
-
-  const routes = [
-    { path: '/durango/inputPanel', Component: ObjectLogin },
-    { path: '/durango/inputPanel/login', Component: ObjectLogin },
-    { path: '/durango/inputPanel/:id', Component: Restaurant },
-    { path: '/durango/inputPanel/:id/settings', Component: ObjectSettings },
-  ]
-
   return (
     <Fragment>
       <ObjectProvider history={history}>
-        <AbsoluteWrapper>
-          <TransitionGroup>
-            <CSSTransition
-              in={true}
-              timeout={300}
-              classNames="page"
-              unmountOnExit
-              key={history.location.key} // Bez ovoga neće!
-            >
-              <Switch location={history.location}>
-                {
-                  routes.map(({ path, Component }) => (
-                    <Route
-                      key={path}
-                      exact
-                      path={path}
-                      render={
-                        ({ match }) => (
-                          // <div className="page">
-                            <Component history={history} />
-                          // </div>
-                        )
-                      }
-                    />
-                  ))
-                }
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        </AbsoluteWrapper>
+        <Switch location={location}>
+          <Route
+            exact path="/durango/inputPanel/login"
+            render={({ match }) => <ObjectLogin history={history} match={match} />}
+          />
+          <Route
+            exact path="/durango/inputPanel"
+            render={({ match }) => <ObjectLogin history={history} match={match} />}
+          />
+          <Route
+            path="/durango/inputPanel/:id"
+            render={({ match }) => <InputPanelStackOfScreens history={history} match={match} />}
+          />
+        </Switch>
       </ObjectProvider>
     </Fragment>
 
@@ -104,6 +79,8 @@ const ObjectStackOfScreens = ({ history }) => {
 }
 
 const App = (props) => {
+  moment.locale('sr');
+
   return (
     <Router>
       <Switch>

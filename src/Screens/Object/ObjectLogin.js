@@ -27,18 +27,17 @@ const ObjectLogin = ({ history }) => {
     const [key, setKey] = useState("");
     const [id, setId] = useState("");
 
-    useEffect(() => {
-        // while (!ID || !findData.id) {
-        //     ID = prompt("Unesi ID svog objekta:");
-        //     findData = { ..._.find(kafici, { 'id': parseInt(ID, 10) }) };
+    const entering = () => {
+        if (!id) return;
 
-        //     if (!findData.id) {
-        //         alert("Nije pronađen objekat sa ovim ID-em");
-        //     } else {
-        //         history.replace(`/durango/inputPanel/${findData.id}`);
-        //     }
-        // }
-    }, []);
+        let findData = { ..._.find(kafici, { 'id': parseInt(id, 10) }) };
+
+        if (!findData.id) {
+            alert("Nije pronađen objekat sa ovim ID-em");
+        } else {
+            history.replace(`/durango/inputPanel/${findData.id}`);
+        }
+    }
 
     return (
         <div className="IP-Login">
@@ -53,7 +52,8 @@ const ObjectLogin = ({ history }) => {
                 <button
                     className="IP-input-imaMesta IP-clickable"
                     onClick={() => {
-                        history.push('/durango/inputPanel/' + id);
+                        // history.push('/durango/inputPanel/' + id);
+                        entering();
                     }}
                 >
                     Udji

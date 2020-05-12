@@ -54,7 +54,7 @@ const ObjectSettings = ({ history }) => {
 
     useEffect(() => {
         if (!data || !data.id) return;
-        
+
         const { title, brojMesta, details: { lokacija, adresa, brojTelefona, muzika, opis } } = data;
 
         setTitle(title);
@@ -70,20 +70,20 @@ const ObjectSettings = ({ history }) => {
     return (
         <div className="IP-Container">
             {
-                data.id && <div className="detailsHeader">
-                    <div
-                        className="goBack"
-                        onClick={() => {
-                            history.push('/durango/inputPanel/' + data.id);
-                        }}
-                    >
-                        <img src={BackArrow} className="svgIconBigger" />
-                    </div>
-                    <img src={Logo} className="detailsDurangoLogo" />
-                </div>
+                // data.id && <div className="detailsHeader">
+                //     <div
+                //         className="goBack"
+                //         onClick={() => {
+                //             history.push('/durango/inputPanel/' + data.id);
+                //         }}
+                //     >
+                //         <img src={BackArrow} className="svgIconBigger" />
+                //     </div>
+                //     <img src={Logo} className="detailsDurangoLogo" />
+                // </div>
             }
             {
-                data.id && <div className="page container">
+                data.id && <div className="container">
                     <div className="IP-Settings-Form">
                         <div className="IP-Settings-Block">
                             <p>Naziv</p>

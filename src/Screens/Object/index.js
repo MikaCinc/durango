@@ -11,10 +11,6 @@ import { useParams } from "react-router-dom";
 /* Default Logo */
 import defaultLogo from '../../CustomIcons/defaultLogo.png';
 
-/* Data */
-import Logo from '../../ExtendedLogo/Logo.png';
-import kafici from '../../data/kafici';
-
 /* Context */
 import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
 
@@ -23,8 +19,6 @@ const Restaurant = ({ history }) => {
 
     const { Data, loading } = useContext(ObjectContext);
 
-    // const [id, setId] = useState(null)
-    const [currentTime, setCurrentTime] = useState(moment());
     const [data, setData] = useState({});
     const [currentNumber, setCurrentNumber] = useState(3);
     const [volume, setVolume] = useState(2);
@@ -60,16 +54,6 @@ const Restaurant = ({ history }) => {
         }
     }, [data]);
 
-    useEffect(() => {
-        let interval = setInterval(() => {
-            setCurrentTime(moment());
-        }, 1000);
-
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
-
     const getRadnoVreme = () => {
         const open = isOpen(data.details.radnoVreme);
 
@@ -90,23 +74,9 @@ const Restaurant = ({ history }) => {
 
     return (
         <div className="IP-Container">
-            <div className="detailsHeader">
-                <div className="IP-time">
-                    {currentTime.format("HH:mm:ss")}
-                </div>
-                <img src={Logo} className="detailsDurangoLogo" />
-                <i
-                    className="material-icons IP-settings-icon"
-                    onClick={() => {
-                        history.push('/durango/inputPanel/' + data.id + '/settings');
-                    }}
-                >
-                    settings
-                </i>
-            </div>
             {
                 data && data.id && <div className="IP-data-loaded">
-                    <div className="page container">
+                    <div>
                         <div className="IP-dataLoaded">
                             <div className="detailsSubheader">
                                 <div>
