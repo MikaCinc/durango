@@ -47,6 +47,8 @@ const InputPanelStackOfScreens = (props) => {
     // const { location } = useContext(__RouterContext);
 
     const { Data, loading } = useContext(ObjectContext);
+    const [data, setData] = useState();
+    const [volume, setVolume] = useState(2);
 
     useEffect(() => {
         if (!Data || !Data.length) {
@@ -61,9 +63,49 @@ const InputPanelStackOfScreens = (props) => {
         if (!findData.id) {
             props.history.replace(`/durango/inputPanel/login`);
         } else {
+            setData(findData);
             props.history.replace(`/durango/inputPanel/${findData.id}`);
         }
     }, [Data]);
+
+    useEffect(() => {
+        // Request na server
+    }, [volume]);
+
+    const renderFixedButtons = () => {
+        if (!data || !data.id) return null;
+
+        const { location: { pathname } } = props.history;
+
+        let splitted = pathname.split('/');
+
+        if (['settings'].indexOf(splitted[splitted.length - 1]) !== -1) {
+            return null;
+        }
+
+        return (
+            <Fragment>
+                <div className="IP-zatvoriOtvoriContainer">Zatvori</div>
+                <div className="IP-volumeContainer">
+                    {
+                        ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
+                            return (
+                                <div
+                                    key={level}
+                                    className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
+                                    onClick={() => {
+                                        setVolume(i + 1);
+                                    }}
+                                >
+                                    {level}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </Fragment>
+        )
+    }
 
     return (
         <Fragment>
@@ -102,6 +144,10 @@ const InputPanelStackOfScreens = (props) => {
             </div>
             {
                 // !loading && data && <Claps data={data} />
+            }
+
+            {
+                renderFixedButtons()
             }
         </Fragment>
     )
