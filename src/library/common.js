@@ -58,7 +58,13 @@ function isOpen(workingHours, day = moment()) {
 
     //! Ako je isti openign i closing, odna je 24h open, treba handluejs i ovaj case.
     if (closing.isSame(opening)) {
-        return "24/7";
+        // return "24/7";
+        return true;
+    }
+
+    //! Ako je trenutno vreme prešlo 00:00, vreme zatvaranja je pre otvoranja i trenutno vreme je pre vremena zatvaranja
+    if (closing.isBefore(opening) && moment(day).isBefore(closing)) {
+        return true;
     }
 
     //! Ako prodje 00:00, to znaci da prebacimo u sledeci dan.
