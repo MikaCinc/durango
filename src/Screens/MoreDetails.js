@@ -63,7 +63,7 @@ const daysOfTheWeek = [
 
 function MoreDetails(props) {
     let { id } = useParams();
-    const { Data, loading } = useContext(DataContext);
+    const { Data, loading, setShowComingSoonModal } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
     const [showWHModal, setShowWHModal] = useState(false);
@@ -234,7 +234,7 @@ function MoreDetails(props) {
                 <div
                     className="detailsRow clickableRow"
                     onClick={() => {
-                        alert('Coming soon')
+                        setShowComingSoonModal(true);
                     }}
                 >
                     <h1 className="detailRowText boldText">Meni</h1>

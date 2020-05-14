@@ -7,36 +7,30 @@ import React, {
 import { Modal } from 'react-bootstrap';
 
 /* Logo */
-import Logo from '../ExtendedLogo/Logo.png';
+import Logo from '../CustomIcons/noResults.png';
 
-const ComingSoonModal = (props) => {
-    const [showModal, setShowModal] = useState(false);
-
-    useEffect(() => {
-
-    }, []);
-
-    const handleClose = () => {
-        setShowModal(false);
-    }
-
+const ComingSoonModal = ({ show, onHide }) => {
     return (
         <Modal
-            show={showModal}
-            onHide={handleClose}
+            show={show}
+            onHide={onHide}
             centered
         >
             <Modal.Body>
-                    <img src={Logo} className="reserveModalLogo" />
-                    <h3 className="boldText reserveModalTitle">Naš tim aktivno radi na ovoj funkciji</h3>
+                <div className="reserveModalContainer">
+                    <img src={Logo} style={{width: '125px'}} />
+                    <h6 className="boldText">Naš tim aktivno radi na ovoj funkciji</h6>
+                    <p style={{marginBottom: '0px'}}>Biće dostupna u nekom od narednih ažuriranja.</p>
+                    <p>Hvala na strpljenju!</p>
                     <div
                         className="detailsRow clickableRow w-50"
                         onClick={() => {
-                            handleClose();
+                            onHide();
                         }}
                     >
                         <h1 className="detailRowText boldText">OK</h1>
                     </div>
+                </div>
             </Modal.Body>
         </Modal>
     )

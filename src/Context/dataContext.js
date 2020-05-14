@@ -7,6 +7,9 @@ import React, {
 /* Data */
 import kafici from '../data/kafici';
 
+/* Components */
+import ComingSoonModal from '../Components/ComingSoonModal';
+
 /* Packages & libraries */
 import _ from 'lodash';
 import { isOpen } from '../library/common';
@@ -43,6 +46,8 @@ const DataProvider = (props) => {
     const [sortedClosed, setSortedClosed] = useState([]);
     // Current page/data
     const [currentData, setCurrentData] = useState({});
+    // Coming soon modal
+    const [showComingSoonModal, setShowComingSoonModal] = useState(false);
     // Timer za rezervaciju
     const [timer, setTimer] = useState(null);
 
@@ -333,11 +338,13 @@ const DataProvider = (props) => {
                 setCurrentData,
                 fastReserve,
                 // setTimer,
-                timer
+                timer,
+                setShowComingSoonModal
             }}
         >
             {props.children}
             <LoaderComponent />
+            <ComingSoonModal show={showComingSoonModal} onHide={() => {setShowComingSoonModal(false);}}/>
         </Provider>
     )
 }

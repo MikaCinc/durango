@@ -2,7 +2,8 @@ import React, {
     useContext,
     useEffect,
     useRef,
-    useState
+    useState,
+    Fragment
 } from 'react';
 
 /* Libraries */
@@ -10,6 +11,9 @@ import _ from 'lodash';
 
 /* webComponent */
 import 'emoji-slider';
+
+/* Components */
+import { Modal } from 'react-bootstrap';
 
 /* Animations */
 import RubberBand from 'react-reveal/RubberBand';
@@ -31,6 +35,7 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
     };
 
     const [showSlider, setShowSlider] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [localClaps, setLocalClaps] = useState(0);
 
     const slider = useRef(null);
@@ -111,38 +116,66 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
         )
     }
 
+    const handleClose = () => {
+        setShowModal(false);
+    }
+
     return (
-        <div
-            className="clapsContainer"
-            style={{
-                left: showSlider ? 0 : '' // Dok nije aktivan da može da se klikne na nešto ispod
-            }}
-        >
-            <RubberBand
-                when={showSlider}
-                duration={500}
-                opposite={true}
-            >
-                <div className={`clapsSliderContainer ${!showSlider && 'd-none'}`}>
-                    <emoji-slider emoji="👏" value={0.5} step={0.2} ref={slider}></emoji-slider>
-                </div>
-            </RubberBand>
+        <Fragment>
             <div
-                className="clapsTriggerContainer"
-                onClick={() => {
-                    if (userAplauza() > 0) {
-                        alert('Hvala! Već si 👏 ovom objektu');
-                        return;
-                    }
-                    setShowSlider(!showSlider);
+                className="clapsContainer"
+                style={{
+                    left: showSlider ? 0 : '' // Dok nije aktivan da može da se klikne na nešto ispod
                 }}
             >
-                <span>👏</span>
-                {
-                    renderNumber(totalClaps)
-                }
+                <RubberBand
+                    when={showSlider}
+                    duration={500}
+                    opposite={true}
+                >
+                    <div className={`clapsSliderContainer ${!showSlider && 'd-none'}`}>
+                        <emoji-slider emoji="👏" value={0.5} step={0.2} ref={slider}></emoji-slider>
+                    </div>
+                </RubberBand>
+                <div
+                    className="clapsTriggerContainer"
+                    onClick={() => {
+                        if (userAplauza() > 0) {
+                            setShowModal(true);
+                            return;
+                        }
+                        setShowSlider(!showSlider);
+                    }}
+                >
+                    <span>👏</span>
+                    {
+                        renderNumber(totalClaps)
+                    }
+                </div>
             </div>
-        </div>
+            <Modal
+                show={showModal}
+                onHide={handleClose}
+                centered
+            >
+                <Modal.Body>
+                    <div className="reserveModalContainer" style={{ padding: '20px' }}>
+                        <h6 className="boldText">Hvala! Već si 👏 objektu {data.title}</h6>
+                        <p>Ukupno 👏: {data.details.totalClaps}</p>
+                        <p>Prosečno 👏: {(data.details.totalClaps / data.details.numberOfGrades).toPrecision(2)}</p>
+                        <p>Tvojih 👏: {userAplauza()}</p>
+                        <div
+                            className="detailsRow clickableRow w-50"
+                            onClick={() => {
+                                handleClose();
+                            }}
+                        >
+                            <h1 className="detailRowText boldText">OK</h1>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
+        </Fragment>
     )
 }
 

@@ -107,7 +107,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
 
 function Details(props) {
     let { id } = useParams();
-    const { Data, loading, changeData, setCurrentData, User, toggleFavourite } = useContext(DataContext);
+    const { Data, loading, changeData, setCurrentData, User, toggleFavourite, setShowComingSoonModal } = useContext(DataContext);
     const [data, setData] = useState({ ...placeholderObj });
     const [timer, setTimer] = useState('');
 
@@ -242,7 +242,7 @@ function Details(props) {
                 <div
                     className="detailsRow clickableRow"
                     onClick={() => {
-                        // handleShow()
+                        setShowComingSoonModal(true);
                         props.history.push(`/durango/app/${data.id}/reserve`);
                     }}
                 >
