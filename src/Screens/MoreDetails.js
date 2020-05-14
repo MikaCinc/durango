@@ -253,7 +253,7 @@ function MoreDetails(props) {
                 !loading && restOfPage()
             }
             {
-                showWHModal && <Modal
+                !loading && <Modal
                     show={showWHModal}
                     onHide={() => { setShowWHModal(false); }}
                     centered
@@ -278,6 +278,14 @@ function MoreDetails(props) {
                                     )
                                 })
                             }
+                            <div
+                                className="detailsRow clickableRow w-50"
+                                onClick={() => {
+                                    setShowWHModal(false);
+                                }}
+                            >
+                                <h1 className="detailRowText boldText">OK</h1>
+                            </div>
                         </div>
                     </Modal.Body>
                 </Modal>
