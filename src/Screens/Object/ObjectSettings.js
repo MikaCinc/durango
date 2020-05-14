@@ -28,12 +28,12 @@ const ObjectSettings = ({ history }) => {
     const [data, setData] = useState({});
 
     const [title, setTitle] = useState('');
-    const [brojMesta, setBrojMesta] = useState(1);
-    const [opis, setOpis] = useState('');
-    const [lokacija, setLokacija] = useState('');
-    const [adresa, setAdresa] = useState('');
-    const [muzika, setMuzika] = useState('');
-    const [brojTelefona, setBrojTelefona] = useState('');
+    const [totalSpots, setTotalSpots] = useState(1);
+    const [description, setDescription] = useState('');
+    const [location, setLocation] = useState('');
+    const [address, setAddress] = useState('');
+    const [music, setMusic] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
 
     useEffect(() => {
         if (!Data || !Data.length) return;
@@ -55,15 +55,15 @@ const ObjectSettings = ({ history }) => {
     useEffect(() => {
         if (!data || !data.id) return;
 
-        const { title, brojMesta, details: { lokacija, adresa, brojTelefona, muzika, opis } } = data;
+        const { title, totalSpots, details: { location, address, phoneNumber, music, description } } = data;
 
         setTitle(title);
-        setBrojMesta(brojMesta);
-        setOpis(opis);
-        setLokacija(lokacija);
-        setMuzika(muzika);
-        setAdresa(adresa);
-        setBrojTelefona(brojTelefona);
+        setTotalSpots(totalSpots);
+        setDescription(description);
+        setLocation(location);
+        setMusic(music);
+        setAddress(address);
+        setPhoneNumber(phoneNumber);
 
     }, [data]);
 
@@ -91,27 +91,27 @@ const ObjectSettings = ({ history }) => {
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Ukupan broj mesta</p>
-                            <input type="number" value={brojMesta} onChange={(e) => setBrojMesta(e.target.value)} />
+                            <input type="number" value={totalSpots} onChange={(e) => setTotalSpots(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Adresa</p>
-                            <input type="text" value={adresa} onChange={(e) => setAdresa(e.target.value)} />
+                            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Telefon</p>
-                            <input type="text" value={brojTelefona} onChange={(e) => setBrojTelefona(e.target.value)} />
+                            <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Tip muzike</p>
-                            <input type="text" value={muzika} onChange={(e) => setMuzika(e.target.value)} />
+                            <input type="text" value={music} onChange={(e) => setMusic(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Google Maps lokacija</p>
-                            <textarea type="text" value={lokacija} onChange={(e) => setLokacija(e.target.value)} />
+                            <textarea type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <p>Opis</p>
-                            <textarea type="text" value={opis} onChange={(e) => setOpis(e.target.value)} />
+                            <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
                             <button

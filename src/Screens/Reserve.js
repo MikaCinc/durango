@@ -38,14 +38,14 @@ const placeholderObj = {
     id: 0,
     title: '',
     logo: '',
-    brojMesta: 0,
-    brojSlobodnihMesta: 0,
+    totalSpots: 0,
+    freeSpots: 0,
     details: {
-        opis: '',
-        slike: '',
+        description: '',
+        images: '',
         radnoVreme: '',
-        lokacija: '',
-        meni: ''
+        location: '',
+        menu: ''
     }
 }
 

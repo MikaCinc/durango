@@ -161,8 +161,8 @@ const DataProvider = (props) => {
             if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {
                 return {
                     ...item,
-                    brojSlobodnihMesta: getNewNumber(item.brojSlobodnihMesta),
-                    azurirano: moment(),
+                    freeSpots: getNewNumber(item.freeSpots),
+                    spotsUpdatedAt: moment(),
                     details: {
                         ...item.details,
                         volume: _.random(1, 3)
@@ -200,13 +200,13 @@ const DataProvider = (props) => {
             return title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
         });
 
-        setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
+        setFilteredData(_.orderBy(filtered, 'freeSpots', 'desc'));
     };
 
     const filterByOmiljeni = () => {
         let filtered = Data.filter(({ id }) => User.Favourites.indexOf(id) !== -1);
 
-        setFilteredData(_.orderBy(filtered, 'brojSlobodnihMesta', 'desc'));
+        setFilteredData(_.orderBy(filtered, 'freeSpots', 'desc'));
     };
 
     const toggleFavourite = (fav) => {

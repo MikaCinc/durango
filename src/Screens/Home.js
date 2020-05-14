@@ -169,13 +169,13 @@ const FavoritBadge = ({ color = '#596164' }) => {
 const UpdatedBadge = ({ color = 'white', object }) => {
     // moment().locale('sr'); @todo
 
-    const [label, setLabel] = useState(moment(object.azurirano).fromNow());
+    const [label, setLabel] = useState(moment(object.spotsUpdatedAt).fromNow());
 
     useEffect(() => {
         let interval;
 
         const updateLabel = () => {
-            setLabel(moment(object.azurirano).fromNow());
+            setLabel(moment(object.spotsUpdatedAt).fromNow());
         }
 
         updateLabel();
@@ -185,7 +185,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [object.azurirano]);
+    }, [object.spotsUpdatedAt]);
 
 
     return (
@@ -194,7 +194,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
             style={
                 {
                     color,
-                    background: object.brojSlobodnihMesta === 0
+                    background: object.freeSpots === 0
                         ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
                         : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
                 }
@@ -288,9 +288,9 @@ const List = ({ history }) => {
                                     <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 15)}</h1>
                                     <p className="lineFreeSeats boldText greyText">
                                         {
-                                            Kafic.brojSlobodnihMesta >= 10
+                                            Kafic.freeSpots >= 10
                                                 ? '10+'
-                                                : Kafic.brojSlobodnihMesta
+                                                : Kafic.freeSpots
                                         }
                                     </p>
                                     <i
@@ -298,7 +298,7 @@ const List = ({ history }) => {
                                     >
                                         <img
                                             src={
-                                                Kafic.brojSlobodnihMesta > 0
+                                                Kafic.freeSpots > 0
                                                     ? Seat
                                                     : SeatOrange
                                             }
@@ -319,7 +319,7 @@ const List = ({ history }) => {
                                 User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge color="#005bea" />
                             }
                             {
-                                Kafic.azurirano && <UpdatedBadge
+                                Kafic.spotsUpdatedAt && <UpdatedBadge
                                     color="white"
                                     object={Kafic}
                                 />
@@ -361,9 +361,9 @@ const List = ({ history }) => {
                             <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 15)}</h1>
                             <p className="lineFreeSeats boldText greyText">
                                 {
-                                    Kafic.brojSlobodnihMesta >= 10
+                                    Kafic.freeSpots >= 10
                                         ? '10+'
-                                        : Kafic.brojSlobodnihMesta
+                                        : Kafic.freeSpots
                                 }
                             </p>
                             <i

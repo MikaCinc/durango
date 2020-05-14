@@ -44,8 +44,8 @@ const Restaurant = ({ history }) => {
     }, [currentNumber]);
 
     useEffect(() => {
-        if (data.brojSlobodnihMesta || data.brojSlobodnihMesta === 0) {
-            setCurrentNumber(data.brojSlobodnihMesta);
+        if (data.freeSpots || data.freeSpots === 0) {
+            setCurrentNumber(data.freeSpots);
         }
     }, [data]);
 
@@ -63,7 +63,7 @@ const Restaurant = ({ history }) => {
 
         setData({
             ...data,
-            brojSlobodnihMesta: value
+            freeSpots: value
         })
     }
 
@@ -87,7 +87,7 @@ const Restaurant = ({ history }) => {
                                         }
                                         className={
                                             `detailsLogo reveal-focus-${
-                                            data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
+                                            data.freeSpots && isOpen(data.details.radnoVreme) > 0
                                                 ? 'blue'
                                                 : 'orange'
                                             }`
@@ -131,8 +131,8 @@ const Restaurant = ({ history }) => {
                                                     }
                                                 }
                                             />
-                                            <h5>od ukupno {data.brojMesta}</h5>
-                                            {/* <div className="IP-center-ukupnoMesta">{data.brojMesta}</div> */}
+                                            <h5>od ukupno {data.totalSpots}</h5>
+                                            {/* <div className="IP-center-ukupnoMesta">{data.totalSpots}</div> */}
                                         </div>
                                         <div className="IP-dial-container">
                                             {

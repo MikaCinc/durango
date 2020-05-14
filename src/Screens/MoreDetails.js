@@ -41,14 +41,14 @@ const placeholderObj = {
     id: 0,
     title: '',
     logo: '',
-    brojMesta: 0,
-    brojSlobodnihMesta: 0,
+    totalSpots: 0,
+    freeSpots: 0,
     details: {
-        opis: '',
-        slike: '',
+        description: '',
+        images: '',
         radnoVreme: '',
-        lokacija: '',
-        meni: ''
+        location: '',
+        menu: ''
     }
 }
 
@@ -127,7 +127,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Adresa: </span>
-                        {data.details.adresa}
+                        {data.details.address}
                     </p>
                     <img
                         src={Location}
@@ -139,7 +139,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Telefon: </span>
-                        {data.details.brojTelefona}
+                        {data.details.phoneNumber}
                     </p>
                     <img
                         src={Call}
@@ -152,7 +152,7 @@ function MoreDetails(props) {
                     <div>
                         <span className="boldText mr-1">Muzika: </span>
                         {
-                            data.details.muzika
+                            data.details.music
                         }
                     </div>
                     <div>
@@ -207,7 +207,7 @@ function MoreDetails(props) {
                 <div
                     className="detailAbout"
                 >
-                    {data.details.opis.slice(0, 135) + '...'}
+                    {data.details.description.slice(0, 135) + '...'}
                 </div>
                 <div
                     className="detailsRow clickableRow"

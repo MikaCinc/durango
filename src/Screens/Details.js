@@ -47,14 +47,14 @@ const placeholderObj = {
     id: 0,
     title: '',
     logo: '',
-    brojMesta: 0,
-    brojSlobodnihMesta: 0,
+    totalSpots: 0,
+    freeSpots: 0,
     details: {
-        opis: '',
-        slike: '',
+        description: '',
+        images: '',
         radnoVreme: '',
-        lokacija: '',
-        meni: ''
+        location: '',
+        menu: ''
     }
 }
 
@@ -72,13 +72,13 @@ const UkupnoMestaBadge = ({ color = 'white', object }) => {
                     left: 'auto',
                     color,
                     fontSize: '12px',
-                    background: object.brojSlobodnihMesta === 0
+                    background: object.freeSpots === 0
                         ? 'linear-gradient(to bottom left, #f83600 0%, #f9d423 100%)'
                         : 'linear-gradient(to bottom left, #00c6fb 0%, #005bea 100%)'
                 }
             }
         >
-            <p>Ukupno mesta: {object.brojMesta}</p>
+            <p>Ukupno mesta: {object.totalSpots}</p>
         </div>
     )
 }
@@ -93,13 +93,13 @@ const UpdatedBadge = ({ color = 'white', object }) => {
                 {
                     color,
                     fontSize: '12px',
-                    background: object.brojSlobodnihMesta === 0
+                    background: object.freeSpots === 0
                         ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
                         : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
                 }
             }
         >
-            <p>Poslednje ažuriranje u: {moment(object.azurirano).format('HH:mm:ss')}</p>
+            <p>Poslednje ažuriranje u: {moment(object.spotsUpdatedAt).format('HH:mm:ss')}</p>
             {/* <img src={watchBlue} className="svgIconSmallest updatedBadgeIcon" /> */}
         </div>
     )
@@ -190,7 +190,7 @@ function Details(props) {
                                 }
                                 className={
                                     `detailsLogo reveal-focus-${
-                                    data.brojSlobodnihMesta && isOpen(data.details.radnoVreme) > 0
+                                    data.freeSpots && isOpen(data.details.radnoVreme) > 0
                                         ? 'blue'
                                         : 'orange'
                                     }`
@@ -203,34 +203,34 @@ function Details(props) {
                     <h1 className="detailRowText">
                         Slobodnih mesta:
                     <span style={{
-                            color: data.brojSlobodnihMesta > 0 ? '#3185FC' : 'orangered',
+                            color: data.freeSpots > 0 ? '#3185FC' : 'orangered',
                         }}>
                             {
                                 ` ${
-                                data.brojSlobodnihMesta >= 10
+                                data.freeSpots >= 10
                                     ? '10+'
-                                    : data.brojSlobodnihMesta
+                                    : data.freeSpots
                                 } `
                             }
                         </span>
-                        {/* / {data.brojMesta} */}
+                        {/* / {data.totalSpots} */}
                     </h1>
                     <img
                         src={
-                            data.brojSlobodnihMesta > 0
+                            data.freeSpots > 0
                                 ? Seat
                                 : SeatOrange
                         }
                         className="svgIcon"
                     />
                     {
-                        data.azurirano && <UpdatedBadge
+                        data.spotsUpdatedAt && <UpdatedBadge
                             color="white"
                             object={data}
                         />
                     }
                     {
-                        data.brojMesta && <UkupnoMestaBadge
+                        data.totalSpots && <UkupnoMestaBadge
                             color="white"
                             object={data}
                         />
@@ -289,7 +289,7 @@ function Details(props) {
                 <div
                     className="detailsRow clickableRow"
                     onClick={() => {
-                        window.open(data.details.lokacija, '_blank');
+                        window.open(data.details.location, '_blank');
                     }}
                 >
                     <h1 className="detailRowText boldText">Prikaži na mapi</h1>
