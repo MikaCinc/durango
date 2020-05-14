@@ -114,6 +114,9 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
     return (
         <div
             className="clapsContainer"
+            style={{
+                left: showSlider ? 0 : '' // Dok nije aktivan da može da se klikne na nešto ispod
+            }}
         >
             <RubberBand
                 when={showSlider}

@@ -13,8 +13,7 @@ import { useParams } from "react-router-dom";
 import { roundToPrecision } from '../library/common';
 
 /* Components */
-import { Carousel } from 'react-bootstrap';
-import AbsoluteWrapper from '../Components/AbsoluteWrapper';
+import { Carousel, Modal } from 'react-bootstrap';
 
 /* Animations */
 import { Spring } from 'react-spring/renderprops';
@@ -50,14 +49,24 @@ const placeholderObj = {
         location: '',
         menu: ''
     }
-}
+};
 
+const daysOfTheWeek = [
+    'Ponedeljak',
+    'Utorak',
+    'Sreda',
+    'Četvrtak',
+    'Petak',
+    'Subota',
+    'Nedelja'
+];
 
 function MoreDetails(props) {
     let { id } = useParams();
     const { Data, loading } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
+    const [showWHModal, setShowWHModal] = useState(false);
 
     useEffect(() => {
         let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
@@ -194,10 +203,23 @@ function MoreDetails(props) {
                 </div>
                 <div
                     className="detailsRowMini"
+                    onClick={() => {
+                        setShowWHModal(true);
+                    }}
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Radno vreme: </span>
                         {data.details.workingHours[moment().isoWeekday() - 1]}
+                        {' [ '}
+                        <span
+                            style={{
+                                color: 'orangered',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            više
+                            </span>
+                        {' ]'}
                     </p>
                     <img
                         src={Watch}
@@ -226,13 +248,41 @@ function MoreDetails(props) {
     }
 
     return (
-        // <AbsoluteWrapper>
         <div>
             {
                 !loading && restOfPage()
             }
+            {
+                showWHModal && <Modal
+                    show={showWHModal}
+                    onHide={() => { setShowWHModal(false); }}
+                    centered
+                >
+                    <Modal.Body>
+                        <div className="reserveModalContainer">
+                            {
+                                data.details.workingHours.map((item, index) => {
+                                    return (
+                                        <p
+                                            key={index}
+                                            className={
+                                                index === moment().isoWeekday() - 1
+                                                    ? 'boldText'
+                                                    : ''
+                                            }
+                                        >
+                                            {
+                                                daysOfTheWeek[index] + ': ' + item
+                                            }
+                                        </p>
+                                    )
+                                })
+                            }
+                        </div>
+                    </Modal.Body>
+                </Modal>
+            }
         </div>
-        // </AbsoluteWrapper>
     );
 }
 

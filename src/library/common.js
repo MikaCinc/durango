@@ -46,6 +46,10 @@ import moment from 'moment';
 // }
 
 function isOpen(workingHours, day = moment()) {
+
+    /*@todo Pošto sada imamo array treba da se sredi da posle 00:00 gleda closing time od prethodnog dana */
+
+
     let [openingTime, closingTime] = workingHours.split(" - ");
 
     function getMomentForTime(time, day) {
@@ -71,7 +75,7 @@ function isOpen(workingHours, day = moment()) {
     if (closing.isBefore(opening)) {
         closing = moment(closing).add({ days: 1 });
     }
-    
+
     // Da li je trenutno vreme izmedju dva momenta.
     return moment(day).isBetween(opening, closing, null, "()");
 }

@@ -5,6 +5,7 @@ import React, {
     useContext,
     Fragment
 } from 'react';
+
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
@@ -14,22 +15,15 @@ import { useParams } from "react-router-dom";
 import Logo from '../ExtendedLogo/Logo.png';
 
 /* Icons */
-
 import Plus from '../icons/plus.svg';
 import Minus from '../icons/minus.svg';
 import Done from '../icons/doneWhite.svg';
 import Clear from '../icons/clearWhite.svg';
 
-// import { Plus, Minus } from '../icons/index.js';
-
 /* Components */
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker'
 import { Modal } from 'react-bootstrap';
-import AbsoluteWrapper from '../Components/AbsoluteWrapper';
-
-/* Data */
-import mockData from '../data/kafici.js';
 
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';

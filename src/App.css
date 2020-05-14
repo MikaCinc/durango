@@ -765,7 +765,6 @@ h5 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .reserveModalLogo {
@@ -903,7 +902,7 @@ h5 {
   justify-content: right;
   align-items: center;
   right: 0;
-  left: 0;
+  /* left: 0; */
 }
 
 .clapsSliderContainer {
@@ -923,7 +922,6 @@ h5 {
   box-shadow: var(--shadow);
   cursor: pointer;
   user-select: none;
-  margin-left: auto;
   transition-duration: 0.1s;
   display: flex;
 }
