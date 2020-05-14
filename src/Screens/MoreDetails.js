@@ -253,7 +253,7 @@ function MoreDetails(props) {
                 !loading && restOfPage()
             }
             {
-                !loading && <Modal
+                showWHModal && <Modal
                     show={showWHModal}
                     onHide={() => { setShowWHModal(false); }}
                     centered
