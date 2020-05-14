@@ -119,8 +119,21 @@ const DataProvider = (props) => {
     }, [search, Data, filters]);
 
     useEffect(() => {
-        setSortedOpen([...filteredData.filter(item => isOpen(item.details.workingHours))]);
-        setSortedClosed([...filteredData.filter(item => !isOpen(item.details.workingHours))]);
+        let day = moment().isoWeekday() - 1;
+        setSortedOpen(
+            [
+                ...filteredData.filter(
+                    item => isOpen(item.details.workingHours[day])
+                )
+            ]
+        );
+        setSortedClosed(
+            [
+                ...filteredData.filter(
+                    item => !isOpen(item.details.workingHours[day])
+                )
+            ]
+        );
     }, [filteredData]);
 
     useEffect(() => {
@@ -155,10 +168,11 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 0, 3);
+            randomIDs = _.slice(_.shuffle(IDs), 0, 3),
+            day = moment().isoWeekday() - 1;;
 
         return [...Data].map(item => {
-            if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours)) {
+            if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours[day])) {
                 return {
                     ...item,
                     freeSpots: getNewNumber(item.freeSpots),

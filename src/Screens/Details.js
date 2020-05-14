@@ -143,11 +143,12 @@ function Details(props) {
     }
 
     const getRadnoVreme = () => {
-        const open = isOpen(data.details.workingHours);
+        let day = moment().isoWeekday() - 1;
+        const open = isOpen(data.details.workingHours[day]);
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.workingHours}</span>
+            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.workingHours[day]}</span>
         </p>;
     }
 
@@ -167,6 +168,8 @@ function Details(props) {
     }
 
     const restOfPage = () => {
+        let day = moment().isoWeekday() - 1;
+
         return (
             <Fragment>
                 <div className="detailsSubheader">
@@ -190,7 +193,7 @@ function Details(props) {
                                 }
                                 className={
                                     `detailsLogo reveal-focus-${
-                                    data.freeSpots && isOpen(data.details.workingHours) > 0
+                                    data.freeSpots && isOpen(data.details.workingHours[day]) > 0
                                         ? 'blue'
                                         : 'orange'
                                     }`

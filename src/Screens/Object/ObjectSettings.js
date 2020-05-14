@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-/* Icons */
-import BackArrow from '../../icons/backArrow.svg';
-
 /* Libraries */
 import moment from 'moment';
 import _ from 'lodash';
@@ -10,13 +7,6 @@ import { isOpen } from '../../library/common';
 
 /* Router */
 import { useParams } from "react-router-dom";
-
-/* Default Logo */
-import defaultLogo from '../../CustomIcons/defaultLogo.png';
-
-/* Data */
-import Logo from '../../ExtendedLogo/Logo.png';
-import kafici from '../../data/kafici';
 
 /* Context */
 import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
@@ -69,19 +59,6 @@ const ObjectSettings = ({ history }) => {
 
     return (
         <div className="IP-Container">
-            {
-                // data.id && <div className="detailsHeader">
-                //     <div
-                //         className="goBack"
-                //         onClick={() => {
-                //             history.push('/durango/inputPanel/' + data.id);
-                //         }}
-                //     >
-                //         <img src={BackArrow} className="svgIconBigger" />
-                //     </div>
-                //     <img src={Logo} className="detailsDurangoLogo" />
-                // </div>
-            }
             {
                 data.id && <div className="container">
                     <div className="IP-Settings-Form">

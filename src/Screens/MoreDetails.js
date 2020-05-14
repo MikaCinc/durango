@@ -197,7 +197,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Radno vreme: </span>
-                        {data.details.workingHours}
+                        {data.details.workingHours[moment().isoWeekday() - 1]}
                     </p>
                     <img
                         src={Watch}

@@ -50,11 +50,12 @@ const Restaurant = ({ history }) => {
     }, [data]);
 
     const getRadnoVreme = () => {
-        const open = isOpen(data.details.workingHours);
+        let day = moment().isoWeekday() - 1;
+        const open = isOpen(data.details.workingHours[day]);
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.workingHours}</span>
+            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.workingHours[day]}</span>
         </p>;
     }
 
@@ -87,7 +88,7 @@ const Restaurant = ({ history }) => {
                                         }
                                         className={
                                             `detailsLogo reveal-focus-${
-                                            data.freeSpots && isOpen(data.details.workingHours) > 0
+                                            data.freeSpots && isOpen(data.details.workingHours[moment().isoWeekday() - 1]) > 0
                                                 ? 'blue'
                                                 : 'orange'
                                             }`
