@@ -28,9 +28,6 @@ import ObjectSettings from '../Screens/Object/ObjectSettings';
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
 
-/* Icons */
-import BackArrow from '../icons/backArrow.svg';
-
 /* Animations */
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -142,10 +139,6 @@ const InputPanelStackOfScreens = (props) => {
                     </CSSTransition>
                 </TransitionGroup>
             </div>
-            {
-                // !loading && data && <Claps data={data} />
-            }
-
             {
                 renderFixedButtons()
             }

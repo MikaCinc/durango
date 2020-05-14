@@ -112,6 +112,7 @@ const Restaurant = ({ history }) => {
                                     </div>
                                     <div className="IP-center-container">
                                         <div className="IP-center-upper">
+                                            <h5>Trenutno slobodno </h5>
                                             <input
                                                 className="IP-input"
                                                 type="number"
@@ -130,7 +131,8 @@ const Restaurant = ({ history }) => {
                                                     }
                                                 }
                                             />
-                                            <div className="IP-center-ukupnoMesta">{data.brojMesta}</div>
+                                            <h5>od ukupno {data.brojMesta}</h5>
+                                            {/* <div className="IP-center-ukupnoMesta">{data.brojMesta}</div> */}
                                         </div>
                                         <div className="IP-dial-container">
                                             {

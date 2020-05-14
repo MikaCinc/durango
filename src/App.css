@@ -61,6 +61,10 @@ h1 {
   margin-bottom: 0rem;
 }
 
+h5 {
+  margin-bottom: 0;
+}
+
 .app {
   overflow: hidden;
 }
@@ -1128,22 +1132,26 @@ emoji-slider {
 }
 
 .IP-clickable:active {
-  padding: 5px;
+  padding: 10px;
 }
 
 .IP-center-upper {
   display: flex;
   padding: 10px;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .IP-input {
   flex: 2;
   text-align: center;
   border-radius: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
+  max-width: 150px;
   border: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
   color: black;
   box-shadow: var(--shadow);
   transition-duration: 0.1s;
@@ -1192,8 +1200,8 @@ emoji-slider {
 
 .IP-Settings-Form {
   z-index: 1000;
-  margin-top: 100px;  
-  margin-bottom: 100px;  
+  margin-top: 100px;
+  margin-bottom: 100px;
   /* position: absolute;
   left: 50%;
   top: 50%;
