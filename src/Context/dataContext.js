@@ -119,8 +119,8 @@ const DataProvider = (props) => {
     }, [search, Data, filters]);
 
     useEffect(() => {
-        setSortedOpen([...filteredData.filter(item => isOpen(item.details.radnoVreme))]);
-        setSortedClosed([...filteredData.filter(item => !isOpen(item.details.radnoVreme))]);
+        setSortedOpen([...filteredData.filter(item => isOpen(item.details.workingHours))]);
+        setSortedClosed([...filteredData.filter(item => !isOpen(item.details.workingHours))]);
     }, [filteredData]);
 
     useEffect(() => {
@@ -158,7 +158,7 @@ const DataProvider = (props) => {
             randomIDs = _.slice(_.shuffle(IDs), 0, 3);
 
         return [...Data].map(item => {
-            if (_.includes(randomIDs, item.id) && isOpen(item.details.radnoVreme)) {
+            if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours)) {
                 return {
                     ...item,
                     freeSpots: getNewNumber(item.freeSpots),

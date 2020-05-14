@@ -18,7 +18,7 @@ import { Spring } from 'react-spring/renderprops';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } }) => {
+const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } } }) => {
     const { changeData, User: { Claps }, changeClaps } = useContext(DataContext);
 
     const userAplauza = () => {
@@ -80,8 +80,8 @@ const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } 
             ...data,
             details: {
                 ...details,
-                ukupnoAplauza: ukupnoAplauza + localClaps,
-                brojOcena: userAplauza() === 0 ? brojOcena + 1 : brojOcena
+                totalClaps: totalClaps + localClaps,
+                numberOfGrades: userAplauza() === 0 ? numberOfGrades + 1 : numberOfGrades
             }
         });
 
@@ -136,7 +136,7 @@ const Claps = ({ data, data: { details, details: { ukupnoAplauza, brojOcena } } 
             >
                 <span>👏</span>
                 {
-                    renderNumber(ukupnoAplauza)
+                    renderNumber(totalClaps)
                 }
             </div>
         </div>

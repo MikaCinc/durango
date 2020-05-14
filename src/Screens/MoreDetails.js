@@ -46,7 +46,7 @@ const placeholderObj = {
     details: {
         description: '',
         images: '',
-        radnoVreme: '',
+        workingHours: '',
         location: '',
         menu: ''
     }
@@ -182,13 +182,13 @@ function MoreDetails(props) {
                     <div>
                         <span className="boldText mr-1">Prosečno 👏: </span>
                         {
-                            (data.details.ukupnoAplauza / data.details.brojOcena).toPrecision(2)
+                            (data.details.totalClaps / data.details.numberOfGrades).toPrecision(2)
                         }
                     </div>
                     <div>
                         <span className="boldText mr-1">Ukupno 👏: </span>
                         {
-                            renderNumber(data.details.ukupnoAplauza)
+                            renderNumber(data.details.totalClaps)
                         }
                     </div>
                 </div>
@@ -197,7 +197,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Radno vreme: </span>
-                        {data.details.radnoVreme}
+                        {data.details.workingHours}
                     </p>
                     <img
                         src={Watch}

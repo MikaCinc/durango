@@ -1,10 +1,10 @@
 import moment from 'moment';
 
-// const isOpen = (radnoVreme) => {
+// const isOpen = (workingHours) => {
 //     // Kafići ne smeju da se zatvaraju od lowerLimita što je 05:00 do početka radnog vremena u toku dana
 //     // Da bi ovaj algoritam funkcionisao
 
-//     let time = radnoVreme,
+//     let time = workingHours,
 //         timeStart = time.split(' - ')[0],
 //         timeEnd = time.split(' - ')[1],
 //         currentTime = moment(),

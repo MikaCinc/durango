@@ -52,7 +52,7 @@ const placeholderObj = {
     details: {
         description: '',
         images: '',
-        radnoVreme: '',
+        workingHours: '',
         location: '',
         menu: ''
     }
@@ -143,11 +143,11 @@ function Details(props) {
     }
 
     const getRadnoVreme = () => {
-        const open = isOpen(data.details.radnoVreme);
+        const open = isOpen(data.details.workingHours);
 
         return <p className="randoVremeParagraph">
             <span className="greyText">{open ? 'Otvoreno: ' : 'Zatvoreno: '}</span>
-            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.radnoVreme}</span>
+            <span style={{ color: open ? '#009A1F' : 'orangered' }}>{data.details.workingHours}</span>
         </p>;
     }
 
@@ -190,7 +190,7 @@ function Details(props) {
                                 }
                                 className={
                                     `detailsLogo reveal-focus-${
-                                    data.freeSpots && isOpen(data.details.radnoVreme) > 0
+                                    data.freeSpots && isOpen(data.details.workingHours) > 0
                                         ? 'blue'
                                         : 'orange'
                                     }`

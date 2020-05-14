@@ -43,7 +43,7 @@ const placeholderObj = {
     details: {
         description: '',
         images: '',
-        radnoVreme: '',
+        workingHours: '',
         location: '',
         menu: ''
     }
