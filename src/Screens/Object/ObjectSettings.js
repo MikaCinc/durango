@@ -110,7 +110,10 @@ const ObjectSettings = ({ history }) => {
                                 onChange={
                                     (e) => {
                                         let value = e.target.value;
-                                        if (value.length > 150) return;
+                                        if (value.length < description.length) {
+                                            setDescription(value);
+                                        }
+                                        else if (value.length > 150) return;
                                         setDescription(value);
                                     }
                                 }

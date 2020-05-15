@@ -15,6 +15,14 @@ button:focus {
   --no-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
+/* Bootstrap changes */
+
+@media (min-width: 1200px) {
+  /* .container {
+    max-width: 700px;
+  } */
+}
+
 body {
   /* overflow: hidden; */
   scrollbar-width: none;
@@ -666,8 +674,12 @@ h5 {
   transition-duration: 0.2s;
 }
 
+.clickableRow:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
 .clickableRow:active {
-  box-shadow: var(--no-shadow);
+  box-shadow: var(--mini-shadow);
 }
 
 .clickableRowCancel {
@@ -1200,12 +1212,11 @@ emoji-slider {
   background-image: linear-gradient(-225deg, #65379B 0%, #886AEA 53%, #6457C6 100%) !important;
   color: white;
   font-weight: 700;
-
   /* Animation */
   z-index: -1;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	transform: scale(1);
-	animation: pulse 2s infinite;
+  transform: scale(1);
+  animation: pulse 2s infinite;
 }
 
 .IP-settings-icon {
@@ -1238,18 +1249,16 @@ emoji-slider {
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(0.96);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-	}
-
-	70% {
-		transform: scale(1);
-		box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
-	}
-
-	100% {
-		transform: scale(0.96);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	}
+  0% {
+    transform: scale(0.96);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
+  100% {
+    transform: scale(0.96);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }

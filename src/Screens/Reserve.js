@@ -165,7 +165,7 @@ function Reserve(props) {
                                 Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.
                     Ne zaboravite da se pojavite najkasnije do {time}.
                     </p>
-                            <div
+                            <button
                                 className="detailsRow clickableRow w-50"
                                 onClick={() => {
                                     handleClose();
@@ -174,7 +174,7 @@ function Reserve(props) {
                                 }}
                             >
                                 <h1 className="detailRowText boldText">OK</h1>
-                            </div>
+                            </button>
                         </div>
                     </Modal.Body>
                 </Modal>

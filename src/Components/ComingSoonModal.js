@@ -22,14 +22,14 @@ const ComingSoonModal = ({ show, onHide }) => {
                     <h6 className="boldText">Naš tim aktivno radi na ovoj funkciji</h6>
                     <p style={{marginBottom: '0px'}}>Biće dostupna u nekom od narednih ažuriranja.</p>
                     <p>Hvala na strpljenju!</p>
-                    <div
+                    <button
                         className="detailsRow clickableRow w-50"
                         onClick={() => {
                             onHide();
                         }}
                     >
                         <h1 className="detailRowText boldText">OK</h1>
-                    </div>
+                    </button>
                 </div>
             </Modal.Body>
         </Modal>

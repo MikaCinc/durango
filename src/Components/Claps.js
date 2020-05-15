@@ -56,7 +56,7 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
 
     const onChange = (value) => {
         if (userAplauza() > 0) {
-            alert('Hvala! Već si 👏 ovom objektu');
+            setShowModal(true);
             return;
         } else {
             let ceildValue = Math.ceil(value * 5);
@@ -65,6 +65,8 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
     }
 
     useEffect(() => {
+        let interval;
+
         if (localClaps > 0) {
             clearTimeout(interval);
             interval = setTimeout(() => {
@@ -164,14 +166,14 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
                         <p>Ukupno 👏: {data.details.totalClaps}</p>
                         <p>Prosečno 👏: {(data.details.totalClaps / data.details.numberOfGrades).toPrecision(2)}</p>
                         <p>Tvojih 👏: {userAplauza()}</p>
-                        <div
+                        <button
                             className="detailsRow clickableRow w-50"
                             onClick={() => {
                                 handleClose();
                             }}
                         >
                             <h1 className="detailRowText boldText">OK</h1>
-                        </div>
+                        </button>
                     </div>
                 </Modal.Body>
             </Modal>

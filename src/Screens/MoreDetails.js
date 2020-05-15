@@ -278,14 +278,14 @@ function MoreDetails(props) {
                                     )
                                 })
                             }
-                            <div
+                            <button
                                 className="detailsRow clickableRow w-50"
                                 onClick={() => {
                                     setShowWHModal(false);
                                 }}
                             >
                                 <h1 className="detailRowText boldText">OK</h1>
-                            </div>
+                            </button>
                         </div>
                     </Modal.Body>
                 </Modal>
