@@ -250,7 +250,7 @@ function Details(props) {
                         {
                             isReserved(data)
                                 ? `Rezervisano: ${timer}`
-                                : 'Napravi rezervaciju'
+                                : 'Brza rezervacija'
                         }
                     </h1>
                     <img

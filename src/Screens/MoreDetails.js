@@ -148,7 +148,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Telefon: </span>
-                        {data.details.phoneNumber}
+                        <a href={`tel:${data.details.phoneNumber}`}>{data.details.phoneNumber}</a>
                     </p>
                     <img
                         src={Call}
