@@ -95,6 +95,26 @@ const Restaurant = ({ history }) => {
                                         }
                                     />
                                 </div>
+                                <div className="IP-center-upper">
+                                    <h5>Trenutno slobodno </h5>
+                                    <input
+                                        className="IP-input"
+                                        type="number"
+                                        min={0}
+                                        max={10}
+                                        value={currentNumber}
+                                        onChange={
+                                            (e) => {
+                                                let { value, min, max } = e.target;
+                                                value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+
+                                                setCurrentNumber(value);
+                                            }
+                                        }
+                                    />
+                                    <h5>od ukupno {data.totalSpots}</h5>
+                                    {/* <div className="IP-center-ukupnoMesta">{data.totalSpots}</div> */}
+                                </div>
                                 <div className="IP-counter-container">
                                     <div className="IP-input-sideButton">
                                         <button
@@ -107,34 +127,12 @@ const Restaurant = ({ history }) => {
                                             }
                                             onClick={() => {
                                                 setCurrentNumber(0)
-                                            }}>
+                                            }}
+                                        >
                                             Nemamo mesta
-                                </button>
+                                        </button>
                                     </div>
                                     <div className="IP-center-container">
-                                        <div className="IP-center-upper">
-                                            <h5>Trenutno slobodno </h5>
-                                            <input
-                                                className="IP-input"
-                                                type="number"
-                                                value={currentNumber}
-                                                onChange={
-                                                    (e) => {
-                                                        let value = e.target.value;
-                                                        if (!value) {
-                                                            setCurrentNumber(0);
-                                                            return;
-                                                        }
-
-                                                        if (value <= 10 && value >= 0) {
-                                                            setCurrentNumber(parseInt(value, 10));
-                                                        }
-                                                    }
-                                                }
-                                            />
-                                            <h5>od ukupno {data.totalSpots}</h5>
-                                            {/* <div className="IP-center-ukupnoMesta">{data.totalSpots}</div> */}
-                                        </div>
                                         <div className="IP-dial-container">
                                             {
                                                 [..._.range(1, 10)].map(i => {
@@ -173,7 +171,7 @@ const Restaurant = ({ history }) => {
                                             }}
                                         >
                                             Imamo 10+ mesta
-                                </button>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
