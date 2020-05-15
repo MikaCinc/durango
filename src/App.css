@@ -24,14 +24,18 @@ body {
   display: none;
 }
 
-/* .button {
-  background-position: center;
-  transition: background 0.8s;
+button {
+  border: 0px;
+  transition-duration: 0.4s;
 }
 
-.button:hover {
-  background: #b0b0b0 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-} */
+button:hover {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+  box-shadow: var(--mini-shadow);
+}
 
 /* ICONS */
 
@@ -1136,8 +1140,12 @@ emoji-slider {
   font-size: 20px;
 }
 
+.IP-clickable {
+  transition-duration: 0.2s;
+}
+
 .IP-clickable:active {
-  padding: 10px;
+  padding: 15px;
 }
 
 .IP-center-upper {
@@ -1151,16 +1159,18 @@ emoji-slider {
 .IP-input {
   flex: 2;
   text-align: center;
-  border-radius: 50px;
-  padding: 20px;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 7px;
   max-width: 150px;
   border: 0px;
   margin-left: 10px;
   margin-right: 10px;
-  color: black;
+  color: white;
   box-shadow: var(--shadow);
   transition-duration: 0.1s;
   font-size: 32px;
+  background-image: linear-gradient(-225deg, #65379B 0%, #886AEA 53%, #6457C6 100%);
 }
 
 .IP-center-ukupnoMesta {
@@ -1187,8 +1197,15 @@ emoji-slider {
 }
 
 .IP-input-selected {
-  background: yellow !important;
-  color: black;
+  background-image: linear-gradient(-225deg, #65379B 0%, #886AEA 53%, #6457C6 100%) !important;
+  color: white;
+  font-weight: 700;
+
+  /* Animation */
+  z-index: -1;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(1);
+	animation: pulse 2s infinite;
 }
 
 .IP-settings-icon {
@@ -1216,4 +1233,21 @@ emoji-slider {
 
 .IP-Settings-TextArea {
   min-width: 80%;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.96);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.96);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
 }

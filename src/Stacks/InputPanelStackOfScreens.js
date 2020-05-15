@@ -87,7 +87,7 @@ const InputPanelStackOfScreens = (props) => {
                     {
                         ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
                             return (
-                                <div
+                                <button
                                     key={level}
                                     className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
                                     onClick={() => {
@@ -95,7 +95,7 @@ const InputPanelStackOfScreens = (props) => {
                                     }}
                                 >
                                     {level}
-                                </div>
+                                </button>
                             )
                         })
                     }
