@@ -1220,19 +1220,21 @@ emoji-slider {
   display: inline-block;
   margin: 10px;
   background-color: white;
-  box-shadow: var(--shadow);
-  border-radius: 20px;
-  padding: 50px;
+  box-shadow: var(--mini-shadow);
+  border-radius: 10px;
+  padding: 30px;
 }
 
 .IP-Settings-Form {
   z-index: 1000;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .IP-Settings-TextArea {
-  min-width: 80%;
+  min-width: 100%;
 }
 
 @keyframes pulse {

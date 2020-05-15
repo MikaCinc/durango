@@ -78,31 +78,54 @@ const ObjectSettings = ({ history }) => {
                 data.id && <div className="container">
                     <div className="IP-Settings-Form">
                         <div className="IP-Settings-Block">
-                            <p>Naziv</p>
+                            <p className="boldText">Naziv</p>
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Ukupan broj mesta</p>
+                            <p className="boldText">Ukupan broj mesta</p>
                             <input type="number" value={totalSpots} onChange={(e) => setTotalSpots(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Adresa</p>
+                            <p className="boldText">Adresa</p>
                             <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Telefon</p>
+                            <p className="boldText">Telefon</p>
                             <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Tip muzike</p>
+                            <p className="boldText">Tip muzike</p>
                             <input type="text" value={music} onChange={(e) => setMusic(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Google Maps lokacija</p>
-                            <textarea type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+                            <p className="boldText">Google Maps lokacija</p>
+                            <textarea className="IP-Settings-TextArea" type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
                         </div>
                         <div className="IP-Settings-Block">
-                            <p>Radno vreme</p>
+                            <p className="boldText">Opis</p>
+                            <textarea
+                                className="IP-Settings-TextArea"
+                                type="text"
+                                value={description}
+                                onChange={
+                                    (e) => {
+                                        let value = e.target.value;
+                                        if (value.length > 150) return;
+                                        setDescription(value);
+                                    }
+                                }
+                            />
+                            <p
+                                style={{
+                                    marginBottom: '0px',
+                                    marginTop: '5px',
+                                }}
+                            >
+                                {description.length} / 150
+                            </p>
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p className="boldText">Radno vreme</p>
                             {
                                 data.details.workingHours.map((item, index) => {
                                     let opening = item.split(' - ')[0];
@@ -111,68 +134,84 @@ const ObjectSettings = ({ history }) => {
                                         <div
                                             style={{
                                                 display: 'flex',
-                                                flexDirection: 'row'
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
                                             }}
                                             key={index}
                                         >
-                                            <p>{daysOfTheWeek[index]}</p>
-                                            <TimePicker
-                                                onChange={(value) => {
-                                                    setWorkingHours([
-                                                        ...workingHours.map((i, n) => {
-                                                            if (n === index) {
-                                                                return `${value} - ${closing}`;
-                                                            }
-
-                                                            return i;
-                                                        })
-                                                    ])
+                                            <p
+                                                style={{
+                                                    display: 'block',
+                                                    marginBottom: '0px',
+                                                    marginTop: '10px',
                                                 }}
-                                                format={'HH:mm'}
-                                                // minTime={moment().toDate()}
-                                                value={opening}
-                                                disableClock={true}
-                                                isOpen={false}
-                                                clockIcon={
-                                                    <i className="material-icons reserveClockIcon">
-                                                        access_time
-                                                    </i>
-                                                }
-                                                className="reserveTime"
-                                            />
-                                            <p>{' - '}</p>
-                                            <TimePicker
-                                                onChange={(value) => {
-                                                    setWorkingHours([
-                                                        ...workingHours.map((i, n) => {
-                                                            if (n === index) {
-                                                                return `${opening} - ${value}`;
-                                                            }
-
-                                                            return i;
-                                                        })
-                                                    ])
+                                            >
+                                                {daysOfTheWeek[index]}
+                                            </p>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row'
                                                 }}
-                                                format={'HH:mm'}
-                                                // minTime={moment().toDate()}
-                                                value={closing}
-                                                disableClock={true}
-                                                isOpen={false}
-                                                clockIcon={
-                                                    <i className="material-icons reserveClockIcon">
-                                                        access_time
+                                            >
+                                                <TimePicker
+                                                    onChange={(value) => {
+                                                        setWorkingHours([
+                                                            ...workingHours.map((i, n) => {
+                                                                if (n === index) {
+                                                                    return `${value} - ${closing}`;
+                                                                }
+
+                                                                return i;
+                                                            })
+                                                        ])
+                                                    }}
+                                                    format={'HH:mm'}
+                                                    // minTime={moment().toDate()}
+                                                    value={opening}
+                                                    disableClock={true}
+                                                    isOpen={false}
+                                                    clockIcon={
+                                                        <i className="material-icons reserveClockIcon">
+                                                            access_time
                                                     </i>
-                                                }
-                                                className="reserveTime"
-                                            />
+                                                    }
+                                                    className="reserveTime"
+                                                />
+                                                <p
+                                                    style={{
+                                                        margin: '10px'
+                                                    }}
+                                                >-</p>
+                                                <TimePicker
+                                                    onChange={(value) => {
+                                                        setWorkingHours([
+                                                            ...workingHours.map((i, n) => {
+                                                                if (n === index) {
+                                                                    return `${opening} - ${value}`;
+                                                                }
+
+                                                                return i;
+                                                            })
+                                                        ])
+                                                    }}
+                                                    format={'HH:mm'}
+                                                    // minTime={moment().toDate()}
+                                                    value={closing}
+                                                    disableClock={true}
+                                                    isOpen={false}
+                                                    clockIcon={
+                                                        <i className="material-icons reserveClockIcon">
+                                                            access_time
+                                                    </i>
+                                                    }
+                                                    className="reserveTime"
+                                                />
+                                            </div>
                                         </div>
                                     )
                                 })
                             }
-                        </div>
-                        <div className="IP-Settings-Block">
-                            <p>Opis</p>
-                            <textarea className="IP-Settings-TextArea" type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
                     </div>
                 </div>
