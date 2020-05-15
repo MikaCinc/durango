@@ -6,6 +6,7 @@ import React, {
 
 /* Data */
 import kafici from '../data/kafici';
+import UserMock from '../data/user';
 
 /* Components */
 import ComingSoonModal from '../Components/ComingSoonModal';
@@ -89,7 +90,7 @@ const DataProvider = (props) => {
         } */
 
 
-        if (authorized) {
+        if (authorized && User && User.ID) {
             timeout = setTimeout(() => {
                 setData(kafici);
                 setLoading(false);
@@ -111,6 +112,26 @@ const DataProvider = (props) => {
         // updateFromServer();
         // updateWithMockData(); OVO NE DIRAJ
         /* Experiment @todo */
+
+        if (!User) {
+            return;
+        }
+
+        function compareKeys(a, b) {
+            var aKeys = Object.keys(a).sort();
+            var bKeys = Object.keys(b).sort();
+            return JSON.stringify(aKeys) === JSON.stringify(bKeys);
+        }
+
+        if (!compareKeys(User, UserMock)) {
+            // localStorage.removeItem('User');
+            setUser({
+                ...UserMock,
+                ...User
+            })
+            return;
+        }
+
         localStorage.setItem('User', JSON.stringify(User));
     }, [User]);
 
@@ -344,7 +365,7 @@ const DataProvider = (props) => {
         >
             {props.children}
             <LoaderComponent />
-            <ComingSoonModal show={showComingSoonModal} onHide={() => {setShowComingSoonModal(false);}}/>
+            <ComingSoonModal show={showComingSoonModal} onHide={() => { setShowComingSoonModal(false); }} />
         </Provider>
     )
 }

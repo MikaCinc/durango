@@ -100,7 +100,7 @@ const ObjectProfileStackOfScreens = (props) => {
                 <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
                 <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} /> */}
             {
-                !loading && data && <Claps data={data} />
+                !loading && data && <Claps data={data} history={props.history} />
             }
         </Fragment>
     )

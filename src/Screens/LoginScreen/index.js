@@ -16,13 +16,27 @@ const LoginScreen = props => {
     const [profileName, setProfileName] = useState('');
 
     useEffect(() => {
-        // localStorage.removeItem('User')
-        let User = JSON.parse(localStorage.getItem('User')),
+        let UserLoc = JSON.parse(localStorage.getItem('User')),
             timeout = null;
 
-        if (User && User.ID) {
-            setProfileImage(User.imageUrl)
-            setProfileName(User.Name)
+        if (!UserLoc) {
+            return;
+        }
+
+        function compareKeys(a, b) {
+            var aKeys = Object.keys(a).sort();
+            var bKeys = Object.keys(b).sort();
+            return JSON.stringify(aKeys) === JSON.stringify(bKeys);
+        }
+
+        if (!compareKeys(User, UserLoc)) {
+            localStorage.removeItem('User');
+            return;
+        }
+
+        if (UserLoc && UserLoc.ID) {
+            setProfileImage(UserLoc.imageUrl)
+            setProfileName(UserLoc.Name)
             setIsSuccess(true);
             timeout = setTimeout(() => {
                 // props.setAuthorized(true);

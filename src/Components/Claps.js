@@ -22,8 +22,8 @@ import { Spring } from 'react-spring/renderprops';
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
 
-const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } } }) => {
-    const { changeData, User: { Claps }, changeClaps } = useContext(DataContext);
+const Claps = ({ history, data, data: { details, details: { totalClaps, numberOfGrades } } }) => {
+    const { changeData, User, User: { Claps }, changeClaps } = useContext(DataContext);
 
     const userAplauza = () => {
         let obj = _.find(Claps, { ID: data.id });
@@ -142,6 +142,10 @@ const Claps = ({ data, data: { details, details: { totalClaps, numberOfGrades } 
                 <div
                     className="clapsTriggerContainer"
                     onClick={() => {
+                        if(!User || !User.ID) {
+                            history.push('/durango/app-login');
+                        }
+
                         if (userAplauza() > 0) {
                             setShowModal(true);
                             return;

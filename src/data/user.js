@@ -2,6 +2,7 @@ let User = {
     ID: '',
     Name: '',
     Email: '',
+    imageUrl: '',
     Location: '',
     Permissions: {
         canReserve: true,
