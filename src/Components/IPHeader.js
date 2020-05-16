@@ -21,6 +21,7 @@ import Logo from '../ExtendedLogo/Logo.png';
 
 /* Icons */
 import BackArrow from '../icons/backArrow.svg';
+import GearOutlineBlue from '../icons/gearOutlineBlue.svg';
 
 /* Context */
 import ObjectContext, { ObjectProvider } from '../Context/objectContext';
@@ -98,14 +99,13 @@ const IPHeader = (props) => {
             return null;
         } else {
             return (
-                <i
-                    className="material-icons IP-settings-icon"
+                <img
+                    src={GearOutlineBlue}
+                    className="svgIconBigger IP-settings-icon"
                     onClick={() => {
                         history.push('/durango/inputPanel/' + data.id + '/settings');
                     }}
-                >
-                    settings
-                </i>
+                />
             );
         }
     }
