@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/durango/static/css/main.484b1ca6.chunk.css",
-    "main.js": "/durango/static/js/main.443918c8.chunk.js",
-    "main.js.map": "/durango/static/js/main.443918c8.chunk.js.map",
+    "main.js": "/durango/static/js/main.bf027390.chunk.js",
+    "main.js.map": "/durango/static/js/main.bf027390.chunk.js.map",
     "runtime-main.js": "/durango/static/js/runtime-main.8a91d0b5.js",
     "runtime-main.js.map": "/durango/static/js/runtime-main.8a91d0b5.js.map",
     "static/css/2.d753d4d8.chunk.css": "/durango/static/css/2.d753d4d8.chunk.css",
-    "static/js/2.01dee5c4.chunk.js": "/durango/static/js/2.01dee5c4.chunk.js",
-    "static/js/2.01dee5c4.chunk.js.map": "/durango/static/js/2.01dee5c4.chunk.js.map",
+    "static/js/2.7b45aa65.chunk.js": "/durango/static/js/2.7b45aa65.chunk.js",
+    "static/js/2.7b45aa65.chunk.js.map": "/durango/static/js/2.7b45aa65.chunk.js.map",
     "index.html": "/durango/index.html",
-    "precache-manifest.642747ee94e7fdba25e86d0098c2c307.js": "/durango/precache-manifest.642747ee94e7fdba25e86d0098c2c307.js",
+    "precache-manifest.729be297a552299b742d1694e87a71f1.js": "/durango/precache-manifest.729be297a552299b742d1694e87a71f1.js",
     "service-worker.js": "/durango/service-worker.js",
     "static/css/2.d753d4d8.chunk.css.map": "/durango/static/css/2.d753d4d8.chunk.css.map",
     "static/css/main.484b1ca6.chunk.css.map": "/durango/static/css/main.484b1ca6.chunk.css.map",
-    "static/js/2.01dee5c4.chunk.js.LICENSE.txt": "/durango/static/js/2.01dee5c4.chunk.js.LICENSE.txt",
+    "static/js/2.7b45aa65.chunk.js.LICENSE.txt": "/durango/static/js/2.7b45aa65.chunk.js.LICENSE.txt",
     "static/media/Logo.png": "/durango/static/media/Logo.eb5c53a5.png",
     "static/media/audioBlue.svg": "/durango/static/media/audioBlue.d3318f47.svg",
     "static/media/audioLightblue.svg": "/durango/static/media/audioLightblue.c793620e.svg",
@@ -43,13 +43,14 @@
     "static/media/star_white_border.svg": "/durango/static/media/star_white_border.825836a4.svg",
     "static/media/titleBlue.svg": "/durango/static/media/titleBlue.d533da91.svg",
     "static/media/watchBlue.svg": "/durango/static/media/watchBlue.7d4403df.svg",
+    "static/media/workHours.png": "/durango/static/media/workHours.8656e816.png",
     "static/media/workInProgress.png": "/durango/static/media/workInProgress.19c824e6.png"
   },
   "entrypoints": [
     "static/js/runtime-main.8a91d0b5.js",
     "static/css/2.d753d4d8.chunk.css",
-    "static/js/2.01dee5c4.chunk.js",
+    "static/js/2.7b45aa65.chunk.js",
     "static/css/main.484b1ca6.chunk.css",
-    "static/js/main.443918c8.chunk.js"
+    "static/js/main.bf027390.chunk.js"
   ]
 }
