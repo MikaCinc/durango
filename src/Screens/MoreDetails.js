@@ -27,6 +27,7 @@ import Audio from '../icons/audioBlue.svg';
 import AudioLight from '../icons/audioLightblue.svg';
 import Location from '../icons/locationBlue.svg';
 import MenuBook from '../icons/menuBookWhite.svg';
+import WorkingHours from '../CustomIcons/workHours.png';
 
 /* Slike */
 import kafic1 from '../carouselMock/kafic1.jpg';
@@ -213,9 +214,9 @@ function MoreDetails(props) {
                         {' [ '}
                         <span
                             style={{
-                                color: 'orangered',
                                 cursor: 'pointer',
                             }}
+                            className="text-primary"
                         >
                             više
                             </span>
@@ -260,6 +261,7 @@ function MoreDetails(props) {
                 >
                     <Modal.Body>
                         <div className="reserveModalContainer">
+                            <img src={WorkingHours} style={{ width: '125px' }} />
                             {
                                 data.details.workingHours.map((item, index) => {
                                     return (

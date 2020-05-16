@@ -167,7 +167,7 @@ const DataProvider = (props) => {
 
         int = setInterval(() => {
             setData(simulateUpdateData());
-        }, 1000)
+        }, 600)
 
         return () => {
             clearInterval(int);
@@ -194,7 +194,7 @@ const DataProvider = (props) => {
 
     const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 0, 3),
+            randomIDs = _.slice(_.shuffle(IDs), 0, 5),
             day = moment().isoWeekday() - 1;;
 
         return [...Data].map(item => {
