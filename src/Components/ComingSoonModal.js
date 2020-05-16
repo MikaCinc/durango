@@ -7,7 +7,7 @@ import React, {
 import { Modal } from 'react-bootstrap';
 
 /* Logo */
-import Logo from '../CustomIcons/noResults.png';
+import Img from '../CustomIcons/workInProgress.png';
 
 const ComingSoonModal = ({ show, onHide }) => {
     return (
@@ -18,7 +18,7 @@ const ComingSoonModal = ({ show, onHide }) => {
         >
             <Modal.Body>
                 <div className="reserveModalContainer">
-                    <img src={Logo} style={{width: '125px'}} />
+                    <img src={Img} style={{width: '125px'}} />
                     <h6 className="boldText">Naš tim aktivno radi na ovoj funkciji</h6>
                     <p style={{marginBottom: '0px'}}>Biće dostupna u nekom od narednih ažuriranja.</p>
                     <p>Hvala na strpljenju!</p>

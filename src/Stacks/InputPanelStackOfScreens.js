@@ -29,6 +29,7 @@ import ObjectSettings from '../Screens/Object/ObjectSettings';
 import Logo from '../ExtendedLogo/Logo.png';
 
 /* Animations */
+import Zoom from 'react-reveal/Zoom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 /* Context */
@@ -83,23 +84,25 @@ const InputPanelStackOfScreens = (props) => {
         return (
             <Fragment>
                 <div className="IP-zatvoriOtvoriContainer">Zatvori</div>
-                <div className="IP-volumeContainer">
-                    {
-                        ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
-                            return (
-                                <button
-                                    key={level}
-                                    className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
-                                    onClick={() => {
-                                        setVolume(i + 1);
-                                    }}
-                                >
-                                    {level}
-                                </button>
-                            )
-                        })
-                    }
-                </div>
+                <Zoom bottom cascade>
+                    <div className="IP-volumeContainer">
+                        {
+                            ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
+                                return (
+                                    <button
+                                        key={level}
+                                        className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
+                                        onClick={() => {
+                                            setVolume(i + 1);
+                                        }}
+                                    >
+                                        {level}
+                                    </button>
+                                )
+                            })
+                        }
+                    </div>
+                </Zoom>
             </Fragment>
         )
     }

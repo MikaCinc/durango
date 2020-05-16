@@ -8,6 +8,9 @@ import { isOpen } from '../../library/common';
 /* Components */
 import TimePicker from 'react-time-picker'
 
+/* Animations */
+import Zoom from 'react-reveal/Zoom';
+
 /* Router */
 import { useParams } from "react-router-dom";
 
@@ -219,19 +222,21 @@ const ObjectSettings = ({ history }) => {
                     </div>
                 </div>
             }
-            <button
-                className="IP-input-imaMesta IP-clickable"
-                style={{
-                    position: 'fixed',
-                    bottom: '20px',
-                    right: '20px'
-                }}
-                onClick={() => {
-                    // API Call
-                }}
-            >
-                Sačuvaj
-            </button>
+            <Zoom bottom>
+                <button
+                    className="IP-input-imaMesta IP-clickable"
+                    style={{
+                        position: 'fixed',
+                        bottom: '20px',
+                        right: '20px'
+                    }}
+                    onClick={() => {
+                        // API Call
+                    }}
+                >
+                    Sačuvaj
+                </button>
+            </Zoom>
         </div>
     )
 };

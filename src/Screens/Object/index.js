@@ -5,6 +5,11 @@ import moment from 'moment';
 import _ from 'lodash';
 import { isOpen } from '../../library/common';
 
+/* Animations */
+import Zoom from 'react-reveal/Zoom';
+import Pulse from 'react-reveal/Pulse';
+import Jump from 'react-reveal/Jump';
+
 /* Router */
 import { useParams } from "react-router-dom";
 
@@ -77,41 +82,52 @@ const Restaurant = ({ history }) => {
                             <div className="IP-dataLoaded">
                                 <div className="detailsSubheader">
                                     <div>
-                                        <h1 className="detailsTitle boldText">{data.title}</h1>
+                                        <Zoom cascade>
+                                            <h1 className="detailsTitle boldText">{data.title}</h1>
+                                        </Zoom>
                                         {getRadnoVreme()}
                                     </div>
-                                    <img
-                                        src={
-                                            data.logo
-                                                ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
-                                                : defaultLogo
-                                        }
-                                        className={
-                                            `detailsLogo reveal-focus-${
-                                            data.freeSpots && isOpen(data.details.workingHours[moment().isoWeekday() - 1]) > 0
-                                                ? 'blue'
-                                                : 'orange'
-                                            }`
-                                        }
-                                    />
+                                    <Zoom
+                                        top
+                                        duration={1000}
+                                    >
+                                        <div>
+                                            <img
+                                                src={
+                                                    data.logo
+                                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                                        : defaultLogo
+                                                }
+                                                className={
+                                                    `detailsLogo reveal-focus-${
+                                                    data.freeSpots && isOpen(data.details.workingHours[moment().isoWeekday() - 1]) > 0
+                                                        ? 'blue'
+                                                        : 'orange'
+                                                    }`
+                                                }
+                                            />
+                                        </div>
+                                    </Zoom>
                                 </div>
                                 <div className="IP-center-upper">
                                     <h5>Trenutno slobodno </h5>
-                                    <input
-                                        className="IP-input"
-                                        type="number"
-                                        min={0}
-                                        max={10}
-                                        value={currentNumber}
-                                        onChange={
-                                            (e) => {
-                                                let { value, min, max } = e.target;
-                                                value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+                                    <Jump spy={currentNumber}>
+                                        <input
+                                            className="IP-input"
+                                            type="number"
+                                            min={0}
+                                            max={10}
+                                            value={currentNumber}
+                                            onChange={
+                                                (e) => {
+                                                    let { value, min, max } = e.target;
+                                                    value = Math.max(Number(min), Math.min(Number(max), Number(value)));
 
-                                                setCurrentNumber(value);
+                                                    setCurrentNumber(value);
+                                                }
                                             }
-                                        }
-                                    />
+                                        />
+                                    </Jump>
                                     <h5>od ukupno {data.totalSpots}</h5>
                                     {/* <div className="IP-center-ukupnoMesta">{data.totalSpots}</div> */}
                                 </div>
@@ -133,29 +149,31 @@ const Restaurant = ({ history }) => {
                                         </button>
                                     </div>
                                     <div className="IP-center-container">
-                                        <div className="IP-dial-container">
-                                            {
-                                                [..._.range(1, 10)].map(i => {
-                                                    return (
-                                                        <button
-                                                            key={i}
-                                                            className={
-                                                                `IP-dial-button IP-clickable ${
-                                                                currentNumber === i
-                                                                    ? 'IP-input-selected'
-                                                                    : ''
-                                                                }`
-                                                            }
-                                                            onClick={() => {
-                                                                setCurrentNumber(i)
-                                                            }}
-                                                        >
-                                                            {i}
-                                                        </button>
-                                                    )
-                                                })
-                                            }
-                                        </div>
+                                        <Pulse>
+                                            <div className="IP-dial-container">
+                                                {
+                                                    [..._.range(1, 10)].map(i => {
+                                                        return (
+                                                            <button
+                                                                key={i}
+                                                                className={
+                                                                    `IP-dial-button IP-clickable ${
+                                                                    currentNumber === i
+                                                                        ? 'IP-input-selected'
+                                                                        : ''
+                                                                    }`
+                                                                }
+                                                                onClick={() => {
+                                                                    setCurrentNumber(i)
+                                                                }}
+                                                            >
+                                                                {i}
+                                                            </button>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </Pulse>
                                     </div>
                                     <div className="IP-input-sideButton">
                                         <button
