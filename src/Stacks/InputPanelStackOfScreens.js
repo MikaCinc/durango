@@ -132,6 +132,9 @@ const InputPanelStackOfScreens = (props) => {
                                             ({ match }) => (
                                                 <div className="page">
                                                     <Component match={match} history={props.history} />
+                                                    {
+                                                        renderFixedButtons()
+                                                    }
                                                 </div>
                                             )
                                         }
@@ -142,9 +145,6 @@ const InputPanelStackOfScreens = (props) => {
                     </CSSTransition>
                 </TransitionGroup>
             </div>
-            {
-                renderFixedButtons()
-            }
         </Fragment>
     )
 }

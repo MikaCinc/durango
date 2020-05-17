@@ -8,7 +8,7 @@ import { isOpen } from '../../library/common';
 /* Animations */
 import Zoom from 'react-reveal/Zoom';
 import Pulse from 'react-reveal/Pulse';
-import Jump from 'react-reveal/Jump';
+import Jello from 'react-reveal/Jello';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -110,8 +110,16 @@ const Restaurant = ({ history }) => {
                                     </Zoom>
                                 </div>
                                 <div className="IP-center-upper">
-                                    <h5>Trenutno slobodno </h5>
-                                    <Jump spy={currentNumber}>
+                                    <h5
+                                        style={
+                                            {
+                                                textAlign: 'right',
+                                            }
+                                        }
+                                    >
+                                        Trenutno slobodno
+                                    </h5>
+                                    <Jello spy={currentNumber}>
                                         <input
                                             className="IP-input"
                                             type="number"
@@ -127,7 +135,7 @@ const Restaurant = ({ history }) => {
                                                 }
                                             }
                                         />
-                                    </Jump>
+                                    </Jello>
                                     <h5>od ukupno {data.totalSpots}</h5>
                                     {/* <div className="IP-center-ukupnoMesta">{data.totalSpots}</div> */}
                                 </div>

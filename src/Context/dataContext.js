@@ -167,7 +167,7 @@ const DataProvider = (props) => {
 
         int = setInterval(() => {
             setData(simulateUpdateData());
-        }, 600)
+        }, 900)
 
         return () => {
             clearInterval(int);
