@@ -202,7 +202,6 @@ const Restaurant = ({ history }) => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             }

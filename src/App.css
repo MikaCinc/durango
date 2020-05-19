@@ -420,16 +420,22 @@ h5 {
   color: white;
   position: absolute;
   padding-bottom: 3px;
+  padding-top: 0px;
   padding-left: 3px;
   padding-right: 3px;
   border-bottom-left-radius: 7px;
   border-top-right-radius: 7px;
   cursor: pointer;
-  height: 18px;
+  height: 16px;
   bottom: 0;
   left: 0;
   font-size: 12px;
   background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+}
+
+.updatedBadge > p {
+  margin: 0px;
+  line-height: 14px;
 }
 
 .updatedBadgeIcon {

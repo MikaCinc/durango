@@ -39,6 +39,7 @@ import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 /* Animations */
 import Bounce from 'react-reveal/Bounce';
 import Roll from 'react-reveal/Roll';
+import Zoom from 'react-reveal/Zoom';
 
 /* Context */
 import DataContext, { DataProvider } from '../Context/dataContext';
@@ -174,7 +175,12 @@ function Details(props) {
             <Fragment>
                 <div className="detailsSubheader">
                     <div>
-                        <h1 className="detailsTitle boldText">{data.title}</h1>
+                        <Zoom
+                            cascade
+                            duration={500}
+                        >
+                            <h1 className="detailsTitle boldText">{data.title}</h1>
+                        </Zoom>
                         {/* <i className="material-icons-outlined greyText">
                         access_time
                     </i> */}
