@@ -43,7 +43,7 @@ const ObjectProfileStackOfScreens = (props) => {
     const [data, setData] = useState();
 
     useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
+        let findData = { ..._.find(Data, { 'id': id }) };
 
         setData(findData);
     }, [Data]);

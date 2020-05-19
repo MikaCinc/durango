@@ -70,7 +70,7 @@ function MoreDetails(props) {
     const [showWHModal, setShowWHModal] = useState(false);
 
     useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(Data, { 'id': id }) || placeholderObj };
 
         setData(findData);
     }, [Data]);

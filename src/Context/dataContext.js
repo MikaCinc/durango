@@ -70,34 +70,49 @@ const DataProvider = (props) => {
         let authorized = isAuthorized(),
             timeout;
 
-        /* if (authorized) {
-          fetch('http://178.17.17.197:7000/lista-kafica')
-            .then(response => response.json())
-            .then(data => {
-              console.log(data)
-              if (!data || !data.length) {
-                setData(mockData);
-              } else {
-                //Doing this just to show loader for a little bit :)
-                setTimeout(() => {
-                  setData(data);
-                }, 1500)
-              }
-            }).catch(() => {
-              console.log('error')
-              setData(mockData);
-            });
-        } */
-
-
         if (authorized && User && User.ID) {
+            fetch('http://durango.devffwd.nl:3000/api/places')
+                .then(response => response.json())
+                .then(response => {
+                    const { data } = response;
+                    console.log(data)
+                    if (!data || !data.length) {
+                        console.log('nešto ga nema data');
+                        setData(kafici);
+                    } else {
+                        //Doing this just to show loader for a little bit :)
+                        // setTimeout(() => {
+                        //     setData(data);
+                        // }, 1500)
+
+                        let editedData = [...data.map((obj) => {
+                            return {
+                                ...obj,
+                                id: obj._id
+                            }
+                        })];
+
+                        console.log(editedData);
+                        setData(editedData);
+                        setLoading(false);
+                    }
+                }).catch(({ message }) => {
+                    console.log('error', message);
+                    //   setData(kafici);
+                });
+        } else {
+            props.history.push('/durango/app-login');
+        };
+
+
+        /* if (authorized && User && User.ID) {
             timeout = setTimeout(() => {
                 setData(kafici);
                 setLoading(false);
             }, 1200)
         } else {
             props.history.push('/durango/app-login');
-        }
+        } */
 
         return () => {
             clearTimeout(timeout);
@@ -202,7 +217,7 @@ const DataProvider = (props) => {
                 return {
                     ...item,
                     freeSpots: getNewNumber(item.freeSpots),
-                    spotsUpdatedAt: moment(),
+                    spotsUpdatedAt: moment().valueOf(),
                     details: {
                         ...item.details,
                         volume: _.random(1, 3)

@@ -7,8 +7,8 @@ const kafici = [
         logo: 'vinyl.png',
         totalSpots: 32,
         freeSpots: 8,
-        spotsUpdatedAt: moment().subtract(15, 'minute'),
-        rezervacija: [],
+        spotsUpdatedAt: 1589897781000,
+        reservations: [],
         details: {
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             images: '',
@@ -38,8 +38,8 @@ const kafici = [
         logo: 'distrikt.png',
         totalSpots: 68,
         freeSpots: 7,
-        spotsUpdatedAt: moment().subtract(1, 'minute'),
-        rezervacija: [],
+        spotsUpdatedAt: 1589897781000,
+        reservations: [],
         details: {
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             images: '',
@@ -68,8 +68,8 @@ const kafici = [
         logo: 'dnevnaSoba.jpg',
         totalSpots: 42,
         freeSpots: 0,
-        spotsUpdatedAt: new Date(),
-        rezervacija: [],
+        spotsUpdatedAt: 1589897781000,
+        reservations: [],
         details: {
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             images: '',
@@ -98,7 +98,7 @@ const kafici = [
         logo: '',
         totalSpots: 90,
         freeSpots: 10,
-        spotsUpdatedAt: new Date(),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'Jedini kafić u gradu gde možete maziti naše kućne ljubimce dok ispijate kafu sa svojim društvom',
@@ -128,7 +128,7 @@ const kafici = [
         logo: 'biro.png',
         totalSpots: 32,
         freeSpots: 10,
-        spotsUpdatedAt: moment().subtract(1, 'hour'),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'Pazite se, mi volimo da vas slikamo noću!',
@@ -159,7 +159,7 @@ const kafici = [
         // preporuka: true,
         totalSpots: 20,
         freeSpots: 0,
-        spotsUpdatedAt: new Date(2018, 11, 24, 10, 33, 30, 0),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'Kod nas uvek možete da čitate knjige iz trilogija "Gospodar prstenova" i "Hobiti"',
@@ -189,7 +189,7 @@ const kafici = [
         logo: 'zrnce.png',
         totalSpots: 58,
         freeSpots: 10,
-        spotsUpdatedAt: moment().subtract(6, 'hours'),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'I ako smo zrnce mi nismo mali!',
@@ -219,7 +219,7 @@ const kafici = [
         logo: 'sailor.png',
         totalSpots: 30,
         freeSpots: 10,
-        spotsUpdatedAt: moment().subtract(6, 'minute'),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'Plovimo na talasima vaše kafe',
@@ -249,7 +249,7 @@ const kafici = [
         logo: 'zebrano.png',
         totalSpots: 45,
         freeSpots: 0,
-        spotsUpdatedAt: moment().subtract(38, 'minute'),
+        spotsUpdatedAt: 1589897781000,
         reservations: [],
         details: {
             description: 'Mazimo zebre!',

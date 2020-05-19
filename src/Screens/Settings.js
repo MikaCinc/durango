@@ -50,9 +50,9 @@ function Settings(props) {
                                 cascade
                                 duration={500}
                             >
-                                <h1 className="detailsTitle">{User.Name}</h1>
+                                <h1 className="settingsTitle">{User.Name}</h1>
                             </Zoom>
-                            <p className="randoVremeParagraph">
+                            <p className="settingsEmailParagraph">
                                 <span className="greyText">{'Email: '}</span>
                                 <span>{User.Email}</span>
                             </p>
@@ -116,6 +116,20 @@ function Settings(props) {
                     <div
                         className="detailsRow clickableRow"
                         onClick={() => {
+                            setShowComingSoonModal(true);
+                        }}
+                    >
+                        <h1 className="detailRowText boldText">
+                            Privacy policy
+                        </h1>
+                        <img
+                            src={Plus}
+                            className="svgIconSmaller"
+                        />
+                    </div>
+                    <div
+                        className="detailsRow clickableRow"
+                        onClick={() => {
                             localStorage.removeItem('User');
                             props.history.push("/durango/app-login");
                         }}
@@ -128,7 +142,7 @@ function Settings(props) {
                             className="svgIconSmaller"
                         />
                     </div>
-                    <Image src="https://futureforward.nl/resources/themes/app/images/futureforward-logo.svg" fluid />
+                    <Image className="settingsFFWDLogo" src="https://futureforward.nl/resources/themes/app/images/futureforward-logo.svg" fluid />
                 </div>
             </Fragment>
         )

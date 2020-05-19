@@ -113,7 +113,7 @@ function Details(props) {
     const [timer, setTimer] = useState('');
 
     useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) || placeholderObj };
+        let findData = { ..._.find(Data, { 'id': id }) || placeholderObj };
 
         setData(findData);
         setCurrentData(findData);
