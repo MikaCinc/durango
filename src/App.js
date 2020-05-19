@@ -25,6 +25,7 @@ import {
 /* Pages / Screens */
 import Login from './Screens/LoginScreen';
 import Home from './Screens/Home';
+import Settings from './Screens/Settings';
 import ObjectLogin from './Screens/Object/ObjectLogin';
 
 /* Stacks */
@@ -44,7 +45,8 @@ const UserStackOfScreens = ({ history }) => {
         <Switch location={location}>
           <Route key={1} exact path="/durango/app" render={() => (<Redirect to="/durango/app/home" />)} />
           <Route key={2} exact path="/durango/app/home" component={Home} />
-          <Route key={3} path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
+          <Route key={3} exact path="/durango/app/settings" component={Settings} />
+          <Route key={4} path="/durango/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
         </Switch>
       </DataProvider >
     </Fragment>

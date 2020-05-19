@@ -19,6 +19,7 @@ import moment from 'moment';
 
 /* Animations */
 import Fade from 'react-reveal/Fade';
+import Spin from 'react-reveal/Spin';
 import FlipMove from 'react-flip-move';
 
 /* Icons */
@@ -26,6 +27,7 @@ import Star from '../icons/star.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
 import SeatOrange from '../icons/seat_orange.svg';
+import GearBlue from '../icons/gearBlue.svg';
 import watchBlue from '../icons/watchBlue.svg';
 
 /* Components & LOADER */
@@ -389,7 +391,7 @@ const List = ({ history }) => {
 }
 
 const ListAndSearch = ({ history }) => {
-    const { toggleFilters, changeSearch, loading, filters } = useContext(DataContext);
+    const { toggleFilters, changeSearch, loading, filters, User } = useContext(DataContext);
 
     const isTurnedOn = () => {
         return filters.indexOf('omiljeni') !== -1
@@ -399,6 +401,15 @@ const ListAndSearch = ({ history }) => {
         <Fragment>
             <div className="mainHeader">
                 <img src={Logo} className="logoHeader" />
+                <div
+                    className="avatarContainer"
+                    onClick={() => { history.push('/durango/app/settings') }}
+                >
+                    <img src={User.imageUrl} className="avatar" />
+                    <Spin duration={500}>
+                        <img src={GearBlue} className="avatarGears" />
+                    </Spin>
+                </div>
                 <Search />
             </div>
             {
