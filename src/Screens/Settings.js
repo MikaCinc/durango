@@ -17,6 +17,7 @@ import Roll from 'react-reveal/Roll';
 import Zoom from 'react-reveal/Zoom';
 
 /* Icons */
+import incLogo from '../ExtendedLogo/incLogo.png';
 import Plus from '../icons/plus.svg';
 import Minus from '../icons/minus.svg';
 import Done from '../icons/doneWhite.svg';
@@ -142,7 +143,13 @@ function Settings(props) {
                             className="svgIconSmaller"
                         />
                     </div>
-                    <Image className="settingsFFWDLogo" src="https://futureforward.nl/resources/themes/app/images/futureforward-logo.svg" fluid />
+                        <p className="greyText settingsDevelopedByLabel">Durango razvili:</p>
+                    <div>
+                        <div className="settingsDevelopedBy">
+                            <img className="settingsINCLogo" src={incLogo} />
+                            <img className="settingsFFWDLogo" src="https://futureforward.nl/resources/themes/app/images/futureforward-logo.svg" />
+                        </div>
+                    </div>
                 </div>
             </Fragment>
         )
