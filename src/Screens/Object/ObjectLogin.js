@@ -21,7 +21,7 @@ import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
 
 const ObjectLogin = ({ history }) => {
 
-    const { setID, loading } = useContext(ObjectContext);
+    const { setID, loading, Data } = useContext(ObjectContext);
 
     const [title, setTitle] = useState("");
     const [key, setKey] = useState("");
@@ -30,7 +30,7 @@ const ObjectLogin = ({ history }) => {
     const entering = () => {
         if (!id) return;
 
-        let findData = { ..._.find(kafici, { 'id': parseInt(id, 10) }) };
+        let findData = { ..._.find(Data, { 'id': id }) };
 
         if (!findData.id) {
             alert("Nije pronađen objekat sa ovim ID-em");
@@ -48,7 +48,7 @@ const ObjectLogin = ({ history }) => {
                 <p>Key</p>
                 <input className="IP-Login-Input" type="text" value={key} onChange={(e) => { setKey(e.target.value) }} /> */}
                 <p>ID Objekta:</p>
-                <input className="IP-Login-Input" type="number" value={id} onChange={(e) => { setId(parseInt(e.target.value), 10) }} />
+                <input className="IP-Login-Input" type="text" value={id} onChange={(e) => { setId(e.target.value) }} />
                 <button
                     className="IP-input-imaMesta IP-clickable"
                     onClick={() => {

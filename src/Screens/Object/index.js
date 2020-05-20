@@ -19,30 +19,9 @@ import defaultLogo from '../../CustomIcons/defaultLogo.png';
 /* Context */
 import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
 
-const Restaurant = ({ history }) => {
-    const { id } = useParams();
-
-    const { Data, loading } = useContext(ObjectContext);
-
-    const [data, setData] = useState({});
+const Restaurant = ({ history, dataFromStack }) => {
+    const [data, setData] = useState({...dataFromStack});
     const [currentNumber, setCurrentNumber] = useState(3);
-
-    useEffect(() => {
-        if (!Data || !Data.length) return;
-
-        let findData;
-
-        if (id) {
-            findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
-        }
-
-        if (findData.id) {
-            setData(findData);
-        } /* else {
-            history.push('/durango/inputPanel/login');
-        } */
-
-    }, [Data]);
 
     useEffect(() => {
         // Request na server

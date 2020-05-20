@@ -27,20 +27,14 @@ import GearOutlineBlue from '../icons/gearOutlineBlue.svg';
 import ObjectContext, { ObjectProvider } from '../Context/objectContext';
 
 const IPHeader = (props) => {
-    let { id } = useParams();
     let history = useHistory();
 
-    const { Data, loading } = useContext(ObjectContext);
-
-    const [data, setData] = useState({});
+    const [data, setData] = useState({ ...props.dataFromStack });
     const [currentTime, setCurrentTime] = useState(moment());
 
     useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
-
-        setData(findData);
-    }, [Data]);
-
+        setData({ ...props.dataFromStack });
+    }, [props.dataFromStack]);
 
     useEffect(() => {
         let interval = setInterval(() => {

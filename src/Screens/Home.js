@@ -266,7 +266,7 @@ const List = ({ history }) => {
                     return (
                         <div
                             key={Kafic.id}
-                            className={`button ${isReserved(Kafic) ? 'reservedObject' : "normalObject"} ${Kafic.preporuka ? 'preporukaObject' : ""}`}
+                            className={`singleLineContainer ${isReserved(Kafic) ? 'reservedObject' : "normalObject"} ${Kafic.preporuka ? 'preporukaObject' : ""}`}
                             onClick={() => {
                                 history.push(`/durango/app/${Kafic.id}`);
                             }}
@@ -346,7 +346,7 @@ const List = ({ history }) => {
                 sortedClosed.map(Kafic => {
                     return <div
                         key={Kafic.id}
-                        className="closedObject button"
+                        className="closedObject singleLineContainer"
                         onClick={() => {
                             history.push(`/durango/app/${Kafic.id}`);
                         }}

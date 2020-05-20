@@ -433,6 +433,13 @@ h5 {
   box-shadow: var(--shadow);
 }
 
+.singleLineContainer {
+  /* Desktop */
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .singleLine {
   position: relative;
   /* Potrebno da bi badge bio na svom mestu */
@@ -481,7 +488,7 @@ h5 {
   background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
 }
 
-.updatedBadge > p {
+.updatedBadge>p {
   margin: 0px;
   line-height: 14px;
 }
@@ -1302,6 +1309,15 @@ emoji-slider {
 
 .IP-Settings-TextArea {
   min-width: 100%;
+}
+
+.IP-Settings-Close-Object {
+  border-radius: 50px;
+  padding: 20px;
+  background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+  color: white;
+  cursor: pointer;
+  user-select: none;
 }
 
 @keyframes pulse {

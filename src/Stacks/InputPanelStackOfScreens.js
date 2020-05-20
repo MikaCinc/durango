@@ -42,7 +42,6 @@ const routes = [
 
 const InputPanelStackOfScreens = (props) => {
     let { id } = useParams();
-    // const { location } = useContext(__RouterContext);
 
     const { Data, loading } = useContext(ObjectContext);
     const [data, setData] = useState();
@@ -56,7 +55,7 @@ const InputPanelStackOfScreens = (props) => {
             props.history.push('/durango/inputPanel/login');
         }
 
-        let findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
+        let findData = { ..._.find(Data, { 'id': id }) };
 
         if (!findData.id) {
             props.history.replace(`/durango/inputPanel/login`);
@@ -110,7 +109,7 @@ const InputPanelStackOfScreens = (props) => {
     return (
         <Fragment>
             {
-                <IPHeader history={props.history} />
+                <IPHeader history={props.history} dataFromStack={data} />
             }
             <div className="container">
                 <TransitionGroup>
@@ -131,7 +130,7 @@ const InputPanelStackOfScreens = (props) => {
                                         render={
                                             ({ match }) => (
                                                 <div className="page">
-                                                    <Component match={match} history={props.history} />
+                                                    <Component match={match} history={props.history} dataFromStack={data} />
                                                     {
                                                         renderFixedButtons()
                                                     }

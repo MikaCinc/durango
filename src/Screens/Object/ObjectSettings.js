@@ -6,10 +6,14 @@ import _ from 'lodash';
 import { isOpen } from '../../library/common';
 
 /* Components */
-import TimePicker from 'react-time-picker'
+import TimePicker from 'react-time-picker';
+import ImageUploader from 'react-images-upload';
 
 /* Animations */
 import Zoom from 'react-reveal/Zoom';
+
+/* Default Logo */
+import defaultLogo from '../../CustomIcons/defaultLogo.png';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -27,11 +31,8 @@ const daysOfTheWeek = [
     'Nedelja'
 ];
 
-const ObjectSettings = ({ history }) => {
-    const { id } = useParams();
-
-    const { Data, loading } = useContext(ObjectContext);
-    const [data, setData] = useState({});
+const ObjectSettings = ({ history, dataFromStack }) => {
+    const [data, setData] = useState({ ...dataFromStack });
 
     const [title, setTitle] = useState('');
     const [totalSpots, setTotalSpots] = useState(1);
@@ -41,23 +42,6 @@ const ObjectSettings = ({ history }) => {
     const [music, setMusic] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [workingHours, setWorkingHours] = useState([]);
-
-    useEffect(() => {
-        if (!Data || !Data.length) return;
-
-        let findData;
-
-        if (id) {
-            findData = { ..._.find(Data, { 'id': parseInt(id, 10) }) };
-        }
-
-        if (findData.id) {
-            setData(findData);
-        } else {
-            history.push('/durango/inputPanel/login');
-        }
-
-    }, [Data]);
 
     useEffect(() => {
         if (!data || !data.id) return;
@@ -75,6 +59,10 @@ const ObjectSettings = ({ history }) => {
 
     }, [data]);
 
+    const onLogoDrop = (pictureFiles, pictureDataURLs) => {
+        console.log(pictureFiles, pictureDataURLs)
+    };
+
     return (
         <div className="IP-Container">
             {
@@ -83,6 +71,47 @@ const ObjectSettings = ({ history }) => {
                         <div className="IP-Settings-Block">
                             <p className="boldText">Naziv</p>
                             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p className="boldText">Promeni šifru</p>
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p className="boldText">Zatvori objekat</p>
+                            <p>PAŽNJA! Ukoliko manuelno zatvorite objekat klikom na ovo dugme,
+                            naš algoritam će ignorisati radno vreme i Vaš objekat će uvek korisnicima biti prikazan kao zatvoren,
+                                sve dok ga ponovo ne otvorite manuelno klikom na isto ovo dugme</p>
+                            <button
+                                className="IP-Settings-Close-Object"
+                            >
+                                Zatvori
+                            </button>
+                        </div>
+                        <div className="IP-Settings-Block">
+                            <p className="boldText">Logo</p>
+                            <img
+                                style={{
+                                    width: 100,
+                                    height: 'auto',
+                                }}
+                                src={
+                                    data.logo
+                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                        : defaultLogo
+                                }
+                            />
+                            <ImageUploader
+                                withIcon={true}
+                                singleImage={true}
+                                defaultImage={
+                                    data.logo
+                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${data.logo}`
+                                        : defaultLogo
+                                }
+                                buttonText='Izaberi logo'
+                                onChange={onLogoDrop}
+                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                maxFileSize={5242880}
+                            />
                         </div>
                         <div className="IP-Settings-Block">
                             <p className="boldText">Ukupan broj mesta</p>

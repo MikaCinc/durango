@@ -37,11 +37,11 @@ const ObjectProvider = (props) => {
     useEffect(() => {
         let findData = {};
         if (ID) {
-            findData = { ..._.find(Data, { 'id': parseInt(ID, 10) }) };
+            findData = { ..._.find(Data, { 'id': 10}) };
         }
 
         if (findData.id) {
-            props.history.push('/durango/inputPanel/' + ID);
+            // props.history.push('/durango/inputPanel/' + ID);
         }
     }, [ID]);
 
