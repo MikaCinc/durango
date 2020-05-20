@@ -80,16 +80,20 @@ const DataProvider = (props) => {
                         console.log('nešto ga nema data');
                         setData(kafici);
                     } else {
-                        //Doing this just to show loader for a little bit :)
-                        // setTimeout(() => {
-                        //     setData(data);
-                        // }, 1500)
+                        setTimeout(() => {
+                            setData(data);
+                        }, 1500)
                         setData(data);
                         setLoading(false);
                     }
                 }).catch(({ message }) => {
                     // Za sada ako bude greška postavi mockData
-                    setData(kafici);
+                    //Doing this just to show loader for a little bit :)
+                    setTimeout(() => {
+                        setData(kafici);
+                        setLoading(false);
+                        alert('Učitan mockData, server vratio error')
+                    }, 1500)
                     console.log('error', message);
                 });
         } else {

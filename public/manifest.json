@@ -33,7 +33,7 @@
       "sizes": "2048x2048"
     }
   ],
-  "start_url": ".",
+  "start_url": "/durango/app/home",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",

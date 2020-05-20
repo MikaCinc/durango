@@ -45,7 +45,7 @@ const placeholderObj = {
 
 function Reserve(props) {
     let { id } = useParams();
-    const { Data, loading, fastReserve } = useContext(DataContext);
+    const { Data, loading, fastReserve, User } = useContext(DataContext);
 
     const [data, setData] = useState({ ...placeholderObj });
     const [date, setDate] = useState(new Date());
