@@ -84,21 +84,13 @@ const DataProvider = (props) => {
                         // setTimeout(() => {
                         //     setData(data);
                         // }, 1500)
-
-                        let editedData = [...data.map((obj) => {
-                            return {
-                                ...obj,
-                                id: obj._id
-                            }
-                        })];
-
-                        console.log(editedData);
-                        setData(editedData);
+                        setData(data);
                         setLoading(false);
                     }
                 }).catch(({ message }) => {
+                    // Za sada ako bude greška postavi mockData
+                    setData(kafici);
                     console.log('error', message);
-                    //   setData(kafici);
                 });
         } else {
             props.history.push('/durango/app-login');

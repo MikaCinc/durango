@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const kafici = [
     {
-        id: 1,
+        id: 'ab12ba1',
         title: 'Vinyl',
         logo: 'vinyl.png',
         totalSpots: 32,
@@ -33,7 +33,7 @@ const kafici = [
         }
     },
     {
-        id: 2,
+        id: 'ab12ba2',
         title: 'Distrikt',
         logo: 'distrikt.png',
         totalSpots: 68,
@@ -63,7 +63,7 @@ const kafici = [
         }
     },
     {
-        id: 3,
+        id: 'ab12ba3',
         title: 'Dnevna soba',
         logo: 'dnevnaSoba.jpg',
         totalSpots: 42,
@@ -93,7 +93,7 @@ const kafici = [
         }
     },
     {
-        id: 4,
+        id: 'ab12ba4',
         title: 'Durango Caffe',
         logo: '',
         totalSpots: 90,
@@ -123,7 +123,7 @@ const kafici = [
         }
     },
     {
-        id: 6,
+        id: 'ab12ba6',
         title: 'Biro Kafeterija',
         logo: 'biro.png',
         totalSpots: 32,
@@ -153,7 +153,7 @@ const kafici = [
         }
     },
     {
-        id: 7,
+        id: 'ab12ba7',
         title: 'Okrug caffe',
         logo: 'okrug.jpg',
         // preporuka: true,
@@ -184,7 +184,7 @@ const kafici = [
         }
     },
     {
-        id: 8,
+        id: 'ab12ba8',
         title: 'Zrnce caffe',
         logo: 'zrnce.png',
         totalSpots: 58,
@@ -214,7 +214,7 @@ const kafici = [
         }
     },
     {
-        id: 9,
+        id: 'ab12ba9',
         title: 'Sailor',
         logo: 'sailor.png',
         totalSpots: 30,
@@ -244,7 +244,7 @@ const kafici = [
         }
     },
     {
-        id: 5,
+        id: 'ab12ba5',
         title: 'Caffe Zebrano',
         logo: 'zebrano.png',
         totalSpots: 45,
