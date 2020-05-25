@@ -20,11 +20,24 @@ import defaultLogo from '../../CustomIcons/defaultLogo.png';
 import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
 
 const Restaurant = ({ history, dataFromStack }) => {
-    const [data, setData] = useState({...dataFromStack});
+    const [data, setData] = useState({ ...dataFromStack });
     const [currentNumber, setCurrentNumber] = useState(3);
 
     useEffect(() => {
         // Request na server
+
+        // Example fetch with authorization header:
+
+        // fetch('URL_GOES_HERE', {
+        //     method: 'post',
+        //     headers: new Headers({
+        //         'Authorization': 'Basic ' + btoa('username:password'),
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //     }),
+        //     body: 'A=1&B=2'
+        // });
+
+
     }, [currentNumber]);
 
     useEffect(() => {

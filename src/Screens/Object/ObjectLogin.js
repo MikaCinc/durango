@@ -26,6 +26,8 @@ const ObjectLogin = ({ history }) => {
     const [title, setTitle] = useState("");
     const [key, setKey] = useState("");
     const [id, setId] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const entering = () => {
         if (!id) return;
@@ -39,6 +41,24 @@ const ObjectLogin = ({ history }) => {
         }
     }
 
+    const loginObject = () => {
+        if(!email || !password) return;
+
+        let cred = {
+            email,
+            password
+        }
+
+        fetch('http://durango.devffwd.nl:3000/api/places/login', {
+            method: 'post',
+            body: JSON.stringify(cred)
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            console.log(data)
+        });
+    }
+
     return (
         <div className="IP-Login">
             <div className="IP-LoginForm">
@@ -47,8 +67,10 @@ const ObjectLogin = ({ history }) => {
                 <input className="IP-Login-Input" type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
                 <p>Key</p>
                 <input className="IP-Login-Input" type="text" value={key} onChange={(e) => { setKey(e.target.value) }} /> */}
-                <p>ID Objekta:</p>
-                <input className="IP-Login-Input" type="text" value={id} onChange={(e) => { setId(e.target.value) }} />
+                <p>Email:</p>
+                <input className="IP-Login-Input" type="text" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                <p>Password:</p>
+                <input className="IP-Login-Input" type="text" value={password} onChange={(e) => { setPassword(e.target.value) }} />
                 <button
                     className="IP-input-imaMesta IP-clickable"
                     onClick={() => {
