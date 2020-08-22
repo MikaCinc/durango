@@ -7,15 +7,17 @@ import React, {
 } from 'react';
 
 /* Data */
-import Logo from '../ExtendedLogo/Logo.png';
+import Logo from '../ExtendedLogo/LogoBetaV3.png';
 import noResultsIcon from '../CustomIcons/noResults.png';
+import errorIcon from '../CustomIcons/errorModal.png';
 import noFavoritesIcon from '../CustomIcons/noFavorites.png';
 import defaultLogo from '../CustomIcons/defaultLogo.png';
+import defaultAvatar from '../CustomIcons/defaultAvatar.png';
 
 /* Libraries */
-import _ from 'lodash';
-import queryString from 'query-string';
 import moment from 'moment';
+import { getApiUrl } from '../library/common';
+import _ from 'lodash';
 
 /* Animations */
 import Fade from 'react-reveal/Fade';
@@ -26,16 +28,18 @@ import FlipMove from 'react-flip-move';
 import Star from '../icons/star.svg';
 import Seat from '../icons/seat.svg';
 import SeatGray from '../icons/seat_gray.svg';
+import SeatRed from '../icons/seatRed.svg';
+import SeatDarkRed from '../icons/seatDarkRed.svg';
 import SeatOrange from '../icons/seat_orange.svg';
 import GearBlue from '../icons/gearBlue.svg';
-import watchBlue from '../icons/watchBlue.svg';
+import Audio from '../icons/audioBlue.svg';
+import AudioLight from '../icons/audioLightblue.svg';
 
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import AbsoluteWrapper from '../Components/AbsoluteWrapper';
 
 /* Context */
-import DataContext, { DataProvider } from '../Context/dataContext';
+import DataContext from '../Context/dataContext';
 
 const Search = () => {
     const { search, changeSearch } = useContext(DataContext);
@@ -87,14 +91,14 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
     const [timer, setTimer] = useState('');
 
     const isReserved = (obj) => {
-        if (!User.Reservation || !obj) {
+        if (!User || !User.reservation || !obj) {
             return false;
         }
 
         // Is current time behind Reserved Time
-        let flag = moment(User.Reservation.Time, 'HH:mm').isAfter();
+        let flag = moment(User.reservation.time, 'HH:mm').isAfter();
 
-        if (flag && User.Reservation.ID === obj.id) {
+        if (flag && User.reservation.id === obj.id) {
             return true;
         }
 
@@ -102,6 +106,10 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
     }
 
     useEffect(() => {
+        if (!Reservation) {
+            return;
+        };
+
         let interval;
 
         const updateTimer = () => {
@@ -124,7 +132,7 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
         }
 
         return () => clearInterval(interval);
-    }, []);
+    }, [Reservation]);
 
     return (
         <div
@@ -132,8 +140,6 @@ const LabelBadge = ({ label = 'ZATVORENO', color = '#596164', Reservation, objec
             style={
                 {
                     backgroundColor: color,
-                    // backgroundImage: color,
-                    // color:
                 }
             }
         >
@@ -154,23 +160,12 @@ const FavoritBadge = ({ color = '#596164' }) => {
                 }
             }
         >
-            {/* <i
-                className="material-icons-outlined favoritBadge"
-                style={{
-                    fontSize: '18px'
-                }}
-            >
-                star
-            </i> */}
-
-            <img src={Star} className="svgIconSmallest favoritBadge" />
+            <img src={Star} className="svgIconSmallest favoritBadge" alt="icon" />
         </div>
     )
 }
 
 const UpdatedBadge = ({ color = 'white', object }) => {
-    // moment().locale('sr'); @todo
-
     const [label, setLabel] = useState(moment(object.spotsUpdatedAt).fromNow());
 
     useEffect(() => {
@@ -189,6 +184,22 @@ const UpdatedBadge = ({ color = 'white', object }) => {
         return () => clearInterval(interval);
     }, [object.spotsUpdatedAt]);
 
+    const getLabelColor = () => {
+        let hoursTillUpdated = moment.duration(moment().diff(moment(object.spotsUpdatedAt))).asHours(),
+            labelColor;
+
+        if (hoursTillUpdated <= 1) {
+            labelColor = `linear-gradient(to top right, #00c6fb 0%, #005bea 100%)`;
+        } else if (hoursTillUpdated > 1 && hoursTillUpdated <= 5) {
+            labelColor = `linear-gradient(to top right, #f83600 0%, #f9d423 100%)`;
+        } else if (hoursTillUpdated > 5 && hoursTillUpdated <= 8) {
+            labelColor = `linear-gradient(to top right, #ff0844 0%, #ffb199 100%)`;
+        } else if (hoursTillUpdated > 8) {
+            labelColor = `linear-gradient(to top right, #ad080f 0%, #ff0000 100%)`;
+        }
+
+        return labelColor;
+    }
 
     return (
         <div
@@ -196,9 +207,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
             style={
                 {
                     color,
-                    background: object.freeSpots === 0
-                        ? 'linear-gradient(to top right, #f83600 0%, #f9d423 100%)'
-                        : 'linear-gradient(to top right, #00c6fb 0%, #005bea 100%)'
+                    background: getLabelColor()
                 }
             }
         >
@@ -209,21 +218,98 @@ const UpdatedBadge = ({ color = 'white', object }) => {
 }
 
 const List = ({ history }) => {
-    const { filteredData, sortedOpen, sortedClosed, loading, User, filters } = useContext(DataContext);
+    const { Data, filteredData, sortedOpen, sortedClosed, loading, User, filters, info } = useContext(DataContext);
+
+    if ((!Data || !Data.length) && !loading) {
+        return (
+            <div className="noResults boldText">
+                <h1>
+                    Greška na serveru, pokušajte malo kasnije
+                </h1>
+                <img className="noResultsIcon" src={errorIcon} alt="icon" />
+            </div>
+        )
+    }
 
     const isReserved = (obj) => {
-        if (!User.Reservation) {
+        if (!User || !User.reservation) {
             return false;
         }
 
         // Is current time behind Reserved Time
-        let flag = moment(User.Reservation.Time, 'HH:mm').isAfter();
+        let flag = moment(User.reservation.time, 'HH:mm').isAfter();
 
-        if (flag && User.Reservation.ID === obj.id) {
+        if (flag && User.reservation.id === obj.id) {
             return true;
         }
 
         return false;
+    }
+
+    const getSeatIcon = (object) => {
+        let hoursTillUpdated = moment.duration(moment().diff(moment(object.spotsUpdatedAt))).asHours(),
+            seatInColor;
+
+        if (hoursTillUpdated <= 1) {
+            seatInColor = Seat;
+        } else if (hoursTillUpdated > 1 && hoursTillUpdated <= 5) {
+            seatInColor = SeatOrange;
+        } else if (hoursTillUpdated > 5 && hoursTillUpdated <= 8) {
+            seatInColor = SeatRed;
+        } else if (hoursTillUpdated > 8) {
+            seatInColor = SeatDarkRed;
+        }
+
+        return <img
+            src={seatInColor}
+            className="svgIcon"
+            alt="icon"
+        />
+    }
+
+    const getInfoForTile = (Kafic) => {
+        if (!info) {
+            return null;
+        }
+
+        switch (info) {
+            case 'address': {
+                return <p className="greyText mb-0">{Kafic.details.address}</p>;
+            }
+            case 'volume': {
+                return (
+                    <span className="d-flex">
+                        {
+                            [1, 2, 3].map((i) => {
+                                return (
+                                    <img
+                                        key={i}
+                                        src={
+                                            _.inRange(i, 0, Kafic.details.volume + 1)
+                                                ? Audio
+                                                : AudioLight
+                                        }
+                                        className="svgIconSmaller"
+                                        alt="icon"
+                                    />
+                                )
+                            })
+                        }
+                    </span>
+                )
+            }
+            case 'claps': {
+                return (
+                    <div>
+                        {
+                            Kafic.details.totalClaps || '0'
+                        }
+                        <span className="ml-1" role="img" aria-label="claps">👏</span>
+                    </div>
+                )
+            }
+            default: return null;
+        }
     }
 
     if (!(Array.isArray(filteredData) && filteredData.length)) {
@@ -235,7 +321,7 @@ const List = ({ history }) => {
                     <h1>
                         Objekte koje označite zvezdicom pojaviće se ovde kao omiljeni
                     </h1>
-                    <img className="noResultsIcon" src={noFavoritesIcon} />
+                    <img className="noResultsIcon" src={noFavoritesIcon} alt="icon" />
                 </div>
             )
         }
@@ -245,7 +331,7 @@ const List = ({ history }) => {
                 <h1>
                     Mesto koje tražite nije pronađeno
                 </h1>
-                <img className="noResultsIcon" src={noResultsIcon} />
+                <img className="noResultsIcon" src={noResultsIcon} alt="icon" />
             </div>
         )
     }
@@ -268,7 +354,7 @@ const List = ({ history }) => {
                             key={Kafic.id}
                             className={`singleLineContainer ${isReserved(Kafic) ? 'reservedObject' : "normalObject"} ${Kafic.preporuka ? 'preporukaObject' : ""}`}
                             onClick={() => {
-                                history.push(`/durango/app/${Kafic.id}`);
+                                history.push(`/app/${Kafic.id}`);
                             }}
                         >
                             <Fade
@@ -283,11 +369,26 @@ const List = ({ history }) => {
                                         className="listLogo"
                                         src={
                                             Kafic.logo
-                                                ? `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                                ? `${getApiUrl() + Kafic.logo}`
                                                 : defaultLogo
                                         }
+                                        alt="icon"
                                     />
-                                    <h1 className="linetitle ">{getTrimmedTitle(Kafic.title, 15)}</h1>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column'
+                                        }}
+                                        className="linetitle"
+                                    >
+                                        <h1>{getTrimmedTitle(Kafic.title, 15)}</h1>
+                                        {
+                                            // showAddresses && <p className="greyText mb-0">{Kafic.details.address}</p>
+                                        }
+                                        {
+                                            info && getInfoForTile(Kafic)
+                                        }
+                                    </div>
                                     <p className="lineFreeSeats boldText greyText">
                                         {
                                             Kafic.freeSpots >= 10
@@ -298,27 +399,20 @@ const List = ({ history }) => {
                                     <i
                                         className="material-icons-outlined peopleIcon"
                                     >
-                                        <img
-                                            src={
-                                                Kafic.freeSpots > 0
-                                                    ? Seat
-                                                    : SeatOrange
-                                            }
-                                            className="svgIcon"
-                                        />
+                                        {getSeatIcon(Kafic)}
                                     </i>
                                     {
                                         isReserved(Kafic) && <LabelBadge
                                             label="REZERVISANO"
                                             color="#005bea"
-                                            Reservation={User.Reservation}
+                                            Reservation={User.reservation}
                                             object={Kafic}
                                         />
                                     }
                                 </div>
                             </Fade>
                             {
-                                User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge color="#005bea" />
+                                User && User.id && User.favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge color="#005bea" />
                             }
                             {
                                 Kafic.spotsUpdatedAt && <UpdatedBadge
@@ -339,8 +433,6 @@ const List = ({ history }) => {
             enterAnimation="none"
             leaveAnimation="none"
             staggerDurationBy={100}
-        // verticalAlignment="bottom"
-        // maintainContainerHeight="true"
         >
             {
                 sortedClosed.map(Kafic => {
@@ -348,7 +440,7 @@ const List = ({ history }) => {
                         key={Kafic.id}
                         className="closedObject singleLineContainer"
                         onClick={() => {
-                            history.push(`/durango/app/${Kafic.id}`);
+                            history.push(`/app/${Kafic.id}`);
                         }}
                     >
                         <div className="singleLine">
@@ -356,11 +448,23 @@ const List = ({ history }) => {
                                 className="listLogo"
                                 src={
                                     Kafic.logo
-                                        ? `${process.env.PUBLIC_URL}/slike/mockLogos/${Kafic.logo}`
+                                        ? `${getApiUrl() + Kafic.logo}`
                                         : defaultLogo
                                 }
+                                alt="icon"
                             />
-                            <h1 className="linetitle">{getTrimmedTitle(Kafic.title, 15)}</h1>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}
+                                className="linetitle"
+                            >
+                                <h1>{getTrimmedTitle(Kafic.title, 15)}</h1>
+                                {
+                                    info && getInfoForTile(Kafic)
+                                }
+                            </div>
                             <p className="lineFreeSeats boldText greyText">
                                 {
                                     Kafic.freeSpots >= 10
@@ -374,14 +478,15 @@ const List = ({ history }) => {
                                     color: '#B0B0B0'
                                 }}
                             >
-                                {/* people */}
-                                {/* event_seat */}
-                                <img src={SeatGray} className="svgIcon" />
+                                <img src={SeatGray} className="svgIcon" alt="icon" />
                             </i>
-                            <LabelBadge />
+                            <LabelBadge
+                                Reservation={null}
+                                object={null}
+                            />
                         </div>
                         {
-                            User.Favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
+                            User && User.id && User.favourites.indexOf(Kafic.id) !== -1 && <FavoritBadge />
                         }
                     </div>
                 })
@@ -391,33 +496,73 @@ const List = ({ history }) => {
 }
 
 const ListAndSearch = ({ history }) => {
-    const { toggleFilters, changeSearch, loading, filters, User } = useContext(DataContext);
+    const {
+        toggleFilters,
+        changeSearch,
+        loading,
+        filters,
+        User,
+        setShowLoginModal,
+        sortBy,
+        info,
+        setInfo,
+        setSortBy
+    } = useContext(DataContext);
+    const [isSticky, setSticky] = useState(false);
 
     const isTurnedOn = () => {
         return filters.indexOf('omiljeni') !== -1
     }
 
+    const handleScroll = () => {
+        setSticky(window.pageYOffset !== 0);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const getAvatarSrc = () => {
+        let accessToken = localStorage.getItem('userAccessToken');
+        if (!User || !accessToken || !User.imageUrl) {
+            return defaultAvatar;
+        }
+
+        return User.imageUrl;
+    }
+
     return (
         <Fragment>
-            <div className="mainHeader">
-                <img src={Logo} className="logoHeader" />
-                <div
-                    className="avatarContainer"
-                    onClick={() => { history.push('/durango/app/settings') }}
-                >
-                    <img src={User.imageUrl} className="avatar" />
-                    <Spin duration={500}>
-                        <img src={GearBlue} className="avatarGears" />
-                    </Spin>
+            <div className={`mainHeader ${isSticky ? 'acrylic' : ''}`}>
+                <div>
+                    <img src={Logo} className="logoHeader" alt="icon" />
+                    <div
+                        className="avatarContainer"
+                        onClick={() => { history.push('/app/settings') }}
+                    >
+                        <img src={getAvatarSrc()} className="avatar" alt="icon" />
+                        <Spin duration={500}>
+                            <img src={GearBlue} className="avatarGears" alt="icon" />
+                        </Spin>
+                    </div>
+                    <Search />
                 </div>
-                <Search />
             </div>
             {
                 !loading && <div className="filtersContainer">
-                    <div className="filterChipContainer">
+                    {/* <div className="filtersMask"></div> */}
+                    <div className="filterChipContainer chip">
                         <div
                             className={`filterChip ${isTurnedOn() ? 'filterChipActive' : ''}`}
                             onClick={() => {
+                                if (!User || !User.id) {
+                                    setShowLoginModal(true);
+                                    return;
+                                }
                                 toggleFilters('omiljeni');
                                 changeSearch('');
                             }}
@@ -426,6 +571,62 @@ const ListAndSearch = ({ history }) => {
                                 isTurnedOn()
                                     ? 'Prikaži sve'
                                     : 'Prikaži omiljene'
+                            }
+                        </div>
+                    </div>
+                    <div className="sortChipContainer chip">
+                        <div
+                            className={`sortChip ${sortBy === 'spotsUpdatedAt' ? '' : 'sortChipActive'}`}
+                            onClick={() => {
+                                if (sortBy === 'spotsUpdatedAt') {
+                                    setSortBy('freeSpots');
+                                    return;
+                                }
+
+                                setSortBy('spotsUpdatedAt');
+                            }}
+                        >
+                            Sortirano po
+                            <span className="boldText ml-1">
+                                {
+                                    sortBy === 'spotsUpdatedAt' ? 'ažurnosti' : 'broju mesta'
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div className="addressesChipContainer chip">
+                        <div
+                            className={`addressesChip ${info === 'address' ? 'addressesChipActive' : ''}`}
+                            onClick={() => {
+                                setInfo(info === 'address' ? '' : 'address');
+                            }}
+                        >
+                            {
+                                info === 'address' ? 'Ukloni adrese' : 'Prikaži adrese'
+                            }
+                        </div>
+                    </div>
+                    <div className="volumeChipContainer chip">
+                        <div
+                            className={`volumeChip ${info === 'volume' ? 'volumeChipActive' : ''}`}
+                            onClick={() => {
+                                setInfo(info === 'volume' ? '' : 'volume');
+                            }}
+                        >
+                            {
+                                info === 'volume' ? 'Ukloni glasnoću' : 'Prikaži glasnoću'
+                            }
+                        </div>
+                    </div>
+                    <div className="clapsChipContainer chip">
+                        <div
+                            className={`clapsChip ${info === 'claps' ? 'clapsChipActive' : ''}`}
+                            onClick={() => {
+                                setInfo(info === 'claps' ? '' : 'claps');
+                            }}
+                        >
+                            {
+                                info === 'claps' ? 'Ukloni 👏' : 'Prikaži 👏'
                             }
                         </div>
                     </div>
@@ -447,12 +648,29 @@ const MainScreen = ({ history }) => {
 }
 
 const Home = props => {
+    const {
+        setShowFeedbackModal
+    } = useContext(DataContext);
+
     return (
-        // <div className="container">
         <div className="App">
             <MainScreen history={props.history} />
+            <div
+                className="feedbackContainer"
+                onClick={() => {
+                    setShowFeedbackModal(true);
+                }}
+            >
+                Tvoje mišljenje
+                <span
+                    className="ml-1"
+                    role="img"
+                    aria-label="feedback"
+                >
+                    📋
+                </span>
+            </div>
         </div>
-        // </div>
     );
 };
 

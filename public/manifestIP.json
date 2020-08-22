@@ -1,6 +1,6 @@
 {
-  "short_name": "Durango",
-  "name": "Durango",
+  "short_name": "Durango IP",
+  "name": "Durango IP",
   "icons": [
     {
       "src": "favicon.ico",
@@ -33,7 +33,7 @@
       "sizes": "2048x2048"
     }
   ],
-  "start_url": "/app",
+  "start_url": "/inputPanel",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",

@@ -28,12 +28,12 @@ import Reserve from '../Screens/Reserve';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 /* Context */
-import DataContext, { DataProvider } from '../Context/dataContext';
+import DataContext from '../Context/dataContext';
 
 const routes = [
-    { path: '/durango/app/:id', name: 'Details', Component: Details },
-    { path: '/durango/app/:id/more', name: 'MoreDetails', Component: MoreDetails },
-    { path: '/durango/app/:id/reserve', name: 'Reserve', Component: Reserve },
+    { path: '/app/:id', name: 'Details', Component: Details },
+    { path: '/app/:id/more', name: 'MoreDetails', Component: MoreDetails },
+    { path: '/app/:id/reserve', name: 'Reserve', Component: Reserve },
 ]
 
 const ObjectProfileStackOfScreens = (props) => {
@@ -43,7 +43,15 @@ const ObjectProfileStackOfScreens = (props) => {
     const [data, setData] = useState();
 
     useEffect(() => {
+        if(!Data || !Data.length) {
+            return;
+        };
+
         let findData = { ..._.find(Data, { 'id': id }) };
+
+        if (!findData || !findData.id) {
+            props.history.push('/app/home');
+        }
 
         setData(findData);
     }, [Data]);
@@ -51,56 +59,62 @@ const ObjectProfileStackOfScreens = (props) => {
     const getBackURL = () => {
         const { history: { location: { pathname } } } = props;
 
+        if(!data || !data.id) {
+            return `/app/home`;
+        };
+
         let splitted = pathname.split('/');
 
         if (['more', 'reserve'].indexOf(splitted[splitted.length - 1]) !== -1) {
-            return `/durango/app/${data.id}`;
+            return `/app/${data.id}`;
         } else {
-            return `/durango/app/home`;
+            return `/app/home`;
         }
+    }
+
+    const restOfPage = () => {
+        return (
+            <Fragment>
+                <div className="container">
+                    <TransitionGroup>
+                        <CSSTransition
+                            in={true}
+                            timeout={300}
+                            classNames="page"
+                            unmountOnExit
+                            key={props.history.location.key} // Bez ovoga neće!
+                        >
+                            <Switch location={props.history.location}>
+                                {
+                                    routes.map(({ path, Component }) => (
+                                        <Route
+                                            key={path}
+                                            exact
+                                            path={path}
+                                            render={
+                                                ({ match }) => (
+                                                    <div className="page" style={{ maxWidth: '600px' }}>
+                                                        <Component history={props.history} data={data} />
+                                                    </div>
+                                                )
+                                            }
+                                        />
+                                    ))
+                                }
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
+                </div>
+                <Claps data={data} history={props.history} />
+            </Fragment>
+        )
     }
 
     return (
         <Fragment>
+            <DetailsHeader history={props.history} back={getBackURL()} showAvatar />
             {
-                data && <DetailsHeader history={props.history} back={getBackURL()} />
-            }
-            <div className="container">
-                <TransitionGroup>
-                    <CSSTransition
-                        in={true}
-                        timeout={300}
-                        classNames="page"
-                        unmountOnExit
-                        key={props.history.location.key} // Bez ovoga neće!
-                    >
-                        <Switch location={props.history.location}>
-                            {
-                                routes.map(({ path, Component }) => (
-                                    <Route
-                                        key={path}
-                                        exact
-                                        path={path}
-                                        render={
-                                            ({ match }) => (
-                                                <div className="page">
-                                                    <Component history={props.history} />
-                                                </div>
-                                            )
-                                        }
-                                    />
-                                ))
-                            }
-                        </Switch>
-                    </CSSTransition>
-                </TransitionGroup>
-            </div>
-
-            {/* <Route key={2} exact path="/durango/app/:id" component={Details} />
-                <Route key={3} exact path="/durango/app/:id/more" component={MoreDetails} />
-                <Route key={4} exact path="/durango/app/:id/reserve" component={Reserve} /> */}
-            {
-                !loading && data && <Claps data={data} history={props.history} />
+                !loading && data && data.id && restOfPage()
             }
         </Fragment>
     )

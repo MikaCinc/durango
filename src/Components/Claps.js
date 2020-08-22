@@ -8,6 +8,11 @@ import React, {
 
 /* Libraries */
 import _ from 'lodash';
+import { getApiUrl } from '../library/common';
+import ReactGA from 'react-ga';
+
+/* Icons */
+import Img from '../CustomIcons/clapsModal.png';
 
 /* webComponent */
 import 'emoji-slider';
@@ -20,34 +25,46 @@ import RubberBand from 'react-reveal/RubberBand';
 import { Spring } from 'react-spring/renderprops';
 
 /* Context */
-import DataContext, { DataProvider } from '../Context/dataContext';
+import DataContext from '../Context/dataContext';
 
-const Claps = ({ history, data, data: { details, details: { totalClaps, numberOfGrades } } }) => {
-    const { changeData, User, User: { Claps }, changeClaps } = useContext(DataContext);
-
-    const userAplauza = () => {
-        let obj = _.find(Claps, { ID: data.id });
-        if (!obj) {
-            return 0;
-        }
-
-        return obj.userAplauza;
-    };
+const Claps = ({ data, data: { details: { totalClaps } } }) => {
+    const { User, setUser, setShowLoginModal, setErrorModalMessage } = useContext(DataContext);
 
     const [showSlider, setShowSlider] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [localClaps, setLocalClaps] = useState(0);
+    const [userClaps, setUserClaps] = useState(0);
 
     const slider = useRef(null);
     let interval;
 
+    const userClapsFunction = () => {
+        if (!User || !User.id) {
+            return;
+        }
+
+        let obj = _.find(User.claps, { id: data.id });
+        if (!obj || !obj.id) {
+            return 0;
+        }
+
+        return obj.userClaps;
+    };
+
     useEffect(() => {
-        slider.current.addEventListener('change', (e) => {
+        setUserClaps(userClapsFunction());
+    }, [User]);
+
+    useEffect(() => {
+        let sCurrent = slider.current;
+        sCurrent.addEventListener('change', (e) => {
+
+            //@todo Ovde treba debouncer neki
             onChange(e.detail.value);
         });
 
         return () => {
-            slider.current.removeEventListener('change', (e) => {
+            sCurrent.removeEventListener('change', (e) => {
                 onChange(e.detail.value);
             });
             clearTimeout(interval);
@@ -55,7 +72,7 @@ const Claps = ({ history, data, data: { details, details: { totalClaps, numberOf
     }, []);
 
     const onChange = (value) => {
-        if (userAplauza() > 0) {
+        if (userClaps > 0) {
             setShowModal(true);
             return;
         } else {
@@ -65,8 +82,6 @@ const Claps = ({ history, data, data: { details, details: { totalClaps, numberOf
     }
 
     useEffect(() => {
-        let interval;
-
         if (localClaps > 0) {
             clearTimeout(interval);
             interval = setTimeout(() => {
@@ -82,24 +97,48 @@ const Claps = ({ history, data, data: { details, details: { totalClaps, numberOf
     const finishedRating = () => {
         setShowSlider(false);
 
-        // Update caffe
-        changeData({
-            ...data,
-            details: {
-                ...details,
-                totalClaps: totalClaps + localClaps,
-                numberOfGrades: userAplauza() === 0 ? numberOfGrades + 1 : numberOfGrades
-            }
+        let accessToken = localStorage.getItem('userAccessToken');
+        // let refreshToken = localStorage.getItem('userRefreshToken');
+
+        fetch(getApiUrl() + '/users/' + User.id + '/add-claps', {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+            }),
+            body: JSON.stringify({
+                id: data.id,
+                userClaps: localClaps
+            })
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            console.log(response);
+
+            setUser({
+                ...User,
+                ...response.data
+            });
+
+            localStorage.setItem('User', JSON.stringify({
+                ...User,
+                ...response.data
+            }));
+
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
         });
 
         // Update User object
-        changeClaps({
-            ID: data.id,
-            userAplauza: localClaps
-        });
+        /* changeClaps({
+            id: data.id,
+            userClaps: localClaps
+        }); */
     }
 
     const renderNumber = (num) => {
+        if (!num && num !== 0) return;
+
         return (
             <Spring
                 from={{ number: 100 }}
@@ -142,20 +181,27 @@ const Claps = ({ history, data, data: { details, details: { totalClaps, numberOf
                 <div
                     className="clapsTriggerContainer"
                     onClick={() => {
-                        if(!User || !User.ID) {
-                            history.push('/durango/app-login');
+                        ReactGA.event({
+                            category: 'Application',
+                            action: 'Claps',
+                            label: 'Claps trigger button clicked',
+                        });
+
+                        if (!User || !User.id) {
+                            setShowLoginModal(true);
+                            return;
                         }
 
-                        if (userAplauza() > 0) {
+                        if (userClaps > 0) {
                             setShowModal(true);
                             return;
                         }
                         setShowSlider(!showSlider);
                     }}
                 >
-                    <span>👏</span>
+                    <span role="img" aria-label="claps">👏</span>
                     {
-                        renderNumber(totalClaps)
+                        renderNumber(totalClaps) || '?'
                     }
                 </div>
             </div>
@@ -165,11 +211,13 @@ const Claps = ({ history, data, data: { details, details: { totalClaps, numberOf
                 centered
             >
                 <Modal.Body>
-                    <div className="reserveModalContainer" style={{ padding: '20px' }}>
-                        <h6 className="boldText">Hvala! Već si 👏 objektu {data.title}</h6>
-                        <p>Ukupno 👏: {data.details.totalClaps}</p>
-                        <p>Prosečno 👏: {(data.details.totalClaps / data.details.numberOfGrades).toPrecision(2)}</p>
-                        <p>Tvojih 👏: {userAplauza()}</p>
+                    <div className="modalContainer">
+                        <img src={Img} style={{ width: '125px' }} alt="icon"/>
+                        <h6 className="boldText">Hvala! Već si <span role="img" aria-label="claps">👏</span> objektu {data.title}.</h6>
+                        <p>Ukupno <span role="img" aria-label="claps">👏</span>: {data.details.totalClaps}</p>
+                        <p>Ukupno ocena: {data.details.numberOfGrades}</p>
+                        <p>Prosečno <span role="img" aria-label="claps">👏</span>: {data.details.numberOfGrades ? (data.details.totalClaps / data.details.numberOfGrades).toPrecision(2) : '0'}</p>
+                        <p>Tvojih <span role="img" aria-label="claps">👏</span>: {userClaps}</p>
                         <button
                             className="detailsRow clickableRow w-50"
                             onClick={() => {

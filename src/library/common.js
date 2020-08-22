@@ -45,22 +45,52 @@ import moment from 'moment';
 //     return false;
 // }
 
-function isOpen(workingHours, day = moment()) {
+function getMomentForTime(time, day = moment()) {
+    const [hours, minutes] = time.split(":");
+    return moment(day).set({ hours, minutes, seconds: 0, millisecond: 0 });
+}
 
-    /*@todo Pošto sada imamo array treba da se sredi da posle 00:00 gleda closing time od prethodnog dana */
+const getTodaysWorkingHours = (workingHours) => {
+    let dayOfTheWeek = moment().isoWeekday() - 1;
+    let dayBefore = dayOfTheWeek === 0 ? 6 : moment().isoWeekday() - 2;
+    if (!workingHours[dayBefore]) {
+        return workingHours[dayOfTheWeek];
+    }
+    let [dayBeforeOpeningTime, dayBeforeClosingTime] = workingHours[dayBefore].split(" - ");
 
+    let opening = getMomentForTime(dayBeforeOpeningTime);
+    let closing = getMomentForTime(dayBeforeClosingTime);
 
-    let [openingTime, closingTime] = workingHours.split(" - ");
-
-    function getMomentForTime(time, day) {
-        const [hours, minutes] = time.split(":");
-        return moment(day).set({ hours, minutes, seconds: 0, millisecond: 0 });
+    if (closing.isBefore(opening) && moment().isBefore(closing)) {
+        return workingHours[dayBefore];
     }
 
+    if (closing.isBefore(opening)) {
+        closing = moment(closing).add({ days: 1 });
+    }
+
+    if(moment().isBetween(opening, closing, null, "()")) {
+        return workingHours[dayBefore];
+    }
+
+    return workingHours[dayOfTheWeek];
+}
+
+function isOpen(workingHours, manuallyClosedFlag, day = moment()) {
+    if (manuallyClosedFlag || !workingHours) {
+        return false;
+    }
+
+    let todaysWorkingHours = getTodaysWorkingHours(workingHours);
+    if (!todaysWorkingHours) {
+        return false;
+    }
+
+    let [openingTime, closingTime] = todaysWorkingHours.split(" - ");
     let opening = getMomentForTime(openingTime, day);
     let closing = getMomentForTime(closingTime, day);
 
-    //! Ako je isti openign i closing, odna je 24h open, treba handluejs i ovaj case.
+    //! Ako je isti openign i closing, onda je 24h open, treba handluejs i ovaj case.
     if (closing.isSame(opening)) {
         // return "24/7";
         return true;
@@ -85,7 +115,74 @@ const roundToPrecision = (x, precision) => {
     return y - (y % (precision === undefined ? 1 : +precision));
 }
 
+function compareKeys(a, b) {
+    var aKeys = Object.keys(a).sort();
+    var bKeys = Object.keys(b).sort();
+    return JSON.stringify(aKeys) === JSON.stringify(bKeys);
+}
+
+const FLAGS = {
+    DEV: false,
+    LIVE: true
+};
+
+const getApiUrl = () => {
+    const URLs = {
+        DEV: 'https://durango.devffwd.nl/api/v1',
+        LIVE: 'https://durango.rs/api/v1'
+    };
+
+    if (FLAGS.DEV) {
+        return URLs.DEV;
+    };
+
+    if (FLAGS.LIVE) {
+        return URLs.LIVE;
+    }
+
+    return URLs.DEV;
+}
+
+const getSocketUrl = () => {
+    const URLs = {
+        DEV: 'https://durango.devffwd.nl:3000/',
+        LIVE: 'https://durango.rs:8080/'
+    };
+
+    if (FLAGS.DEV) {
+        return URLs.DEV;
+    };
+
+    if (FLAGS.LIVE) {
+        return URLs.LIVE;
+    }
+
+    return URLs.DEV;
+}
+
+const getGAid = () => {
+    const URLs = {
+        DEV: 'UA-169243209-1',
+        LIVE: 'UA-169243209-2'
+    };
+
+    if (FLAGS.DEV) {
+        return URLs.DEV;
+    };
+
+    if (FLAGS.LIVE) {
+        return URLs.LIVE;
+    }
+
+    return URLs.DEV;
+}
+
 export {
     isOpen,
-    roundToPrecision
+    getTodaysWorkingHours,
+    roundToPrecision,
+    compareKeys,
+    getApiUrl,
+    getSocketUrl,
+    getGAid
 }

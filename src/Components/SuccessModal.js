@@ -4,9 +4,10 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 
 /* Logo */
-import Img from '../CustomIcons/workInProgress.png';
+import Img from '../CustomIcons/successModal.png';
 
-const ComingSoonModal = ({ show, onHide }) => {
+const SuccessModal = ({ show, onHide, message }) => {
+
     return (
         <Modal
             show={show}
@@ -15,10 +16,9 @@ const ComingSoonModal = ({ show, onHide }) => {
         >
             <Modal.Body>
                 <div className="modalContainer">
-                    <img src={Img} style={{width: '125px'}} alt="icon" />
-                    <h6 className="boldText">Naš tim aktivno radi na ovoj funkciji</h6>
-                    <p style={{marginBottom: '0px'}}>Biće dostupna u nekom od narednih ažuriranja.</p>
-                    <p>Hvala na strpljenju!</p>
+                    <img src={Img} style={{ width: '125px' }} alt="icon" />
+                    <h6 className="boldText">Uspešno!</h6>
+                    <p>{message}</p>
                     <button
                         className="detailsRow clickableRow w-50"
                         onClick={() => {
@@ -33,4 +33,4 @@ const ComingSoonModal = ({ show, onHide }) => {
     )
 }
 
-export default ComingSoonModal;
+export default SuccessModal;

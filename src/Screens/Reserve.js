@@ -1,6 +1,5 @@
 /* React */
 import React, {
-    useEffect,
     useState,
     useContext,
     Fragment
@@ -9,7 +8,6 @@ import React, {
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
-import { useParams } from "react-router-dom";
 
 /* Logo */
 import Logo from '../ExtendedLogo/Logo.png';
@@ -26,28 +24,10 @@ import TimePicker from 'react-time-picker'
 import { Modal } from 'react-bootstrap';
 
 /* Context */
-import DataContext, { DataProvider } from '../Context/dataContext';
+import DataContext from '../Context/dataContext';
 
-const placeholderObj = {
-    id: 0,
-    title: '',
-    logo: '',
-    totalSpots: 0,
-    freeSpots: 0,
-    details: {
-        description: '',
-        images: '',
-        workingHours: '',
-        location: '',
-        menu: ''
-    }
-}
-
-function Reserve(props) {
-    let { id } = useParams();
-    const { Data, loading, fastReserve, User } = useContext(DataContext);
-
-    const [data, setData] = useState({ ...placeholderObj });
+const Reserve = ({ data, history }) => {
+    const { loading, fastReserve, User, setShowComingSoonModal } = useContext(DataContext);
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(moment().add(15, 'minutes').format('HH:mm'));
     const [seats, setSeats] = useState(5);
@@ -56,12 +36,6 @@ function Reserve(props) {
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
-
-    useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': id}) || placeholderObj };
-
-        setData(findData);
-    }, [Data]);
 
     const restOfPage = () => {
         return (
@@ -137,7 +111,8 @@ function Reserve(props) {
                 <div
                     className="detailsRow clickableRow"
                     onClick={() => {
-                        handleShow(true);
+                        setShowComingSoonModal(true);
+                        // handleShow(true);
                     }}
                 >
                     <h1 className="detailRowText boldText">Rezerviši</h1>
@@ -146,7 +121,7 @@ function Reserve(props) {
                 <div
                     className="detailsRow clickableRowCancel"
                     onClick={() => {
-                        props.history.push(`/durango/app/${data.id}`);
+                        history.push(`/app/${data.id}`);
                     }}
                 >
                     <h1 className="detailRowText boldText">Otkaži</h1>
@@ -158,10 +133,10 @@ function Reserve(props) {
                     centered
                 >
                     <Modal.Body>
-                        <div className="reserveModalContainer">
-                            <img src={Logo} className="reserveModalLogo"/>
-                            <h3 className="boldText reserveModalTitle">Konobar je odobrio!</h3>
-                            <p className="reserveModalExplanation">
+                        <div className="modalContainer">
+                            <img src={Logo} className="modalLogo" />
+                            <h3 className="boldText modalTitle">Konobar je odobrio!</h3>
+                            <p className="modalExplanation">
                                 Vaša rezervacija u objektu '{data.title}' je uspešno obavljena.
                     Ne zaboravite da se pojavite najkasnije do {time}.
                     </p>
@@ -169,7 +144,7 @@ function Reserve(props) {
                                 className="detailsRow clickableRow w-50"
                                 onClick={() => {
                                     handleClose();
-                                    props.history.push(`/durango/app/${data.id}`);
+                                    history.push(`/app/${data.id}`);
                                     fastReserve(data.id, time);
                                 }}
                             >
@@ -183,7 +158,7 @@ function Reserve(props) {
     }
 
     return (
-        !loading && restOfPage()
+        restOfPage()
     );
 }
 

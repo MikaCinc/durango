@@ -7,18 +7,17 @@ import React, {
 
 /* Libraries */
 import _ from 'lodash';
-import moment from 'moment';
+import { getApiUrl } from '../library/common';
 
 /* Components */
 import IPHeader from '../Components/IPHeader';
-import AbsoluteWrapper from '../Components/AbsoluteWrapper';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 /* Router */
 import {
     useParams,
     Route,
     Switch,
-    __RouterContext
 } from "react-router-dom";
 
 /* Pages / Screens */
@@ -33,41 +32,130 @@ import Zoom from 'react-reveal/Zoom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 /* Context */
-import ObjectContext, { ObjectProvider } from '../Context/objectContext';
+import ObjectContext from '../Context/objectContext';
 
 const routes = [
-    { path: '/durango/inputPanel/:id', Component: Restaurant },
-    { path: '/durango/inputPanel/:id/settings', Component: ObjectSettings },
+    { path: '/inputPanel/:id', Component: Restaurant },
+    { path: '/inputPanel/:id/settings', Component: ObjectSettings },
 ]
 
 const InputPanelStackOfScreens = (props) => {
     let { id } = useParams();
 
-    const { Data, loading } = useContext(ObjectContext);
-    const [data, setData] = useState();
-    const [volume, setVolume] = useState(2);
+    const { data, setData, setShowObjectManuallyOpenCloseModal, refreshTokenFunction, setErrorModalMessage } = useContext(ObjectContext);
+    const [volume, setVolume] = useState();
 
     useEffect(() => {
-        if (!Data || !Data.length) {
+        if (!id || !data || !data.id) {
             return;
         }
-        if (!id) {
-            props.history.push('/durango/inputPanel/login');
-        }
 
-        let findData = { ..._.find(Data, { 'id': id }) };
-
-        if (!findData.id) {
-            props.history.replace(`/durango/inputPanel/login`);
-        } else {
-            setData(findData);
-            props.history.replace(`/durango/inputPanel/${findData.id}`);
-        }
-    }, [Data]);
+        setVolume(data.details.volume);
+    }, [data]);
 
     useEffect(() => {
-        // Request na server
+        if (!data || !data.id) {
+            return;
+        };
+
+        if (volume === data.details.volume) {
+            return;
+        }
+
+        postNewVolume();
     }, [volume]);
+
+    const postNewVolume = () => {
+        let accessToken = localStorage.getItem('durangoAccessToken');
+        if (!accessToken) {
+            props.history.push('/inputPanel/login');
+        }
+
+        const obj = {
+            details: {
+                volume
+            }
+        };
+
+        fetch(getApiUrl() + '/places/' + data.id, {
+            method: 'POST',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            }),
+            mode: 'cors',
+            body: JSON.stringify({ ...obj })
+        }).then(response => {
+            return response.json();
+        }).then(({ data, error, message }) => {
+            if (error && data.tokenExpired) {
+                refreshTokenFunction(postNewVolume);
+                return;
+            }
+
+            if (error) {
+                setErrorModalMessage(message);
+                return;
+            }
+            setData({
+                ...data
+            });
+        }).catch(({ message }) => {
+            console.log('error', message);
+            setErrorModalMessage(message);
+        });
+    }
+
+    const renderOpenCloseButton = () => {
+        let label = data.isManualyClosed
+            ? 'Otvori'
+            : 'Zatvori';
+        let tooltip = data.isManualyClosed
+            ? 'Otvorite kafić da bi korisnici mogli da vide broj slobodnih mesta'
+            : 'Koristiti ovo dugme samo u slučaju vanrednog prestanka rada kafića(npr. renoviranje).';
+        let className = data.isManualyClosed
+            ? 'IP-Settings-Open-Object'
+            : 'IP-Settings-Close-Object';
+
+        return (
+            <Zoom left>
+                <div className="IP-zatvoriOtvoriContainer">
+                    <OverlayTrigger
+                        placement={'top'}
+                        overlay={
+                            <Tooltip id={`tooltip-top`}>
+                                {tooltip}
+                            </Tooltip>
+                        }
+                    >
+                        <button
+                            className={className}
+                            onClick={() => setShowObjectManuallyOpenCloseModal(true)}
+                        >
+                            {label}
+                        </button>
+                    </OverlayTrigger>
+                </div>
+            </Zoom >
+        )
+    }
+
+    const getVolumeTooltip = (level) => {
+        switch (level) {
+            case 'Tiho': {
+                return 'U objektu je tiha muzika, pogodna za razgovore i sastanke.';
+            };
+            case 'Umereno': {
+                return 'U objektu je umereno glasna muzika, pogodna za ćaskanje sa društvom';
+            };
+            case 'Glasno': {
+                return 'U objektu je glasna muzika, pogodnija za žurke i svirke.';
+            };
+            default: {
+                return '';
+            }
+        }
+    }
 
     const renderFixedButtons = () => {
         if (!data || !data.id) return null;
@@ -82,21 +170,31 @@ const InputPanelStackOfScreens = (props) => {
 
         return (
             <Fragment>
-                <div className="IP-zatvoriOtvoriContainer">Zatvori</div>
-                <Zoom bottom cascade>
+                {renderOpenCloseButton()}
+                <Zoom bottom>
                     <div className="IP-volumeContainer">
                         {
                             ['Tiho', 'Umereno', 'Glasno'].map((level, i) => {
                                 return (
-                                    <button
+                                    <OverlayTrigger
                                         key={level}
-                                        className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
-                                        onClick={() => {
-                                            setVolume(i + 1);
-                                        }}
+                                        placement={'top'}
+                                        overlay={
+                                            <Tooltip id={`tooltip-top`}>
+                                                {getVolumeTooltip(level)}
+                                            </Tooltip>
+                                        }
                                     >
-                                        {level}
-                                    </button>
+                                        <button
+                                            key={level}
+                                            className={`IP-volume-level ${volume === i + 1 ? 'IP-volume-active' : ''}`}
+                                            onClick={() => {
+                                                setVolume(i + 1);
+                                            }}
+                                        >
+                                            {level}
+                                        </button>
+                                    </OverlayTrigger>
                                 )
                             })
                         }
@@ -106,44 +204,54 @@ const InputPanelStackOfScreens = (props) => {
         )
     }
 
+    const restOfPage = () => {
+        return (
+            <Fragment>
+                {
+                    <IPHeader history={props.history} dataFromStack={data} />
+                }
+                <div className="container">
+                    <TransitionGroup>
+                        <CSSTransition
+                            in={true}
+                            timeout={300}
+                            classNames="page"
+                            unmountOnExit
+                            key={props.history.location.key} // Bez ovoga neće!
+                        >
+                            <Switch location={props.history.location}>
+                                {
+                                    routes.map(({ path, Component }) => (
+                                        <Route
+                                            key={path}
+                                            exact
+                                            path={path}
+                                            render={
+                                                ({ match }) => (
+                                                    <div className="page">
+                                                        <Component match={match} history={props.history} />
+                                                        {
+                                                            renderFixedButtons()
+                                                        }
+                                                    </div>
+                                                )
+                                            }
+                                        />
+                                    ))
+                                }
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
+                </div>
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
             {
-                <IPHeader history={props.history} dataFromStack={data} />
+                data && data.id && restOfPage()
             }
-            <div className="container">
-                <TransitionGroup>
-                    <CSSTransition
-                        in={true}
-                        timeout={300}
-                        classNames="page"
-                        unmountOnExit
-                        key={props.history.location.key} // Bez ovoga neće!
-                    >
-                        <Switch location={props.history.location}>
-                            {
-                                routes.map(({ path, Component }) => (
-                                    <Route
-                                        key={path}
-                                        exact
-                                        path={path}
-                                        render={
-                                            ({ match }) => (
-                                                <div className="page">
-                                                    <Component match={match} history={props.history} dataFromStack={data} />
-                                                    {
-                                                        renderFixedButtons()
-                                                    }
-                                                </div>
-                                            )
-                                        }
-                                    />
-                                ))
-                            }
-                        </Switch>
-                    </CSSTransition>
-                </TransitionGroup>
-            </div>
         </Fragment>
     )
 }

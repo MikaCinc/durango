@@ -1,80 +1,117 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+    useState,
+    useEffect,
+    Fragment,
+    useContext
+} from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import { Fade, Zoom } from 'react-reveal';
 
-/* Data */
-import User from '../../data/user';
+/* Library */
+import { getApiUrl } from '../../library/common';
+import ReactGA from 'react-ga';
 
 /* Logo */
-import Logo from '../../ExtendedLogo/Logo.png';
+import Logo from '../../ExtendedLogo/LogoBetaV3.png';
+
+/* Context */
+import DataContext from '../../Context/dataContext';
 
 const LoginScreen = props => {
+    const { User, setUser, startRefreshInterval, setErrorModalMessage } = useContext(DataContext);
+
     const [isSuccess, setIsSuccess] = useState(false);
     const [profileImage, setProfileImage] = useState('');
     const [profileName, setProfileName] = useState('');
 
     useEffect(() => {
-        let UserLoc = JSON.parse(localStorage.getItem('User')),
-            timeout = null;
+        let UserLoc = JSON.parse(localStorage.getItem('User'));
+        let accessToken = localStorage.getItem('userAccessToken');
+        let refreshToken = localStorage.getItem('userRefreshToken');
 
-        if (!UserLoc) {
-            return;
-        }
-
-        function compareKeys(a, b) {
-            var aKeys = Object.keys(a).sort();
-            var bKeys = Object.keys(b).sort();
-            return JSON.stringify(aKeys) === JSON.stringify(bKeys);
-        }
-
-        if (!compareKeys(User, UserLoc)) {
+        if (!UserLoc || !accessToken || !refreshToken) {
             localStorage.removeItem('User');
             return;
         }
 
-        if (UserLoc && UserLoc.ID) {
-            setProfileImage(UserLoc.imageUrl)
-            setProfileName(UserLoc.Name)
+        if (UserLoc && UserLoc.id && accessToken) {
+            setProfileImage(UserLoc.imageUrl);
+            setProfileName(UserLoc.name);
             setIsSuccess(true);
-            timeout = setTimeout(() => {
-                // props.setAuthorized(true);
-                props.history.push('/durango/app/home');
-            }, 2000);
-        }
-
-        return () => {
-            clearTimeout(timeout);
+            setTimeout(() => {
+                if (props.history.length > 2) {
+                    props.history.goBack();
+                } else {
+                    props.history.push('/app/home');
+                }
+            }, 1500);
         }
 
     }, []);
 
     const responseGoogleSuccess = (response) => {
         // console.log(response)
-        setIsSuccess(true);
-        setProfileImage(response.profileObj.imageUrl)
-        setProfileName(response.profileObj.name)
+        ReactGA.event({
+            category: 'Application',
+            action: 'Login',
+            label: 'Logged in with Google',
+        });
 
         let obj = {
             ...User,
-            ID: response.profileObj.googleId,
-            Email: response.profileObj.email,
+            id: response.profileObj.googleId,
+            email: response.profileObj.email,
             imageUrl: response.profileObj.imageUrl,
-            Name: response.profileObj.name,
+            name: response.profileObj.name,
         };
 
-        localStorage.setItem('User', JSON.stringify(obj));
+        fetch(getApiUrl() + '/users/login/google', {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify({
+                id_token: response.tokenId
+            })
+        }).then((response) => {
+            return response.json();
+        }).then(({ data }) => {
+            console.log(data);
 
-        setTimeout(() => {
-            // props.setAuthorized(true);
-            props.history.push('/durango/app/home')
-        }, 2000);
+            let finalizedUserObject = {
+                ...obj,
+                ...data.user,
+            };
+
+            setUser(finalizedUserObject);
+
+            localStorage.setItem('userAccessToken', data.token.accessToken);
+            localStorage.setItem('userRefreshToken', data.token.refreshToken);
+            localStorage.setItem('User', JSON.stringify(finalizedUserObject));
+
+            // This shows only locally on Login screen
+            setProfileImage(response.profileObj.imageUrl);
+            setProfileName(response.profileObj.name);
+            setIsSuccess(true);
+
+            startRefreshInterval();
+
+            setTimeout(() => {
+                if (props.history.length > 2) {
+                    props.history.goBack();
+                } else {
+                    props.history.push('/app/home');
+                }
+            }, 1500);
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
+        });
     }
 
     const responseGoogleFailure = (response) => {
         // console.log(response)
-        alert('Something is wrong with Google login');
+        setErrorModalMessage('Something is wrong with Google login');
     }
 
     const responseFacebook = (response) => {
@@ -84,7 +121,7 @@ const LoginScreen = props => {
         setProfileName(response.name)
         setTimeout(() => {
             // props.setAuthorized(true);
-            props.history.push('/durango/app/home')
+            props.history.push('/app/home')
         }, 2000)
     }
 
@@ -96,7 +133,7 @@ const LoginScreen = props => {
             delay={500}
             duration={1000}
         >
-            <img className="loginLogo" src={Logo} />
+            <img className="loginLogo" src={Logo} alt="logo" />
         </Fade>
         <p className="loginParagraph">Najlakši način za pregled broja slobodnih mesta u kafiću ili restoranu!</p>
         <Zoom
@@ -108,6 +145,7 @@ const LoginScreen = props => {
                 <img
                     className="loginProfileImageLoaded"
                     src={profileImage}
+                    alt="your profile"
                 />
                 <p className="loginParagraph">{profileName}</p>
             </div>
@@ -115,7 +153,8 @@ const LoginScreen = props => {
         {
             !isSuccess && <Fragment>
                 <GoogleLogin
-                    clientId="873302302315-mv8lh0772kbe55nvh687qpv8ddvlv9t0.apps.googleusercontent.com"
+                    // clientId="873302302315-mv8lh0772kbe55nvh687qpv8ddvlv9t0.apps.googleusercontent.com"
+                    clientId="1013140890804-2t170dtn07vsb7usp9lklbto79r8j52v.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={responseGoogleSuccess}
                     onFailure={responseGoogleFailure}
@@ -129,6 +168,7 @@ const LoginScreen = props => {
                             <img
                                 className="google-icon"
                                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                                alt="google logo"
                             />
                             <p className="google-text"><b>Sign in with Google</b></p>
                         </div>
@@ -149,14 +189,12 @@ const LoginScreen = props => {
                                 <img
                                     className="facebook-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/267px-F_icon.svg.png"
+                                    alt="facebook logo"
                                 />
                                 <p className="facebook-text"><b>Sign in with Facebook</b></p>
                             </div>
                         )
                     }
-                    /* onClick={(nesto) => {
-                        console.log('nesto', nesto)
-                    }} */
                     callback={responseFacebook}
                     onFailure={() => {
                         console.log('Something is wrong with Facebook sign in')
@@ -166,7 +204,5 @@ const LoginScreen = props => {
         }
     </div>;
 };
-
-LoginScreen.propTypes = {};
 
 export default LoginScreen;

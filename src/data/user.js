@@ -1,18 +1,18 @@
 let User = {
-    ID: '',
-    Name: '',
-    Email: '',
+    id: '',
+    name: '',
+    email: '',
     imageUrl: '',
-    Location: '',
-    Permissions: {
+    location: '',
+    permissions: {
         canReserve: true,
     },
-    Reservation: {
-        ID: null,
-        Time: '',
+    reservation: {
+        id: null,
+        time: '',
     },
-    Claps: [],
-    Favourites: []
+    claps: [],
+    favourites: []
 };
 
 export default User;

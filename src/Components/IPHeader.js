@@ -2,17 +2,17 @@ import React, {
     useEffect,
     useState,
     Fragment,
-    useContext
 } from 'react';
 
 /* Libraries */
 import moment from 'moment';
 import _ from 'lodash';
 
+/* Components */
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 /* Router */
 import {
-    useParams,
-    __RouterContext,
     useHistory,
 } from "react-router-dom";
 
@@ -22,9 +22,6 @@ import Logo from '../ExtendedLogo/Logo.png';
 /* Icons */
 import BackArrow from '../icons/backArrow.svg';
 import GearOutlineBlue from '../icons/gearOutlineBlue.svg';
-
-/* Context */
-import ObjectContext, { ObjectProvider } from '../Context/objectContext';
 
 const IPHeader = (props) => {
     let history = useHistory();
@@ -69,7 +66,7 @@ const IPHeader = (props) => {
                 <div
                     className="goBack"
                     onClick={() => {
-                        history.push(`/durango/inputPanel/${data.id}`);
+                        history.push(`/inputPanel/${data.id}`);
                     }}
                 >
                     <img src={BackArrow} className="svgIconBigger" />
@@ -93,13 +90,22 @@ const IPHeader = (props) => {
             return null;
         } else {
             return (
-                <img
-                    src={GearOutlineBlue}
-                    className="svgIconBigger IP-settings-icon"
-                    onClick={() => {
-                        history.push('/durango/inputPanel/' + data.id + '/settings');
-                    }}
-                />
+                <OverlayTrigger
+                    placement={'bottom'}
+                    overlay={
+                        <Tooltip id={`tooltip-top`}>
+                            Podesi parametre kafića
+                        </Tooltip>
+                    }
+                >
+                    <img
+                        src={GearOutlineBlue}
+                        className="svgIconBigger IP-settings-icon"
+                        onClick={() => {
+                            history.push('/inputPanel/' + data.id + '/settings');
+                        }}
+                    />
+                </OverlayTrigger>
             );
         }
     }

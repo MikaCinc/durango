@@ -1,92 +1,98 @@
 import React, { useEffect, useState, useContext } from 'react';
 
 /* Libraries */
-import moment from 'moment';
-import _ from 'lodash';
-import { isOpen } from '../../library/common';
+import { getApiUrl } from '../../library/common';
 import Particles from 'react-particles-js';
-
-/* Router */
-import { useParams } from "react-router-dom";
-
-/* Default Logo */
-import defaultLogo from '../../CustomIcons/defaultLogo.png';
 
 /* Data */
 import Logo from '../../ExtendedLogo/Logo.png';
-import kafici from '../../data/kafici';
 
 /* Context */
-import ObjectContext, { ObjectProvider } from '../../Context/objectContext';
+import ObjectContext from '../../Context/objectContext';
 
 const ObjectLogin = ({ history }) => {
-
-    const { setID, loading, Data } = useContext(ObjectContext);
-
-    const [title, setTitle] = useState("");
-    const [key, setKey] = useState("");
-    const [id, setId] = useState("");
-    const [email, setEmail] = useState("");
+    const { setLoading, setAuthorized, email, setEmail, setData, startRefreshInterval, setErrorModalMessage } = useContext(ObjectContext);
     const [password, setPassword] = useState("");
 
-    const entering = () => {
-        if (!id) return;
-
-        let findData = { ..._.find(Data, { 'id': id }) };
-
-        if (!findData.id) {
-            alert("Nije pronađen objekat sa ovim ID-em");
-        } else {
-            history.replace(`/durango/inputPanel/${findData.id}`);
+    useEffect(() => {
+        // @todo ako uđe na login a već je ulogovan
+        let localEmail = localStorage.getItem('durangoEmail');
+        let localPassword = localStorage.getItem('durangoPassword');
+        if (localEmail) {
+            setEmail(localEmail);
         }
-    }
+        if (localPassword) {
+            setPassword(localPassword);
+        }
+    }, [setEmail]);
 
-    const loginObject = () => {
-        if(!email || !password) return;
+    const loginObject = (e) => {
+        e.preventDefault();
+        if (!email || !password) return;
 
         let cred = {
             email,
             password
-        }
+        };
 
-        fetch('http://durango.devffwd.nl:3000/api/places/login', {
+        fetch(getApiUrl() + '/places/login', {
             method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
             body: JSON.stringify(cred)
         }).then((response) => {
             return response.json();
-        }).then((data) => {
-            console.log(data)
+        }).then(({ data: { place, token } }) => {
+            if(!place || !place.id || !token) {
+                setErrorModalMessage('Uneli ste pogrešan email ili password');
+                return;
+            }
+            if (place.id && token.accessToken) {
+                setData(place);
+                // setAccessToken(token.accessToken);
+                // setRefreshToken(token.refreshToken);
+                localStorage.setItem('durangoAccessToken', token.accessToken);
+                localStorage.setItem('durangoRefreshToken', token.refreshToken);
+                localStorage.setItem('durangoEmail', email);
+                localStorage.setItem('durangoPassword', password);
+
+                setAuthorized(true);
+                setLoading(false);
+
+                startRefreshInterval();
+                history.push('/inputPanel/' + place.id);
+            }
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
         });
     }
 
     return (
         <div className="IP-Login">
-            <div className="IP-LoginForm">
-                <img src={Logo} className="IP-Login-Logo" />
-                {/* <p>Naziv objekta</p>
-                <input className="IP-Login-Input" type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} />
-                <p>Key</p>
-                <input className="IP-Login-Input" type="text" value={key} onChange={(e) => { setKey(e.target.value) }} /> */}
+            <form className="IP-LoginForm" onSubmit={loginObject}>
+                <img src={Logo} className="IP-Login-Logo" alt="logo" />
                 <p>Email:</p>
-                <input className="IP-Login-Input" type="text" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                <input className="IP-Login-Input" type="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
                 <p>Password:</p>
-                <input className="IP-Login-Input" type="text" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                <input className="IP-Login-Input" type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
                 <button
-                    className="IP-input-imaMesta IP-clickable"
-                    onClick={() => {
-                        // history.push('/durango/inputPanel/' + id);
-                        entering();
+                    className="detailsRow clickableRow w-75"
+                    type="submit"
+                    style={{
+                        marginTop: '10px',
+                        marginBottom: '0px',
                     }}
                 >
-                    Udji
+                    <h1 className="detailRowText boldText">Uloguj se</h1>
                 </button>
-            </div>
+            </form>
             <Particles
                 canvasClassName="IP-Login-Particles"
                 params={{
                     particles: {
                         number: {
-                            value: 200,
+                            value: 100,
                             density: {
                                 enable: true,
                                 value_area: 1000,

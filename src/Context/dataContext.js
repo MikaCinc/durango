@@ -8,12 +8,18 @@ import React, {
 import kafici from '../data/kafici';
 import UserMock from '../data/user';
 
+import openSocket from 'socket.io-client';
+
 /* Components */
 import ComingSoonModal from '../Components/ComingSoonModal';
+import ErrorModal from '../Components/ErrorModal';
+import SuccessModal from '../Components/SuccessModal';
+import LoginModal from '../Components/LoginModal';
+import FeedbackModal from '../Components/FeedbackModal';
 
 /* Packages & libraries */
-import _ from 'lodash';
-import { isOpen } from '../library/common';
+import _, { filter } from 'lodash';
+import { isOpen, getApiUrl, getSocketUrl } from '../library/common';
 
 /* Router */
 import { useParams } from "react-router-dom";
@@ -23,13 +29,12 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import moment from 'moment';
 
-
 let DataContext;
+let refreshInterval;
 
 const { Provider, Consumer } = DataContext = React.createContext({});
 
 const DataProvider = (props) => {
-    // let { id } = useParams();
     // User
     const [User, setUser] = useState(
         {
@@ -43,72 +48,44 @@ const DataProvider = (props) => {
     const [search, setSearch] = useState('');
     const [filters, setFilters] = useState([]);
     // Sorted
+    const [sortBy, setSortBy] = useState('spotsUpdatedAt');
     const [sortedOpen, setSortedOpen] = useState([]);
     const [sortedClosed, setSortedClosed] = useState([]);
-    // Current page/data
-    const [currentData, setCurrentData] = useState({});
-    // Coming soon modal
+    // Additional settings
+    const [info, setInfo] = useState('');
+    // Modals
     const [showComingSoonModal, setShowComingSoonModal] = useState(false);
+    const [ErrorModalMessage, setErrorModalMessage] = useState('');
+    const [SuccessModalMessage, setSuccessModalMessage] = useState('');
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
     // Timer za rezervaciju
     const [timer, setTimer] = useState(null);
 
     const [loading, setLoading] = useState(true);
-    // const [authorized, setAuthorized] = useState(false);
 
-    /* const updateFromServer = () => {
-        return fetch("/update/all")
-            .then(({ data }) => {
-                setLoading(false)
-                return setData([...data]);
-            })
-            .catch(({ message }) => {
-                return toast.error(message);
-            });
-    } */
-
-    const updateWithMockData = () => {
+    const updateFromServer = () => {
         let authorized = isAuthorized(),
             timeout;
 
-        if (authorized && User && User.ID) {
-            fetch('http://durango.devffwd.nl:3000/api/places')
-                .then(response => response.json())
-                .then(response => {
-                    const { data } = response;
-                    console.log(data)
-                    if (!data || !data.length) {
-                        console.log('nešto ga nema data');
-                        setData(kafici);
-                    } else {
-                        setTimeout(() => {
-                            setData(data);
-                        }, 1500)
-                        setData(data);
-                        setLoading(false);
-                    }
-                }).catch(({ message }) => {
-                    // Za sada ako bude greška postavi mockData
-                    //Doing this just to show loader for a little bit :)
-                    setTimeout(() => {
-                        setData(kafici);
-                        setLoading(false);
-                        alert('Učitan mockData, server vratio error')
-                    }, 1500)
-                    console.log('error', message);
-                });
-        } else {
-            props.history.push('/durango/app-login');
-        };
-
-
-        /* if (authorized && User && User.ID) {
-            timeout = setTimeout(() => {
-                setData(kafici);
+        fetch(getApiUrl() + '/places', { mode: 'cors' })
+            .then(response => response.json())
+            .then(response => {
+                const { data, message } = response;
+                if (!data || !data.length) {
+                    setLoading(false);
+                    setErrorModalMessage(message);
+                    // setData(kafici);
+                } else {
+                    setData(data);
+                    setLoading(false);
+                }
+            }).catch(({ message }) => {
+                // setData(kafici);
                 setLoading(false);
-            }, 1200)
-        } else {
-            props.history.push('/durango/app-login');
-        } */
+                setErrorModalMessage('Greška na serveru, pokušajte ponovo malo kasnije...')
+                console.error(message);
+            });
 
         return () => {
             clearTimeout(timeout);
@@ -116,37 +93,230 @@ const DataProvider = (props) => {
     }
 
     useEffect(() => {
-        updateWithMockData();
+        updateFromServer();
+
+        document.title = 'Durango';
+
+        const socket = openSocket(getSocketUrl());
+        const onChange = ({ id, ...rest }) => {
+            return setData((current) => current.map((item) => {
+                if (item.id === id) {
+                    return {
+                        ...item,
+                        ...rest
+                    }
+                }
+                return item;
+            }))
+        }
+        socket.on('freeSpotsChanged', onChange);
+
+        const onChangeVolume = ({ id, volume }) => {
+            return setData((current) => current.map((item) => {
+                if (item.id === id) {
+                    return {
+                        ...item,
+                        details: {
+                            ...item.details,
+                            volume
+                        }
+                    }
+                }
+                return item;
+            }))
+        }
+        socket.on('volumeChanged', onChangeVolume);
+
+        const onChangeTotalClaps = (data) => {
+            console.log(data)
+            return setData((current) => current.map((item) => {
+                if (item.id === data.id) {
+                    return {
+                        ...item,
+                        details: {
+                            ...item.details,
+                            totalClaps: data.totalClaps,
+                            numberOfGrades: data.numberOfGrades
+                        }
+                    }
+                }
+                return item;
+            }))
+        }
+        socket.on('totalClapsChanged', onChangeTotalClaps);
+
+        const onChangeClosed = ({ id, isManualyClosed }) => {
+            return setData((current) => current.map((item) => {
+                if (item.id === id) {
+                    return {
+                        ...item,
+                        isManualyClosed
+                    }
+                }
+                return item;
+            }))
+        }
+        socket.on('isManualyClosedChanged', onChangeClosed);
+
+        let accessToken = localStorage.getItem('userAccessToken');
+        let refreshToken = localStorage.getItem('userRefreshToken');
+
+        if (!accessToken || !refreshToken) {
+            localStorage.removeItem('User');
+            return;
+        };
+
+        checkUser();
+        startRefreshInterval();
+
+        return () => {
+            clearInterval(refreshInterval);
+        }
     }, []);
 
     useEffect(() => {
-        // updateFromServer();
-        // updateWithMockData(); OVO NE DIRAJ
-        /* Experiment @todo */
-
-        if (!User) {
+        let LSsA = localStorage.getItem('info');
+        if(!LSsA) {
             return;
         }
 
-        function compareKeys(a, b) {
-            var aKeys = Object.keys(a).sort();
-            var bKeys = Object.keys(b).sort();
-            return JSON.stringify(aKeys) === JSON.stringify(bKeys);
-        }
+        setInfo(LSsA);
+    }, []);
 
-        if (!compareKeys(User, UserMock)) {
+    useEffect(() => {
+        localStorage.setItem('info', info);
+    }, [info]);
+
+    const startRefreshInterval = () => {
+        refreshInterval = setInterval(() => {
+            refreshTokenFunction();
+        }, 60 * 10 * 1000);
+    }
+
+    const refreshTokenFunction = (callback) => {
+        fetch(getApiUrl() + '/users/refreshtoken', {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('userAccessToken'),
+            }),
+            body: JSON.stringify({ refreshToken: localStorage.getItem('userRefreshToken') })
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            console.log(response);
+            if (response.error) {
+                clearInterval(refreshInterval);
+                localStorage.removeItem('User');
+                localStorage.removeItem('userAccessToken')
+                localStorage.removeItem('userRefreshToken')
+                setUser({});
+                return;
+            }
+
+            localStorage.setItem('userAccessToken', response.data.token.accessToken);
+            localStorage.setItem('userRefreshToken', response.data.token.refreshToken);
+
+            if (callback) {
+                callback();
+            };
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
+        });
+    }
+
+    const checkUser = () => {
+        let accessToken = localStorage.getItem('userAccessToken');
+        let refreshToken = localStorage.getItem('userRefreshToken');
+
+        if (!User || !User.id || !accessToken) {
             // localStorage.removeItem('User');
-            setUser({
-                ...UserMock,
-                ...User
-            })
             return;
         }
 
-        localStorage.setItem('User', JSON.stringify(User));
+        fetch(getApiUrl() + '/users/me', {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            console.log(response);
+            if (response.error) {
+                refreshTokenFunction(checkUser);
+                return;
+            }
+            let finalizedUserObject = {
+                ...User,
+                ...response.data
+            };
+
+            setUser(finalizedUserObject);
+            localStorage.setItem('User', JSON.stringify(finalizedUserObject));
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
+        });
+    }
+
+    const editUserOnServer = () => {
+        let accessToken = localStorage.getItem('userAccessToken');
+        let refreshToken = localStorage.getItem('userRefreshToken');
+
+        fetch(getApiUrl() + '/users/' + User.id, {
+            method: 'post',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+            }),
+            body: JSON.stringify({
+                favourites: User.favourites,
+                claps: User.claps
+            })
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            console.log(response);
+
+            if (response.error) {
+                refreshTokenFunction(editUserOnServer);
+                return;
+            }
+
+            setUser({
+                ...User,
+                ...response.data
+            });
+
+            localStorage.setItem('User', JSON.stringify({
+                ...User,
+                ...response.data
+            }));
+
+        }).catch(({ message }) => {
+            return setErrorModalMessage(message);
+        });
+    }
+
+    useEffect(() => {
+        if (!User || !User.id) {
+            // localStorage.removeItem('User');
+            return;
+        }
+        // Samo ako je deepcompare za user i localstorage user različit
+        if (_.isEqual(User, { ...JSON.parse(localStorage.getItem('User')) })) {
+            return;
+        }
+
+        editUserOnServer();
     }, [User]);
 
     useEffect(() => {
+        if (!search) {
+            setFilteredData(Data);
+        }
+
         filterBySearch(search);
 
         if (filters.indexOf('omiljeni') !== -1) {
@@ -156,34 +326,34 @@ const DataProvider = (props) => {
     }, [search, Data, filters]);
 
     useEffect(() => {
-        let day = moment().isoWeekday() - 1;
+        let sortingFiltered = _.orderBy(filteredData, sortBy, 'desc');
         setSortedOpen(
             [
-                ...filteredData.filter(
-                    item => isOpen(item.details.workingHours[day])
+                ...sortingFiltered.filter(
+                    item => isOpen(item.details.workingHours, item.isManualyClosed)
                 )
             ]
         );
         setSortedClosed(
             [
-                ...filteredData.filter(
-                    item => !isOpen(item.details.workingHours[day])
+                ...sortingFiltered.filter(
+                    item => !isOpen(item.details.workingHours, item.isManualyClosed)
                 )
             ]
         );
-    }, [filteredData]);
+    }, [filteredData, sortBy]);
 
-    useEffect(() => {
-        let int = null;
+    // useEffect(() => {
+    //     let int = null;
 
-        int = setInterval(() => {
-            setData(simulateUpdateData());
-        }, 900)
+    //     int = setInterval(() => {
+    //         setData(simulateUpdateData());
+    //     }, 900);
 
-        return () => {
-            clearInterval(int);
-        }
-    }, [Data]);
+    //     return () => {
+    //         clearInterval(int);
+    //     }
+    // }, [Data]);
 
     useEffect(() => {
         let int;
@@ -203,13 +373,12 @@ const DataProvider = (props) => {
         }
     }, [timer]);
 
-    const simulateUpdateData = () => {
+    /* const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 0, 5),
-            day = moment().isoWeekday() - 1;;
+            randomIDs = _.slice(_.shuffle(IDs), 0, 5);
 
         return [...Data].map(item => {
-            if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours[day])) {
+            if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours, item.isManualyClosed)) {
                 return {
                     ...item,
                     freeSpots: getNewNumber(item.freeSpots),
@@ -225,16 +394,16 @@ const DataProvider = (props) => {
                 ...item
             }
         })
-    }
+    } */
 
-    const getNewNumber = (old) => {
+    /* const getNewNumber = (old) => {
         let bulk = Math.floor(Math.random() * 4);
         return Math.floor(Math.random() * 10) > 5 || old < 3
             ? old > 10
                 ? old - bulk
                 : old + bulk
             : old - bulk;
-    }
+    } */
 
     const isAuthorized = () => {
         let User = JSON.parse(localStorage.getItem('User'));
@@ -247,51 +416,55 @@ const DataProvider = (props) => {
     }
 
     const filterBySearch = (search = '') => {
+        if (search.length < 2) {
+            return;
+        };
+
         let filtered = Data.filter(({ title }) => {
             return title.trim().toLowerCase().indexOf(search.trim().toLowerCase()) > -1;
         });
 
-        setFilteredData(_.orderBy(filtered, 'freeSpots', 'desc'));
+        setFilteredData(filtered);
     };
 
     const filterByOmiljeni = () => {
-        let filtered = Data.filter(({ id }) => User.Favourites.indexOf(id) !== -1);
+        let filtered = Data.filter(({ id }) => User.favourites.indexOf(id) !== -1);
 
-        setFilteredData(_.orderBy(filtered, 'freeSpots', 'desc'));
+        setFilteredData(filtered);
     };
 
     const toggleFavourite = (fav) => {
         let nextState = { ...User };
 
-        if (nextState.Favourites.indexOf(fav) === -1) {
+        if (nextState.favourites.indexOf(fav) === -1) {
             nextState = {
                 ...User,
-                Favourites: [
-                    ...nextState.Favourites,
+                favourites: [
+                    ...nextState.favourites,
                     fav
                 ]
             }
         } else {
-            nextState.Favourites = nextState.Favourites.filter(f => f !== fav);
+            nextState.favourites = nextState.favourites.filter(f => f !== fav);
         }
 
         return setUser(nextState);
     }
 
-    const fastReserve = (ID, Time) => {
+    const fastReserve = (id, time) => {
         let nextState = { ...User };
 
         // console.log(ID, Time);
 
-        if (nextState.Reservation.ID) {
+        if (nextState.reservation.id) {
             //@todo provera
         }
 
         nextState = {
             ...User,
-            Reservation: {
-                ID,
-                Time
+            reservation: {
+                id,
+                time
             }
         }
 
@@ -306,7 +479,11 @@ const DataProvider = (props) => {
         if (!!_.find(Data, { id })) {
             nextState = Data.map((item) => {
                 if (item.id === id) {
-                    return { id, ...restOfData };
+                    return {
+                        id,
+                        ...item,
+                        ...restOfData
+                    };
                 }
 
                 return item;
@@ -318,14 +495,14 @@ const DataProvider = (props) => {
         return setData(nextState);
     }
 
-    const changeClaps = ({ ID, userAplauza }) => {
+    const changeClaps = ({ id, userClaps }) => {
         let nextState = {
             ...User,
-            Claps: [
-                ...User.Claps,
+            claps: [
+                ...User.claps,
                 {
-                    ID,
-                    userAplauza
+                    id,
+                    userClaps
                 }
             ]
         }
@@ -353,6 +530,8 @@ const DataProvider = (props) => {
         <Provider
             value={{
                 User,
+                setUser,
+                startRefreshInterval,
                 changeClaps,
                 toggleFavourite,
                 Data,
@@ -366,17 +545,45 @@ const DataProvider = (props) => {
                 filterBySearch,
                 filters,
                 toggleFilters,
-                currentData,
-                setCurrentData,
+                sortBy,
+                setSortBy,
+                info, 
+                setInfo,
                 fastReserve,
                 // setTimer,
                 timer,
-                setShowComingSoonModal
+                setShowComingSoonModal,
+                setErrorModalMessage,
+                setSuccessModalMessage,
+                setShowLoginModal,
+                setShowFeedbackModal
             }}
         >
             {props.children}
             <LoaderComponent />
-            <ComingSoonModal show={showComingSoonModal} onHide={() => { setShowComingSoonModal(false); }} />
+            <ComingSoonModal
+                show={showComingSoonModal}
+                onHide={() => { setShowComingSoonModal(false); }}
+            />
+            <ErrorModal
+                show={ErrorModalMessage.length > 0}
+                message={ErrorModalMessage}
+                onHide={() => { setErrorModalMessage(''); }}
+            />
+            <SuccessModal
+                show={SuccessModalMessage.length > 0}
+                message={SuccessModalMessage}
+                onHide={() => { setSuccessModalMessage(''); }}
+            />
+            <LoginModal
+                show={showLoginModal}
+                onHide={() => { setShowLoginModal(false); }}
+                history={props.history}
+            />
+            <FeedbackModal
+                show={showFeedbackModal}
+                onHide={() => { setShowFeedbackModal(false); }}
+            />
         </Provider>
     )
 }

@@ -1,6 +1,5 @@
 /* React */
 import React, {
-    useEffect,
     useState,
     useContext,
     Fragment
@@ -9,15 +8,13 @@ import React, {
 /* Libraries */
 import _ from 'lodash';
 import moment from 'moment';
-import { useParams } from "react-router-dom";
-import { roundToPrecision } from '../library/common';
+import { getTodaysWorkingHours, getApiUrl } from '../library/common';
 
 /* Components */
 import { Carousel, Modal } from 'react-bootstrap';
 
 /* Animations */
 import { Spring } from 'react-spring/renderprops';
-import Fade from 'react-reveal/Fade';
 
 /* Icons */
 import Title from '../icons/titleBlue.svg';
@@ -28,29 +25,13 @@ import AudioLight from '../icons/audioLightblue.svg';
 import Location from '../icons/locationBlue.svg';
 import MenuBook from '../icons/menuBookWhite.svg';
 import WorkingHours from '../CustomIcons/workHours.png';
+import musicModal from '../CustomIcons/musicModal.png';
 
 /* Slike */
-import kafic1 from '../carouselMock/kafic1.jpg';
-import kafic2 from '../carouselMock/kafic2.jpg';
-import kafic3 from '../carouselMock/kafic3.jpg';
+import defaultPhoto from '../carouselMock/defaultPhoto.jpg';
 
 /* Context */
-import DataContext, { DataProvider } from '../Context/dataContext';
-
-const placeholderObj = {
-    id: 0,
-    title: '',
-    logo: '',
-    totalSpots: 0,
-    freeSpots: 0,
-    details: {
-        description: '',
-        images: '',
-        workingHours: '',
-        location: '',
-        menu: ''
-    }
-};
+import DataContext from '../Context/dataContext';
 
 const daysOfTheWeek = [
     'Ponedeljak',
@@ -62,49 +43,52 @@ const daysOfTheWeek = [
     'Nedelja'
 ];
 
-function MoreDetails(props) {
-    let { id } = useParams();
-    const { Data, loading, setShowComingSoonModal } = useContext(DataContext);
+const MoreDetails = ({ data }) => {
+    const { setShowComingSoonModal, setErrorModalMessage } = useContext(DataContext);
 
-    const [data, setData] = useState({ ...placeholderObj });
     const [showWHModal, setShowWHModal] = useState(false);
-
-    useEffect(() => {
-        let findData = { ..._.find(Data, { 'id': id }) || placeholderObj };
-
-        setData(findData);
-    }, [Data]);
+    const [showVolumeModal, setShowVolumeModal] = useState(false);
 
     const renderCarousel = () => {
+        const { images } = data.details;
+        let shouldShowDefault = !images || !images.length || !images[0];
+
         return (
             <Carousel
                 style={{ marginBottom: '10px' }}
                 interval={2500}
                 slide={true}
+                indicators={!shouldShowDefault}
             >
                 {
-                    [kafic1, kafic2, kafic3].map((item, index) => {
+                    !shouldShowDefault && images.map((item, index) => {
                         return <Carousel.Item key={index}>
                             <div>
                                 <img
                                     className="d-block w-100"
-                                    // src={'./slike/carouselMock/' + item}
-                                    src={item}
+                                    src={getApiUrl() + item}
                                     alt={(index + 1) + '. slika'}
                                 />
                             </div>
-                            {/* <Carousel.Caption>
-                                <h3>{'Glavni tekst ' + (index + 1)}</h3>
-                                <p>{'Tekst opisa ' + (index + 1)}</p>
-                            </Carousel.Caption> */}
                         </Carousel.Item>
                     })
+                }
+                {
+                    shouldShowDefault && <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src={defaultPhoto}
+                            alt={'Ovaj objekat trenutno nema slika'}
+                        />
+                    </Carousel.Item>
                 }
             </Carousel>
         )
     }
 
     const renderNumber = (num) => {
+        if (!num && num !== 0) return;
+
         return (
             <Spring
                 from={{ number: 0 }}
@@ -112,6 +96,65 @@ function MoreDetails(props) {
                 {props => <span>{Math.ceil(props.number)}</span>}
             </Spring>
         )
+    }
+
+    const getAddress = () => {
+        let adr = data.details.address;
+        if (!adr) {
+            return <a>Trenutno nepoznata adresa</a>;
+        }
+
+        if (adr.length > 30) {
+            return <a
+                href={'http://maps.google.com/?q=' + adr}
+                target='blank'
+            >
+                {adr.slice(0, 30) + '...'}
+            </a>;
+        }
+
+        return <a
+            href={'http://maps.google.com/?q=' + adr}
+            target='blank'
+        >
+            {adr}
+        </a>;
+    }
+
+    const getMusic = () => {
+        let mus = data.details.music;
+        if (!mus) {
+            return '?';
+        }
+
+        if (mus.length > 9) {
+            return mus.slice(0, 9) + '...';
+        }
+
+        return mus;
+    }
+
+    const getPhoneNumber = () => {
+        let ph = data.details.phoneNumber;
+        if (!ph) {
+            return <span>Trenutno nepoznato</span>;
+        }
+
+        if (ph.length > 30) {
+            return <span>{ph.slice(0, 30) + '...'}</span>;
+        }
+
+        return <a href={`tel:${ph}`}>{ph}</a>;
+    }
+
+    const getWorkingHours = () => {
+        let day = getTodaysWorkingHours(data.details.workingHours);
+
+        if (!day) {
+            return 'ZATVORENO'
+        }
+
+        return day;
     }
 
     const restOfPage = () => {
@@ -130,6 +173,7 @@ function MoreDetails(props) {
                     <img
                         src={Title}
                         className="svgIconSmaller"
+                        alt="icon"
                     />
                 </div>
                 <div
@@ -137,11 +181,12 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Adresa: </span>
-                        {data.details.address}
+                        {getAddress()}
                     </p>
                     <img
                         src={Location}
                         className="svgIconSmaller"
+                        alt="icon"
                     />
                 </div>
                 <div
@@ -149,11 +194,12 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Telefon: </span>
-                        <a href={`tel:${data.details.phoneNumber}`}>{data.details.phoneNumber}</a>
+                        {getPhoneNumber()}
                     </p>
                     <img
                         src={Call}
                         className="svgIconSmaller"
+                        alt="icon"
                     />
                 </div>
                 <div
@@ -161,11 +207,9 @@ function MoreDetails(props) {
                 >
                     <div>
                         <span className="boldText mr-1">Muzika: </span>
-                        {
-                            data.details.music
-                        }
+                        {getMusic()}
                     </div>
-                    <div>
+                    <div onClick={() => setShowVolumeModal(true)} className="clickable">
                         <span className="boldText mr-1">Glasnoća: </span>
                         <span className="d-flex">
                             {
@@ -179,6 +223,7 @@ function MoreDetails(props) {
                                                     : AudioLight
                                             }
                                             className="svgIconSmaller"
+                                            alt="icon"
                                         />
                                     )
                                 })
@@ -190,15 +235,15 @@ function MoreDetails(props) {
                     className="detailsRow2Container"
                 >
                     <div>
-                        <span className="boldText mr-1">Prosečno 👏: </span>
+                        <span className="boldText mr-1">Prosečno <span role="img" aria-label="claps">👏</span>: </span>
                         {
-                            (data.details.totalClaps / data.details.numberOfGrades).toPrecision(2)
+                            data.details.numberOfGrades ? (data.details.totalClaps / data.details.numberOfGrades).toPrecision(2) : '0'
                         }
                     </div>
                     <div>
-                        <span className="boldText mr-1">Ukupno 👏: </span>
+                        <span className="boldText mr-1">Ukupno <span role="img" aria-label="claps">👏</span>: </span>
                         {
-                            renderNumber(data.details.totalClaps)
+                            renderNumber(data.details.totalClaps) || '?'
                         }
                     </div>
                 </div>
@@ -210,7 +255,7 @@ function MoreDetails(props) {
                 >
                     <p className="detailRowTextMini">
                         <span className="boldText">Radno vreme: </span>
-                        {data.details.workingHours[moment().isoWeekday() - 1]}
+                        {getWorkingHours()}
                         {' [ '}
                         <span
                             style={{
@@ -225,12 +270,31 @@ function MoreDetails(props) {
                     <img
                         src={Watch}
                         className="svgIconSmaller"
+                        alt="icon"
                     />
                 </div>
+                {
+                    data.details.description && <div
+                        className="detailAbout"
+                    >
+                        {
+                            data.details.description.length > 150
+                                ? data.details.description.slice(0, 150) + '...'
+                                : data.details.description
+                        }
+                    </div>
+                }
                 <div
-                    className="detailAbout"
+                    className="detailsRow2Container"
                 >
-                    {data.details.description.slice(0, 135) + '...'}
+                    <div onClick={() => setShowComingSoonModal(true)}>
+                        <span className="boldText mr-1" role="img" aria-label="Coming soon emojis">🔜🚶‍🎈🍀👣</span>
+                        <div className="comingSoon acrylicDark"></div>
+                    </div>
+                    <div onClick={() => setShowComingSoonModal(true)}>
+                        <span className="boldText mr-1" role="img" aria-label="Coming soon emojis">🍓🍀🔓🤐🔀</span>
+                        <div className="comingSoon acrylicDark"></div>
+                    </div>
                 </div>
                 <div
                     className="detailsRow clickableRow"
@@ -242,6 +306,7 @@ function MoreDetails(props) {
                     <img
                         src={MenuBook}
                         className="svgIconSmaller"
+                        alt="icon"
                     />
                 </div>
             </Fragment>
@@ -251,7 +316,7 @@ function MoreDetails(props) {
     return (
         <div>
             {
-                !loading && restOfPage()
+                restOfPage()
             }
             {
                 showWHModal && <Modal
@@ -260,8 +325,8 @@ function MoreDetails(props) {
                     centered
                 >
                     <Modal.Body>
-                        <div className="reserveModalContainer">
-                            <img src={WorkingHours} style={{ width: '125px' }} />
+                        <div className="modalContainer">
+                            <img src={WorkingHours} style={{ width: '125px' }} alt="icon" />
                             {
                                 data.details.workingHours.map((item, index) => {
                                     return (
@@ -274,8 +339,13 @@ function MoreDetails(props) {
                                             }
                                         >
                                             {
-                                                daysOfTheWeek[index] + ': ' + item
+                                                daysOfTheWeek[index] + ': '
                                             }
+                                            <span>
+                                                {
+                                                    item ? item : 'ZATVORENO'
+                                                }
+                                            </span>
                                         </p>
                                     )
                                 })
@@ -284,6 +354,62 @@ function MoreDetails(props) {
                                 className="detailsRow clickableRow w-50"
                                 onClick={() => {
                                     setShowWHModal(false);
+                                }}
+                            >
+                                <h1 className="detailRowText boldText">OK</h1>
+                            </button>
+                        </div>
+                    </Modal.Body>
+                </Modal>
+            }
+            {
+                showVolumeModal && <Modal
+                    show={showVolumeModal}
+                    onHide={() => { setShowVolumeModal(false); }}
+                    centered
+                >
+                    <Modal.Body>
+                        <div className="modalContainer">
+                            <img src={musicModal} style={{ width: '125px' }} alt="icon" />
+                            <div className="d-flex flex-column mb-2">
+                                {
+                                    [1, 2, 3].map((j) => {
+                                        return (
+                                            <div className="d-flex flex-row" key={j}>
+                                                {
+                                                    [1, 2, 3].map((i) => {
+                                                        return (
+                                                            <img
+                                                                key={i}
+                                                                src={
+                                                                    _.inRange(i, 0, j + 1)
+                                                                        ? Audio
+                                                                        : AudioLight
+                                                                }
+                                                                className="svgIconSmaller"
+                                                                alt="icon"
+                                                            />
+                                                        )
+                                                    })
+                                                }
+                                                <p>
+                                                    {
+                                                        j === 1
+                                                            ? ' - Tiho'
+                                                            : j === 2
+                                                                ? ' - Umereno'
+                                                                : ' - Glasno'
+                                                    }
+                                                </p>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <button
+                                className="detailsRow clickableRow w-50"
+                                onClick={() => {
+                                    setShowVolumeModal(false);
                                 }}
                             >
                                 <h1 className="detailRowText boldText">OK</h1>
