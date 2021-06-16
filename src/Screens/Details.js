@@ -239,7 +239,8 @@ const Details = ({ data, history }) => {
                             <img
                                 src={
                                     data.logo
-                                        ? `${getApiUrl() + data.logo}`
+                                        // ? `${getApiUrl() + data.logo}`
+                                        ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + data.logo}`
                                         : defaultLogo
                                 }
                                 className={

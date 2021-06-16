@@ -122,8 +122,8 @@ function compareKeys(a, b) {
 }
 
 const FLAGS = {
-    DEV: false,
-    LIVE: true
+    DEV: true,
+    LIVE: false
 };
 
 const getApiUrl = () => {

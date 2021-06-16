@@ -369,7 +369,8 @@ const List = ({ history }) => {
                                         className="listLogo"
                                         src={
                                             Kafic.logo
-                                                ? `${getApiUrl() + Kafic.logo}`
+                                                // ? `${getApiUrl() + Kafic.logo}`
+                                                ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                                 : defaultLogo
                                         }
                                         alt="icon"
@@ -448,7 +449,8 @@ const List = ({ history }) => {
                                 className="listLogo"
                                 src={
                                     Kafic.logo
-                                        ? `${getApiUrl() + Kafic.logo}`
+                                        // ? `${getApiUrl() + Kafic.logo}`
+                                        ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                         : defaultLogo
                                 }
                                 alt="icon"

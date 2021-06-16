@@ -81,7 +81,7 @@ const DataProvider = (props) => {
                     setLoading(false);
                 }
             }).catch(({ message }) => {
-                // setData(kafici);
+                setData(kafici); // @edited
                 setLoading(false);
                 setErrorModalMessage('Greška na serveru, pokušajte ponovo malo kasnije...')
                 console.error(message);
@@ -93,70 +93,72 @@ const DataProvider = (props) => {
     }
 
     useEffect(() => {
-        updateFromServer();
+        // updateFromServer(); @edited
+        setData(kafici);
+        setLoading(false);
 
         document.title = 'Durango';
 
-        const socket = openSocket(getSocketUrl());
-        const onChange = ({ id, ...rest }) => {
-            return setData((current) => current.map((item) => {
-                if (item.id === id) {
-                    return {
-                        ...item,
-                        ...rest
-                    }
-                }
-                return item;
-            }))
-        }
-        socket.on('freeSpotsChanged', onChange);
+        // const socket = openSocket(getSocketUrl());
+        // const onChange = ({ id, ...rest }) => {
+        //     return setData((current) => current.map((item) => {
+        //         if (item.id === id) {
+        //             return {
+        //                 ...item,
+        //                 ...rest
+        //             }
+        //         }
+        //         return item;
+        //     }))
+        // }
+        // socket.on('freeSpotsChanged', onChange);
 
-        const onChangeVolume = ({ id, volume }) => {
-            return setData((current) => current.map((item) => {
-                if (item.id === id) {
-                    return {
-                        ...item,
-                        details: {
-                            ...item.details,
-                            volume
-                        }
-                    }
-                }
-                return item;
-            }))
-        }
-        socket.on('volumeChanged', onChangeVolume);
+        // const onChangeVolume = ({ id, volume }) => {
+        //     return setData((current) => current.map((item) => {
+        //         if (item.id === id) {
+        //             return {
+        //                 ...item,
+        //                 details: {
+        //                     ...item.details,
+        //                     volume
+        //                 }
+        //             }
+        //         }
+        //         return item;
+        //     }))
+        // }
+        // socket.on('volumeChanged', onChangeVolume);
 
-        const onChangeTotalClaps = (data) => {
-            console.log(data)
-            return setData((current) => current.map((item) => {
-                if (item.id === data.id) {
-                    return {
-                        ...item,
-                        details: {
-                            ...item.details,
-                            totalClaps: data.totalClaps,
-                            numberOfGrades: data.numberOfGrades
-                        }
-                    }
-                }
-                return item;
-            }))
-        }
-        socket.on('totalClapsChanged', onChangeTotalClaps);
+        // const onChangeTotalClaps = (data) => {
+        //     console.log(data)
+        //     return setData((current) => current.map((item) => {
+        //         if (item.id === data.id) {
+        //             return {
+        //                 ...item,
+        //                 details: {
+        //                     ...item.details,
+        //                     totalClaps: data.totalClaps,
+        //                     numberOfGrades: data.numberOfGrades
+        //                 }
+        //             }
+        //         }
+        //         return item;
+        //     }))
+        // }
+        // socket.on('totalClapsChanged', onChangeTotalClaps);
 
-        const onChangeClosed = ({ id, isManualyClosed }) => {
-            return setData((current) => current.map((item) => {
-                if (item.id === id) {
-                    return {
-                        ...item,
-                        isManualyClosed
-                    }
-                }
-                return item;
-            }))
-        }
-        socket.on('isManualyClosedChanged', onChangeClosed);
+        // const onChangeClosed = ({ id, isManualyClosed }) => {
+        //     return setData((current) => current.map((item) => {
+        //         if (item.id === id) {
+        //             return {
+        //                 ...item,
+        //                 isManualyClosed
+        //             }
+        //         }
+        //         return item;
+        //     }))
+        // }
+        // socket.on('isManualyClosedChanged', onChangeClosed);
 
         let accessToken = localStorage.getItem('userAccessToken');
         let refreshToken = localStorage.getItem('userRefreshToken');
@@ -166,8 +168,8 @@ const DataProvider = (props) => {
             return;
         };
 
-        checkUser();
-        startRefreshInterval();
+        // checkUser();
+        // startRefreshInterval(); @edited
 
         return () => {
             clearInterval(refreshInterval);
@@ -309,7 +311,7 @@ const DataProvider = (props) => {
             return;
         }
 
-        editUserOnServer();
+        // editUserOnServer(); // @edit
     }, [User]);
 
     useEffect(() => {
@@ -343,17 +345,17 @@ const DataProvider = (props) => {
         );
     }, [filteredData, sortBy]);
 
-    // useEffect(() => {
-    //     let int = null;
+    useEffect(() => {
+        let int = null;
 
-    //     int = setInterval(() => {
-    //         setData(simulateUpdateData());
-    //     }, 900);
+        int = setInterval(() => {
+            setData(simulateUpdateData());
+        }, 1500);
 
-    //     return () => {
-    //         clearInterval(int);
-    //     }
-    // }, [Data]);
+        return () => {
+            clearInterval(int);
+        }
+    }, [Data]);
 
     useEffect(() => {
         let int;
@@ -373,9 +375,9 @@ const DataProvider = (props) => {
         }
     }, [timer]);
 
-    /* const simulateUpdateData = () => {
+    const simulateUpdateData = () => {
         let IDs = _.map(Data, 'id'),
-            randomIDs = _.slice(_.shuffle(IDs), 0, 5);
+            randomIDs = _.slice(_.shuffle(IDs), 0, 1);
 
         return [...Data].map(item => {
             if (_.includes(randomIDs, item.id) && isOpen(item.details.workingHours, item.isManualyClosed)) {
@@ -394,16 +396,16 @@ const DataProvider = (props) => {
                 ...item
             }
         })
-    } */
+    }
 
-    /* const getNewNumber = (old) => {
+    const getNewNumber = (old) => {
         let bulk = Math.floor(Math.random() * 4);
         return Math.floor(Math.random() * 10) > 5 || old < 3
             ? old > 10
                 ? old - bulk
                 : old + bulk
             : old - bulk;
-    } */
+    }
 
     const isAuthorized = () => {
         let User = JSON.parse(localStorage.getItem('User'));
