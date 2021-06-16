@@ -1,0 +1,55 @@
+.settingsTitle {
+    color: black;
+    font-size: 24px;
+  }
+  
+  .settingsEmailParagraph {
+    display: inline-block;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .settingsProfileImage {
+    margin: 10px;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    /* Animation */
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse 2s infinite;
+  }
+  
+  .settingsDevelopedBy {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .settingsDevelopedByMikacMarko {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .settingsDevelopedByMikacMarko>div {
+    display: flex;
+    align-items: center;
+    margin: 0px 20px 10px 0px;
+    cursor: pointer;
+  }
+  
+  .settingsDevelopedByMikacMarko>div>img {
+    margin-left: 5px;
+    width: 25px;
+  }
+  
+  .settingsINCLogo {
+    margin: 0px 30px;
+    max-width: 350px;
+    cursor: pointer;
+  }

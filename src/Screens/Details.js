@@ -5,7 +5,7 @@ import React, {
     useContext,
     Fragment
 } from 'react';
-import '../App.css';
+// import '../Styles/App.css'; @edited
 
 /* Icons */
 // import Star from '../icons/star.svg';

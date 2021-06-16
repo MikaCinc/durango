@@ -311,7 +311,7 @@ const DataProvider = (props) => {
             return;
         }
 
-        // editUserOnServer(); // @edit
+        // editUserOnServer(); // @edited
     }, [User]);
 
     useEffect(() => {

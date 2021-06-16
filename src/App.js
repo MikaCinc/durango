@@ -1,6 +1,6 @@
 /* React */
 import React, { Fragment, useEffect, useState } from 'react';
-import './App.css';
+// import './Styles/App.css';
 
 import {
   BrowserRouter as Router,
