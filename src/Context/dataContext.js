@@ -342,6 +342,8 @@ const DataProvider = (props) => {
 
     useEffect(() => {
         let sortingFiltered = _.orderBy(filteredData, sortBy, 'desc');
+        // Ovo se poziva na svaki filter change
+        // Možda mogu da se poboljšaju perf. @todo
         setSortedOpen(
             [
                 ...sortingFiltered.filter(

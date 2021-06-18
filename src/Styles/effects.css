@@ -2,7 +2,7 @@
 
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
     .acrylic {
-        backdrop-filter: blur(5px) saturate(300%);
+        backdrop-filter: blur(8px) saturate(300%) brightness(110%);
         background-color: rgba(255, 255, 255, 0.7) !important;
     }
     .acrylicDark {

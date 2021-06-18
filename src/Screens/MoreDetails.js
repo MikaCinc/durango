@@ -322,6 +322,7 @@ const MoreDetails = ({ data }) => {
         showWHModal && <Modal
           show={showWHModal}
           onHide={() => { setShowWHModal(false); }}
+          className="acrylicDarkBackdrop"
           centered
         >
           <Modal.Body>
@@ -366,6 +367,7 @@ const MoreDetails = ({ data }) => {
         showVolumeModal && <Modal
           show={showVolumeModal}
           onHide={() => { setShowVolumeModal(false); }}
+          className="acrylicDarkBackdrop"
           centered
         >
           <Modal.Body>
