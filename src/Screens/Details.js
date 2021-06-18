@@ -121,7 +121,7 @@ const UpdatedBadge = ({ color = 'white', object }) => {
 
 const Details = ({ data, history }) => {
   const { loading, User, toggleFavourite, setShowComingSoonModal, setErrorModalMessage, setShowLoginModal } = useContext(DataContext);
-  const [timer, setTimer] = useState('');
+  /* const [timer, setTimer] = useState('');
 
   useEffect(() => {
     if (!User || !User.id) {
@@ -144,7 +144,7 @@ const Details = ({ data, history }) => {
     }
 
     return () => clearInterval(interval);
-  }, [data]);
+  }, [data]); */
 
   const isFavourite = () => {
     if (!User || !User.id) {

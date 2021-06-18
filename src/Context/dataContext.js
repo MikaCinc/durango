@@ -160,13 +160,13 @@ const DataProvider = (props) => {
         // }
         // socket.on('isManualyClosedChanged', onChangeClosed);
 
-        let accessToken = localStorage.getItem('userAccessToken');
+        /* let accessToken = localStorage.getItem('userAccessToken');
         let refreshToken = localStorage.getItem('userRefreshToken');
 
         if (!accessToken || !refreshToken) {
             localStorage.removeItem('User');
             return;
-        };
+        }; */
 
         // checkUser();
         // startRefreshInterval(); @edited
@@ -183,6 +183,17 @@ const DataProvider = (props) => {
         }
 
         setInfo(LSsA);
+    }, []);
+
+    useEffect(() => {
+        let localInitUser = localStorage.getItem('user');
+        if(!localInitUser || !localInitUser.id) {
+            setUser(UserMock);
+            // localStorage.setItem('user')
+            return;
+        }
+
+        setUser(localInitUser);
     }, []);
 
     useEffect(() => {
@@ -302,6 +313,7 @@ const DataProvider = (props) => {
     }
 
     useEffect(() => {
+        console.log(User)
         if (!User || !User.id) {
             // localStorage.removeItem('User');
             return;
@@ -311,6 +323,7 @@ const DataProvider = (props) => {
             return;
         }
 
+        localStorage.setItem("user", User);
         // editUserOnServer(); // @edited
     }, [User]);
 
