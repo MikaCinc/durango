@@ -11,6 +11,7 @@ const ComingSoonModal = ({ show, onHide }) => {
         <Modal
             show={show}
             onHide={onHide}
+            className="acrylicDarkBackdrop"
             centered
         >
             <Modal.Body>

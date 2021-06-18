@@ -1,3 +1,17 @@
+@import "App.css";
+@import "loginScreen.css";
+@import "settings.css";
+@import "header.css";
+@import "filters.css";
+@import "list.css";
+@import "details.css";
+@import "reserve.css";
+@import "modals.css";
+@import "effects.css";
+@import "claps.css";
+@import "feedback.css";
+@import "inputPanel.css";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

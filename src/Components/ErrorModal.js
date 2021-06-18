@@ -11,6 +11,7 @@ const ErrorModal = ({ show, onHide, message }) => {
         <Modal
             show={show}
             onHide={onHide}
+            className="acrylicDarkBackdrop"
             centered
         >
             <Modal.Body>

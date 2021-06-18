@@ -369,7 +369,8 @@ const List = ({ history }) => {
                                         className="listLogo"
                                         src={
                                             Kafic.logo
-                                                ? `${getApiUrl() + Kafic.logo}`
+                                                // ? `${getApiUrl() + Kafic.logo}`
+                                                ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                                 : defaultLogo
                                         }
                                         alt="icon"
@@ -448,7 +449,8 @@ const List = ({ history }) => {
                                 className="listLogo"
                                 src={
                                     Kafic.logo
-                                        ? `${getApiUrl() + Kafic.logo}`
+                                        // ? `${getApiUrl() + Kafic.logo}`
+                                        ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                         : defaultLogo
                                 }
                                 alt="icon"
@@ -656,7 +658,7 @@ const Home = props => {
         <div className="App">
             <MainScreen history={props.history} />
             <div
-                className="feedbackContainer"
+                className="feedbackContainer acrylicDark"
                 onClick={() => {
                     setShowFeedbackModal(true);
                 }}

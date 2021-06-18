@@ -54,6 +54,9 @@ const FeedbackModal = ({ show, onHide }) => {
         <Modal
             show={show}
             onHide={onHide}
+            className="acrylicDarkBackdrop"
+            // dialogClassName="acrylicDarkBackdrop"
+            // backdropClassName="acrylicDarkBackdrop"
             centered
         >
             <Modal.Body>

@@ -1,0 +1,160 @@
+/* ACRYLIC BACKGROUND EFFECT */
+
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+    .acrylic {
+        backdrop-filter: blur(8px) saturate(300%) brightness(110%);
+        background-color: rgba(255, 255, 255, 0.7) !important;
+    }
+    .acrylicDark {
+        backdrop-filter: blur(10px) saturate(200%) brightness(65%);
+        background-color: rgba(2, 70, 255, 0.3) !important;
+    }
+    .acrylicSecondary {
+        backdrop-filter: blur(10px) saturate(200%) brightness(95%);
+        background-color: rgba(255, 116, 2, 0.7) !important;
+    }
+    .acrylicDarkBackdrop {
+        backdrop-filter: blur(5px) brightness(100%);
+        background-color: rgba(0, 0, 0, 0.3) !important;
+    }
+}
+
+/* GLOWING FLUENT EFFECT */
+
+.reveal-focus-blue {
+    /* border: 1px solid transparent !important; */
+    /* outline: 5px solid transparent !important; */
+    position: relative !important;
+    /* border-color: #000 !important; */
+    outline-color: var(--primary) !important;
+    /* box-shadow: 0 0 15px 3px #3185FC !important; */
+    animation: glowfade-blue 2s ease-in-out;
+    -moz-animation: glowfade-blue 2s ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    z-index: 1 !important;
+}
+
+@keyframes glowfade-blue {
+    from {
+        box-shadow: 0 0 20px 5px var(--primary);
+    }
+    to {
+        box-shadow: 0 0 10px 3px var(--primary);
+    }
+}
+
+.reveal-focus-orangered {
+    /* border: 1px solid transparent !important; */
+    /* outline: 5px solid transparent !important; */
+    position: relative !important;
+    /* border-color: #000 !important; */
+    outline-color: orangered !important;
+    /* box-shadow: 0 0 15px 3px red !important; */
+    animation: glowfade-red 2s ease-in-out;
+    -moz-animation: glowfade-red 2s ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    z-index: 1 !important;
+}
+
+@keyframes glowfade-red {
+    from {
+        box-shadow: 0 0 20px 5px orangered;
+    }
+    to {
+        box-shadow: 0 0 10px 3px orangered;
+    }
+}
+
+/* IP Effects */
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.96);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    }
+    100% {
+        transform: scale(0.96);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .IP-zatvoriOtvoriContainer {
+        display: none;
+    }
+    .IP-Container {
+        margin-bottom: 30px;
+    }
+    .IP-volumeContainer {
+        position: relative;
+        justify-content: center;
+        bottom: unset;
+        right: unset;
+        margin-bottom: 20px;
+    }
+    .IP-time {
+        font-size: 14px;
+    }
+    .IP-input {
+        max-width: 150px;
+        min-width: 125px;
+    }
+    .IP-center-container {
+        max-width: 300px;
+    }
+    .IP-dial-button {
+        padding: 15px;
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .IP-counter-container {
+        flex-direction: column;
+    }
+}
+
+/* Route Animations */
+
+.container {
+    position: relative;
+}
+
+.page {
+    position: absolute;
+    top: 75px;
+    /* DetailsHeader je fixed sa visinom 75px */
+    left: 0px;
+    right: 0px;
+    /* max-width: 600px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 200ms, transform 200ms;
+}

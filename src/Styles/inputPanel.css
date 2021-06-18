@@ -1,0 +1,289 @@
+/* Input Panel */
+
+.IP-Login {
+    height: 100%;
+    width: 100%;
+}
+
+.IP-Login-Particles {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--sharp-blues);
+}
+
+.IP-LoginForm {
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 35px 50px;
+    box-shadow: var(--shadow);
+}
+
+.IP-Login-Input {
+    border-radius: 10px;
+    outline: 0px;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    transition-duration: 0.4s;
+}
+
+.IP-Login-Input:hover {
+    border-radius: 20px;
+    border: 1px solid #005DEA;
+}
+
+.IP-Login-Logo {
+    width: 200px;
+    height: auto;
+    /* margin-bottom: 20px; */
+}
+
+.IP-time {
+    font-size: 32px;
+}
+
+.IP-volumeContainer {
+    display: flex;
+    flex-direction: row;
+    color: black;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    user-select: none;
+}
+
+.IP-volume-label {
+    border-radius: 20px;
+    padding: 20px;
+    background: whitesmoke;
+    color: black;
+}
+
+.IP-volume-level {
+    border-radius: 50px;
+    padding: 20px;
+    background: white;
+    color: black;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.IP-volume-active {
+    background: var(--sharp-blues);
+    color: white;
+}
+
+.IP-zatvoriOtvoriContainer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    user-select: none;
+}
+
+.IP-counter-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.IP-input-nemaMesta {
+    border-radius: 50px;
+    padding: 20px;
+    background-image: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+    border: 0px;
+    color: white;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition-duration: 0.1s;
+    font-size: 20px;
+}
+
+.IP-dial-container {
+    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.IP-dial-button {
+    display: block;
+    width: 32%;
+    padding-bottom: 32%;
+    /* Same as width, sets height */
+    margin-bottom: 2%;
+    /* (100-32*3)/2 */
+    position: relative;
+    /* background-image: var(--sharp-blues); */
+    background-color: white;
+    border: 0px;
+    border-radius: 50px;
+    padding: 20px;
+    font-size: 34px;
+    text-align: center;
+    color: black;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition-duration: 0.1s;
+    outline: none;
+}
+
+.IP-input-imaMesta {
+    border-radius: 50px;
+    padding: 20px;
+    background-image: linear-gradient(to top right, #00c6fb 0%, #005bea 100%);
+    border: 0px;
+    color: white;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition-duration: 0.1s;
+    font-size: 20px;
+}
+
+.IP-clickable {
+    transition-duration: 0.2s;
+}
+
+.IP-clickable:active {
+    padding: 15px;
+}
+
+.IP-center-upper {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.IP-input {
+    flex: 2;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 7px;
+    max-width: 125px;
+    min-width: 100px;
+    border: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    box-shadow: var(--shadow);
+    transition-duration: 0.1s;
+    font-size: 32px;
+    background-image: linear-gradient(-225deg, #65379B 0%, #886AEA 53%, #6457C6 100%);
+}
+
+.IP-center-ukupnoMesta {
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+    border-radius: 50px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border: 0px;
+    color: black;
+    transition-duration: 0.1s;
+    font-size: 24px;
+}
+
+.IP-center-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+}
+
+.IP-volume-level {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.IP-input-selected {
+    background-image: linear-gradient(-225deg, #65379B 0%, #886AEA 53%, #6457C6 100%) !important;
+    color: white;
+    font-weight: 700;
+    /* Animation */
+    z-index: -1;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse 2s infinite;
+}
+
+.IP-settings-icon {
+    /* display: flex; */
+    text-align: right;
+    cursor: pointer;
+    font-size: 32px;
+    color: orangered;
+}
+
+.IP-Settings-Block {
+    display: inline-block;
+    margin: 10px;
+    background-color: white;
+    box-shadow: var(--mini-shadow);
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.IP-Settings-Form {
+    z-index: 1000;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.IP-Settings-Input {
+    border-radius: 10px;
+    width: 100%;
+    outline: 0px;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    transition-duration: 0.4s;
+}
+
+.IP-Settings-Input:hover {
+    border-radius: 20px;
+    border: 1px solid #005DEA;
+}
+
+.IP-Settings-TextArea {
+    min-width: 100%;
+}
+
+.IP-Settings-Close-Object {
+    border-radius: 50px;
+    padding: 20px;
+    background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.IP-Settings-Open-Object {
+    border-radius: 50px;
+    padding: 20px;
+    background: var(--sharp-blues);
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}

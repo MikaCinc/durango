@@ -21,6 +21,7 @@ import Logout from '../icons/logoutWhite.svg';
 import Privacy from '../icons/privacyWhite.svg';
 import Wrench from '../icons/wrenchWhite.svg';
 import defaultAvatar from '../CustomIcons/defaultAvatar.png';
+import incLogo from '../ExtendedLogo/incLogo.png';
 
 /* Components */
 import DetailsHeader from '../Components/DetailsHeader';
@@ -209,15 +210,15 @@ const Settings = (props) => {
                             </div>
                         </div>
                         <img
-                            className="settingsFFWDLogo"
-                            src="https://futureforward.nl/resources/themes/app/images/futureforward-logo.svg"
+                            className="settingsINCLogo"
+                            src={incLogo}
                             onClick={() => {
                                 ReactGA.event({
                                     category: 'Application',
                                     action: 'Developer link clicked',
-                                    label: 'ffwd',
+                                    label: 'inc',
                                 });
-                                window.open('https://futureforward.nl/');
+                                // window.open('https://futureforward.nl/');
                             }}
                         />
                     </div>
