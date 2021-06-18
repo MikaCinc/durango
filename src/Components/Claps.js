@@ -174,7 +174,7 @@ const Claps = ({ data, data: { details: { totalClaps } } }) => {
                     duration={500}
                     opposite={true}
                 >
-                    <div className={`clapsSliderContainer ${!showSlider && 'd-none'}`}>
+                    <div className={`clapsSliderContainer ${!showSlider && 'd-none'} acrylic`}>
                         <emoji-slider emoji="👏" value={0.5} step={0.2} ref={slider}></emoji-slider>
                     </div>
                 </RubberBand>
