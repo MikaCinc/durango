@@ -1,0 +1,88 @@
+.reserveContainer {
+    padding: 20px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.reserveCalendarContainer {
+    display: flex;
+    align-content: center;
+    margin-bottom: 30px;
+}
+
+.react-date-picker__wrapper, .react-time-picker__wrapper {
+    border: 0px !important;
+}
+
+.reserveCalendar {
+    background-color: white;
+    flex: 1;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 26px;
+    height: 50px;
+    box-shadow: var(--shadow);
+}
+
+.reserveCalendarMain {
+    font-size: 18px;
+}
+
+.reserveTimeContainer {
+    display: flex;
+    align-content: center;
+    margin-bottom: 30px;
+}
+
+.reserveTime {
+    background-color: white;
+    /* max-width: 120px; */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 22px;
+    height: 50px;
+    box-shadow: var(--shadow);
+}
+
+.reserveClockIcon {
+    font-size: 20px;
+}
+
+.reserveSeatsContainer {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    text-align: center;
+    height: 75px;
+    width: 125px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.reserveSeatsButton {
+    flex: 1;
+    cursor: pointer;
+    font-size: 26px;
+    background-color: white;
+    border: 0px;
+    outline: 0px;
+}
+
+.reserveSeatsCounter {
+    flex: 2;
+    font-size: 38px;
+}
+
+.reserveText {
+    font-size: 24px;
+    color: black;
+    font-weight: 300;
+}

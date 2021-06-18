@@ -1,0 +1,170 @@
+.listHolder {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.list {
+    display: inline-block;
+    width: 100%;
+}
+
+.listSeparator {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 7px;
+    cursor: context-menu;
+}
+
+.peopleIcon {
+    color: grey;
+    display: inline-block;
+}
+
+.closedObject {
+    position: relative;
+    /* border: 4px solid #B0B0B0; */
+    padding: 4px;
+    background-image: linear-gradient(to top left, #868f96 0%, #596164 100%);
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.reservedObject {
+    position: relative;
+    padding: 4px;
+    background: linear-gradient(to top right, #00c6fb 30%, #005bea 100%);
+    /* background: linear-gradient(to bottom left, #f83600 0%, #f9d423 100%); */
+    /* background-color: white; */
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.preporukaObject {
+    background: linear-gradient(to top right, #f83600 0%, #f9d423 100%) !important;
+}
+
+.normalObject {
+    position: relative;
+    padding: 4px;
+    /* background: linear-gradient(to bottom left, #f83600 0%, #f9d423 100%); */
+    background-color: white;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.singleLineContainer {
+    /* Desktop */
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.singleLine {
+    position: relative;
+    /* Potrebno da bi badge bio na svom mestu */
+    display: flex;
+    align-items: center;
+    height: 75px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 7px;
+    background-color: white;
+}
+
+.favoritBadgeContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* background-image: linear-gradient(to bottom left, #868f96 0%, #596164 100%); */
+    /* background-image: transparent; */
+    /* background: #005bea; */
+    color: gold;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7px;
+    z-index: 1;
+}
+
+.favoritBadge {
+    margin: 1px 6px 2px 9px;
+    display: flex;
+    align-self: center;
+}
+
+.updatedBadge {
+    color: white;
+    position: absolute;
+    padding-bottom: 3px;
+    padding-top: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7px;
+    cursor: pointer;
+    height: 16px;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    background: linear-gradient(to top right, #f83600 0%, #f9d423 100%);
+}
+
+.updatedBadge>p {
+    margin: 0px;
+    line-height: 14px;
+}
+
+.updatedBadgeIcon {
+    color: white;
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.listBadge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 3px;
+    padding-top: 2px;
+    border-top-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    /* background-image: linear-gradient(to top left, #868f96 0%, #596164 100%); */
+}
+
+.lineCounter {
+    margin-left: auto;
+}
+
+.lineFreeSeats {
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.lineTitle {
+    color: #707070;
+    font-size: 24px;
+    margin-bottom: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.listLogo {
+    width: 45px;
+    height: 45px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
