@@ -186,10 +186,9 @@ const DataProvider = (props) => {
     }, []);
 
     useEffect(() => {
-        let localInitUser = localStorage.getItem('user');
+        let localInitUser = JSON.parse(localStorage.getItem('user'));
         if(!localInitUser || !localInitUser.id) {
             setUser(UserMock);
-            // localStorage.setItem('user')
             return;
         }
 
@@ -323,7 +322,7 @@ const DataProvider = (props) => {
             return;
         }
 
-        localStorage.setItem("user", User);
+        localStorage.setItem("user", JSON.stringify(User));
         // editUserOnServer(); // @edited
     }, [User]);
 

@@ -658,7 +658,7 @@ const Home = props => {
         <div className="App">
             <MainScreen history={props.history} />
             <div
-                className="feedbackContainer acrylicDark"
+                className="feedbackContainer acrylicDarkBlue"
                 onClick={() => {
                     setShowFeedbackModal(true);
                 }}
