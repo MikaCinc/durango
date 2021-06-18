@@ -97,7 +97,7 @@ const DataProvider = (props) => {
         setData(kafici);
         setLoading(false);
 
-        document.title = 'Durango';
+        document.title = 'Durango - Insider Preview';
 
         // const socket = openSocket(getSocketUrl());
         // const onChange = ({ id, ...rest }) => {
@@ -349,7 +349,7 @@ const DataProvider = (props) => {
         let int = null;
 
         int = setInterval(() => {
-            setData(simulateUpdateData());
+            // setData(simulateUpdateData());
         }, 1500);
 
         return () => {

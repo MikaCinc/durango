@@ -76,7 +76,7 @@
     /* Potrebno da bi badge bio na svom mestu */
     display: flex;
     align-items: center;
-    height: 75px;
+    height: 80px;
     padding: 8px;
     cursor: pointer;
     border-radius: 7px;
