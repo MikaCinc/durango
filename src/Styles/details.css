@@ -68,6 +68,7 @@
     height: 70px;
     background-color: white;
     box-shadow: var(--shadow);
+    user-select: none;
 }
 
 .detailsRowMax {
@@ -83,6 +84,7 @@
     height: 85px;
     background-color: white;
     box-shadow: var(--shadow);
+    user-select: none;
 }
 
 .detailsRowMini {
@@ -99,6 +101,7 @@
     max-height: 350px;
     background-color: white;
     box-shadow: var(--mini-shadow);
+    user-select: none;
 }
 
 /* 1x2 grid */
@@ -109,6 +112,7 @@
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 20px;
+    user-select: none;
 }
 
 .detailsRow2Container>div {
@@ -177,4 +181,5 @@
     border-radius: 10px;
     padding: 10px;
     box-shadow: var(--mini-shadow);
+    user-select: none;
 }

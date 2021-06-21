@@ -53,6 +53,7 @@ const DataProvider = (props) => {
     const [sortedClosed, setSortedClosed] = useState([]);
     // Additional settings
     const [info, setInfo] = useState('');
+    const [location, setLocation] = useState('Niš');
     // Modals
     const [showComingSoonModal, setShowComingSoonModal] = useState(false);
     const [ErrorModalMessage, setErrorModalMessage] = useState('');
@@ -186,6 +187,23 @@ const DataProvider = (props) => {
     }, []);
 
     useEffect(() => {
+        localStorage.setItem('info', info);
+    }, [info]);
+
+    useEffect(() => {
+        let LSlocation = localStorage.getItem('location');
+        if(!LSlocation) {
+            return props.history.push('/app/wizard');
+        }
+
+        setLocation(LSlocation);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('location', location);
+    }, [location]);
+
+    useEffect(() => {
         let localInitUser = JSON.parse(localStorage.getItem('user'));
         if(!localInitUser || !localInitUser.id) {
             setUser(UserMock);
@@ -194,10 +212,6 @@ const DataProvider = (props) => {
 
         setUser(localInitUser);
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem('info', info);
-    }, [info]);
 
     const startRefreshInterval = () => {
         refreshInterval = setInterval(() => {
@@ -563,8 +577,12 @@ const DataProvider = (props) => {
                 toggleFilters,
                 sortBy,
                 setSortBy,
+                // -------user settings -> local storage
                 info, 
                 setInfo,
+                location,
+                setLocation,
+                // -------
                 fastReserve,
                 // setTimer,
                 timer,

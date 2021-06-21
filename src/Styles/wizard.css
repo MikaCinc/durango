@@ -1,0 +1,82 @@
+.wizardContainer {}
+
+.stepContainer {
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 35px 50px;
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.stepContainer>h5 {
+    margin-bottom: 20px;
+}
+
+.stepContainer>.durangoLogo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.reactSelect {
+    width: 200px;
+}
+
+.circle {
+    animation: movement 4s infinite;
+    background: var(--sharp-blues-top-right);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    transform: translate(-80%, -25%);
+}
+
+.circle2 {
+    animation: circle 10s infinite;
+    border-radius: 20px;
+    background: var(--phoenix-start);
+    clip-path: circle(50%);
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    /* transform: translate(-50%); */
+}
+
+@keyframes circle {
+    0% {
+        clip-path: circle(50%);
+    }
+    50% {
+        clip-path: circle(45%);
+    }
+    100% {
+        clip-path: circle(50%);
+    }
+}
+
+@keyframes movement {
+    0%, 25% {
+        left: 40%;
+        top: 35%;
+    }
+    50% {
+        left: 42%;
+        top: 37%;
+    }
+    75%, 100% {
+        left: 40%;
+        top: 35%;
+    }
+}

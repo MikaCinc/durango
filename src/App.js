@@ -34,6 +34,7 @@ import InputPanelStackOfScreens from './Stacks/InputPanelStackOfScreens';
 /* Context */
 import { DataProvider } from './Context/dataContext';
 import { ObjectProvider } from './Context/objectContext';
+import Wizard from './Screens/Wizard';
 
 let deferredPrompt;
 
@@ -85,10 +86,11 @@ const UserStackOfScreens = ({ history }) => {
       <DataProvider history={history}>
         <Switch location={location}>
           <Route key={1} exact path="/app" render={() => (<Redirect to="/app/home" />)} />
-          <Route key={2} exact path="/app/login" component={Login} />
-          <Route key={3} exact path="/app/home" component={Home} />
-          <Route key={4} exact path="/app/settings" component={Settings} />
-          <Route key={5} path="/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
+          <Route key={2} exact path="/app/wizard" component={Wizard} />
+          <Route key={3} exact path="/app/login" component={Login} />
+          <Route key={4} exact path="/app/home" component={Home} />
+          <Route key={5} exact path="/app/settings" component={Settings} />
+          <Route key={6} path="/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
         </Switch>
         <InstallModal
           show={showInstallModal}

@@ -81,6 +81,7 @@
     cursor: pointer;
     border-radius: 7px;
     background-color: white;
+    user-select: none;
 }
 
 .favoritBadgeContainer {
@@ -122,6 +123,7 @@
 .updatedBadge>p {
     margin: 0px;
     line-height: 14px;
+    user-select: none;
 }
 
 .updatedBadgeIcon {
