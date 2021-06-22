@@ -3,6 +3,11 @@
 const kafici = [
     {
         id: '1',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Vinyl',
         logo: 'vinyl.png',
         totalSpots: 32,
@@ -34,6 +39,11 @@ const kafici = [
     },
     {
         id: '2',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Distrikt',
         logo: 'distrikt.png',
         totalSpots: 68,
@@ -64,6 +74,11 @@ const kafici = [
     },
     {
         id: '3',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Dnevna soba',
         logo: 'dnevnaSoba.jpg',
         totalSpots: 42,
@@ -94,6 +109,11 @@ const kafici = [
     },
     {
         id: '4',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Durango Caffe',
         logo: '',
         totalSpots: 90,
@@ -124,6 +144,11 @@ const kafici = [
     },
     {
         id: '6',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Biro Kafeterija',
         logo: 'biro.png',
         totalSpots: 32,
@@ -154,6 +179,11 @@ const kafici = [
     },
     {
         id: '7',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Okrug caffe',
         logo: 'okrug.jpg',
         // preporuka: true,
@@ -185,6 +215,11 @@ const kafici = [
     },
     {
         id: '8',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Zrnce caffe',
         logo: 'zrnce.png',
         totalSpots: 58,
@@ -215,6 +250,11 @@ const kafici = [
     },
     {
         id: '9',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Sailor',
         logo: 'sailor.png',
         totalSpots: 30,
@@ -245,6 +285,11 @@ const kafici = [
     },
     {
         id: '5',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'caffe',
         title: 'Caffe Zebrano',
         logo: 'zebrano.png',
         totalSpots: 45,

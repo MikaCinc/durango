@@ -15,33 +15,18 @@ import Zoom from 'react-reveal/Zoom';
 /* Icons */
 
 /* Components */
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
-
-/* Data */
-import options from '../../data/locations';
 
 /* Context */
 import DataContext from '../../Context/dataContext';
 
-const animatedComponents = makeAnimated();
-
-const LocationStep = (props) => {
+const InstallProposalStep = (props) => {
   const { loading, location, setLocation } = useContext(DataContext);
 
   const restOfPage = () => {
     return (
       <Fragment>
-        <h5>Izaberite lokaciju</h5>
-        <Select
-          defaultValue={options.find(({ value }) => value === location)}
-          options={options}
-          components={animatedComponents}
-          isSearchable
-          className="reactSelect"
-          onChange={({ value }) => setLocation(value)}
-        // defaultValue={options[0]}
-        />
+        <h5>Durango je bolji ukoliko je instaliran</h5>
+        <p>Imaćete brži pristup i brže učitavanje aplikacije</p>
         <button
           className="buttonConfirm"
           onClick={() => {
@@ -52,7 +37,19 @@ const LocationStep = (props) => {
             marginBottom: "0px"
           }}
         >
-          <h1 className="boldText">OK</h1>
+          <h1 className="boldText">INSTALIRAJ</h1>
+        </button>
+        <button
+          className="buttonCancel"
+          onClick={() => {
+            props.submit()
+          }}
+          style={{
+            marginTop: "20px",
+            marginBottom: "0px"
+          }}
+        >
+          <h1 className="boldText">Možda kasnije</h1>
         </button>
       </Fragment>
     )
@@ -63,4 +60,4 @@ const LocationStep = (props) => {
   );
 }
 
-export default LocationStep;
+export default InstallProposalStep;

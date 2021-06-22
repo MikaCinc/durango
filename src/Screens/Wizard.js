@@ -32,6 +32,7 @@ import DataContext from '../Context/dataContext';
 /* Steps */
 import LocationStep from '../Components/WizardSteps/Location';
 import FinishStep from '../Components/WizardSteps/Finish';
+import InstallProposalStep from '../Components/WizardSteps/InstallProposal';
 
 const Wizard = (props) => {
   const { User, setUser, loading, location } = useContext(DataContext);
@@ -44,7 +45,10 @@ const Wizard = (props) => {
           if (location) setStep((last) => ++last);
         }}
       />;
-      case 1: return <FinishStep
+      case 1: return <InstallProposalStep
+        submit={() => setStep((last) => ++last)}
+      />;
+      case 2: return <FinishStep
         submit={() => {
           props.history.push('/app/home');
         }}
