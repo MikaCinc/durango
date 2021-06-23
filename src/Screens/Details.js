@@ -21,6 +21,9 @@ import SeatRed from '../icons/seatRed.svg';
 import SeatDarkRed from '../icons/seatDarkRed.svg';
 import NearMe from '../icons/nearMeWhite.svg';
 
+import CaffeIcon from '../icons/MainIcons/armchair.png';
+import BilliardIcon from '../icons/MainIcons/pool-table.png';
+
 /* MORE DETAILS PAGE */
 import MoreDetails from './MoreDetails';
 
@@ -201,7 +204,7 @@ const Details = ({ data, history }) => {
   }
 
   const getSeatIcon = () => {
-    let hoursTillUpdated = moment.duration(moment().diff(moment(data.spotsUpdatedAt))).asHours(),
+    /* let hoursTillUpdated = moment.duration(moment().diff(moment(data.spotsUpdatedAt))).asHours(),
       seatInColor;
 
     if (hoursTillUpdated <= 1) {
@@ -212,11 +215,19 @@ const Details = ({ data, history }) => {
       seatInColor = SeatRed;
     } else if (hoursTillUpdated > 8) {
       seatInColor = SeatDarkRed;
+    } */
+
+    let icon;
+    switch (data.type) {
+      case 'caffe': icon = CaffeIcon; break;
+      case 'billiard': icon = BilliardIcon; break;
+      default: icon = CaffeIcon;
     }
 
     return <img
-      src={seatInColor}
+      src={icon}
       className="svgIcon"
+      style={{ margin: "3px" }}
       alt="icon"
     />
   }
@@ -256,7 +267,9 @@ const Details = ({ data, history }) => {
         </div>
         <div className="detailsRowMax">
           <h1 className="detailRowText">
-            Slobodnih mesta:
+            Slobodnih
+            {getSeatIcon()}
+            :
             <span style={{
               color: getLabelSingleColor(),
             }}>
@@ -269,7 +282,6 @@ const Details = ({ data, history }) => {
             </span>
             {/* / {data.totalSpots} */}
           </h1>
-          {getSeatIcon()}
           {
             data.spotsUpdatedAt && <UpdatedBadge
               color="white"

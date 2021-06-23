@@ -35,6 +35,9 @@ import GearBlue from '../icons/gearBlue.svg';
 import Audio from '../icons/audioBlue.svg';
 import AudioLight from '../icons/audioLightblue.svg';
 
+import CaffeIcon from '../icons/MainIcons/armchair.png';
+import BilliardIcon from '../icons/MainIcons/pool-table.png';
+
 /* Components & LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -247,10 +250,10 @@ const List = ({ history }) => {
     }
 
     const getSeatIcon = (object) => {
-        let hoursTillUpdated = moment.duration(moment().diff(moment(object.spotsUpdatedAt))).asHours(),
-            seatInColor;
+        /* let hoursTillUpdated = moment.duration(moment().diff(moment(object.spotsUpdatedAt))).asHours(),
+            seatInColor; */
 
-        if (hoursTillUpdated <= 1) {
+        /* if (hoursTillUpdated <= 1) {
             seatInColor = Seat;
         } else if (hoursTillUpdated > 1 && hoursTillUpdated <= 5) {
             seatInColor = SeatOrange;
@@ -258,10 +261,17 @@ const List = ({ history }) => {
             seatInColor = SeatRed;
         } else if (hoursTillUpdated > 8) {
             seatInColor = SeatDarkRed;
+        } */
+
+        let icon;
+        switch(object.type) {
+            case 'caffe': icon = CaffeIcon; break;
+            case 'billiard': icon = BilliardIcon; break;
+            default: icon = CaffeIcon;
         }
 
         return <img
-            src={seatInColor}
+            src={icon}
             className="svgIcon"
             alt="icon"
         />
@@ -480,7 +490,7 @@ const List = ({ history }) => {
                                     color: '#B0B0B0'
                                 }}
                             >
-                                <img src={SeatGray} className="svgIcon" alt="icon" />
+                                <img src={CaffeIcon} className="svgIcon" alt="icon" />
                             </i>
                             <LabelBadge
                                 Reservation={null}

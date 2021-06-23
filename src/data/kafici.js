@@ -317,6 +317,41 @@ const kafici = [
             music: 'Punk',
             volume: 2
         }
+    },
+    {
+        id: '10',
+        location: {
+            id: 1,
+            title: 'Niš'
+        },
+        type: 'billiard',
+        title: 'Buffalo',
+        logo: 'buffalo.jpg',
+        totalSpots: 12,
+        freeSpots: 3,
+        spotsUpdatedAt: 1589897781000,
+        reservations: [],
+        details: {
+            description: 'Samo ćemo reći: BILIJAR!',
+            images: '',
+            workingHours: [
+                '07:55 - 03:00',
+                '07:55 - 04:00',
+                '07:55 - 04:00',
+                '07:55 - 04:00',
+                '07:55 - 04:00',
+                '07:55 - 04:00',
+                '07:55 - 04:00',
+            ],
+            location: 'https://www.google.com/maps/place/%D0%A5%26%D0%9C/@43.3207141,21.8934617,17z/data=!3m1!4b1!4m5!3m4!1s0x4755b0b43dced8c7:0x9eb3a135c152d121!8m2!3d43.3207141!4d21.8956504?hl=sr',
+            menu: '',
+            address: 'Prešernova 6',
+            phoneNumber: '(064) 9839569',
+            totalClaps: 1892,
+            numberOfGrades: 712,
+            music: 'Sve',
+            volume: 1
+        }
     }
 ]
 
