@@ -11,8 +11,8 @@
     }
     .acrylicDarkBlue {
         backdrop-filter: blur(10px) saturate(200%) brightness(65%);
-        background-color: rgba(2, 91, 255, 0.404) !important;
-        /* background: var(--sharp-blues) !important; */
+        /* background-color: rgba(2, 91, 255, 0.404) !important; */
+        background: var(--sharp-blues) !important;
     }
     .acrylicSecondary {
         backdrop-filter: blur(10px) saturate(200%) brightness(95%);

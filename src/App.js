@@ -31,6 +31,9 @@ import ObjectLogin from './Screens/Object/ObjectLogin';
 import ObjectProfileStackOfScreens from './Stacks/ObjectProfileStackOfScreens';
 import InputPanelStackOfScreens from './Stacks/InputPanelStackOfScreens';
 
+/* Animations */
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 /* Context */
 import { DataProvider } from './Context/dataContext';
 import { ObjectProvider } from './Context/objectContext';
@@ -81,17 +84,55 @@ const UserStackOfScreens = ({ history }) => {
     });
   }
 
+  const renderPage = (Component) => {
+    return <Fragment
+      // className="page"
+      // style={{ maxWidth: '600px' }}
+    >
+      <Component history={history} />
+    </Fragment>
+  }
+
   return (
     <Fragment>
       <DataProvider history={history}>
-        <Switch location={location}>
-          <Route key={1} exact path="/app" render={() => (<Redirect to="/app/home" />)} />
-          <Route key={2} exact path="/app/wizard" component={Wizard} />
-          <Route key={3} exact path="/app/login" component={Login} />
-          <Route key={4} exact path="/app/home" component={Home} />
-          <Route key={5} exact path="/app/settings" component={Settings} />
-          <Route key={6} path="/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
-        </Switch>
+        {/* <TransitionGroup>
+          <CSSTransition
+            in={true}
+            timeout={300}
+            classNames="page"
+            unmountOnExit
+            key={history.location.key} // Bez ovoga neće!
+          > */}
+            {/* <Switch location={history.location}>
+              {
+                routes.map(({ path, Component }) => (
+                  <Route
+                    key={path}
+                    exact
+                    path={path}
+                    render={
+                      ({ match }) => (
+                        <div className="page" style={{ maxWidth: '600px' }}>
+                          <Component history={history} />
+                        </div>
+                      )
+                    }
+                  />
+                ))
+              }
+            </Switch> */}
+
+            <Switch location={location}>
+              <Route key={1} exact path="/app" render={() => (<Redirect to="/app/home" />)} />
+              <Route key={2} exact path="/app/wizard" render={() => renderPage(Wizard)} />
+              <Route key={3} exact path="/app/login" render={() => renderPage(Login)} />
+              <Route key={4} exact path="/app/home" render={() => renderPage(Home)} />
+              <Route key={5} exact path="/app/settings" render={() => renderPage(Settings)} />
+              <Route key={6} path="/app/:id" render={() => <ObjectProfileStackOfScreens history={history} />} />
+            </Switch>
+          {/* </CSSTransition>
+        </TransitionGroup> */}
         <InstallModal
           show={showInstallModal}
           onHide={() => setShowInstallModal(false)}
