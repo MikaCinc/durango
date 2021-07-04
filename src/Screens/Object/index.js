@@ -113,6 +113,7 @@ const Restaurant = ({ history }) => {
             return response.json();
         }).then(response => {
             const { data, error, message } = response;
+            console.log("HERERERERERER")
             if (error && data.tokenExpired) {
                 refreshTokenFunction(postNewFreeSeatsNumber);
                 return;

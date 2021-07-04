@@ -8,6 +8,7 @@ import { Modal } from 'react-bootstrap';
 
 /* Packages & Libraries */
 import { getApiUrl } from '../library/common';
+import moment from 'moment';
 
 /* Logo */
 import Img from '../CustomIcons/workInProgress.png';
@@ -25,13 +26,14 @@ const FeedbackModal = ({ show, onHide }) => {
             return;
         }
 
-        fetch(getApiUrl() + '/feedback', {
+        fetch(getApiUrl() + '/feedback/new', {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json',
             }),
             body: JSON.stringify({
-                content: feedback
+                content: feedback,
+                date: moment().unix()
             })
         }).then((response) => {
             return response.json();

@@ -24,7 +24,7 @@ const ObjectLogin = ({ history }) => {
         if (localPassword) {
             setPassword(localPassword);
         }
-    }, [setEmail]);
+    }, [setEmail]); // @todo zašto ovde stoji setEmail??
 
     const loginObject = (e) => {
         e.preventDefault();
@@ -43,8 +43,13 @@ const ObjectLogin = ({ history }) => {
             body: JSON.stringify(cred)
         }).then((response) => {
             return response.json();
-        }).then(({ data: { place, token } }) => {
-            if(!place || !place.id || !token) {
+        }).then(({ error, data }) => {
+            if (error) {
+                return setErrorModalMessage(error);
+            }
+
+            const { place, token } = data;
+            if (!place || !place.id || !token) {
                 setErrorModalMessage('Uneli ste pogrešan email ili password');
                 return;
             }
@@ -90,23 +95,49 @@ const ObjectLogin = ({ history }) => {
             <Particles
                 canvasClassName="IP-Login-Particles"
                 params={{
-                    particles: {
-                        number: {
-                            value: 100,
-                            density: {
-                                enable: true,
-                                value_area: 1000,
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 4000,
+                            },
+                            "opacity": 0.8
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "opacity": 0.1,
+                            // "color": themes[theme][3],
+                        },
+                        "move": {
+                            "direction": "top",
+                            "random": true,
+                            "speed": 1,
+                            "out_mode": "out"
+                        },
+                        "size": {
+                            "value": 4,
+                            "random": true,
+                            "anim": {
+                                "speed": 4,
+                                "size_min": 0.3
                             }
                         },
-                    },
-                    interactivity: {
-                        events: {
-                            onhover: {
-                                enable: true,
-                                mode: "repulse"
+                        "opacity": {
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.2
                             }
-                        }
-                    }
+                        },
+                        /* "color": {
+                          "value": themes[theme][3]
+                        }, */
+                        "shape": {
+                            "type": ["circle"],
+                        },
+                    },
+                    "retina_detect": true
                 }}
             />
         </div>

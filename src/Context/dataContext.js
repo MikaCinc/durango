@@ -7,6 +7,7 @@ import React, {
 /* Data */
 import kafici from '../data/kafici';
 import UserMock from '../data/user';
+import locationsMock from '../data/locations';
 
 import openSocket from 'socket.io-client';
 
@@ -53,7 +54,8 @@ const DataProvider = (props) => {
     const [sortedClosed, setSortedClosed] = useState([]);
     // Additional settings
     const [info, setInfo] = useState('');
-    const [location, setLocation] = useState('Niš');
+    const [location, setLocation] = useState(localStorage.getItem('location'));
+    const [allLocations, setAllLocations] = useState([]);
     // Modals
     const [showComingSoonModal, setShowComingSoonModal] = useState(false);
     const [ErrorModalMessage, setErrorModalMessage] = useState('');
@@ -93,10 +95,76 @@ const DataProvider = (props) => {
         }
     }
 
+    const updateFromServerLOCALnodeTEST = () => {
+        fetch(getApiUrl() + '/places/' + location)
+            .then(response => response.json())
+            .then(response => {
+                /* const { data, message } = response;
+                if (!data || !data.length) {
+                    setLoading(false);
+                    setErrorModalMessage(message);
+                    // setData(kafici);
+                } else {
+                    setData(data);
+                    setLoading(false);
+                } */
+                setLoading(false);
+                console.log("places:", response);
+                setData(response);
+            }).catch(() => {
+                // setData(kafici); // @edited
+                setLoading(false);
+                setErrorModalMessage('Greška na serveru, pokušajte ponovo malo kasnije...')
+                // console.error(message);
+            });
+    }
+
+    const getAllLocations = () => {
+        fetch(getApiUrl() + '/locations')
+            .then(response => response.json())
+            .then(response => {
+                console.log("locations:", response);
+                setAllLocations(response);
+            }).catch(() => {
+                console.log("error! Setting mock data for locations")
+                setAllLocations(locationsMock);
+                setErrorModalMessage('Greška pri preuzimanju dostupnih lokacija...')
+                // console.error(message);
+            });
+    }
+
+    const getAllFeedback = () => {
+        fetch(getApiUrl() + '/feedback/all')
+            .then(response => response.json())
+            .then(response => {
+                console.log("feedback:", response);
+            }).catch(() => {
+                setErrorModalMessage('Greška pri preuzimanju dostupnih feedback-a...')
+                // console.error(message);
+            });
+    }
+
+    useEffect(() => {
+        let LSlocation = localStorage.getItem('location');
+        if (!LSlocation) {
+            return props.history.push('/app/wizard');
+        }
+
+        setLocation(LSlocation);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('location', location);
+        updateFromServerLOCALnodeTEST(); // Update data for new location
+    }, [location]);
+
     useEffect(() => {
         // updateFromServer(); @edited
-        setData(kafici);
-        setLoading(false);
+        // updateFromServerLOCALnodeTEST();
+        // setData(kafici);
+        // setLoading(false);
+        getAllLocations();
+        getAllFeedback();
 
         document.title = 'Durango - Insider Preview';
 
@@ -179,7 +247,7 @@ const DataProvider = (props) => {
 
     useEffect(() => {
         let LSsA = localStorage.getItem('info');
-        if(!LSsA) {
+        if (!LSsA) {
             return;
         }
 
@@ -191,21 +259,8 @@ const DataProvider = (props) => {
     }, [info]);
 
     useEffect(() => {
-        let LSlocation = localStorage.getItem('location');
-        if(!LSlocation) {
-            return props.history.push('/app/wizard');
-        }
-
-        setLocation(LSlocation);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('location', location);
-    }, [location]);
-
-    useEffect(() => {
         let localInitUser = JSON.parse(localStorage.getItem('user'));
-        if(!localInitUser || !localInitUser.id) {
+        if (!localInitUser || !localInitUser.id) {
             setUser(UserMock);
             return;
         }
@@ -578,8 +633,9 @@ const DataProvider = (props) => {
                 sortBy,
                 setSortBy,
                 // -------user settings -> local storage
-                info, 
+                info,
                 setInfo,
+                allLocations, // From server
                 location,
                 setLocation,
                 // -------

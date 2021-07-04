@@ -19,7 +19,7 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 
 /* Data */
-import options from '../../data/locations';
+// import options from '../../data/locations';
 
 /* Context */
 import DataContext from '../../Context/dataContext';
@@ -27,15 +27,17 @@ import DataContext from '../../Context/dataContext';
 const animatedComponents = makeAnimated();
 
 const LocationStep = (props) => {
-  const { loading, location, setLocation } = useContext(DataContext);
+  const { loading, location, setLocation, allLocations } = useContext(DataContext);
+
+  if(!allLocations.length) return null;
 
   const restOfPage = () => {
     return (
       <Fragment>
         <h5>Izaberite lokaciju</h5>
         <Select
-          defaultValue={options.find(({ value }) => value === location)}
-          options={options}
+          defaultValue={allLocations.find(({ value }) => value === location)}
+          options={allLocations}
           components={animatedComponents}
           isSearchable
           className="reactSelect"

@@ -122,14 +122,16 @@ function compareKeys(a, b) {
 }
 
 const FLAGS = {
-    DEV: true,
-    LIVE: false
+    DEV: false,
+    LIVE: false,
+    LOCAL: true
 };
 
 const getApiUrl = () => {
     const URLs = {
         DEV: 'https://durango.devffwd.nl/api/v1',
-        LIVE: 'https://durango.rs/api/v1'
+        LIVE: 'https://durango.rs/api/v1',
+        LOCAL: 'http://localhost:3001/api/v1'
     };
 
     if (FLAGS.DEV) {
@@ -140,7 +142,25 @@ const getApiUrl = () => {
         return URLs.LIVE;
     }
 
-    return URLs.DEV;
+    return URLs.LOCAL;
+}
+
+const getAssetsUrl = () => {
+    const URLs = {
+        DEV: 'https://durango.devffwd.nl/api/v1',
+        LIVE: 'https://durango.rs/api/v1',
+        LOCAL: 'http://localhost:3001'
+    };
+
+    if (FLAGS.DEV) {
+        return URLs.DEV;
+    };
+
+    if (FLAGS.LIVE) {
+        return URLs.LIVE;
+    }
+
+    return URLs.LOCAL;
 }
 
 const getSocketUrl = () => {
@@ -183,6 +203,7 @@ export {
     roundToPrecision,
     compareKeys,
     getApiUrl,
+    getAssetsUrl,
     getSocketUrl,
     getGAid
 }

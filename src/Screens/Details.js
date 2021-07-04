@@ -31,7 +31,7 @@ import MoreDetails from './MoreDetails';
 import defaultLogo from '../CustomIcons/defaultLogo.png';
 
 /* Library */
-import { isOpen, getTodaysWorkingHours, getApiUrl } from '../library/common';
+import { isOpen, getTodaysWorkingHours, getAssetsUrl } from '../library/common';
 import moment from 'moment';
 
 /* Animations */
@@ -253,8 +253,8 @@ const Details = ({ data, history }) => {
               <img
                 src={
                   data.logo
-                    // ? `${getApiUrl() + data.logo}`
-                    ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + data.logo}`
+                    ? `${getAssetsUrl() + '/logos/' + data.logo}`
+                    // ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + data.logo}`
                     : defaultLogo
                 }
                 className={

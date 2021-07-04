@@ -8,7 +8,6 @@ import openSocket from 'socket.io-client';
 
 /* Packages & libraries */
 import { getApiUrl, getSocketUrl } from '../library/common';
-import moment from 'moment';
 
 /* LOADER */
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -19,7 +18,6 @@ import ErrorModal from '../Components/ErrorModal';
 import SuccessModal from '../Components/SuccessModal';
 import ObjectManuallyOpenCloseModal from '../Components/ObjectManuallyOpenCloseModal';
 import NotUpdatedRecentlyModal from '../Components/NotUpdatedRecentlyModal';
-
 
 let ObjectContext;
 let interval;
@@ -39,7 +37,7 @@ const ObjectProvider = (props) => {
     const [notUpdatedRecently, setNotUpdatedRecently] = useState(false);
 
     useEffect(() => {
-        const socket = openSocket(getSocketUrl());
+       /*  const socket = openSocket(getSocketUrl());
         const onChange = ({ id, freeSpots, spotsUpdatedAt }) => {
             return setData((current) => {
                 if (current.id === id && current.freeSpots !== freeSpots) {
@@ -81,7 +79,7 @@ const ObjectProvider = (props) => {
                 return current;
             });
         }
-        socket.on('isManualyClosedChanged', onChangeClosed);
+        socket.on('isManualyClosedChanged', onChangeClosed); */
 
         document.title = 'Durango IP';
 
@@ -117,7 +115,7 @@ const ObjectProvider = (props) => {
         }
 
         fetch(getApiUrl() + '/places/me', {
-            method: 'get',
+            method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + accessToken,

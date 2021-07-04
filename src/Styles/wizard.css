@@ -32,12 +32,14 @@
 }
 
 .circle {
-    animation: movement 4s infinite;
+    animation: circle 4s infinite;
     background: var(--sharp-blues-top-right);
     border-radius: 50%;
     width: 200px;
     height: 200px;
     position: absolute;
+    left: 42%;
+    top: 37%;
     transform: translate(-80%, -25%);
     box-shadow: var(--mini-shadow);
 }
@@ -46,7 +48,7 @@
     animation: circle 10s infinite;
     border-radius: 20px;
     background: var(--phoenix-start);
-    clip-path: circle(50%);
+    /* clip-path: circle(50%); */
     height: 200px;
     width: 200px;
     position: absolute;

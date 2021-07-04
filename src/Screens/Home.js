@@ -16,7 +16,7 @@ import defaultAvatar from '../CustomIcons/defaultAvatar.png';
 
 /* Libraries */
 import moment from 'moment';
-import { getApiUrl } from '../library/common';
+import { getAssetsUrl } from '../library/common';
 import _ from 'lodash';
 
 /* Animations */
@@ -264,7 +264,7 @@ const List = ({ history }) => {
         } */
 
         let icon;
-        switch(object.type) {
+        switch (object.type) {
             case 'caffe': icon = CaffeIcon; break;
             case 'billiard': icon = BilliardIcon; break;
             default: icon = CaffeIcon;
@@ -379,8 +379,8 @@ const List = ({ history }) => {
                                         className="listLogo"
                                         src={
                                             Kafic.logo
-                                                // ? `${getApiUrl() + Kafic.logo}`
-                                                ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
+                                                ? `${getAssetsUrl() + '/logos/' + Kafic.logo}`
+                                                // ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                                 : defaultLogo
                                         }
                                         alt="icon"
@@ -459,8 +459,8 @@ const List = ({ history }) => {
                                 className="listLogo"
                                 src={
                                     Kafic.logo
-                                        // ? `${getApiUrl() + Kafic.logo}`
-                                        ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
+                                        ? `${getAssetsUrl() + '/logos/' + Kafic.logo}`
+                                        // ? `${process.env.PUBLIC_URL + '/slike/mockLogos/' + Kafic.logo}`
                                         : defaultLogo
                                 }
                                 alt="icon"
