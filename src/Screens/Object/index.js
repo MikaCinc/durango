@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, Fragment } from 'react';
 
 /* Libraries */
 import _ from 'lodash';
-import { isOpen, getTodaysWorkingHours, getApiUrl } from '../../library/common';
+import { isOpen, getTodaysWorkingHours, getAssetsUrl, getApiUrl } from '../../library/common';
 import moment from 'moment';
 
 /* Components */
@@ -192,12 +192,11 @@ const Restaurant = ({ history }) => {
                                         <img
                                             src={
                                                 data.logo
-                                                    ? `${getApiUrl() + data.logo}`
+                                                    ? `${getAssetsUrl() + '/logos/' + data.logo}`
                                                     : defaultLogo
                                             }
                                             className={
-                                                `detailsLogo reveal-focus-${
-                                                data.freeSpots && isOpen(data.details.workingHours, data.isManualyClosed) > 0
+                                                `detailsLogo reveal-focus-${data.freeSpots && isOpen(data.details.workingHours, data.isManualyClosed) > 0
                                                     ? 'blue'
                                                     : 'orange'
                                                 }`
@@ -250,8 +249,7 @@ const Restaurant = ({ history }) => {
                                 <div className="IP-input-sideButton">
                                     <button
                                         className={
-                                            `IP-input-nemaMesta IP-clickable ${
-                                            currentNumber === 0
+                                            `IP-input-nemaMesta IP-clickable ${currentNumber === 0
                                                 ? 'IP-input-selected'
                                                 : ''
                                             }`
@@ -261,7 +259,7 @@ const Restaurant = ({ history }) => {
                                         }}
                                     >
                                         Nemamo mesta
-                                        </button>
+                                    </button>
                                 </div>
                                 <div className="IP-center-container">
                                     <Pulse>
@@ -272,8 +270,7 @@ const Restaurant = ({ history }) => {
                                                         <button
                                                             key={i}
                                                             className={
-                                                                `IP-dial-button IP-clickable ${
-                                                                currentNumber === i
+                                                                `IP-dial-button IP-clickable ${currentNumber === i
                                                                     ? 'IP-input-selected'
                                                                     : ''
                                                                 }`
@@ -293,8 +290,7 @@ const Restaurant = ({ history }) => {
                                 <div className="IP-input-sideButton">
                                     <button
                                         className={
-                                            `IP-input-imaMesta IP-clickable ${
-                                            currentNumber === 10
+                                            `IP-input-imaMesta IP-clickable ${currentNumber === 10
                                                 ? 'IP-input-selected'
                                                 : ''
                                             }`
@@ -304,7 +300,7 @@ const Restaurant = ({ history }) => {
                                         }}
                                     >
                                         Imamo 10+ mesta
-                                        </button>
+                                    </button>
                                 </div>
                             </div>
                         </div>

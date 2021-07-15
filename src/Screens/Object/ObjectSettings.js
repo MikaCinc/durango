@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 
 /* Libraries */
-import { getApiUrl } from '../../library/common';
+import { getApiUrl, getAssetsUrl } from '../../library/common';
 
 /* Components */
 import TimePicker from 'react-time-picker';
@@ -370,7 +370,7 @@ const ObjectSettings = ({ history }) => {
                                         clockIcon={
                                             <i className="material-icons reserveClockIcon">
                                                 access_time
-                                                    </i>
+                                            </i>
                                         }
                                         className="reserveTime"
                                     />
@@ -565,7 +565,7 @@ const ObjectSettings = ({ history }) => {
                                 }}
                                 src={
                                     data.logo
-                                        ? `${getApiUrl() + data.logo}`
+                                        ? `${getAssetsUrl() + '/logos/' + data.logo}`
                                         : defaultLogo
                                 }
                             />
@@ -574,7 +574,7 @@ const ObjectSettings = ({ history }) => {
                                 singleImage={true}
                                 defaultImages={[
                                     data.logo
-                                        ? `${getApiUrl() + data.logo}`
+                                        ? `${getAssetsUrl() + '/logos/' + data.logo}`
                                         : defaultLogo
                                 ]}
                                 label={'Maksimalna veličina fajla - 2MB. Preporučujemo kvadratne slike zbog estetike.'}

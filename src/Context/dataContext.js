@@ -168,7 +168,16 @@ const DataProvider = (props) => {
 
         document.title = 'Durango - Insider Preview';
 
-        // const socket = openSocket(getSocketUrl());
+        const socket = openSocket(getSocketUrl(), {
+            /* withCredentials: true,
+            transportOptions: {
+                polling: {
+                    extraHeaders: {
+                        // "my-custom-header": "abcd"
+                    }
+                }
+            } */
+        });
         // const onChange = ({ id, ...rest }) => {
         //     return setData((current) => current.map((item) => {
         //         if (item.id === id) {

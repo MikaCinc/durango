@@ -69,7 +69,7 @@ const getTodaysWorkingHours = (workingHours) => {
         closing = moment(closing).add({ days: 1 });
     }
 
-    if(moment().isBetween(opening, closing, null, "()")) {
+    if (moment().isBetween(opening, closing, null, "()")) {
         return workingHours[dayBefore];
     }
 
@@ -166,7 +166,8 @@ const getAssetsUrl = () => {
 const getSocketUrl = () => {
     const URLs = {
         DEV: 'https://durango.devffwd.nl:3000/',
-        LIVE: 'https://durango.rs:8080/'
+        LIVE: 'https://durango.rs:8080/',
+        LOCAL: 'https://localhost:3001'
     };
 
     if (FLAGS.DEV) {
@@ -177,7 +178,7 @@ const getSocketUrl = () => {
         return URLs.LIVE;
     }
 
-    return URLs.DEV;
+    return URLs.LOCAL;
 }
 
 const getGAid = () => {

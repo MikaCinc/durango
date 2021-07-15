@@ -147,7 +147,7 @@ const ObjectProvider = (props) => {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('durangoAccessToken'),
             }),
-            body: JSON.stringify({ refreshToken: localStorage.getItem('durangoRefreshToken') })
+            body: JSON.stringify({ token: localStorage.getItem('durangoRefreshToken') })
         }).then((response) => {
             return response.json();
         }).then((response) => {
